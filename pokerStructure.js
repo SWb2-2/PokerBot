@@ -98,7 +98,7 @@ class Dealer {
 
     // Prop indtil videre
     make_blind(player1, player2) {
-        player1.blind = "SB";
+        player1.blind = "sb";
         player2.blind = "BB";
     }
     // Prop
@@ -180,16 +180,21 @@ function bettingRound(player1, player2, dealer) {
     player2.player_move.move = "";
         
     while (!dealer.end_betting_round(player1, player2)) { 
-        if (playerProceed(player1, player2) === false || dealer.end_betting_round(player1, player2)) {
+        if (playerProceed(player1, player2, dealer) === false || dealer.end_betting_round(player1, player2)) {
             break;
         }
-        if (playerProceed(player2, player1) === false) {
+        if (playerProceed(player2, player1, dealer) === false) {
             break;
         }
     }
 }
 // Tjekker, om spilleren vil med i spillet og i så fald, om de har et bet. 
-function playerProceed(activePlayer, passivePlayer) {
+function playerProceed(activePlayer, passivePlayer, dealer) {
+    if (activePlayer.balance === 0 && passivePlayer.current_bet > 0) {
+        dealer.pot = activePlayer.current_bet + passivePlayer.current_bet;
+        return false;
+    }
+    
     let bet = scanInput("integer");
     checkBet(activePlayer, passivePlayer, bet);
     bet = validateInput(activePlayer, passivePlayer, bet);
@@ -239,7 +244,6 @@ function distributeMoney(player1, player2, dealer) {
         } else {
             dealer.give_pot(winner);
         }
-        
     }
 }
 // Funktion til at printe en spillers hånd
@@ -251,8 +255,9 @@ function printHand(player, hand) {
 }
 // Validerer input, således det ikke er tilladt at smide et bet, der er mindre end modstanderens raise
 function validateInput(activePlayer, passivePlayer, input) {
-    while (activePlayer.current_bet + input < passivePlayer.current_bet && activePlayer.player_move.move !== "fold" 
-                                                                        && activePlayer.balance !== 0) {
+    while ((activePlayer.current_bet + input < passivePlayer.current_bet || input > activePlayer.balance) 
+                                                                         && activePlayer.player_move.move !== "fold" 
+                                                                         && activePlayer.balance !== 0) {
         console.log("Invalid bet. Please enter new bet");
         input = scanInput("integer");
         checkBet(activePlayer, passivePlayer, input);
