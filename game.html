@@ -4,20 +4,15 @@
         <title>Play poker</title>
         <meta name="description" content="Place where you can practice your poker skills against a world class pokercomputer">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="indexStyle.css">
-        <script type="text/javascript" src="indexJS.js"></script>
+        <link rel="stylesheet" href="css/game.css">
+        <script type="text/javascript" src="js/game.js"></script>
     </head>
     <body>
     <div id="container">
-        <header>
-            <h1>Play poker</h1>
-        </header>
         <div id="game-container">
             <div id="gameboard">
-                <div id="pot">
-                    <p>Pot:</p>
-                    <p id="pot-money">0$</p>
-                </div>
+                <div id="pot">0$</div>
+                <div id="bot-cards"></div>
                 <div id="open-cards"></div>
                 <div id="player-cards"></div>
             </div>
@@ -28,6 +23,9 @@
                 <button id="fold">Fold</button>
             </div>
         </div>
+        <div id="bank">
+            <p>Balance:</p>
+            <p id="balance-field">0$</p>
         </div>
     </div>
     </body>

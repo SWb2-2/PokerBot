@@ -8,9 +8,9 @@ class Card {
 let screenWidth = document.screenWidth;
 let screenHeight = document.screenHeight;
 
-let testCard = new Card(10, 3);
-let player_hand = [testCard, testCard];
-let open_hand = [testCard, testCard, testCard];
+var testCard = new Card(10, 3);
+var player_hand = [testCard, testCard];
+var open_hand = [testCard, testCard, testCard];
 
 let color = ["heart.png","clover.png","spade.png","diamond.png"];
 
@@ -26,11 +26,21 @@ function createCard(card_to_create){
     return cardHolder;
 }
 
+function createBotCard(){
+    let cardHolder = document.createElement("div");
+    cardHolder.setAttribute("id", "card-back");
+
+    return cardHolder;
+}
+
 function givePlayerCards(){
     for (let index = 0; index < player_hand.length; index++) {
         let card = createCard(player_hand[index]);
         document.getElementById("player-cards").appendChild(card);
     }
+    
+    document.getElementById("bot-cards").appendChild(createBotCard());
+    document.getElementById("bot-cards").appendChild(createBotCard());
 }
 
 function giveTableCards(){
