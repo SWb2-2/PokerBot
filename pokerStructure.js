@@ -257,7 +257,7 @@ function printHand(player, hand) {
 function validateInput(activePlayer, passivePlayer, input) {
     while ((activePlayer.current_bet + input < passivePlayer.current_bet || input > activePlayer.balance) 
                                                                          && activePlayer.player_move.move !== "fold" 
-                                                                         && activePlayer.balance !== 0) {
+                                                                         && activePlayer.balance - input !== 0) {
         console.log("Invalid bet. Please enter new bet");
         input = scanInput("integer");
         checkBet(activePlayer, passivePlayer, input);
