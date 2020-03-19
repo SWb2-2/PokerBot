@@ -1,3 +1,9 @@
+/*---------------------bug report--------------------------*/
+// Man kan få "this" med i determine_winner hvis man eksporter med module.eksports
+
+
+const determine_winner = require("./Determine_winner.js");
+
 class Card {
     constructor (rank, suit) {
         this.rank = rank;
@@ -22,7 +28,10 @@ class Dealer {
         this.deck_cards = [];
         this.table_cards = [];
         this.pot;
+        //this.determine_winner = determine_winner.bind(this); //laver en ny property til dealer som er en function. Objektet "this"
+                                                             //i funktionen modsvare "this" dealer-objektet i class definitionen
         }
+    
     create_deck_of_cards() {
         for(let j = 0; j < 4; j++) {
     
@@ -92,7 +101,13 @@ class Dealer {
     // make_blind(player1, player1) {
 
     // }
-
+    
+    get_winner(player1, player2){
+        //return this.determine_winner(player1, player2);
+        return determine_winner.bind(this)(player1, player2);
+    }
+    
+    /*
     determine_winner(player1, player2) {
 
         const high_card = 0,
@@ -197,6 +212,7 @@ class Dealer {
                         }
                         return; 
                     }
+                } else if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
                 } else {
                     array = [];
                 }
@@ -229,6 +245,7 @@ class Dealer {
                         }
                         return; 
                     }
+                } else if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
                 } else {
                     array = [];
                 }
@@ -415,8 +432,10 @@ class Dealer {
             return false;
         }
 
-    }
+    }*/
+
 }
+
 let dealer = new Dealer;
 
 let player1 = new Player(100);
@@ -425,8 +444,11 @@ let player2 = new Player(100);
 dealer.create_deck_of_cards();
 dealer.shuffle_array();
 
+
 dealer.give_hand_cards(player1, player2);
 
 dealer.add_table_cards(5);
 
-console.log("And the winner is", dealer.determine_winner(player1, player2));
+console.log("And the winner is", dealer.get_winner(player1, player2));
+
+
