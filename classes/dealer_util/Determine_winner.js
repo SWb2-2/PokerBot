@@ -1,23 +1,34 @@
 module.exports = function determine_winner(player1, player2){
-    //Sortere et array ud fra insertionsort ^^
+
+    const ace = 14;
+
+    //Sortere et array ud fra insertionsort, og sortere fra højest til lavest
     function sort_hand(hand_info) {
+
         for(let i = 1; i < hand_info.hand.length; i++) {
 
             let key = hand_info.hand[i];
             let j = i - 1;
             while(j >= 0 && hand_info.hand[j].rank < key.rank) {
 
-                hand_info.hand[j + 1] = hand_info.hand[j];
+                hand_info.hand[j+1] = hand_info.hand[j];
                 j--;
             }
-            hand_info.hand[j + 1] = key;
+            hand_info.hand[j+1] = key;
         }
+        return;
     }
-    function test_count_rank(hand_info) {
-        for(let i = 14; i >= 2; i--) {
+
+    //Count the amount of each rank in the hand, and stores it as an array in hand_info. 
+    //The index in the array corresponds to the rank. 
+    function count_all_ranks(hand_info) {
+        let hand_size = hand_info.hand.length;
+
+        for(let i = 2; i <= ace; i++) {
+
             hand_info.count_rank[i] = 0; 
 
-            for(let j = 0; j < hand_info.hand.length; j++) {
+            for(let j = 0; j < hand_size; j++) {
 
                 if(hand_info.hand[j].rank == i) {
                     hand_info.count_rank[i] += 1;
@@ -26,12 +37,15 @@ module.exports = function determine_winner(player1, player2){
         }
         return;
     }
-    function count_suits(hand_info) {
 
-        for(let i = 3; i >= 0; i--) { //Løber igennem de forskellige suits. 
+    //Count the amount of each suit in the hand, and stores it as an array in hand_info. 
+    function count_suits(hand_info) {
+        let hand_size = hand_info.hand.length;
+
+        for(let i = 0; i <= 3; i++) { 
             hand_info.count_suit[i] = 0; 
 
-            for(let j = 0; j < hand_info.hand.length; j++) { //Løber igennem de 7 kort. 
+            for(let j = 0; j < hand_size; j++) {
 
                 if(hand_info.hand[j].suit == i) {
                     hand_info.count_suit[i] += 1; 
@@ -40,109 +54,138 @@ module.exports = function determine_winner(player1, player2){
         }
         return;
     }
-    function test_high_card(hand_info) {
-        let array = [];
+
+    //Adds the 5 best cards to the best hands at index high_card
+    function find_high_card(hand_info) {
+
+        let best_highcards = [];
         for(let i = 0; i < 5; i++) {
 
-            array.push(hand_info.hand[i].rank); 
+            best_highcards.push(hand_info.hand[i].rank); 
         }
-        hand_info.strong[high_card] = array;
+        hand_info.best_hands[high_card] = best_highcards;
         return;
     }
-    function test_pair(hand_info) {
-        test_2_3_4_of_a_kind(2, hand_info, pair);
+
+    //Uses the helperfunction find_2_3_4_of_a_kind to find a pair and store it correctly
+    function find_pair(hand_info) {
+        find_2_3_4_of_a_kind(2, hand_info, pair);
     }
-    function test_two_pairs(hand_info) {            
+
+    //Searches for 1 pair and adds it to the best_pairs. 
+    //Searches for a second pair, and adds it to the best_pairs
+    //If two pairs was found, add a highcard to the best_pairs.
+    //Lastly store the best_pairs in the best_hands under index two_pairs
+    function find_two_pairs(hand_info) {  
+        let hand_size = hand_info.hand.length;          
         let pair1 = false,
             pair2 = false;
-        let array = []; 
-        let not_done = 1;
-        
-        let i = 14;
-        while(i >= 2 && !pair1) {
+        let best_pairs = []; 
+
+        let i = ace;
+        while(i >= 2 && pair1 == false) {
             if(hand_info.count_rank[i] >= 2) {
                 pair1 = i;
-                array.push(pair1, pair1);
+                best_pairs.push(pair1, pair1);
             }
             i--;
         }
-        while(i >= 2 && !pair2) {
+
+        while(i >= 2 && pair2 == false) {
             if(hand_info.count_rank[i] >= 2) {
                 pair2 = i;
-                array.push(pair2, pair2);
+                best_pairs.push(pair2, pair2);
             }
             i--;
-        }   
-        if(pair1 && pair2){
-            for(let i = 0; i < 7 && not_done; i++) {
-                if(hand_info.hand[i].rank != pair1 &&
-                hand_info.hand[i].rank != pair2 ) {
+        } 
 
-                    array.push(hand_info.hand[i].rank);
-                    hand_info.strong[two_pairs] = array;
-                    not_done = 0;  //break
+        if(pair1 && pair2){
+            for(let i = 0; i < hand_size; i++) {
+                if(hand_info.hand[i].rank != pair1 &&
+                   hand_info.hand[i].rank != pair2 ) {
+
+                    best_pairs.push(hand_info.hand[i].rank);
+                    hand_info.best_hands[two_pairs] = best_pairs;
+                    break;
                 }
             }
         }
         return;
     }
-    function test_for_three(hand_info) {
-        test_2_3_4_of_a_kind(3, hand_info, three_of_kind);
-    }
-    function test_straight(hand_info) {
-        let array = [];
 
-        if(hand_info.hand[0] == 14) {
+    //Uses the helperfunction find_2_3_4_of_a_kind to find a three of a kind and store it correctly
+    function find_three_of_a_kind(hand_info) {
+        find_2_3_4_of_a_kind(3, hand_info, three_of_kind);
+    }
+
+    //Starts from the first card in the hand and tests if the next card is one less than the current. 
+    //If it is, add it to the current_straight, and test for the next card. 
+    //If 5 cards are added to current_straight, it is stored in the best_hands. 
+    //Else if the next card is not one lower, the current_straight is reset. 
+    function find_straight(hand_info) {
+        let current_straight = [];
+        let hand_size = hand_info.hand.length;
+
+        //Ace can be used in a straight as 14 or 1. 
+        if(hand_info.hand[0] == ace) {
             hand_info.hand.push(1);   
         }
 
-        for(let i = 0; i < hand_info.hand.length - 1; i++) {
+        for(let i = 0; i < hand_size - 1; i++) {
             if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1) {
 
-                array.push(hand_info.hand[i].rank);
+                current_straight.push(hand_info.hand[i].rank);
 
-                if(array.length == 4) {
-                    array.push(hand_info.hand[i+1].rank);
-                    hand_info.strong[straight] = array;
+                if(current_straight.length == 4) {
+                    current_straight.push(hand_info.hand[i+1].rank);
+                    hand_info.best_hands[straight] = current_straight;
                     if(hand_info.hand.length > 7) {
                         hand_info.hand.pop();
                     }
-                    return; 
+                    break; 
                 }
             } else if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
-                //do nothing
+                //if the next card is the same as the current, do nothing, because a straight might be coming after
             } else {
-                array = [];
+                current_straight = [];
             }
         }
         return;
     }
-    function test_flush(hand_info) {
-        let array = [];
+
+    //Go through the 4 suits, and tests if the hand contains 5 of the given suit. 
+    //If it does, run through the hand, and add the 5 highest of that suit, to best_flush and store it in best_hands. 
+    function find_flush(hand_info) {
+        let best_flush = [];
+        let hand_size = hand_info.hand.length;
 
         for(let i = 0; i < 4; i++) {
-            if(hand_info.count_suit[i] >= 5) {  //VI har fundet en suit der er flush, nemlig "i"
+            if(hand_info.count_suit[i] >= 5) {
 
-                for(let j = 0; j < 7; j++) {
+                for(let j = 0; j < hand_size; j++) {
                     if(hand_info.hand[j].suit == i) {
-                        array.push(hand_info.hand[j].rank);
+                        best_flush.push(hand_info.hand[j].rank);
                     }
                 }
-                hand_info.strong[flush] = array;
+                hand_info.best_hands[flush] = best_flush;
             }
         }
     } 
-    function test_full_house(hand_info) {
+    
+    //Find the highest 3 of a kind, and add it to the best_full_house array. 
+    //THen look for a pair, and add it. 
+    //If a full house is found, add best_full_house to the best_hands. 
+    function find_full_house(hand_info) {
         let threes = false, 
             pair = false;
-        let array = [];
+        let best_full_house = [];
         let done = false;
 
         let i = 14;
-        while(i >= 2 && !threes) {
+        while(i >= 2 && threes == false) {
             if(hand_info.count_rank[i] >= 3) {
                 threes = i;
-                array.push(threes, threes, threes);
+                best_full_house.push(threes, threes, threes);
             }
             i--;
         }
@@ -152,57 +195,67 @@ module.exports = function determine_winner(player1, player2){
             if(hand_info.count_rank[i] >= 2) {
                 pair = i;
                 if(threes != pair) {
-                    array.push(pair, pair);
+                    best_full_house.push(pair, pair);
                     done = true;
                 }
             }
             i--;
         } 
-        if(array.length == 5) {
-            hand_info.strong[full_house] = array;
+        if(best_full_house.length == 5) {
+            hand_info.best_hands[full_house] = best_full_house;
         }
     }
-    function test_for_four(hand_info) {
-        test_2_3_4_of_a_kind(4, hand_info, four_of_kind);
+
+    //Uses the helperfunction find_2_3_4_of_a_kind to find a four of a kind and store it correctly
+    function find_four_of_a_kind(hand_info) {
+        find_2_3_4_of_a_kind(4, hand_info, four_of_kind);
     }
-    function test_for_straight_flush(hand_info) {
-        if(hand_info.strong[flush] == undefined && hand_info.strong[straight] == undefined) {
+
+    //Tests if a straight and a flush has been found, and if not return. 
+    //Searches through hand and checks if thenext card's rank is one lower than the current card and the suits are similar 
+    //If yes, adds both cards to best_straight_flush array
+    // if 5 cards are found, best_straight_flush is added to best_hands
+    function find_straight_flush(hand_info) {
+        if(hand_info.best_hands[flush] == undefined && hand_info.best_hands[straight] == undefined) {
             return;
         }
-
-        let array = [];
+        let hand_size = hand_info.hand.length;
+        let best_straight_flush = [];
 
         if(hand_info.hand[0] == 14) {
             hand_info.hand.push(1);   
         }
 
-        for(let i = 0; i < hand_info.hand.length - 1; i++) {
+        for(let i = 0; i < hand_size - 1; i++) {
             if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1  &&
             hand_info.hand[i].suit == hand_info.hand[i+1].suit) {
 
-                array.push(hand_info.hand[i].rank);
+                best_straight_flush.push(hand_info.hand[i].rank);
 
-                if(array.length == 4) {
-                    array.push(hand_info.hand[i+1].rank);
-                    hand_info.strong[straight_flush] = array;
+                if(best_straight_flush.length == 4) { // When 4 cards have been added, we have tested 5 cards
+                                                      // So we push the last card in, adds it and return/
+                    best_straight_flush.push(hand_info.hand[i+1].rank);
+                    hand_info.best_hands[straight_flush] = best_straight_flush;
                     if(hand_info.hand.length > 7) {
                         hand_info.hand.pop();
                     }
                     return; 
                 }
             } else if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
-                //do nothing
+                // If the next card is similar rank, do nothing, since a straight flush might still occur. 
             } else {
-                array = [];
+                best_straight_flush = [];
             }
         }
         return;
     }
-    function test_for_similar(amount, hand_info) {
+
+    //Helper function that takes an amount, and find the rank with that amount, and if none is found, return false
+    function find_similar(amount, hand_info) {
         let streak = 1; 
+        let hand_size = hand_info.hand.length;
 
-        for(let i = 0; i < 6; i++) {
-
+        for(let i = 0; i < hand_size - 1; i++) { //6 to avoid subscripting beyond the last index of the array 
             if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
                 streak++;
                 if(streak == amount) {
@@ -214,9 +267,10 @@ module.exports = function determine_winner(player1, player2){
         }
         return false;
     }
-    function test_2_3_4_of_a_kind(amount, hand_info, index) {
+
+    function find_2_3_4_of_a_kind(amount, hand_info, index) {
         let array = [];
-        let k = test_for_similar(amount, hand_info);
+        let k = find_similar(amount, hand_info);
 
         if(k){
             for(let i = 0; i < amount; i++) {
@@ -226,7 +280,7 @@ module.exports = function determine_winner(player1, player2){
                 if(hand_info.hand[i].rank != k) {
                     array.push(hand_info.hand[i].rank);
                     if(array.length == 5) {
-                        hand_info.strong[index] = array;
+                        hand_info.best_hands[index] = array;
                         break;
                     }
                 }
@@ -245,8 +299,8 @@ module.exports = function determine_winner(player1, player2){
           straight_flush = 8;
 
     //Placere spillerens 7 tilgængelige kort i hand, og sortere
-    let hand_info1 = {hand: [], count_rank: [], count_suit: [], strong: []};
-    let hand_info2 = {hand: [], count_rank: [], count_suit: [], strong: []};
+    let hand_info1 = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+    let hand_info2 = {hand: [], count_rank: [], count_suit: [], best_hands: []};
     for(let i = 0; i < 5; i++) {
         hand_info1.hand[i] = this.table_cards[i];
         hand_info2.hand[i] = this.table_cards[i];
@@ -260,19 +314,19 @@ module.exports = function determine_winner(player1, player2){
     count_suits(hand_info1);
     count_suits(hand_info2);
 
-    test_count_rank(hand_info1);
-    test_count_rank(hand_info2);
+    count_all_ranks(hand_info1);
+    count_all_ranks(hand_info2);
 
     let a_function = [];
-    a_function[high_card] = test_high_card;  
-    a_function[pair] = test_pair;
-    a_function[two_pairs] = test_two_pairs;
-    a_function[three_of_kind] = test_for_three;
-    a_function[straight] = test_straight;
-    a_function[flush] = test_flush;
-    a_function[full_house] = test_full_house;
-    a_function[four_of_kind] = test_for_four;
-    a_function[straight_flush] = test_for_straight_flush;
+    a_function[high_card] = find_high_card;  
+    a_function[pair] = find_pair;
+    a_function[two_pairs] = find_two_pairs;
+    a_function[three_of_kind] = find_three_of_a_kind;
+    a_function[straight] = find_straight;
+    a_function[flush] = find_flush;
+    a_function[full_house] = find_full_house;
+    a_function[four_of_kind] = find_four_of_a_kind;
+    a_function[straight_flush] = find_straight_flush;
 
 
     for(let i = high_card; i < straight_flush; i++) {
@@ -290,16 +344,16 @@ module.exports = function determine_winner(player1, player2){
     console.log("\n\n\n")
 
 
-    if(hand_info1.strong.length > hand_info2.strong.length) {
+    if(hand_info1.best_hands.length > hand_info2.best_hands.length) {
         return player1;
-    } else if (hand_info1.strong.length < hand_info2.strong.length) {
+    } else if (hand_info1.best_hands.length < hand_info2.best_hands.length) {
         return player2;
     } else {
         for(let i = 0; i < 5; i++) {
-            let strongest = hand_info1.strong.length;
-            if(hand_info1.strong[strongest][i] > hand_info2.strong[strongest][i]) {
+            let strongest = hand_info1.best_hands.length - 1;
+            if(hand_info1.best_hands[strongest][i] > hand_info2.best_hands[strongest][i]) {
                 return player1;
-            } else if (hand_info1.strong[strongest][i] < hand_info2.strong[strongest][i]) {
+            } else if (hand_info1.best_hands[strongest][i] < hand_info2.best_hands[strongest][i]) {
                 return player2;
             }
         }
