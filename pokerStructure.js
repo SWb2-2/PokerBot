@@ -1,11 +1,9 @@
-// Ved ikke lige hvordan man eksporterer klasserne over fra main
 class Card {
     constructor (rank, suit) {
         this.rank = rank;
         this.suit = suit;
     }
 }
-
 
 class Player{
     constructor(balance) {
@@ -16,7 +14,6 @@ class Player{
         this.player_move = {move: "", amount: 0}; 
     }
 }
-
 
 class Dealer {
     constructor(){
@@ -77,7 +74,6 @@ class Dealer {
         
     }
     give_pot(player1, player2) {
-
         if(player2 === undefined) {
             player1.balance += this.pot;
         } else { //Grundet hvis begge har lige gode hænder. 
@@ -88,9 +84,14 @@ class Dealer {
     end_betting_round(player1, player2) { 
         // Ny addition til metodens logiske udtryk. Dette er for at sikre, at spillet ikke slutter, når den med det første træk checker
         if (player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
+            console.log(player1.current_bet, player2.current_bet);
             this.pot += player1.current_bet + player2.current_bet;
             player1.current_bet = 0;
             player2.current_bet = 0;
+            return true;
+        }
+        if (player1.player_move.move === 'All-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") {
+            this.pot = player1.current_bet + player2.current_bet;
             return true;
         }
         return false;
@@ -109,14 +110,13 @@ class Dealer {
 }
 
 // Den overordnede funktion, hvor hver iteration i loopet svarer til et spil poker.
-function initiatePoker(player1, player2, dealer) {
+function pokerGame(player1, player2, dealer) {
     while (player1.balance > 0 && player2.balance > 0) {
         preFlop(player1, player2, dealer);
-        if (noFold(player1, player2)) {
-            flopRound(player1, player2, dealer);
-            while (noFold(player1, player2) && dealer.table_cards.length < 5) {
-                turnRiverRound(player1, player2, dealer);
-            }
+        let addCards = 3;
+        while (noFold(player1, player2) && dealer.table_cards.length < 5) {
+            nextRound(player1, player2, dealer, addCards);
+            addCards = 1;
         }
         distributeMoney(player1, player2, dealer);
         console.log(player1.balance, player2.balance);
@@ -132,7 +132,7 @@ function preFlop(player1, player2, dealer) {
     
     printHand("Player1: ", player1.hand);
     printHand("Player2: ", player2.hand);
-    // Bestemer hvem der går først. Kunne også addes til bettingRound funktionen, men den bliver rimelig lang og redundant
+
     if (player1.blind === "sb") {
         bettingRound(player1, player2, dealer);
     } else {
@@ -140,72 +140,46 @@ function preFlop(player1, player2, dealer) {
     }
 }
 
-function flopRound(player1, player2, dealer) {
-    dealer.add_table_cards(3);
+function nextRound(player1, player2, dealer, tableCards) {
+    dealer.add_table_cards(tableCards);
     printHand("Table: ", dealer.table_cards);
     printHand("Player1: ", player1.hand);
     printHand("Player2: ", player2.hand);
-    
-    if (player1.blind === "sb") {
-        bettingRound(player1, player2, dealer);
-    } else {
-        bettingRound(player2, player1, dealer);
-    }
-}
-
-// Turn og river runde afvikles her. De er slået sammen, idet de udspilles på samme måde – et kort lægges på bordet og bettingrunde initieres.
-function turnRiverRound(player1, player2, dealer) {
-    // Vi kunne logisk set mikse alle rundefunktioner sammen ved at have en parameter k til at bestemme antallet af kort der lægges på bordet/ lave if else kæder.
-    dealer.add_table_cards(1);
-    printHand("Table: ", dealer.table_cards);
-    printHand("Player1: ", player1.hand);
-    printHand("Player2: ", player2.hand);
-    
-    if (player1.blind === "sb") {
-        bettingRound(player1, player2, dealer);
-    } else {
-        bettingRound(player2, player1, dealer);
+    console.log(player1.player_move.move, player2.player_move.move);
+    if (player1.player_move.move !== 'All-in' && player2.player_move.move !== 'All-in') {
+        if (player1.blind === "sb") {
+            bettingRound(player1, player2, dealer);
+        } else {
+            bettingRound(player2, player1, dealer);
+        }
     }
 }
 
 function noFold(player1, player2) {
     // Hvis vi lige et sekund ignorerer hvor forfærdeligt det ser ud, 
     // bruges denne boolske funktion egentlig bare som en sentinelvalue for, om nogen harr foldet
-    return player1.player_move.move !== "fold" && player2.player_move.move !== "fold";
+    return player1.player_move.move !== "Fold" && player2.player_move.move !== "Fold";
 }
 
 // En bettingrunde. 
 function bettingRound(player1, player2, dealer) {
     player1.player_move.move = "";
     player2.player_move.move = "";
-        
+    
     while (!dealer.end_betting_round(player1, player2)) { 
-        if (playerProceed(player1, player2, dealer) === false || dealer.end_betting_round(player1, player2)) {
+        // Det er her, vi skal modtage en spillers input:
+        player1.player_move.move = scanInput('string'); 
+        if (checkMove(player1, player2, dealer) === false || dealer.end_betting_round(player1, player2)) {
             break;
         }
-        if (playerProceed(player2, player1, dealer) === false) {
+        // Og en anden spillers her:
+        player2.player_move.move = scanInput('string'); 
+        if (checkMove(player2, player1, dealer) === false) {
             break;
         }
     }
 }
-// Tjekker, om spilleren vil med i spillet og i så fald, om de har et bet. 
-function playerProceed(activePlayer, passivePlayer, dealer) {
-    if (activePlayer.balance === 0 && passivePlayer.current_bet > 0) {
-        dealer.pot = activePlayer.current_bet + passivePlayer.current_bet;
-        return false;
-    }
-    
-    let bet = scanInput("integer");
-    checkBet(activePlayer, passivePlayer, bet);
-    bet = validateInput(activePlayer, passivePlayer, bet);
-    
-    if (noFold(activePlayer, passivePlayer) === false) {
-        return false;
-    } else {
-        activePlayer.current_bet += bet;
-        activePlayer.balance -= bet;
-    }
-}
+
 // Scanner input via det nedstående module. Det ser lidt skørt ud, men det betyder bare, at den søger et heltal.
 function scanInput(string) {
     const inputReader = require('wait-console-input');
@@ -218,23 +192,69 @@ function scanInput(string) {
     console.log(`Player placed following bet: ${inputBet}`);
     return inputBet;
     }
+    else {
+            let playerMove = inputReader.readLine( "What do you wish to do?: ", {
+            reInputOnError: true,
+            separator: 'enter',
+            size: 5
+            });
+        console.log(`Player ${playerMove}s`);
+        return playerMove; 
+    }
 }
-// Ud fra bettets størrelse bedømmes spillerens træk (Tænker dette bør blive ændret, men det virker indtil videre.)
-function checkBet(player1, player2, bet) {
-    if (player1.current_bet + bet > player2.current_bet) {
-        player1.player_move.move = "raise";
-    } else if (bet < 0) {
-        player1.player_move.move = "fold";
-    } else if (player1.current_bet + bet === player2.current_bet && player2.current_bet > 0) {
-        player1.player_move.move = "call"
-    } else 
-        player1.player_move.move = "check";
+// Ud fra trækket bestemmes, hvad spilleren næst kan gøre. Her valideres også deres træk, dvs. man kan ikke raise med mere end det man har osv. 
+// Overvejer at splitte dem ud i funktioner, fordi den bliver lidt voldsom for sig selv. 
+function checkMove(player1, player2, dealer) {
+    if (player1.player_move.move === 'Raise') {
+        
+        player1.player_move.amount = scanInput("integer");
+        player1.player_move.amount = validateInput(player1, player2);
+        player1.current_bet += player1.player_move.amount;
+        player1.balance -= player1.player_move.amount;
+        
+        if (player1.balance === 0) {
+            player1.player_move.move = "All-in";
+        }
+        return true;
+    } 
+    else if (player1.player_move.move === 'Fold') {
+        dealer.pot += player1.current_bet + player2.current_bet;
+        player1.current_bet = -1;
+        return false;
+    } 
+    else if (player1.player_move.move === 'Call') {
+        player1.player_move.amount = player2.current_bet - player1.current_bet;
+        player1.current_bet += player2.current_bet - player1.current_bet;
+        player1.balance -= player1.player_move.amount;
+        console.log(player1.balance, player1.current_bet);
+        
+        if (player1.balance <= 0) {
+            player1.player_move.move = "All-in";
+            player1.current_bet = player1.balance + player1.current_bet;
+            player1.balance = 0;
+        }
+        return true;
+    } 
+    else if (player1.player_move.move === 'Check') {
+        if (player2.player_move.move !== '' && player2.player_move.move !== 'Check') {
+            console.log("You cannot check in your given position.");
+            player1.player_move.move = scanInput("string");
+            return checkMove(player1, player2, dealer);
+        }
+        return true;
+    }
+    else {
+        console.log("Move not in register");
+        player1.player_move.move = scanInput("string");
+        return checkMove(player1, player2, dealer);
+    }
 }
+
 // Fordeler penge til spillerne. Der er to kategorier, i.e. enten vinder man fordi den ene foldede, 
 // eller også vandt man i showdown. Det er det, som de to overordnede if og else hhv. repræsenterer. 
 function distributeMoney(player1, player2, dealer) {
     if (noFold(player1, player2) === false) {
-        dealer.pot += player1.current_bet + player2.current_bet;
+        // dealer.pot += player1.current_bet + player2.current_bet;
         player1.current_bet > player2.current_bet ? dealer.give_pot(player1) 
                                                   : dealer.give_pot(player2);
     } else {
@@ -254,18 +274,19 @@ function printHand(player, hand) {
     }
 }
 // Validerer input, således det ikke er tilladt at smide et bet, der er mindre end modstanderens raise
-function validateInput(activePlayer, passivePlayer, input) {
-    while ((activePlayer.current_bet + input < passivePlayer.current_bet || input > activePlayer.balance) 
-                                                                         && activePlayer.player_move.move !== "fold" 
-                                                                         && activePlayer.balance - input !== 0) {
-        console.log("Invalid bet. Please enter new bet");
-        input = scanInput("integer");
-        checkBet(activePlayer, passivePlayer, input);
+function validateInput(activePlayer, passivePlayer) {
+    let input = activePlayer.player_move.amount;
+    if ((activePlayer.player_move.move !== 'All-in')) {
+        while(input > activePlayer.balance || input < 0 || input <= passivePlayer.current_bet) {
+            console.log("Invalid bet. Please enter new bet");
+            input = scanInput("integer");
+           
+        }
+        return input;
     }
-    return input;
 }
 
 let player1 = new Player(200);
 let player2 = new Player(200);
 let dealer = new Dealer();
-initiatePoker(player1, player2, dealer);
+pokerGame(player1, player2, dealer);
