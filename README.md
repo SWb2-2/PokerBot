@@ -1,7 +1,5 @@
 # P2 - B2   
-
 ----------
-
 ## Kode konvention
 
 
@@ -57,7 +55,7 @@
 - Master branchen bruges ALDRIG til udvikling af ny kode. 
     - Den eneste måde at ændre master, er gennem pull request, som accepteres af andre. 
 
-- Branches laves ved udvikling af en ny feature. 
+- Nye branches laves til udvikling af en ny feature. 
 - Husk at _" git pull "_ for at være opdateret. 
 
 ----------
@@ -67,7 +65,7 @@
 - Der vil bruges jest til test. 
     - Nemt at instalere, og simpelt at bruge
     
-
+  
 - Alle funktioner skal kunne testes
 - Alle funktioner skal være gennemtestet
-- En testfil kaldes "filnavn.test.js" hvor filnavn er hvor funktionen der testes kommerfra 
+- En testfil kaldes "filnavn.test.js" hvor filnavn er navnet af filen, som funktionen kommer fra. 
