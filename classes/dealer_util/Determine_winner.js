@@ -352,12 +352,12 @@ module.exports = function determine_winner(player1, player2){
     //comparison of hands. Returns the winning player, otherwise returns false if it's a complete draw 
     //      (i.e. same hands for all possible hands)
     // length of best_hands array signifies the given hand, i.e. 0 = highcard, 8 = straight flush
-    // if hands are similar, the 
+    // if hands are similar, the highest cards are checked
     if(hand_info1.best_hands.length > hand_info2.best_hands.length) {
         return player1;
     } else if (hand_info1.best_hands.length < hand_info2.best_hands.length) {
         return player2;
-    } else {   //if the best hands are equal, checks the next best hands
+    } else {   //if the best hands are equal, checks the highest cards
         for(let i = 0; i < 5; i++) {
             let strongest = hand_info1.best_hands.length - 1;
             if(hand_info1.best_hands[strongest][i] > hand_info2.best_hands[strongest][i]) {
