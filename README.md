@@ -1,23 +1,12 @@
-# P1 - A411   
-
-This is the repository for all software developed for the P1 project by group A411 of first semester at AAU during semester E19.
+# P2 - B2   
 
 ----------
-![Master check](https://github.com/Hebbe1234/P1/workflows/Compilation/badge.svg)
-----------
 
-## Coding conventions
+## Kode konvention
 
-- The code must clearly show that it has been developed through a paradigm of top-down programming and stepwise improvement  
-  - General code at the top of the file
-  - More and more specific code as the file goes on´
+-Koden skal formateres ud fra dette eksempel 
 
-- No actual execution of logic may take place in main().
-  - main() is allowed to handle command line options (e.g --test and --silent).
-
-- As a rule, the code should be formatted as shown here:
-
-```C
+```js
     #include <stdio.h>
 
     #include "../headers/main.h"
