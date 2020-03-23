@@ -1,0 +1,23 @@
+{
+  "name": "pokerbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "jest": "^25.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SWb2-2/PokerBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SWb2-2/PokerBot/issues"
+  },
+  "homepage": "https://github.com/SWb2-2/PokerBot#readme"
+}
