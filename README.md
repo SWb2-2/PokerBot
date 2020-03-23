@@ -4,14 +4,16 @@
 
 ## Kode konvention
 
-- Koden skal formateres ud fra dette eksempel 
 
 - Require skal være i toppen.
-- Functioner skal beskrives. 
+- Funktioner skal beskrives. 
 - Variabler skal deklareres i toppen af tilhørende blok. 
-- Variable og funktionsnavne, skal være beskrivende. 
-- Variable og funktionsnavne skrives i småt, og med _ mellem navne 
+- Variable og funktionsnavne
+    - Skal være beskrivende
+    - Skrives i småt, og med _ mellem navne 
 
+
+- Koden skal formateres ud fra dette eksempel 
 ```js
     const Class = require("./class.js");
 
@@ -42,16 +44,6 @@
     
 ```
 
-- And each .c source file containing ANY function or procedure must have an associated .h header file
-
-```C
-     /* A description of the function */
-    void example_function(int start, int limit);
-
-```
-
-- There is no reason for the use of "goto" in the code
-  - If one wishes to use this structure in their code (looking at you Martin), its existence must be well argued in the pull request, since it will be put under a lot of scrutiny.
 
 - Source files, header files and files containg tests are seperated into different directories to keep the project organized.
 - Source files goes in the directory "source".
