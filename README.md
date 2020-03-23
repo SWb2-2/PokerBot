@@ -4,38 +4,42 @@
 
 ## Kode konvention
 
--Koden skal formateres ud fra dette eksempel 
+- Koden skal formateres ud fra dette eksempel 
+
+- Require skal være i toppen.
+- Functioner skal beskrives. 
+- Variabler skal deklareres i toppen af tilhørende blok. 
+- Variable og funktionsnavne, skal være beskrivende. 
+- Variable og funktionsnavne skrives i småt, og med _ mellem navne 
 
 ```js
-    #include <stdio.h>
+    const Class = require("./class.js");
 
-    #include "../headers/main.h"
-
-    /* A description of the function */
-    int main(void) {
-        int i = 0;
-      
-        example_function(1, 10, &i);
-
-        return 0;
-
-    }
-
-     /* A description of the function */
-    void example_function(int start, int limit, int *pointer) {
-
-        int i = 0;
-
-        for (i = start, i <= limit; i++) {
-            printf("The current value of i is: %d", i);
+    //En beskrivelse af funktionen
+    function eksempel_funktion(variable) {
+    
+        let resultat;
+        
+        for(let i = start; i < limit; i++) {
+            console.log("Hej");
+            
+            if(i == variable) {
+                resultat = i; 
+                break;
+            }
         }
         
-        if (i == 10) {
-           i = 11;
+        if(variable == i) {
+            i = 10;
+        } else if(variable > i) {
+            i = 11;
         } else {
-           i = 12;
+            i = 12;
         }
     }
+    
+    let k = new Class;
+    
 ```
 
 - And each .c source file containing ANY function or procedure must have an associated .h header file
