@@ -42,7 +42,7 @@
     let k = new Class;
     console.log(k);
     
-    export.modules.eksempel_funktion = eksempel_funktion;
+    module.exports.eksempel_funktion = eksempel_funktion;
     
 ```
 
