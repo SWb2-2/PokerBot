@@ -4,5 +4,3 @@ module.exports = class Card {
         this.suit = suit;
     }
 }
-
-

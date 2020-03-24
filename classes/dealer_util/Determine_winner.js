@@ -1,4 +1,4 @@
-module.exports = function determine_winner(player1, player2){
+/*module.exports = function determine_winner(player1, player2){
 
     const ace = 14,
           hand_size = 7;
@@ -369,3 +369,4 @@ module.exports = function determine_winner(player1, player2){
         return false;
     }
 }
+*/

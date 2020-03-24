@@ -204,7 +204,7 @@ function find_straight(hand_info) {
 		hand_info.hand.push(1);   
 	}
 
-	for(let i = 0; i < hand_size - 1; i++) {
+	for(let i = 0; i < hand_info.hand.length - 1; i++) {
 		if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1) {
 			current_straight.push(hand_info.hand[i].rank);       //only current card to avoid adding next card twice in next iteration
 
@@ -298,7 +298,7 @@ function find_straight_flush(hand_info) {
 		hand_info.hand.push(1);   
 	}
 
-	for(let i = 0; i < hand_size - 1; i++) {
+	for(let i = 0; i < hand_info.hand.length - 1; i++) {
 		if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1  &&
 		hand_info.hand[i].suit == hand_info.hand[i+1].suit) {
 

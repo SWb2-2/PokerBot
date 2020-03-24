@@ -1,4 +1,4 @@
-const determine_winner = require("./dealer_util/Determine_winner.js");
+const determine_winner = require("./dealer_util/Determine_winner2.js");
 const Card = require("./class_card.js");
 
 const ace = 14;
@@ -91,7 +91,7 @@ module.exports = class Dealer {
     //Returns the winning player, and if they both win, return false. 
     get_winner(player1, player2){
 
-        return determine_winner.bind(this)(player1, player2);
+        return determine_winner.determine_winner.bind(this)(player1, player2);
     }
 
     //If only 1 player is given, that is the winner of the given round and, that player is given the pot. 
