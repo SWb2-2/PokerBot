@@ -44,8 +44,6 @@
     
 ```
 
-- Alle tests ligger i _"test "_ mappen. 
-
 
 ----------
 
@@ -69,3 +67,4 @@
 - Alle funktioner skal kunne testes
 - Alle funktioner skal være gennemtestet
 - En testfil kaldes "filnavn.test.js" hvor filnavn er navnet af filen, som funktionen kommer fra. 
+- Alle testfiler gemmes i _test_ mappen
