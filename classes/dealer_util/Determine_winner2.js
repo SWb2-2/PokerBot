@@ -1,3 +1,4 @@
+const Card = require("../class_card");
 const ace = 14,
 	  hand_size = 7;
 
@@ -198,12 +199,12 @@ function find_three_of_a_kind(hand_info) {
 //Else if the next card is not one lower, the current_straight is reset. 
 function find_straight(hand_info) {
 	let current_straight = [];
-
+	
 	//Ace can be used in a straight as 14 or 1. 
-	if(hand_info.hand[0] == ace) {
-		hand_info.hand.push(1);   
+	if(hand_info.hand[0].rank == ace) {
+		hand_info.hand.push(new Card(1,0));
 	}
-
+	
 	for(let i = 0; i < hand_info.hand.length - 1; i++) {
 		if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1) {
 			current_straight.push(hand_info.hand[i].rank);       //only current card to avoid adding next card twice in next iteration
@@ -294,11 +295,16 @@ function find_straight_flush(hand_info) {
 
 	let best_straight_flush = [];
 
-	if(hand_info.hand[0] == 14) {
-		hand_info.hand.push(1);   
+	for(let i = 0; i < 4; i++) { 		//checking if player has any aces, which need to count as ones as well
+		if(hand_info.hand[0].rank == 14) {
+			hand_info.hand.push(new Card(1, hand_info.hand[i].suit));
+		}
 	}
+	//if(hand_info.hand[0].rank == 14) {
+	//	hand_info.hand.push(new Card(1, 1)); //vi skal have indsat esserens kulør. Men hvis der er flere essere  
+	//}
 
-	for(let i = 0; i < hand_info.hand.length - 1; i++) {
+	for(i = 0; i < hand_info.hand.length - 1; i++) {
 		if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1  &&
 		hand_info.hand[i].suit == hand_info.hand[i+1].suit) {
 
@@ -308,7 +314,8 @@ function find_straight_flush(hand_info) {
 													// So we push the last card in, adds it and return/
 				best_straight_flush.push(hand_info.hand[i+1].rank);
 				hand_info.best_hands[straight_flush] = best_straight_flush;
-				if(hand_info.hand.length > 7) {
+				//if(hand_info.hand.length > 7) {
+				while(hand_info.hand.length > 7){ //removing excess 1's from hand
 					hand_info.hand.pop();
 				}
 				return; 
