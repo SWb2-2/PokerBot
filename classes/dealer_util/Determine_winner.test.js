@@ -208,7 +208,6 @@ test("Should insert array of highest rank of a card that there is 2 of", ()=>{
 	expect(hand_info.best_hands[three_of_kind]).toStrictEqual(undefined); //trying to index outside of largest index
 	expect(hand_info.best_hands[four_of_kind]).toStrictEqual(undefined);
 });
-
 test("Should insert array of highest rank of a card that there is 2 of", ()=>{
 	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
 	hand_info.hand = [new Card(5,1),new Card(2,0),new Card(2,2),new Card(2,0),new Card(2,3),
@@ -221,7 +220,6 @@ test("Should insert array of highest rank of a card that there is 2 of", ()=>{
 	expect(hand_info.best_hands[three_of_kind]).toStrictEqual([2,2,2,14,14]); //trying to index outside of largest index
 	expect(hand_info.best_hands[four_of_kind]).toStrictEqual([2,2,2,2,14]);
 });
-
 test("Should insert array of highest rank of a card that there is 2 of", ()=>{
 	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
 	hand_info.hand = [new Card(5,1),new Card(7,0),new Card(11,2),new Card(10,0),new Card(12,3),
@@ -234,4 +232,5 @@ test("Should insert array of highest rank of a card that there is 2 of", ()=>{
 	expect(hand_info.best_hands[three_of_kind]).toStrictEqual(undefined); //trying to index outside of largest index
 	expect(hand_info.best_hands[four_of_kind]).toStrictEqual(undefined);
 });
+
 
