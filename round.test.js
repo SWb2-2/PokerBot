@@ -88,7 +88,7 @@ test("Player2 raises with 20 so when player1 calls, they should place a bet of 2
     let response = round.process_move(player1, player2, dealer);
     expect(response).toStrictEqual({
         pot: 40,
-        player_current_bet: 0,
+        player_current_bet: 20,
         player_balance: 180,
         player_move: 'Call',
         player_amount: 20,
@@ -230,7 +230,7 @@ test("If there are five cards on the table, and the bets are even, the game shou
     let response = round.process_move(player1, player2, dealer);
     expect(response).toStrictEqual({
         pot: 100,
-        player_current_bet: 0,
+        player_current_bet: 50,
         player_balance: 150,
         player_move: 'Call',
         player_amount: 10,
