@@ -57,29 +57,50 @@ function determine_winner(player1, player2){
         a_function[i](hand_info2);
     }
 
-    console.log("player1 \n", hand_info1);
-    console.log("player2 \n", hand_info2);
- 
-
     //comparison of hands. Returns the winning player, otherwise returns false if it's a complete draw 
     //      (i.e. same hands for all possible hands)
     // length of best_hands array signifies the given hand, i.e. 0 = highcard, 8 = straight flush
-    // if hands are similar, the highest cards are chacked 
+	// if hands are similar, the highest cards are chacked 
+	let winner;
     if(hand_info1.best_hands.length > hand_info2.best_hands.length) {
-        return player1;
+        winner = player1;
     } else if (hand_info1.best_hands.length < hand_info2.best_hands.length) {
-        return player2;
+        winner = player2;
     } else {   //if the best hands are equal, checks the highest cards
         for(let i = 0; i < 5; i++) {
             let strongest = hand_info1.best_hands.length - 1;
             if(hand_info1.best_hands[strongest][i] > hand_info2.best_hands[strongest][i]) {
-                return player1;
+                winner = player1;
             } else if (hand_info1.best_hands[strongest][i] < hand_info2.best_hands[strongest][i]) {
-                return player2;
+                winner = player2;
             }
         }
-        return false;
-    }
+        winner = true;
+	}
+	let best_hand1 = hand_info1.best_hands.length - 1; 
+	let best_hand2 = hand_info2.best_hands.length - 1;
+
+	best_hand1 = convert_hand_to_string(best_hand1);
+	best_hand2 = convert_hand_to_string(best_hand2);
+
+	return {winner: winner, 
+			player1_hand: best_hand1,
+			player2_hand: best_hand2}
+
+	function convert_hand_to_string(best_hand){
+		switch(best_hand){
+			case 0: best_hand = "high card"; break;
+			case 1: best_hand = "pair"; break;
+			case 2: best_hand = "two pairs"; break;
+			case 3: best_hand = "three of a kind"; break;
+			case 4: best_hand = "straight"; break; 
+			case 5: best_hand = "flush"; break;
+			case 6: best_hand = "full house"; break;
+			case 7: best_hand = "four of a kind"; break;
+			case 8: best_hand = "straight flush"; break;
+		}
+		return best_hand;
+	}
 }
 
 
@@ -296,7 +317,7 @@ function find_straight_flush(hand_info) {
 	let best_straight_flush = [];
 
 	for(let i = 0; i < 4; i++) { 		//checking if player has any aces, which need to count as ones as well
-		if(hand_info.hand[0].rank == 14) {
+		if(hand_info.hand[i].rank == 14) {
 			hand_info.hand.push(new Card(1, hand_info.hand[i].suit));
 		}
 	}
