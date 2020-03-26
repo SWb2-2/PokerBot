@@ -70,3 +70,41 @@
 - Alle funktioner skal være gennemtestet
 - En testfil kaldes "filnavn.test.js" hvor filnavn er navnet af filen, som funktionen kommer fra. 
 - Alle testfiler gemmes i _test_ mappen
+
+Eksempel::
+Dette er vores main funktion
+filnavn:
+addition.js
+```js
+    function plus(x, y) {
+        return x + y;
+    }
+     module.exports.plus = plus;
+```
+Test filnavn:
+addition.test.js
+```js
+    const plus = require("../addition.js");
+    
+    test("Beskrivende tekst - test af plus, forventer summet af to tal, () => {
+    
+    //Opsætter testmiljøet
+    let j = 3, k = 4;
+    
+    //Kalder funktionen
+    let svar_fra_funktion = plus(j, k);
+    
+    //Gennemgår testen
+    expect(svar_fra_funktion).toBe(7);
+    
+    //Alternativ
+    expect(plus(j,k)).toStrictEqual(7);
+    }
+
+For at køre testene skal "jest" installeres. 
+I konsolen skriv:
+    npm install jest
+
+For at køre testene skriv:
+    npm test
+    
