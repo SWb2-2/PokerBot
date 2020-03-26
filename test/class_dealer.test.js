@@ -1,4 +1,3 @@
-// const determine_winner = require("./Determine_winner2.js");
 const Dealer = require("../classes/class_dealer.js");
 const Player = require("../classes/class_player.js");
 const Card = require("../classes/class_card.js");
