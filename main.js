@@ -11,5 +11,4 @@ dealer.shuffle_array();
 dealer.give_player_cards(player1, player2);
 dealer.add_table_cards(5);
 
-console.log("And the winner is", dealer.get_winner(player1, player2), "with the hand\n\n", 
-dealer.get_winner(player1,player2).hand);
+console.log("And the winner is", dealer.get_winner(player1, player2));

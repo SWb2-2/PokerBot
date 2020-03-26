@@ -266,6 +266,25 @@ test("Should ignore duplicates and not break streak",() => {
 	expect(hand_info.best_hands[straight]).toStrictEqual([5,4,3,2,1]);
 	expect(hand_info.hand.length).toBe(7);
 });
+test("Should ignore duplicates and not break streak",() => {
+	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+	hand_info.hand = [new Card(13,1),new Card(13,0),new Card(13,2),new Card(12,0),new Card(11,3),
+					new Card(10,2), new Card(14,1)]
+	determine_winner.sort_hand(hand_info);
+	determine_winner.find_straight(hand_info);
+	expect(hand_info.best_hands[straight]).toStrictEqual([14,13,12,11,10]);
+	expect(hand_info.hand.length).toBe(7);
+});
+test("Should ignore duplicates and not break streak",() => {
+	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+	hand_info.hand = [new Card(14,1),new Card(13,0),new Card(12,2),new Card(9,0),new Card(11,3),
+					new Card(10,2), new Card(8,1)]
+	determine_winner.sort_hand(hand_info);
+	determine_winner.find_straight(hand_info);
+	expect(hand_info.best_hands[straight]).toStrictEqual([14,13,12,11,10]);
+	expect(hand_info.hand.length).toBe(7);
+});
+
 
 //find flush
 test("Should insert ranks of highest flush into best_hands[flush]",() => {
@@ -276,6 +295,16 @@ test("Should insert ranks of highest flush into best_hands[flush]",() => {
 	determine_winner.count_suits(hand_info);
 	determine_winner.find_flush(hand_info);
 	expect(hand_info.best_hands[flush]).toStrictEqual([14,7,6,5,3]);
+	expect(hand_info.best_hands.length - 1).toEqual(flush);
+});
+test("Should insert ranks of highest flush into best_hands[flush]",() => {
+	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+	hand_info.hand = [new Card(2,0),new Card(3,0),new Card(4,0),new Card(11,0),new Card(6,0),
+					new Card(14,0), new Card(7,0)]
+	determine_winner.sort_hand(hand_info);
+	determine_winner.count_suits(hand_info);
+	determine_winner.find_flush(hand_info);
+	expect(hand_info.best_hands[flush]).toStrictEqual([14,11,7,6,4]);
 	expect(hand_info.best_hands.length - 1).toEqual(flush);
 });
 
@@ -309,8 +338,27 @@ test("Should insert ranks of highest full house, otherwise empty",() => {
 	determine_winner.find_full_house(hand_info);
 	expect(hand_info.best_hands[full_house]).toStrictEqual([14,14,14,6,6]);
 });
+test("Should insert ranks of highest full house, otherwise empty",() => {
+	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+	hand_info.hand = [new Card(2,1),new Card(14,0),new Card(6,2),new Card(6,0),new Card(6,3),
+					new Card(14,1), new Card(14,2)]
+	determine_winner.sort_hand(hand_info);
+	determine_winner.count_all_ranks(hand_info);
+	determine_winner.find_full_house(hand_info);
+	expect(hand_info.best_hands[full_house]).toStrictEqual([14,14,14,6,6]);
+});
+test("Should insert ranks of highest full house, otherwise empty",() => {
+	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
+	hand_info.hand = [new Card(14,3),new Card(8,0),new Card(5,2),new Card(4,0),new Card(6,3),
+					new Card(14,1), new Card(14,2)]
+	determine_winner.sort_hand(hand_info);
+	determine_winner.count_all_ranks(hand_info);
+	determine_winner.find_full_house(hand_info);
+	expect(hand_info.best_hands[full_house]).toStrictEqual(undefined);
+});
 
-//find_straight_flush
+
+//find straight_flush
 test("Should insert ranks of highest straight flush into the respective index in best hands",() => {
 	let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
 	hand_info.hand = [new Card(2,1),new Card(4,1),new Card(7,1),new Card(3,1),new Card(5,1),
@@ -344,25 +392,31 @@ test("should return player with best hand. Return false if equal hands", () => {
 	let dealer = new Dealer;
 	let player1 = new Player(100);
 	let player2 = new Player(100);
-	dealer.table_cards = [new Card(13,0),new Card(13,2),new Card(10,0),new Card(11,0),new Card(12,0)]
-	player1.hand = [new Card(14,0),new Card(13,0)]
-	player2.hand = [new Card(14,3),new Card(14,2)]
+	dealer.table_cards = [new Card(13,3),new Card(13,2),new Card(10,0),new Card(11,0),new Card(12,0)]
+	player1.hand = [new Card(14,0), new Card(13,0)]
+	player2.hand = [new Card(14,3),new Card(14,2)]	
 
 	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
-	.toBe({winner: player1, 
-		player1_hand: "straight flush",
-		player2_hand: "straight"});
+	.toStrictEqual({winner: player1, 
+		   player1_hand: "straight flush",
+		   player2_hand: "straight"});
 });
-/*
+
 test("should return player with best hand. Return false if equal hands", () => {
 	let dealer = new Dealer;
 	let player1 = new Player(100);
 	let player2 = new Player(100);
-	dealer.table_cards = [new Card(13,0),new Card(13,2),new Card(10,2),new Card(11,3),new Card(12,0)]
-	player1.hand = [new Card(14,2),new Card(13,0)]
-	player2.hand = [new Card(14,0),new Card(13,2)]
-	expect(determine_winner.determine_winner.bind(dealer)(player1, player2)).toBe(false);
+
+	dealer.table_cards = [new Card(13,0),new Card(13,2),new Card(13,2),new Card(11,3),new Card(11,0)]
+	player1.hand = [new Card(14,2),new Card(2,0)]
+	player2.hand = [new Card(14,0),new Card(3,2)]
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: true, 
+		player1_hand: "full house",
+		player2_hand: "full house"});
 });
+
 test("should return player with best hand. Return false if equal hands", () => {
 	let dealer = new Dealer;
 	let player1 = new Player(100);
@@ -371,8 +425,12 @@ test("should return player with best hand. Return false if equal hands", () => {
 	player1.hand = [new Card(12,3), new Card(11,4)];
 	player2.hand = [new Card(10,0),new Card(9,2)];
 
-	expect(determine_winner.determine_winner.bind(dealer)(player1, player2)).toBe(player1);
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player1, 
+		player1_hand: "four of a kind",
+		player2_hand: "four of a kind"});
 });
+
 test("should return player with best hand. Return false if equal hands", () => {
 	let dealer = new Dealer;
 	let player1 = new Player(100);
@@ -381,6 +439,75 @@ test("should return player with best hand. Return false if equal hands", () => {
 	player1.hand = [new Card(2,3), new Card(2,0)];
 	player2.hand = [new Card(2,1),new Card(2,2)];
 
-	expect(determine_winner.determine_winner.bind(dealer)(player1, player2)).toBe(false);
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: true, 
+		player1_hand: "four of a kind",
+		player2_hand: "four of a kind"});
 });
-*/
+
+test("test highcard - should return player with best hand. Return false if equal hands", () => {
+	let dealer = new Dealer;
+	let player1 = new Player(100);
+	let player2 = new Player(100);
+	dealer.table_cards = [new Card(6,0),new Card(5,1),new Card(8,2),new Card(14,3),new Card(13,0)];
+	player1.hand = [new Card(2,1),new Card(7,2)];
+	player2.hand = [new Card(11,3), new Card(2,0)];
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player2, 
+		player1_hand: "high card",
+		player2_hand: "high card"});
+});
+test("test highcard - should return player with best hand. Return false if equal hands", () => {
+	let dealer = new Dealer;
+	let player1 = new Player(100);
+	let player2 = new Player(100);
+	dealer.table_cards = [new Card(6,0),new Card(5,1),new Card(8,2),new Card(14,3),new Card(13,0)];
+	player1.hand = [new Card(8,1),new Card(7,2)];
+	player2.hand = [new Card(11,3), new Card(2,0)];
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player1, 
+		player1_hand: "pair",
+		player2_hand: "high card"});
+});
+test("test highcard - should return player with best hand. Return false if equal hands", () => {
+	let dealer = new Dealer;
+	let player1 = new Player(100);
+	let player2 = new Player(100);
+	dealer.table_cards = [new Card(6,0),new Card(5,1),new Card(8,2),new Card(14,3),new Card(13,0)];
+	player1.hand = [new Card(8,1),new Card(7,2)];
+	player2.hand = [new Card(8,3), new Card(8,0)];
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player2, 
+		player1_hand: "pair",
+		player2_hand: "three of a kind"});
+});
+test("test highcard - should return player with best hand. Return false if equal hands", () => {
+	let dealer = new Dealer;
+	let player1 = new Player(100);
+	let player2 = new Player(100);
+	dealer.table_cards = [new Card(6,0),new Card(5,1),new Card(5,2),new Card(14,3),new Card(13,0)];
+	player1.hand = [new Card(8,1),new Card(8,2)];
+	player2.hand = [new Card(8,3), new Card(9,0)];
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player1, 
+		player1_hand: "two pairs",
+		player2_hand: "pair"});
+});
+
+test("test highcard - should return player with best hand. Return false if equal hands", () => {
+	let dealer = new Dealer;
+	let player1 = new Player(100);
+	let player2 = new Player(100);
+	dealer.table_cards = [new Card(6,0),new Card(5,1),new Card(4,2),new Card(14,3),new Card(13,0)];
+	player1.hand = [new Card(8,1),new Card(7,2)];
+	player2.hand = [new Card(8,3), new Card(9,0)];
+
+	expect(determine_winner.determine_winner.bind(dealer)(player1, player2))
+	.toStrictEqual({winner: player1, 
+		player1_hand: "straight",
+		player2_hand: "high card"});
+});

@@ -29,95 +29,95 @@ test("Tests dealer.create_deck_of_cards, should reset the dealer and players ", 
     expect(player2.current_bet).toStrictEqual(0);
 });
 
-//dealer.create_deck_of_cards
-test("Tests dealer.create_deck_of_cards and it should return an array of 52 cards", () => {
-    let dealer = new Dealer;
-    let card;
-    let error0 = 0;
-    let error1 = 0;
-    let error2 = 0;
-    let rank = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    let suit = [0,0,0,0];
-    dealer.create_deck_of_cards();
+// //dealer.create_deck_of_cards
+// test("Tests dealer.create_deck_of_cards and it should return an array of 52 cards", () => {
+//     let dealer = new Dealer;
+//     let card;
+//     let error0 = 0;
+//     let error1 = 0;
+//     let error2 = 0;
+//     let rank = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//     let suit = [0,0,0,0];
+//     dealer.create_deck_of_cards();
     
-    //Tests that no card is in the deck twice. 
-    for(let i = 0; i < 52; i++) {
-        card = dealer.deck_cards[i];
-        rank[card.rank] += 1;
-        suit[card.suit] += 1;
-        for(let j = 0; j < 52; j++) {
-            if(j == i) {
-                j++;
-            }
-            if(card === dealer.deck_cards[j]) {
-                error0 = 1;
-            }
-        } 
-    }
-    //Tests there is 4 of each rank
-    for(let i = 2; i < 15; i++) {
-        if(rank[i] != 4) {
-            error1 = 1;
-        }
-    }
-    //tests there is 13 of is suit
-    for(let i = 0; i < 4; i++) {
-        if(suit[i] != 13) {
-            error2 = 1;
-        }
-    }
+//     //Tests that no card is in the deck twice. 
+//     for(let i = 0; i < 52; i++) {
+//         card = dealer.deck_cards[i];
+//         rank[card.rank] += 1;
+//         suit[card.suit] += 1;
+//         for(let j = 0; j < 52; j++) {
+//             if(j == i) {
+//                 j++;
+//             }
+//             if(card === dealer.deck_cards[j]) {
+//                 error0 = 1;
+//             }
+//         } 
+//     }
+//     //Tests there is 4 of each rank
+//     for(let i = 2; i < 15; i++) {
+//         if(rank[i] != 4) {
+//             error1 = 1;
+//         }
+//     }
+//     //tests there is 13 of is suit
+//     for(let i = 0; i < 4; i++) {
+//         if(suit[i] != 13) {
+//             error2 = 1;
+//         }
+//     }
 
-    expect(error2).toStrictEqual(0);
-    expect(error1).toStrictEqual(0);
-    expect(error0).toStrictEqual(0);
-    expect(dealer.deck_cards.length).toStrictEqual(52);
-});
+//     expect(error2).toStrictEqual(0);
+//     expect(error1).toStrictEqual(0);
+//     expect(error0).toStrictEqual(0);
+//     expect(dealer.deck_cards.length).toStrictEqual(52);
+// });
 
-//dealer.shuffle_array.
-//Tests by making sure every card is still in the deck.  
-test("test of dealer.shuffle_array, should return a shuffled array", () => {
-    let dealer = new Dealer;
-    let card;
-    let error0 = 0;
-    let error1 = 0;
-    let error2 = 0;
-    let rank = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    let suit = [0,0,0,0];
-    dealer.create_deck_of_cards();
-    dealer.shuffle_array();
+// //dealer.shuffle_array.
+// //Tests by making sure every card is still in the deck.  
+// test("test of dealer.shuffle_array, should return a shuffled array", () => {
+//     let dealer = new Dealer;
+//     let card;
+//     let error0 = 0;
+//     let error1 = 0;
+//     let error2 = 0;
+//     let rank = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//     let suit = [0,0,0,0];
+//     dealer.create_deck_of_cards();
+//     dealer.shuffle_array();
     
-    //Tests that no card is in the deck twice. 
-    for(let i = 0; i < 52; i++) {
-        card = dealer.deck_cards[i];
-        rank[card.rank] += 1;
-        suit[card.suit] += 1;
-        for(let j = 0; j < 52; j++) {
-            if(j == i) {
-                j++;
-            }
-            if(card === dealer.deck_cards[j]) {
-                error0 = 1;
-            }
-        } 
-    }
-    //Tests there is 4 of each rank
-    for(let i = 2; i < 15; i++) {
-        if(rank[i] != 4) {
-            error1 = 1;
-        }
-    }
-    //tests there is 13 of is suit
-    for(let i = 0; i < 4; i++) {
-        if(suit[i] != 13) {
-            error2 = 1;
-        }
-    }
+//     //Tests that no card is in the deck twice. 
+//     for(let i = 0; i < 52; i++) {
+//         card = dealer.deck_cards[i];
+//         rank[card.rank] += 1;
+//         suit[card.suit] += 1;
+//         for(let j = 0; j < 52; j++) {
+//             if(j == i) {
+//                 j++;
+//             }
+//             if(card === dealer.deck_cards[j]) {
+//                 error0 = 1;
+//             }
+//         } 
+//     }
+//     //Tests there is 4 of each rank
+//     for(let i = 2; i < 15; i++) {
+//         if(rank[i] != 4) {
+//             error1 = 1;
+//         }
+//     }
+//     //tests there is 13 of is suit
+//     for(let i = 0; i < 4; i++) {
+//         if(suit[i] != 13) {
+//             error2 = 1;
+//         }
+//     }
 
-    expect(error2).toStrictEqual(0);
-    expect(error1).toStrictEqual(0);
-    expect(error0).toStrictEqual(0);
-    expect(dealer.deck_cards.length).toStrictEqual(52);
-});
+//     expect(error2).toStrictEqual(0);
+//     expect(error1).toStrictEqual(0);
+//     expect(error0).toStrictEqual(0);
+//     expect(dealer.deck_cards.length).toStrictEqual(52);
+// });
 
 //dealer.add_table_cards
 test("tests dealer.add_table_cards, and it should add cards to the table", () => {

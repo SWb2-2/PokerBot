@@ -3,8 +3,6 @@ const Card = require("./class_card.js");
 
 const ace = 14;
 
-
-
 module.exports = class Dealer {
     constructor(){
         this.deck_cards = [];
@@ -27,6 +25,7 @@ module.exports = class Dealer {
 
     //Places a new deck of 52 cards in deck_cards    
     create_deck_of_cards() {
+        
         for(let suit = 0; suit < 4; suit++) {
             
             for(let rank = 2; rank <= ace; rank++) {
@@ -39,6 +38,7 @@ module.exports = class Dealer {
     //Works by shuffling the first element with a random element, then the second element, gets shuffled with a random element
     //This continues until every element have been swapped once, with a random element. 
     shuffle_array() {
+
         let swap = 0; 
         let temp_storage = 0;
         for(let i = 0; i < this.deck_cards.length; i++) {

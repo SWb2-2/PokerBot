@@ -52,7 +52,7 @@ function determine_winner(player1, player2){
     a_function[straight_flush] = find_straight_flush;
 
     //finding 5 best cards for each possible hand
-    for(let i = high_card; i < straight_flush; i++) {
+    for(let i = high_card; i <= straight_flush; i++) {
         a_function[i](hand_info1);
         a_function[i](hand_info2);
     }
@@ -66,17 +66,20 @@ function determine_winner(player1, player2){
         winner = player1;
     } else if (hand_info1.best_hands.length < hand_info2.best_hands.length) {
         winner = player2;
-    } else {   //if the best hands are equal, checks the highest cards
+	} else {   //if the best hands are equal, checks the highest cards
+		winner = true;
         for(let i = 0; i < 5; i++) {
             let strongest = hand_info1.best_hands.length - 1;
             if(hand_info1.best_hands[strongest][i] > hand_info2.best_hands[strongest][i]) {
-                winner = player1;
+				winner = player1; 
+				break;
             } else if (hand_info1.best_hands[strongest][i] < hand_info2.best_hands[strongest][i]) {
-                winner = player2;
+				winner = player2;
+				break;
             }
         }
-        winner = true;
 	}
+
 	let best_hand1 = hand_info1.best_hands.length - 1; 
 	let best_hand2 = hand_info2.best_hands.length - 1;
 
@@ -260,6 +263,9 @@ function find_flush(hand_info) {
 					best_flush.push(hand_info.hand[j].rank);
 				}
 			}
+			while(best_flush.length > 5) {
+				best_flush.pop();
+			}
 			hand_info.best_hands[flush] = best_flush;
 		}
 	}
@@ -321,28 +327,35 @@ function find_straight_flush(hand_info) {
 			hand_info.hand.push(new Card(1, hand_info.hand[i].suit));
 		}
 	}
-	//if(hand_info.hand[0].rank == 14) {
-	//	hand_info.hand.push(new Card(1, 1)); //vi skal have indsat esserens kulør. Men hvis der er flere essere  
-	//}
+	let suit;
+	for(let i = 0; i < 4; i++) {
+		if(hand_info.count_suit[i] >=5) {
+			suit = i;
+		}
+	}
 
-	for(i = 0; i < hand_info.hand.length - 1; i++) {
-		if(hand_info.hand[i].rank == hand_info.hand[i+1].rank + 1  &&
-		hand_info.hand[i].suit == hand_info.hand[i+1].suit) {
+	//find places with that suit
+	let matching_suit = [];
+	for(let i = 0; i < hand_info.hand.length; i++) {
+		if(hand_info.hand[i].suit == suit) {
+			matching_suit.push(hand_info.hand[i])
+		}
+	}
 
-			best_straight_flush.push(hand_info.hand[i].rank);
+	for(let i = 0; i < matching_suit.length - 1; i++) {
+		if(matching_suit[i].rank == matching_suit[i+1].rank + 1) {
+
+			best_straight_flush.push(matching_suit[i].rank);
 
 			if(best_straight_flush.length == 4) { // When 4 cards have been added, we have tested 5 cards
 													// So we push the last card in, adds it and return/
-				best_straight_flush.push(hand_info.hand[i+1].rank);
+				best_straight_flush.push(matching_suit[i+1].rank);
 				hand_info.best_hands[straight_flush] = best_straight_flush;
-				//if(hand_info.hand.length > 7) {
 				while(hand_info.hand.length > 7){ //removing excess 1's from hand
 					hand_info.hand.pop();
 				}
 				return; 
 			}
-		} else if(hand_info.hand[i].rank == hand_info.hand[i+1].rank) {
-			// If the next card is similar rank, do nothing, since a straight flush might still occur. 
 		} else {
 			best_straight_flush = [];
 		}
