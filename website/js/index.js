@@ -1,12 +1,10 @@
-
-
 function sendInfo (event) {
-    let formElement = document.querySelector("form");
+    let formElement = document.querySelector("#balance").value;
     console.log("hello");
-    event.preventDefault();
+
     fetch("http://localhost:3000", {
         method: 'POST',
-        body: new FormData(formElement)
+        body: JSON.stringify({balance:formElement})
     }).then((response) => {
         console.log("hejsa");
         return response.text();
