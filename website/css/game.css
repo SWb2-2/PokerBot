@@ -3,14 +3,25 @@ body {
     background-color: silver;
 }
 
-#bank {
+#player-bank {
     position: absolute;
     left: 75%;
     top: 350px;
     padding: 5px 20px;
     color: white;
-    text-align: right;
+    text-align: center;
     background-color: teal;
+    border: thick solid black;
+}
+
+#ai-bank {
+    position: absolute;
+    left: 18%;
+    top: 70px;
+    padding: 5px 20px;
+    color: white;
+    text-align: center;
+    background-color: grey;
     border: thick solid black;
 }
 
@@ -73,7 +84,7 @@ body {
     text-align: center;
 }
 
-#player-options button {
+#player-options .button-on {
     background-color: teal;
     border: none;
     color: white;
@@ -85,8 +96,23 @@ body {
     cursor: pointer;
 }
 
-#player-options button:hover {
+#player-options .button-on:hover {
     background-color: turquoise;
+}
+
+#player-options .button-off {
+    background-color: grey;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#player-options .button-off:hover {
+    background-color: grey;
 }
 
 #card-back {

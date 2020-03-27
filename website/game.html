@@ -18,14 +18,18 @@
                 <div id="player-cards"></div>
             </div>
             <div id="player-options">
-                <button id="check">Check</button>
-                <button id="call">Call</button>
-                <button id="raise">Raise</button>
-                <button id="fold">Fold</button>
+                <button class="button-on" id="check" onclick="getPlayerMove(this.id)">Check</button>
+                <button class="button-on" id="call" onclick="getPlayerMove(this.id)">Call</button>
+                <button class="button-on" id="raise" onclick="getPlayerMove(this.id)">Raise</button>
+                <button class="button-on" id="fold" onclick="getPlayerMove(this.id)">Fold</button>
             </div>
         </div>
-        <div id="bank">
-            <p>Balance:</p>
+        <div id="ai-bank">
+            <p>AI<br>Balance:</p>
+            <p id="balance-field">0$</p>
+        </div>
+        <div id="player-bank">
+            <p>Player<br>Balance:</p>
             <p id="balance-field">0$</p>
         </div>
     </div>
