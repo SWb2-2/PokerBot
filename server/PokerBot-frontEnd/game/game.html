@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Play poker</title>
+        <meta name="description" content="Place where you can practice your poker skills against a world class pokercomputer">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/game.css">
+        <script type="text/javascript" src="js/game.js"></script>
+    </head>
+    <body>
+    <div id="container">
+        <div id="game-container">
+            <div id="gameboard">
+                <div id="jumbotron"><h1 id="jumbo-text"></h1></div>
+                <div id="pot">0$</div>
+                <div id="bot-cards"></div>
+                <div id="open-cards"></div>
+                <div id="player-cards"></div>
+            </div>
+            <div id="player-options">
+                <button class="button-on" id="check" onclick="getPlayerMove(this.id)">Check</button>
+                <button class="button-on" id="call" onclick="getPlayerMove(this.id)">Call</button>
+                <button class="button-on" id="raise" onclick="getPlayerMove(this.id)">Raise</button>
+                <button class="button-on" id="fold" onclick="getPlayerMove(this.id)">Fold</button>
+            </div>
+        </div>
+        <div id="ai-bank">
+            <p>AI<br>Balance:</p>
+            <p id="balance-field">0$</p>
+        </div>
+        <div id="player-bank">
+            <p>Player<br>Balance:</p>
+            <p id="balance-field">0$</p>
+        </div>
+    </div>
+    </body>
+</html>
