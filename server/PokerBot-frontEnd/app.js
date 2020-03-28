@@ -142,62 +142,6 @@ player2.name = "AI";
 const directory = 'website/';
 app.use(express.json({limit:"1mb"}));
 
-/*
-const rootFile = process.cwd();
-console.log(rootFile);
-
-function findPath(reqPath) {
-    reqPath = directory + reqPath;
-    //sætter de to stier sammen, nemlig fra serveren og ned til anmodede sti, som gerne skal ligge i directory Public
-    let pathFromServer = path.join(rootFile, path.normalize(reqPath));
-    return pathFromServer;
-}
-
-// Når et bestemt filnavn anmodes bruges denne funktion til at frembringe den til klienten fra serveren
-function fileResponse(fileReq, response) {
-    // find stien til den anmodede side...
-    reqPath = findPath(fileReq);
-    // Læs siden og se om alt er okay.
-    fs.readFile(reqPath, (error, data) => {
-        // Hvis ikke, returner en respons der siger, at siden ej kunne findes.
-        if (error) {
-            response.statusCode = 404;
-            response.setHeader('Content-Type', 'text/txt');
-            response.write("Sorry, could not find the requested site " + reqPath + ". Error: " + error);
-            response.end();
-        }
-        // Ellers, hvis alt kører som det skal, skal klienten nu have siden. 
-        // Dette gøres ved at udskrive data læst gennem fs via response.write
-        else {
-            response.statusCode = 200;
-            response.setHeader('Content-Type', defineFileType(fileReq));
-            response.write(data);
-            response.end('\n');
-        }
-    });
-}
-// Finder ud af hvilken filtype der søges og sætter respons content-type som følge deraf
-function defineFileType(fileName) {
-    // Objekt med mulige filtyper:
-    let listOfTypes = {
-        'txt': 'text/txt',
-        'css': 'text/css',
-        'js': 'text/js',
-        'html': 'text/html',
-        'json': 'application/json'
-    };
-    // Filtype defineres af bogstaver efter punktum. Derfor søges index af dette i filnavnet.
-    let startPoint = String(fileName).indexOf(".");
-    let end = String(fileName).length;
-    // Her laves subarray med slice, hvor kun fildefinitionen, altså det efter punktummet er med. 
-    let fileEndName = Array.from(fileName).slice(startPoint + 1, end);
-    console.log(fileEndName.join(""));
-    // Slutteligt bruges metoden join til at slutte arrayet sammen igen, således der ikke er kommaer.
-    // Og der søges i objektet, om der er en filtype der passer.
-    return (listOfTypes[fileEndName.join('')] || console.log("Should not be here"));
-}
-
-*/
 // Player turn, når der sendes objekt fra 
 app.use(express.static('game/'));
 
@@ -224,47 +168,17 @@ app.post('/player_turn', (req, res) => {
     
     let answer = round.process_move(player1, player2, dealer);
     console.log(answer);
-    /*res.json({
-        status: 201,
-        note: "Post was successful",
-        message: "Added: " + JSON.stringify(req.body),
-        data: answer
-    });*/
     res.statusCode = 200;
     res.send(answer);
     res.end();
-/*
-    answer = round.process_move(player1, player2, dealer);
+});
+// Dette skal omskrives til bare at bruge req.body
+app.get('/bot_turn', (req, res) => {
+    // Call AI function. 
+    answer = round.process_move(player2, player1, dealer);
     res.send(JSON.stringify(answer));
     res.statusCode = 200;
     res.end("request accepted");
-    */
-});
-// Dette skal omskrives til bare at bruge req.body
-app.post('/bot_turn', (req, res) => {
-    let body = [];
-    console.log(req.body);
-    // Make a it function 
-    if (req.method === "POST") {
-        res.writeHead(200, {
-            "Content-Type": "*",
-        });
-        req.on("data", (chunck) => {
-            body.push(chunck);
-        }).on("end", () => {
-            body = Buffer.concat(body).toString();
-            console.log(body);
-        });
-        console.log(body);
-        // Call AI function here to get move and amount. 
-        body["move"] = player2.player_move.move;
-        body["amount"] = player2.player_move.amount;
-        answer = round.process_move(player2, player1, dealer);
-        res.send(JSON.stringify(answer));
-        res.statusCode = 200;
-        res.end("request accepted");
-    }
-
 });
 
 app.get('/preflop', (req, res) => {
@@ -274,47 +188,19 @@ app.get('/preflop', (req, res) => {
     res.statusCode = 200;
     res.end("request accepted");
 });
-// Dette skal omskrives til bare at bruge req.body
+
 app.get('/next_round', (req, res) => {
-    let body = [];
-    console.log(req.body);
-   
-        res.writeHead(200, {
-            "Content-Type": "*",
-        });
-        req.on("data", (chunck) => {
-            body.push(chunck);
-        }).on("end", () => {
-            body = Buffer.concat(body).toString();
-            console.log(body);
-        });
-        console.log(body);
-        answer = round.next_round(player1, player2, dealer);
-        res.send(JSON.stringify(answer));
-        res.statusCode = 200;
-        res.end("request accepted");
+    answer = round.next_round(player1, player2, dealer);
+    res.send(JSON.stringify(answer));
+    res.statusCode = 200;
+    res.end("request accepted");
 });
-// Dette skal omskrives til bare at bruge req.body
+
 app.get('/showdown', (req, res) => {
-    let body = [];
-    console.log(req.body);
-    
-        res.writeHead(200, {
-            "Content-Type": "*",
-        });
-        req.on("data", (chunck) => {
-            body.push(chunck);
-        }).on("end", () => {
-            body = Buffer.concat(body).toString();
-            console.log(body);
-        });
-        console.log(body);
-        body["move"] = player1.player_move.move;
-        body["amount"] = player1.player_move.amount;
-        answer = round.showdown(player1, player2, dealer);
-        res.send(JSON.stringify(answer));
-        res.statusCode = 200;
-        res.end("request accepted");
+    answer = round.showdown(player1, player2, dealer);
+    res.send(JSON.stringify(answer));
+    res.statusCode = 200;
+    res.end("request accepted");
 });
 
 app.listen(port, () => console.log("Server is running..."));
