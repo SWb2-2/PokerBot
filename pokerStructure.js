@@ -203,7 +203,8 @@ function scanInput(string) {
     }
 }
 // Ud fra trækket bestemmes, hvad spilleren næst kan gøre. Her valideres også deres træk, dvs. man kan ikke raise med mere end det man har osv. 
-// Overvejer at splitte dem ud i funktioner, fordi den bliver lidt voldsom for sig selv. 
+// Overvejer at splitte dem ud i funktioner, fordi den bliver lidt voldsom for sig selv.
+//kommentar: Hvad hvis man vil raise med at gå all in? Vi validere inputtet inden wi sætter player move til all-in, så det får de aldrig lov til 
 function checkMove(player1, player2, dealer) {
     if (player1.player_move.move === 'Raise') {
         
@@ -252,6 +253,7 @@ function checkMove(player1, player2, dealer) {
 
 // Fordeler penge til spillerne. Der er to kategorier, i.e. enten vinder man fordi den ene foldede, 
 // eller også vandt man i showdown. Det er det, som de to overordnede if og else hhv. repræsenterer. 
+// kommentar: Hvad hvis man folder når bets er lige store? dvs, nogle callede og du så folder næste runde?
 function distributeMoney(player1, player2, dealer) {
     if (noFold(player1, player2) === false) {
         // dealer.pot += player1.current_bet + player2.current_bet;

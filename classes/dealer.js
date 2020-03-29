@@ -70,12 +70,12 @@ module.exports = class Dealer {
                 player2.balance = player2.current_bet;
 
             } else {
-                let leftovers = player2.current_bet - player1.current_bet;                                   
-                player1.balance += player2.current_bet - leftovers + player1.current_bet;
+                let leftovers = player2.current_bet - player1.current_bet; //kommentar: under antagelse at player1 har vundet?                                  
+                player1.balance += player2.current_bet - leftovers + player1.current_bet; //ville dealer.pot - leftovers være ækvivalent?
                 player2.balance += leftovers;
 
             }
-        } else { //Grundet hvis begge har lige gode hænder. 
+        } else { //Grundet hvis begge har lige gode hænder. Kommentar: Nu har vi denne håndtering to gange
             player1.balance += this.pot/2;
             player2.balance += this.pot/2;
         }
@@ -88,7 +88,7 @@ module.exports = class Dealer {
             // player2.current_bet = 0;
             return true;
         }
-        if (player1.player_move.move === 'All-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") {
+        if (player1.player_move.move === 'All-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") { //kommentar: forstår ikke logikken her
             this.pot = player1.current_bet + player2.current_bet;
             return true;
         }

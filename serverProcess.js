@@ -49,7 +49,7 @@ function process_move(player1, player2, dealer) {
             let difference = player1.balance - player1.player_move.amount;
             
             if(difference <= 0) {
-                player1.player_move.amount = difference + player1.balance;
+                player1.player_move.amount = difference + player1.balance; //er det ikke plus player1.player_move.amount?
             }
         }
         player1.current_bet += player1.player_move.amount;
