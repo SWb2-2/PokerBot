@@ -10,7 +10,7 @@ class Player{
         this.balance = balance;
         this.hand = [];
         this.current_bet = 0;
-        this.blind = blind; // "bb", "sb"
+        this.blind = ""; // "bb", "sb"
         this.player_move = {move: "", amount: 0}; 
     }
 }
@@ -20,19 +20,13 @@ var blind = 10;
 var testCard = new Card(11, 3);
 
 var player_hand = [testCard, testCard];
-var player = new Player(100);
-player.hand = player_hand;
-player.current_bet = blind;
-player.blind = "bb";
-let move_made = "no";
 
-var flop = [testCard, testCard, testCard];
-var cards = {table_cards: flop, whose_turn: player};
+let move_made = "no";
 
 let color = ["heart.png","clover.png","spade.png","diamond.png"];
 
 //####################################################################################################
-// Card functions
+// Table functions
 function createCard(card_to_create){
     let cardColor = document.createElement("img");
     cardColor.src = "./Images/" + color[card_to_create.suit];
@@ -63,11 +57,19 @@ function createCard(card_to_create){
     return cardHolder;
 }
 
-function createBotCard(){
+function createBotBackCard(){
     let cardHolder = document.createElement("div");
     cardHolder.setAttribute("id", "card-back");
 
     return cardHolder;
+}
+
+function showBotCards(bot_cards) {
+    deleteCards("bot-cards");
+    for (let index = 0; index < bot_cards.length; index++) {
+        let card = createCard(bot_cards[index]);
+        document.querySelector("#bot-cards").appendChild(card);        
+    }
 }
 
 function deleteCards(parent_id) {
@@ -79,21 +81,35 @@ function deleteCards(parent_id) {
 function giveCardsToPlayers(player_cards){
     deleteCards("player-cards");
     deleteCards("bot-cards");
+    deleteCards("open-cards");
 
     for (let index = 0; index < player_cards.length; index++) {
         let card = createCard(player_cards[index]);
         document.getElementById("player-cards").appendChild(card);
-        document.getElementById("bot-cards").appendChild(createBotCard());
+        document.getElementById("bot-cards").appendChild(createBotBackCard());
     }
+
+    let turn = this.getFirstTurn();
+
+    this.decideTurn(turn);
 }
 
-function giveTableCards(table_cards){
+function giveTableCards(table){
     deleteCards("open-cards");
 
-    for (let index = 0; index < table_cards.length; index++) {
-        let card = createCard(table_cards[index]);
+    for (let index = 0; index < table.table_cards.length; index++) {
+        let card = createCard(table.table_cards[index]);
         document.getElementById("open-cards").appendChild(card);
     }
+
+    decideTurn(table);
+}
+
+function getTablecards() {
+    let flop = [testCard, testCard, testCard];
+    let cards = {table_cards: flop, whose_turn: "player"};
+
+    giveTableCards(cards);
 }
 
 //####################################################################################################
@@ -111,6 +127,15 @@ function hideJumbotron() {
 //####################################################################################################
 // Player move functions
 
+function getPlayerSetup() {
+    let player = new Player(100);
+    player.hand = player_hand;
+    player.current_bet = blind;
+    player.blind = "bb";
+    player.balance = 90;
+    return player;
+}
+
 function makeButtonsActive(id){
     document.getElementById(id).className = "button-on";
     document.getElementById(id).disabled = false;
@@ -121,48 +146,67 @@ function makeButtonsInactive(id){
     id.disabled = true;
 }
 
-function showButtons(robot_turn) {
-    switch (robot_turn.ai_move) {
-        case "check":
-            makeButtonsActive("check");
-            makeButtonsActive("fold");
-            makeButtonsActive("raise");
-            break;
-        case "raise":
-            makeButtonsActive("call");
-            makeButtonsActive("fold");
-            makeButtonsActive("raise");
-            break;
-        default:
-            break;
-    }
+function showButtons(previous_move) {
+    let previous_player = "ai_move" in previous_move;
+
+    if (previous_player === true) {
+        switch (robot_turn.ai_move) {
+            case "check":
+                makeButtonsActive("check");
+                makeButtonsActive("fold");
+                makeButtonsActive("raise");
+                break;
+            case "raise":
+                makeButtonsActive("call");
+                makeButtonsActive("fold");
+                makeButtonsActive("raise");
+                break;
+            default:
+                break;
+        }
+    } else{
+        makeButtonsActive("check");
+        makeButtonsActive("raise");
+        makeButtonsActive("fold");
+    }    
 }
 
 function hideAllButtons() {
     let buttonKeeper = document.querySelector("#player-options");
-
     buttonKeeper.querySelectorAll("button").forEach(child => makeButtonsInactive(child));
 }
 
+function playerTurnSetup(previous_move) {
+    showJumbotron("Your turn");
+    hideJumbotron();
+
+    showButtons(previous_move);
+}
+
 function sendPlayerMove(player_turn) {
-    return {pot_size: 45, player_balance: 75, whose_turn: "not_player"};
+    return {pot_size: 45, player_balance: 75, whose_turn: "robot"};
 }
 
 function refreshPlayerStats(player_turn) {
     let player_stats = sendPlayerMove(player_turn);
 
-    document.querySelector("#pot").innerHTML = player_turn.pot_size;
-    document.querySelector("#player-bank #balance-field").innerHTML = player_turn.player_balance;
+    document.querySelector("#pot").innerHTML = player_stats.pot_size;
+    document.querySelector("#player-bank #balance-field").innerHTML = player_stats.player_balance;
+
+    decideTurn(player_stats);
 }
 
-function getPlayerMove(id) {
+function makePlayerMove(id) {
     let player_move = {move: "", amount: 0};
     
     if (id === "raise") {
-        //Add limit
-        let bet = prompt("Input bet:", "5");
-        if (bet == null || bet == "") {
-            move_made = "no";
+        let bet = prompt("Input bet:", "");
+        let player_balance = document.querySelector("#player-bank #balance-field").innerHTML;
+        player_balance = player_balance.replace("$", "");
+        player_balance = Number(player_balance);
+        
+        if (bet == null || bet == "" || bet > player_balance) {
+            alert("Cannot make bet, try again!");
         }else{
             player_move.move = "raise";
             player_move.amount = bet;
@@ -206,7 +250,7 @@ function showMove(current_move) {
 }
 
 function getPokerbotPlay() {
-    let bot_move = {ai_move:"raise", pot_size: 30, ai_balance: 75, whose_turn: "player"};
+    let bot_move = {ai_move:"check", pot_size: 20, ai_balance: 90, whose_turn: "showdown"};
     return bot_move;
 }
 
@@ -223,37 +267,90 @@ function makePokerbotMove(){
     document.querySelector("#ai-bank #balance-field").innerHTML = pokerBot_play.ai_balance;
     document.querySelector("#pot").innerHTML = pokerBot_play.pot_size;
 
-    return pokerBot_play;
+    decideTurn(pokerBot_play);
 }
 
 //####################################################################################################
 // Basic game functions
 
-function setStartup(balance, blind_size, blind_type) {
-    if (blind_type === "bb") {
-        document.querySelector("#player-bank #balance-field").innerHTML = (balance-blind_size) + "$";
-        document.querySelector("#ai-bank #balance-field").innerHTML = (balance-(blind_size/2)) + "$";
-        document.querySelector("#pot").innerHTML = (blind_size*1.5) + "$";
+function getFirstTurn() {
+    return {pot: 15, whose_turn: "player"};
+}
+
+function setStartup() {
+    let player_stats = this.getPlayerSetup();
+
+    if (player_stats.blind === "bb") {
+        document.querySelector("#player-bank #balance-field").innerHTML = player_stats.balance + "$";
+        document.querySelector("#ai-bank #balance-field").innerHTML = (player_stats.balance+(player_stats.current_bet/2)) + "$";
+        document.querySelector("#pot").innerHTML = (player_stats.current_bet+player_stats.current_bet/2) + "$";
     } else {
-        document.querySelector("#player-bank #balance-field").innerHTML = (balance-blind_size) + "$";
-        document.querySelector("#ai-bank #balance-field").innerHTML = (balance-(blind_size*2)) + "$";
-        document.querySelector("#pot").innerHTML = (blind_size*3) + "$";
+        document.querySelector("#player-bank #balance-field").innerHTML = player_stats.balance + "$";
+        document.querySelector("#ai-bank #balance-field").innerHTML = (player_stats.balance-player_stats.current_bet) + "$";
+        document.querySelector("#pot").innerHTML = (player_stats.current_bet+player_stats.current_bet*2) + "$";
+    }
+
+    hideAllButtons();
+    giveCardsToPlayers(player_stats.hand);
+}
+
+function getEndOfGame() {
+    return {player_balance: 110, ai_balance: 90, pot_size: 0, winner: "player", player_best_hand: "flush", ai_best_hand:"straight", ai_cards: player_hand};
+}
+
+function checkBank(player_balance, ai_balance) {
+    if (player_balance === 0) {
+        showJumbotron("Game over, Pokerbot won!");
+        newGame();
+    } else if (ai_balance === 0) {
+        showJumbotron("You won!");
+        newGame();
+    } else{
+        setStartup();
     }
 }
 
-function gameShowdown(showdown) {
-    showJumbotron("Pokerbot has " + showdown.ai_best_hand);
+function gameEnd() {
+    let winner_plays = getEndOfGame();
+    let win_without_fold = "player_best_hand" in winner_plays;
+    alert(win_without_fold);
+    if (win_without_fold === true) {
+        showBotCards(winner_plays.ai_cards);
+
+        showJumbotron("Pokerbot has " + winner_plays.ai_best_hand);
+        hideJumbotron();
+
+        showJumbotron("You have " + winner_plays.player_best_hand);
+        hideJumbotron();
+    }
+    
+    showJumbotron("The winner is " + winner_plays.winner);
     hideJumbotron();
 
-    showJumbotron("Player has " + showdown.player_best_hand);
-    hideJumbotron();
-
-    showJumbotron("The winner is " + showdown.winner);
-    hideJumbotron();
-
-    document.querySelector("#player-bank #balance-field").innerHTML = showdown.player_balance + "$";
-    document.querySelector("#ai-bank #balance-field").innerHTML = showdown.ai_balance + "$";
+    document.querySelector("#player-bank #balance-field").innerHTML = winner_plays.player_balance + "$";
+    document.querySelector("#ai-bank #balance-field").innerHTML = winner_plays.ai_balance + "$";
     document.querySelector("#pot").innerHTML = "0$";
+
+    checkBank(winner_plays.player_balance, winner_plays.ai_balance);
+}
+
+function decideTurn(last_turn_respond) {
+    switch (last_turn_respond.whose_turn) {
+        case "player":
+            playerTurnSetup(last_turn_respond);
+            break;
+        case "robot":
+            makePokerbotMove();
+            break;
+        case "table":
+            getTablecards();
+            break;
+        case "showdown":
+            gameEnd();
+            break;    
+        default:
+            break;
+    }
 }
 
 function newGame() {
@@ -264,17 +361,5 @@ function newGame() {
 
 //####################################################################################################
 window.onload = function() {
-
-    this.setStartup(this.player.balance, this.player.current_bet, this.player.blind);
-    this.giveCardsToPlayers(player.hand);
-
-    let pokerbot_move = this.makePokerbotMove();
-
-    this.showButtons(pokerbot_move);
-
-    while(this.move_made === "no") {
-        console.log("wait");
-    }
-
-    this.giveTableCards(cards.table_cards);
+    this.setStartup();
 }
