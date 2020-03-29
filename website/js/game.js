@@ -183,8 +183,16 @@ function playerTurnSetup(previous_move) {
     showButtons(previous_move);
 }
 
-function sendPlayerMove(player_turn) {
-    return {pot_size: 45, player_balance: 75, whose_turn: "robot"};
+async function sendPlayerMove(player_turn) {
+    let player_stats = await fetch("http://localhost:3000/player_move", {
+        method: "POST",
+        body: JSON.stringify(player_turn)
+    });
+
+    player_stats = await player_stats.text;
+    //player_stats = JSON.parse(player_stats);
+    console.log(player_stats);
+    return player_stats;
 }
 
 function refreshPlayerStats(player_turn) {
