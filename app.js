@@ -6,6 +6,7 @@ let body = [];
 
 app.use(express.static("website"));
 app.use(express.urlencoded({extended:false}));
+
 app.get("/index", (req, res) => {
     res.redirect("game.html");
 });
