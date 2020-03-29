@@ -10,9 +10,5 @@ function sendInfo (event) {
         return response.text();
     });
 
-    //let result = await response.json();
-
-    //alert(result.message);
-
-    location.assign("game.html");
+    return false;
 }
