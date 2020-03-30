@@ -35,7 +35,6 @@ app.post('/balance', (req, res) => {
             body.push(chunck);
         }).on("end", () => {
             body = Buffer.concat(body).toString();
-            console.log(body);
         });
         res.statusCode = 301;
         res.redirect("game.html");
