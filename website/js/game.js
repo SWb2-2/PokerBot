@@ -89,7 +89,7 @@ async function giveCardsToPlayers(player_cards){
         document.getElementById("bot-cards").appendChild(createBotBackCard());
     }
 
-    decideTurn(player_cards.whose_turn);
+    decideTurn(player_cards);
 }
 
 function giveTableCards(table){
@@ -157,7 +157,7 @@ function showButtons(previous_move) {
     let previous_player = "ai_move" in previous_move;
 
     if (previous_player === true) {
-        switch (robot_turn.ai_move) {
+        switch (previous_move.ai_move) {
             case "check":
                 makeButtonsActive("check");
                 makeButtonsActive("fold");
@@ -205,7 +205,7 @@ async function sendPlayerMove(player_turn) {
 async function refreshPlayerStats(player_turn) {
     let player_stats = await sendPlayerMove(player_turn);
     
-    document.querySelector("#pot").innerHTML = player_stats.pot_size;
+    document.querySelector("#pot").innerHTML = player_stats.pot;
     document.querySelector("#player-bank #balance-field").innerHTML = player_stats.player_balance;
 
     decideTurn(player_stats);

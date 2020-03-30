@@ -5,13 +5,14 @@ function pre_flop(player1, player2, dealer) {
     dealer.create_deck_of_cards();
     dealer.shuffle_array();
     dealer.make_blind(player1, player2);
+    dealer.pay_blinds(player1, player2, 10, 5);
     dealer.give_hand_cards(player1, player2);
-    
+    console.log(player1.blind);
     let response = {
         client: player1,
         bot: player2.balance,
         pot: dealer.pot,
-        whose_turn: player1.blind === "sb" ? "Player" : "AI"
+        whose_turn: player1.blind === "sb" ? "player" : "robot"
     };
     return response;
 }
@@ -57,20 +58,14 @@ function process_move(player1, player2, dealer) {
             player1.player_move.move = "all-in";
         }
         let is_round_done = dealer.end_betting_round(player1, player2);
-        let sb_player = '';
-        // Måske lidt overkill
-        if(is_round_done === true) {
-            player1.blind === 'sb' ? sb_player = player1.name : sb_player = player2.name;
-        }
+        
         let response = {
             pot: dealer.pot,
-            player_current_bet: player1.current_bet,
             player_balance: player1.balance,
             player_move: player1.player_move.move,
             player_amount: player1.player_move.amount,
-            end_of_round: is_round_done,
             game_finished: (is_round_done === true && dealer.table_cards.length === 5) ? true : false,
-            whose_turn: sb_player === '' ? player2.name : sb_player
+            whose_turn: is_round_done ? "table" : player2.name
         }
         return response;
     
@@ -78,14 +73,14 @@ function process_move(player1, player2, dealer) {
         dealer.give_pot(player2);
         
         let response = {
-            player_balance: player1.balance,
-            player_move: player1.player_move.move,
-            player2_balance: player2.balance,
+            active_player_name: player1.name,
+            active_player_balance: player1.balance,
+            active_player_move: player1.player_move.move,
+            inactive_player_balance: player2.balance,
             pot: dealer.pot,
-            end_of_round: true,
-            game_finished: true,
             winner: player2.name,
-            bot_hand: player1.name === 'AI' ? player1.hand : player2.hand
+            bot_hand: player1.name === 'robot' ? player1.hand : player2.hand,
+            whose_turn: "showdown"
         }
         return response;
     }
