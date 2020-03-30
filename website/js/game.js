@@ -1,3 +1,5 @@
+
+
 class Card {
     constructor (rank, suit) {
         this.rank = rank;
@@ -20,8 +22,6 @@ var blind = 10;
 var testCard = new Card(11, 3);
 
 var player_hand = [testCard, testCard];
-
-let move_made = "no";
 
 let color = ["heart.png","clover.png","spade.png","diamond.png"];
 
@@ -78,7 +78,7 @@ function deleteCards(parent_id) {
     parent.querySelectorAll("*").forEach(child => child.remove());
 }
 
-function giveCardsToPlayers(player_cards){
+async function giveCardsToPlayers(player_cards){
     deleteCards("player-cards");
     deleteCards("bot-cards");
     deleteCards("open-cards");
@@ -89,9 +89,9 @@ function giveCardsToPlayers(player_cards){
         document.getElementById("bot-cards").appendChild(createBotBackCard());
     }
 
-    let turn = this.getFirstTurn();
+    let turn = await getFirstTurn();
 
-    this.decideTurn(turn);
+    decideTurn(turn);
 }
 
 function giveTableCards(table){
@@ -105,9 +105,14 @@ function giveTableCards(table){
     decideTurn(table);
 }
 
-function getTablecards() {
-    let flop = [testCard, testCard, testCard];
-    let cards = {table_cards: flop, whose_turn: "player"};
+async function getTablecards() {
+    let response = await fetch("http://localhost:3000/table_update", {
+        method: "GET"
+    });
+    
+    let cards = await response.json();
+    cards = JSON.parse(cards);
+    console.log(cards);
 
     giveTableCards(cards);
 }
@@ -115,9 +120,10 @@ function getTablecards() {
 //####################################################################################################
 // Jumbotron functions
 
-function showJumbotron(text) {
+async function showJumbotron(text) {
     document.getElementById("jumbo-text").innerHTML = text;
     document.getElementById("jumbotron").style.visibility = "visible";
+    await sleep(4000);
 }
 
 function hideJumbotron() {
@@ -127,12 +133,15 @@ function hideJumbotron() {
 //####################################################################################################
 // Player move functions
 
-function getPlayerSetup() {
-    let player = new Player(100);
-    player.hand = player_hand;
-    player.current_bet = blind;
-    player.blind = "bb";
-    player.balance = 90;
+async function getPlayerSetup() {
+    let response = await fetch("http://localhost:3000/player_object", {
+        method: "GET"
+    });
+    
+    let player = await response.json();
+    player = JSON.parse(player);
+    console.log(player);
+    
     return player;
 }
 
@@ -176,28 +185,28 @@ function hideAllButtons() {
     buttonKeeper.querySelectorAll("button").forEach(child => makeButtonsInactive(child));
 }
 
-function playerTurnSetup(previous_move) {
-    showJumbotron("Your turn");
+async function playerTurnSetup(previous_move) {
+    await showJumbotron("Your turn");
     hideJumbotron();
 
     showButtons(previous_move);
 }
 
 async function sendPlayerMove(player_turn) {
-    let player_stats = await fetch("http://localhost:3000/player_move", {
+    let response = await fetch("http://localhost:3000/player_move", {
         method: "POST",
         body: JSON.stringify(player_turn)
     });
-
-    player_stats = await player_stats.text;
-    //player_stats = JSON.parse(player_stats);
-    console.log(player_stats);
+    
+    let player_stats = await response.json();
+    player_stats = JSON.parse(player_stats);
+    
     return player_stats;
 }
 
-function refreshPlayerStats(player_turn) {
-    let player_stats = sendPlayerMove(player_turn);
-
+async function refreshPlayerStats(player_turn) {
+    let player_stats = await sendPlayerMove(player_turn);
+    
     document.querySelector("#pot").innerHTML = player_stats.pot_size;
     document.querySelector("#player-bank #balance-field").innerHTML = player_stats.player_balance;
 
@@ -220,13 +229,11 @@ function makePlayerMove(id) {
             player_move.amount = bet;
 
             if (confirm("Are you sure you want to raise with " + bet + "?")) {
-                move_made = "yes";
                 refreshPlayerStats(player_move);
             }
         }
     } else{
         if (confirm("Are you sure you want to " + id + "?")) {
-            move_made = "yes";
             player_move.move = id;
             player_move.amount = 0;
             refreshPlayerStats(player_move);
@@ -237,39 +244,48 @@ function makePlayerMove(id) {
 //####################################################################################################
 // PokerBot move functions
 
-function showMove(current_move) {
+async function showMove(current_move) {
     let text = "Pokerbot has ";
     switch (current_move.ai_move) {
         case "check":
-            showJumbotron(text + "checked");
+            await showJumbotron(text + "checked");
             break;
         case "call":
-            showJumbotron(text + "called");
+            await showJumbotron(text + "called");
             break;
         case "fold":
-            showJumbotron(text + "folded");
+            await showJumbotron(text + "folded");
             break;
         case "raise":
-            showJumbotron(text + "raised");
+            await showJumbotron(text + "raised");
             break;
         default:
             break;
     }
 }
 
-function getPokerbotPlay() {
-    let bot_move = {ai_move:"check", pot_size: 20, ai_balance: 90, whose_turn: "showdown"};
-    return bot_move;
+async function getPokerbotPlay() {
+    let response = await fetch("http://localhost:3000/ai_move", {
+        method: "GET"
+    });
+    
+    let ai_move = await response.json();
+    ai_move = JSON.parse(ai_move);
+    console.log(ai_move);
+
+    return ai_move;
 }
 
-function makePokerbotMove(){
+async function makePokerbotMove(){
     hideAllButtons();
 
-    showJumbotron("Pokerbots turn");
+    await showJumbotron("Pokerbots turn");
     hideJumbotron();
 
-    let pokerBot_play = getPokerbotPlay();
-    showMove(pokerBot_play);
+    await sleep(2000);
+
+    let pokerBot_play = await getPokerbotPlay();
+    await showMove(pokerBot_play);
     hideJumbotron();
 
     document.querySelector("#ai-bank #balance-field").innerHTML = pokerBot_play.ai_balance;
@@ -281,12 +297,24 @@ function makePokerbotMove(){
 //####################################################################################################
 // Basic game functions
 
-function getFirstTurn() {
-    return {pot: 15, whose_turn: "player"};
+async function sleep(ms) {
+    return new Promise(res => {setTimeout(res, ms)});
 }
 
-function setStartup() {
-    let player_stats = this.getPlayerSetup();
+async function getFirstTurn() {
+    let response = await fetch("http://localhost:3000/setup_object", {
+        method: "GET"
+    });
+    
+    let pot = await response.json();
+    pot = JSON.parse(pot);
+    console.log(pot);
+
+    return pot;
+}
+
+async function setStartup() {
+    let player_stats = await getPlayerSetup();
 
     if (player_stats.blind === "bb") {
         document.querySelector("#player-bank #balance-field").innerHTML = player_stats.balance + "$";
@@ -302,37 +330,45 @@ function setStartup() {
     giveCardsToPlayers(player_stats.hand);
 }
 
-function getEndOfGame() {
-    return {player_balance: 110, ai_balance: 90, pot_size: 0, winner: "player", player_best_hand: "flush", ai_best_hand:"straight", ai_cards: player_hand};
+async function getEndOfGame() {
+    let response = await fetch("http://localhost:3000/winner", {
+        method: "GET"
+    });
+    
+    let winner = await response.json();
+    winner = JSON.parse(winner);
+    console.log(winner);
+    return winner;
 }
 
-function checkBank(player_balance, ai_balance) {
+async function checkBank(player_balance, ai_balance) {
     if (player_balance === 0) {
-        showJumbotron("Game over, Pokerbot won!");
+        await showJumbotron("Game over, Pokerbot won!");
         newGame();
     } else if (ai_balance === 0) {
-        showJumbotron("You won!");
+        await showJumbotron("You won!");
         newGame();
     } else{
         setStartup();
     }
 }
 
-function gameEnd() {
-    let winner_plays = getEndOfGame();
+async function gameEnd() {
+    let winner_plays = await getEndOfGame();
     let win_without_fold = "player_best_hand" in winner_plays;
-    alert(win_without_fold);
+    
     if (win_without_fold === true) {
         showBotCards(winner_plays.ai_cards);
+        await sleep(2000);
 
-        showJumbotron("Pokerbot has " + winner_plays.ai_best_hand);
+        await showJumbotron("Pokerbot has " + winner_plays.ai_best_hand);
         hideJumbotron();
 
-        showJumbotron("You have " + winner_plays.player_best_hand);
+        await showJumbotron("You have " + winner_plays.player_best_hand);
         hideJumbotron();
     }
     
-    showJumbotron("The winner is " + winner_plays.winner);
+    await showJumbotron("The winner is " + winner_plays.winner);
     hideJumbotron();
 
     document.querySelector("#player-bank #balance-field").innerHTML = winner_plays.player_balance + "$";

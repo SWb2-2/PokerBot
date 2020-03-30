@@ -1,13 +1,15 @@
-function sendInfo (event) {
-    let formElement = document.querySelector("#balance").value;
-    console.log("hello");
+'use strict'
 
-    fetch("http://localhost:3000", {
+async function sendInfo (event) {
+    let formElement = document.querySelector("#balance").value;
+
+    await fetch("http://localhost:3000/balance", {
         method: 'POST',
         body: JSON.stringify({balance:formElement})
     }).then((response) => {
-        console.log("hejsa");
-        return response.text();
+        if(response.redirected){
+            window.location.href = response.url;
+        }
     });
 
     return false;
