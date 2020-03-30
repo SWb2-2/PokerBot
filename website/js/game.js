@@ -83,15 +83,13 @@ async function giveCardsToPlayers(player_cards){
     deleteCards("bot-cards");
     deleteCards("open-cards");
 
-    for (let index = 0; index < player_cards.length; index++) {
-        let card = createCard(player_cards[index]);
+    for (let index = 0; index < player_cards.client.hand.length; index++) {
+        let card = createCard(player_cards.client.hand[index]);
         document.getElementById("player-cards").appendChild(card);
         document.getElementById("bot-cards").appendChild(createBotBackCard());
     }
 
-    let turn = await getFirstTurn();
-
-    decideTurn(turn);
+    decideTurn(player_cards.whose_turn);
 }
 
 function giveTableCards(table){
@@ -316,18 +314,13 @@ async function getFirstTurn() {
 async function setStartup() {
     let player_stats = await getPlayerSetup();
 
-    if (player_stats.blind === "bb") {
-        document.querySelector("#player-bank #balance-field").innerHTML = player_stats.balance + "$";
-        document.querySelector("#ai-bank #balance-field").innerHTML = (player_stats.balance+(player_stats.current_bet/2)) + "$";
-        document.querySelector("#pot").innerHTML = (player_stats.current_bet+player_stats.current_bet/2) + "$";
-    } else {
-        document.querySelector("#player-bank #balance-field").innerHTML = player_stats.balance + "$";
-        document.querySelector("#ai-bank #balance-field").innerHTML = (player_stats.balance-player_stats.current_bet) + "$";
-        document.querySelector("#pot").innerHTML = (player_stats.current_bet+player_stats.current_bet*2) + "$";
-    }
+    document.querySelector("#player-bank #balance-field").innerHTML = player_stats.client.balance + "$";
+    document.querySelector("#ai-bank #balance-field").innerHTML = player_stats.bot + "$";
+    document.querySelector("#pot").innerHTML = player_stats.pot + "$";
+
 
     hideAllButtons();
-    giveCardsToPlayers(player_stats.hand);
+    giveCardsToPlayers(player_stats);
 }
 
 async function getEndOfGame() {
