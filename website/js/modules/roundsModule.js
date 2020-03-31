@@ -82,6 +82,7 @@ function process_move(player1, player2, dealer) {
     let response = {
         pot: dealer.pot,
         player_balance: player1.balance,
+        player_current_bet: player1.current_bet,
         player_move: player1.player_move.move,
         player_amount: player1.player_move.amount,
         game_finished: is_game_finished,
