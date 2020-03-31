@@ -61,9 +61,9 @@ function process_move(player1, player2, dealer) {
         
         let response = {
             pot: dealer.pot,
-            player_balance: player1.balance,
-            player_move: player1.player_move.move,
-            player_amount: player1.player_move.amount,
+            active_player_balance: player1.balance,
+            active_player_move: player1.player_move.move,
+            active_player_amount: player1.player_move.amount,
             game_finished: (is_round_done === true && dealer.table_cards.length === 5) ? true : false,
             whose_turn: is_round_done ? "table" : player2.name
         }

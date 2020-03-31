@@ -42,8 +42,10 @@ app.post('/balance', (req, res) => {
 app.post('/player_move', (req, res) => {
     human_player.player_move.move = req.body.move;
     human_player.player_move.amount = req.body.amount;
+    console.log(req.body.move + "   " + req.body.amount);
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
+    console.log(response);
     res.json(JSON.stringify(response));
     res.end("request completed");
 });
