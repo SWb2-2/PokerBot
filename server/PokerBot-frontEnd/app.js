@@ -99,6 +99,7 @@ class Dealer {
     }
     end_betting_round(player1, player2) { 
         // Ny addition til metodens logiske udtryk. Dette er for at sikre, at spillet ikke slutter, når den med det første træk checker
+        
         if(player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
             // this.pot += player1.current_bet + player2.current_bet;
             // player1.current_bet = 0;
@@ -156,11 +157,7 @@ app.post('/', (req, res) => {
     });
     res.end();
 })
-/*
-app.get('/game.html', (req, res) => {
-    fileResponse('game.html', res);
-});
-*/
+
 app.post('/player_turn', (req, res) => {
     console.log(req.body);
     player1.player_move.move = req.body.move;
@@ -190,8 +187,8 @@ app.get('/preflop', (req, res) => {
 });
 
 app.get('/next_round', (req, res) => {
-    answer = round.next_round(player1, player2, dealer);
-    res.send(JSON.stringify(answer));
+    answer = round.next_round(player1, dealer);
+    res.send(answer);
     res.statusCode = 200;
     res.end("request accepted");
 });

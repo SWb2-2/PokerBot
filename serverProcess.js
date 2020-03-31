@@ -64,6 +64,8 @@ function process_move(player1, player2, dealer) {
             pot: dealer.pot,
             player_balance: player1.balance,
             end_of_round: is_round_done,
+            player_move: player1.player_move.move,
+            player_amount: player1.player_move.amount,
             game_finished: (is_round_done === true && dealer.table_cards.length === 5) ? true : false,
             whose_turn: player1.name === 'AI' ? 'Player' : 'AI'
         }

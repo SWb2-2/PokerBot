@@ -80,8 +80,8 @@ test("Player2 raises with 20 so when player1 calls, they should place a bet of 2
     player1.current_bet = 0;
     dealer.pot = 20;
     
-    player2.player_move.move = 'Raise';
-    player1.player_move.move = "Call";
+    player2.player_move.move = 'raise';
+    player1.player_move.move = "call";
     player1.name = "Player";
     player2.name = "AI";
 
@@ -90,7 +90,7 @@ test("Player2 raises with 20 so when player1 calls, they should place a bet of 2
         pot: 40,
         player_current_bet: 20,
         player_balance: 180,
-        player_move: 'Call',
+        player_move: 'call',
         player_amount: 20,
         end_of_round: true,
         game_finished: false,
@@ -109,8 +109,8 @@ test("Player2 is all-in with 200 in the pot, and player1 wants to call though th
     player1.current_bet = 0;
     
     dealer.pot = 200;
-    player2.player_move.move = 'Raise';
-    player1.player_move.move = "Call";
+    player2.player_move.move = 'raise';
+    player1.player_move.move = "call";
     player1.name = "Player";
     player2.name = "AI";
 
@@ -137,8 +137,8 @@ test("If player1 raises, but then player2 decides to reraise so that player1 fol
     player1.current_bet = 10;
     dealer.pot = 40;
     
-    player2.player_move.move = 'Raise';
-    player1.player_move.move = "Fold";
+    player2.player_move.move = 'raise';
+    player1.player_move.move = "fold";
     player1.name = "Player";
     player2.name = "AI";
     player2.hand.push("Hello");
@@ -165,7 +165,7 @@ test("If a player checks and the other player has not made a move yet, the round
     dealer.pot = 10;
     
     player2.player_move.move = '';
-    player1.player_move.move = "Raise";
+    player1.player_move.move = "raise";
     player1.player_move.amount = 20;
     player1.name = "Player";
     player2.name = "AI";
@@ -175,7 +175,7 @@ test("If a player checks and the other player has not made a move yet, the round
         pot: 30,
         player_current_bet: 20,
         player_balance: 180,
-        player_move: 'Raise',
+        player_move: 'raise',
         player_amount: 20,
         end_of_round: false,
         game_finished: false,
@@ -194,7 +194,7 @@ test("If player reraises with 20 against an opponents original raise of 10, roun
     dealer.pot = 0;
     
     player2.player_move.move = '';
-    player1.player_move.move = "Check";
+    player1.player_move.move = "check";
     player1.name = "Player";
     player2.name = "AI";
 
@@ -203,7 +203,7 @@ test("If player reraises with 20 against an opponents original raise of 10, roun
         pot: 0,
         player_current_bet: 0,
         player_balance: 190,
-        player_move: 'Check',
+        player_move: 'check',
         player_amount: 0,
         end_of_round: false,
         game_finished: false,
@@ -222,8 +222,8 @@ test("If there are five cards on the table, and the bets are even, the game shou
     player1.current_bet = 40;
     dealer.pot = 90;
     
-    player2.player_move.move = 'Raise';
-    player1.player_move.move = "Call";
+    player2.player_move.move = 'raise';
+    player1.player_move.move = "call";
     player1.name = "Player";
     player2.name = "AI";
 
@@ -232,7 +232,7 @@ test("If there are five cards on the table, and the bets are even, the game shou
         pot: 100,
         player_current_bet: 50,
         player_balance: 150,
-        player_move: 'Call',
+        player_move: 'call',
         player_amount: 10,
         end_of_round: true,
         game_finished: true,
@@ -250,8 +250,8 @@ test("When reaching showdown while both players are All-in and player1 has more 
     dealer.pot = 200;
     player1.current_bet = 150;
     player2.current_bet = 50;
-    player1.player_move.move = 'All-in';
-    player2.player_move.move = 'All-in';
+    player1.player_move.move = 'all-in';
+    player2.player_move.move = 'all-in';
 
 
     player1.hand.push(new Card(2, 1), new Card(3, 2));
@@ -279,8 +279,8 @@ test("Same as above, but where the roles are switched", () => {
     dealer.pot = 200;
     player1.current_bet = 50;
     player2.current_bet = 150;
-    player1.player_move.move = 'All-in';
-    player2.player_move.move = 'All-in';
+    player1.player_move.move = 'all-in';
+    player2.player_move.move = 'all-in';
 
 
     player1.hand.push(new Card(10, 0), new Card(3, 2));
@@ -308,8 +308,8 @@ test("Same principle but with a bit more random number", () => {
     dealer.pot = 209;
     player1.current_bet = 59;
     player2.current_bet = 150;
-    player1.player_move.move = 'All-in';
-    player2.player_move.move = 'All-in';
+    player1.player_move.move = 'all-in';
+    player2.player_move.move = 'all-in';
 
 
     player1.hand.push(new Card(10, 0), new Card(3, 2));
@@ -337,8 +337,8 @@ test("Generally, when a player wins, they should win the entire pot, whilst the 
     dealer.pot = 500;
     player1.current_bet = 250;
     player2.current_bet = 250;
-    player1.player_move.move = 'Raise';
-    player2.player_move.move = 'Call';
+    player1.player_move.move = 'raise';
+    player2.player_move.move = 'call';
 
 
     player1.hand.push(new Card(10, 0), new Card(3, 2));
@@ -352,6 +352,35 @@ test("Generally, when a player wins, they should win the entire pot, whilst the 
         bot_balance: 100,
         pot: 500,
         winner: "Player",
+        no_new_game: false
+    });
+}); 
+
+test("When both players are all in, yet their hands are equally good, their current_bet should equal their balance", () => {
+    let player1 = new Player(0);
+    let dealer = new Dealer;
+    let player2 = new Player(0);
+    player2.name = "AI";
+    player1.name = "Player";
+
+    dealer.pot = 330;
+    player1.current_bet = 309;
+    player2.current_bet = 21;
+    player1.player_move.move = 'all-in';
+    player2.player_move.move = 'all-in';
+
+
+    player1.hand.push(new Card(10, 0), new Card(3, 2));
+    player2.hand.push(new Card(2, 0), (3, 1));
+    dealer.table_cards.push(new Card(10, 1), new Card(7, 1), new Card(11, 2), new Card(8, 2), new Card(9, 2));
+    player1.blind = 'sb';
+    
+    let response = round.showdown(player1, player2, dealer);
+    expect(response).toStrictEqual({
+        player_balance: 309,
+        bot_balance: 21,
+        pot: 330,
+        winner: "draw",
         no_new_game: false
     });
 }); 

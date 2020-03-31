@@ -1,3 +1,5 @@
+
+
 class Card {
     constructor (rank, suit) {
         this.rank = rank;
@@ -27,6 +29,7 @@ player.blind = "bb";
 */let move_made = "no";
 let is_end_of_round = false;
 let flag = true;
+let end_of_game = false;
 //var flop = [testCard, testCard, testCard];
 //var cards = {table_cards: flop, whose_turn: player};
 
@@ -152,10 +155,11 @@ async function sendPlayerMove(player_turn) {
         body: JSON.stringify(player_turn)
     };
     console.log(player_turn);
-    let response = await fetch('http://localhost:3000/player_turn', options);
+    let response = await fetch('http://localhost:3000/player_turn', options)
     let answer = await response.text();
-    response_object = JSON.parse(answer);
+    response_object = await JSON.parse(answer);
     // to typer responser sendes tilbage. Derefter splittes der op her. 
+    
     if(player_turn.move === 'fold') {
         console.log(response_object);
         end_of_round = true;
@@ -164,14 +168,17 @@ async function sendPlayerMove(player_turn) {
         console.log(response_object);
     }
     flag = false;
-    return {pot_size: 45, player_balance: 75, whose_turn: "not_player"};
+    return response_object; //{pot_size: 45, player_balance: 75, whose_turn: "not_player"};
 }
 
 function refreshPlayerStats(player_turn) {
     let player_stats = sendPlayerMove(player_turn);
-
-    document.querySelector("#pot").innerHTML = player_turn.pot_size;
-    document.querySelector("#player-bank #balance-field").innerHTML = player_turn.player_balance;
+    player_stats.then((answer) => {
+        document.querySelector("#pot").innerHTML = answer.pot;
+        document.querySelector("#player-bank #balance-field").innerHTML = answer.player_balance;
+        is_end_of_round = answer.end_of_round;
+        end_of_game = answer.game_finished;
+    });
 }
 
 function getPlayerMove(id) {
@@ -285,15 +292,48 @@ async function requestGame() {
     let response = await fetch('http://localhost:3000/preflop');
     let answer = await response.text();
     let res_object = JSON.parse(answer);
-    setStartup(res_object.client.balance, res_object.client.current_bet, res_object.client.blind);
-    giveCardsToPlayers(res_object.client.hand);
+    await setStartup(res_object.client.balance, res_object.client.current_bet, res_object.client.blind);
+    await giveCardsToPlayers(res_object.client.hand);
 }
-// Dette virker ikke
+// Dette virker 
 function wait() {
     if(flag) {
-        console.log(flag);
-        setTimeout(wait, 10000);
+        setTimeout(wait, 100);
     }
+    else {
+        if(is_end_of_round) {
+            if(end_of_game === false) {
+                getFlop();
+                flag = true;
+                is_end_of_round = false;
+            }
+            else {
+                decideWinner();
+                end_of_game = false;
+                flag = false;
+                is_end_of_round = false;
+                // newgame
+            }      
+        }
+        else {
+            flag = true;
+            // Get AI poker move
+            setTimeout(wait, 100);
+        }
+    }
+}
+async function getFlop() {
+    let response = await fetch("http://localhost:3000/next_round");
+    let answer = await response.text();
+    let obj = JSON.parse(answer);
+    giveTableCards(obj.table_cards);
+}
+
+async function decideWinner() {
+    let response = await fetch("http://localhost:3000/showdown");
+    let answer = await response.text();
+    let obj = JSON.parse(answer);
+    refreshPlayerStats(obj);
 }
 
 //####################################################################################################
@@ -303,6 +343,11 @@ window.onload = function() {
     //this.giveCardsToPlayers(player.hand);
     let pokerbot_move = "";
     this.showButtons(pokerbot_move);
-
+    wait(); 
+    wait();
+    wait();
+    //this.getFlop()   
+    //this.getFlop();
+    //await this.getFlop();
     //this.giveTableCards(cards.table_cards);
 }

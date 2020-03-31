@@ -1,3 +1,4 @@
+// Dette er ikke så relevant længere
 class Card {
     constructor (rank, suit) {
         this.rank = rank;
@@ -84,7 +85,6 @@ class Dealer {
     end_betting_round(player1, player2) { 
         // Ny addition til metodens logiske udtryk. Dette er for at sikre, at spillet ikke slutter, når den med det første træk checker
         if (player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
-            console.log(player1.current_bet, player2.current_bet);
             this.pot += player1.current_bet + player2.current_bet;
             player1.current_bet = 0;
             player2.current_bet = 0;
@@ -145,7 +145,7 @@ function nextRound(player1, player2, dealer, tableCards) {
     printHand("Table: ", dealer.table_cards);
     printHand("Player1: ", player1.hand);
     printHand("Player2: ", player2.hand);
-    console.log(player1.player_move.move, player2.player_move.move);
+    
     if (player1.player_move.move !== 'All-in' && player2.player_move.move !== 'All-in') {
         if (player1.blind === "sb") {
             bettingRound(player1, player2, dealer);
@@ -166,7 +166,7 @@ function bettingRound(player1, player2, dealer) {
     player1.player_move.move = "";
     player2.player_move.move = "";
     
-    while (!dealer.end_betting_round(player1, player2)) { 
+    while (dealer.end_betting_round(player1, player2 === false)) { 
         // Det er her, vi skal modtage en spillers input:
         player1.player_move.move = scanInput('string'); 
         if (checkMove(player1, player2, dealer) === false || dealer.end_betting_round(player1, player2)) {
@@ -226,7 +226,6 @@ function checkMove(player1, player2, dealer) {
         player1.player_move.amount = player2.current_bet - player1.current_bet;
         player1.current_bet += player2.current_bet - player1.current_bet;
         player1.balance -= player1.player_move.amount;
-        console.log(player1.balance, player1.current_bet);
         
         if (player1.balance <= 0) {
             player1.player_move.move = "All-in";
@@ -244,7 +243,7 @@ function checkMove(player1, player2, dealer) {
         return true;
     }
     else {
-        console.log("Move not in register");
+        console.log("Move not in register.");
         player1.player_move.move = scanInput("string");
         return checkMove(player1, player2, dealer);
     }

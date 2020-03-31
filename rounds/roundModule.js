@@ -39,9 +39,9 @@ function next_round(player1, dealer) {
 // Processer et move, hvor det antages server har modtaget player move og potentielt amount. 
 // SKal fikses 
 function process_move(player1, player2, dealer) {
-    if(player1.player_move.move !== "Fold") {
+    if(player1.player_move.move !== "fold") {
         // Vi skal lige kigge på end_betting_round, da den afhænger af, om begge spillere har gjort deres træk.
-        if(player1.player_move.move === 'Call') {
+        if(player1.player_move.move === 'call') {
             player1.player_move.amount = player2.current_bet - player1.current_bet;
             
             if(player1.balance < player1.player_move.amount) {
@@ -53,7 +53,7 @@ function process_move(player1, player2, dealer) {
         player1.balance -= player1.player_move.amount;
         
         if(player1.balance === 0) {
-            player1.player_move.move = "All-in";
+            player1.player_move.move = "all-in";
         }
         let is_round_done = dealer.end_betting_round(player1, player2);
         let sb_player = '';
@@ -92,12 +92,12 @@ function process_move(player1, player2, dealer) {
 // balance ser ud. 
 function showdown(player1, bot, dealer) {
     let winner = dealer.get_winner(player1, bot);
-    if(player1.player_move.move === 'All-in' && bot.player_move.move === 'All-in' && winner !== false) {
+    if(player1.player_move.move === 'all-in' && bot.player_move.move === 'all-in' && winner !== false) {
         
         if(player1.current_bet >= bot.current_bet && winner === bot) {
             dealer.give_pot(bot, player1);
 
-        } else if (player1.current_bet <= bot.current_bet && winner === player1) {
+        } else if(player1.current_bet <= bot.current_bet && winner === player1) {
             dealer.give_pot(player1, bot);
         } else {
             dealer.give_pot(winner);
@@ -110,7 +110,7 @@ function showdown(player1, bot, dealer) {
         player_balance: player1.balance,
         bot_balance: bot.balance,
         pot: dealer.pot,
-        winner: winner.name, 
+        winner: winner === false ? "draw" : winner.name, 
         // player best hand ???
         // ai best hand ???
         no_new_game: player1.balance === 0 || bot.balance === 0 ? true : false

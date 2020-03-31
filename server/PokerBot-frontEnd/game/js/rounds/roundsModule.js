@@ -56,6 +56,7 @@ function process_move(player1, player2, dealer) {
         if(player1.balance === 0) {
             player1.player_move.move = "all-in";
         }
+        player2.player_move.move = "check";
         let is_round_done = dealer.end_betting_round(player1, player2);
         let sb_player = '';
         // Måske lidt overkill

@@ -63,9 +63,9 @@ module.exports = class Dealer {
             player1.balance += this.pot;
         // Denne else-if sørger for, at hvis en spiller har called en all-in, hvor all-in var større end deres egen balance,
         // så kan denne spiller ikke modtage mere end det dobbelte af det, de selv har satset. 
-        } else if (player1.player_move.move === 'All-in' && player2.player_move.move === 'All-in') {
+        } else if(player1.player_move.move === 'all-in' && player2.player_move.move === 'all-in') {
             // I tilfælde af, at begge spillere har lige gode hænder, returneres deres bets bare tilbage til balancen. 
-            if (equal === true) {
+            if(equal === true) {
                 player1.balance = player1.current_bet;
                 player2.balance = player2.current_bet;
 
@@ -82,13 +82,13 @@ module.exports = class Dealer {
     }
     end_betting_round(player1, player2) { 
         // Ny addition til metodens logiske udtryk. Dette er for at sikre, at spillet ikke slutter, når den med det første træk checker
-        if (player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
+        if(player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
             // this.pot += player1.current_bet + player2.current_bet;
             // player1.current_bet = 0;
             // player2.current_bet = 0;
             return true;
         }
-        if (player1.player_move.move === 'All-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") {
+        if(player1.player_move.move === 'all-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") {
             this.pot = player1.current_bet + player2.current_bet;
             return true;
         }
