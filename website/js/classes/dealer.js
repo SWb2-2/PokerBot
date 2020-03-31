@@ -88,7 +88,7 @@ module.exports = class Dealer {
             // player2.current_bet = 0;
             return true;
         }
-        if(player1.player_move.move === 'all-in' && player2.player_move.move !== "" || player2.player_move.move === "All-in") {
+        if(player1.player_move.move === 'all-in' && player2.player_move.move === "all-in") {
             this.pot = player1.current_bet + player2.current_bet;
             return true;
         }

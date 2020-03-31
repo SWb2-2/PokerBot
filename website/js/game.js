@@ -107,7 +107,7 @@ async function getTablecards() {
     let response = await fetch("http://localhost:3000/table_update", {
         method: "GET"
     });
-    
+    hideAllButtons();
     let cards = await response.json();
     cards = JSON.parse(cards);
     console.log(cards);
@@ -193,7 +193,7 @@ async function playerTurnSetup(previous_move) {
 async function sendPlayerMove(player_turn) {
     let response = await fetch("http://localhost:3000/player_move", {
         method: "POST",
-        headers: {'Content-Type': 'application/json'},
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(player_turn)
     });
     

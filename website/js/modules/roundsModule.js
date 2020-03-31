@@ -18,16 +18,18 @@ function pre_flop(player1, player2, dealer) {
 }
 // Næste runde indkapsler flop, turn og river. Ud fra dealeren bestemmes det hvilken runde det er. 
 // Når antallet af kort er 5, sendes det tilbage, at der ikke er en new round 
-function next_round(player1, dealer) {
+function next_round(player1, player2, dealer) {
     let no_new_round = false;
     dealer.table_cards.length < 3 ? dealer.add_table_cards(3) : dealer.add_table_cards(1);
     if(dealer.table_cards.length === 5) {
         no_new_round = true;
     }
+    player1.player_move.move = "";
+    player2.player_move.move = "";
     
     let response = {
         table_cards: dealer.table_cards,
-        whose_turn: player1.blind === "sb" ? "Player" : "AI",
+        whose_turn: player1.blind === "sb" ? "player" : "robot",
         end_of_game: no_new_round
     }
     return response;
@@ -41,78 +43,92 @@ function next_round(player1, dealer) {
 // Processer et move, hvor det antages server har modtaget player move og potentielt amount. 
 // SKal fikses 
 function process_move(player1, player2, dealer) {
-    if(player1.player_move.move !== "fold") {
-        // Vi skal lige kigge på end_betting_round, da den afhænger af, om begge spillere har gjort deres træk.
-        if(player1.player_move.move === 'call') {
-            player1.player_move.amount = player2.current_bet - player1.current_bet;
+    let difference = player2.current_bet - player1.current_bet;
+    switch (player1.player_move.move) {
+        case "call":
+            player1.player_move.amount = difference;
             
             if(player1.balance < player1.player_move.amount) {
                 player1.player_move.amount = player1.balance;
             }
-        }
-        player1.current_bet += player1.player_move.amount;
-        dealer.pot += player1.player_move.amount; 
-        player1.balance -= player1.player_move.amount;
-        
-        if(player1.balance === 0) {
-            player1.player_move.move = "all-in";
-        }
-        let is_round_done = dealer.end_betting_round(player1, player2);
-        
-        let response = {
-            pot: dealer.pot,
-            active_player_balance: player1.balance,
-            active_player_move: player1.player_move.move,
-            active_player_amount: player1.player_move.amount,
-            game_finished: (is_round_done === true && dealer.table_cards.length === 5) ? true : false,
-            whose_turn: is_round_done ? "table" : player2.name
-        }
-        return response;
+            difference = 0;
+            player1.current_bet += player1.player_move.amount;
+            player1.balance -= player1.player_move.amount;
+            dealer.pot += player1.player_move.amount;
+            break;
+        case "raise":
+                let bet = difference + player1.player_move.amount; 
+                player1.current_bet += bet
+                dealer.pot += bet
+                player1.balance -= bet
+           
+                if(player1.balance === 0 || player2.balance === 0) {
+                    player1.player_move.move = "all-in";
+                }
     
-    } else {
-        dealer.give_pot(player2);
-        
-        let response = {
-            active_player_name: player1.name,
-            active_player_balance: player1.balance,
-            active_player_move: player1.player_move.move,
-            inactive_player_balance: player2.balance,
-            pot: dealer.pot,
-            winner: player2.name,
-            bot_hand: player1.name === 'robot' ? player1.hand : player2.hand,
-            whose_turn: "showdown"
-        }
-        return response;
+        default:
+            break;
     }
+    let is_round_done = dealer.end_betting_round(player1, player2);
+    let nextMove = "";
+    
+    is_round_done === true ? nextMove = "table" : nextMove = player2.name;
+    let is_game_finished = false;
+    
+    if(is_round_done === true && dealer.table_cards.length === 5) {
+        is_game_finished = true;
+    }
+    
+    let response = {
+        pot: dealer.pot,
+        player_balance: player1.balance,
+        player_move: player1.player_move.move,
+        player_amount: player1.player_move.amount,
+        game_finished: is_game_finished,
+        whose_turn: is_game_finished === true || player1.player_move.move === "fold" ? nextMove = "showdown" : nextMove
+    }
+    return response;
 }
 // Funktion, der bestemmer vinder ved showdown og sender et objekt tilbage med opdateringer på, hvordan spilelrnes
 // balance ser ud. 
 function showdown(player1, bot, dealer) {
-    let winner = dealer.get_winner(player1, bot);
-    if(player1.player_move.move === 'all-in' && bot.player_move.move === 'all-in' && winner !== false) {
-        
-        if(player1.current_bet >= bot.current_bet && winner === bot) {
-            dealer.give_pot(bot, player1);
+    if(player1.player_move.move !== "fold") {
+        let winner = dealer.get_winner(player1, bot);
+        console.log(winner);
+        if(winner.winner !== "draw" && player1.player_move.move === 'all-in' && bot.player_move.move === 'all-in') {
+            
+            if(player1.current_bet >= bot.current_bet && winner.winner === bot) {
+                dealer.give_pot(bot, player1);
+                
+            } else if(player1.current_bet <= bot.current_bet && winner.winner === player1) {
+                dealer.give_pot(player1, bot);
+            } else {
+                winner.winner.name === "player" ? dealer.give_pot(player1) : dealer.give_pot(bot);
+            }
 
-        } else if(player1.current_bet <= bot.current_bet && winner === player1) {
-            dealer.give_pot(player1, bot);
         } else {
-            dealer.give_pot(winner);
+            
+            winner.winner === "draw" ? dealer.give_pot(player1, bot, true) : dealer.give_pot(winner.winner);
         }
-
+        let response = {
+            player_balance: player1.balance,
+            bot_balance: bot.balance,
+            pot: dealer.pot,
+            winner: winner.winner === "draw" ? "draw" : winner.winner.name, 
+            player_best_hand: winner.human_hand,
+            ai_best_hand: winner.ai_hand
+        }
+        return response;
     } else {
-        winner === false ? dealer.give_pot(player1, bot, true) : dealer.give_pot(winner);
+        player1.player_move.move === "fold" ? dealer.give_pot(bot) : dealer.give_pot(player1)
+        let response = {
+            player_balance: player1.balance,
+            ai_balance: bot.balance,
+            pot: dealer.pot,
+            winner: player1.player_move.move === "fold" ? bot.name : player1.name, 
+        }
+        return response;
     }
-    let response = {
-        player_balance: player1.balance,
-        bot_balance: bot.balance,
-        pot: dealer.pot,
-        winner: winner === false ? "draw" : winner.name, 
-        // player best hand ???
-        // ai best hand ???
-        no_new_game: player1.balance === 0 || bot.balance === 0 ? true : false
-    }
-    return response;
 }
 
 module.exports.pre_flop = pre_flop;

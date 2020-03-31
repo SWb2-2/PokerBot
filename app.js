@@ -41,8 +41,7 @@ app.post('/balance', (req, res) => {
 
 app.post('/player_move', (req, res) => {
     human_player.player_move.move = req.body.move;
-    human_player.player_move.amount = req.body.amount;
-    console.log(req.body.move + "   " + req.body.amount);
+    human_player.player_move.amount = Number(req.body.amount);
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
     console.log(response);
@@ -60,27 +59,54 @@ app.get('/player_object', (req, res) => {
 });
 
 app.get('/ai_move', (req, res) => {
-    if (req.method === "GET") {
-        res.statusCode = 200;
-        res.json('{"ai_move": "raise", "pot_size": 25, "ai_balance": 0, "whose_turn": "player"}');
-        res.end("request accepted");
-    }
+    res.statusCode = 200;
+    ai_player.player_move.amount = 10;
+    ai_player.player_move.move = "raise";
+
+    let response = round.process_move(ai_player, human_player, dealer);
+    console.log(response);
+    let answer = {
+        ai_move: ai_player.player_move.move,
+        pot_size: response.pot,
+        ai_balance: response.player_balance,
+        whose_turn: response.whose_turn
+    };
+    res.json(JSON.stringify(answer));
+    res.end("request accepted");
+
 });
 
 app.get('/table_update', (req, res) => {
-    if (req.method === "GET") {
-        res.statusCode = 200;
-        res.json('{"table_cards":[{"rank":10, "suit":2},{"rank":7, "suit":1},{"rank":3, "suit":0}], "whose_turn":"showdown"}');
-        res.end("request accepted");
+    if(human_player.player_move.move !== "all-in" && ai_player.player_move !== "all-in") {
+        human_player.player_move.move = "";
+        ai_player.player_move.move = "";
     }
+    let response = round.next_round(human_player, ai_player, dealer);
+    res.statusCode = 200;
+    console.log(response);
+    res.json(JSON.stringify(response));
+    //res.json('{"table_cards":[{"rank":10, "suit":2},{"rank":7, "suit":1},{"rank":3, "suit":0}], "whose_turn":"showdown"}');
+    res.end("request accepted");
+
 });
 
 app.get('/winner', (req, res) => {
-    if (req.method === "GET") {
-        res.statusCode = 200;
-        res.json('{"player_balance":110, "ai_balance":0, "pot_size":0, "winner":"player", "ai_cards":[{"rank":3,"suit":0}, {"rank":4, "suit":3}], "player_best_hand":"flush", "ai_best_hand":"straight"}');
-        res.end("request accepted");
+    let response = round.showdown(human_player, ai_player, dealer);
+    console.log(response);
+    let obj = {
+        player_balance: response.player_balance,
+        ai_balance: response.bot_balance,
+        pot_size: response.pot,
+        winner: response.winner,
+        ai_cards: ai_player.hand,
+        player_best_hand: response.player_best_hand,
+        ai_best_hand: response.ai_best_hand
     }
+    res.statusCode = 200;
+    res.json(JSON.stringify(obj));
+    //res.json('{"player_balance":110, "ai_balance":0, "pot_size":0, "winner":"player", "ai_cards":[{"rank":3,"suit":0}, {"rank":4, "suit":3}], "player_best_hand":"flush", "ai_best_hand":"straight"}');
+    res.end("request accepted");
+
 });
 
 app.listen(port, () => console.log("Server is running..."));
