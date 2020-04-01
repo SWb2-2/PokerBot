@@ -10,7 +10,7 @@ function pre_flop(player1, player2, dealer) {
     console.log(player1.blind);
     let response = {
         client: player1,
-        bot: player2.balance,
+        bot: player2,
         pot: dealer.pot,
         whose_turn: player1.blind === "sb" ? "player" : "robot"
     };
@@ -18,25 +18,37 @@ function pre_flop(player1, player2, dealer) {
 }
 // Næste runde indkapsler flop, turn og river. Ud fra dealeren bestemmes det hvilken runde det er. 
 // Når antallet af kort er 5, sendes det tilbage, at der ikke er en new round 
-function next_round(player1, player2, dealer) {
+function next_round(human_player, robot_player, dealer) {
     let no_new_round = false;
     dealer.table_cards.length < 3 ? dealer.add_table_cards(3) : dealer.add_table_cards(1);
     if(dealer.table_cards.length === 5) {
         no_new_round = true;
     }
-    player1.player_move.move = "";
-    player2.player_move.move = "";
+
+    human_player.player_move.move = "";
+    robot_player.player_move.move = "";
     
+    let turn = "";
+
+    if (human_player.balance === 0 || robot_player.balance === 0) {
+        if (dealer.table_cards.length === 5) {
+            turn = "showdown";
+        } else {
+            turn = "table";
+        }
+    } else {
+        turn = human_player.blind === "sb" ? "player" : "robot";
+    }
+
     let response = {
         table_cards: dealer.table_cards,
-        whose_turn: player1.blind === "sb" ? "player" : "robot",
-        end_of_game: no_new_round
+        whose_turn: turn
     }
     return response;
 }
 
 // Vi skal have serveren til at modtage, at det nu er Bottens træk. Botten gives den nødvendige information, 
-// som er spillerens current_bet samt bordets pulje og kort. Herfra gør den sig et træk den sætter ind player2.player_move
+// som er spillerens current_bet samt bordets pulje og kort. Herfra gør den sig et træk den sætter ind robot_player.player_move
 // Herved kan den nedstående funktion genbruges.
 
 
@@ -65,14 +77,14 @@ function process_move(player1, player2, dealer) {
                 if(player1.balance === 0 || player2.balance === 0) {
                     player1.player_move.move = "all-in";
                 }
-    
+                break;
         default:
             break;
     }
+
     let is_round_done = dealer.end_betting_round(player1, player2);
-    let nextMove = "";
-    
-    is_round_done === true ? nextMove = "table" : nextMove = player2.name;
+    let nextMove = is_round_done === true ? "table" : player2.name;
+
     let is_game_finished = false;
     
     if(is_round_done === true && dealer.table_cards.length === 5) {
@@ -85,8 +97,7 @@ function process_move(player1, player2, dealer) {
         player_current_bet: player1.current_bet,
         player_move: player1.player_move.move,
         player_amount: player1.player_move.amount,
-        game_finished: is_game_finished,
-        whose_turn: is_game_finished === true || player1.player_move.move === "fold" ? nextMove = "showdown" : nextMove
+        whose_turn: is_game_finished === true || player1.player_move.move === "fold" ? "showdown" : nextMove
     }
     return response;
 }

@@ -3,25 +3,36 @@ body {
     background-color: silver;
 }
 
-#player-bank {
+#player-bank, #ai-bank {
     position: absolute;
-    left: 75%;
-    top: 350px;
+    width: 150px;
     padding: 5px 20px;
     color: white;
-    text-align: center;
-    background-color: teal;
-    border: thick solid black;
+    text-align: left;
+}
+
+#player-bank p, #ai-bank p {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: #eee;
+}
+
+#player-bank strong, #ai-bank strong {
+    color: white;
+}
+
+#player-bank {
+    left: 75%;
+    top: 300px;
+    background-color: yellowgreen;
+    border: solid black 3px;
 }
 
 #ai-bank {
-    position: absolute;
-    left: 18%;
-    top: 70px;
-    padding: 5px 20px;
-    color: white;
-    text-align: center;
-    background-color: grey;
+    left: 10%;
+    top: 50px;
+    background-color: #444444;
     border: thick solid black;
 }
 
@@ -85,7 +96,7 @@ body {
 }
 
 #player-options .button-on {
-    background-color: teal;
+    background-color: greenyellow;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -97,7 +108,7 @@ body {
 }
 
 #player-options .button-on:hover {
-    background-color: turquoise;
+    background-color: darkgreen;
 }
 
 #player-options .button-off {

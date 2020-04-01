@@ -24,7 +24,7 @@ const round = require('./website/js/modules/roundsModule');
 const dealer_module = require("./website/js/classes/dealer");
 let dealer = new dealer_module;
 let human_player = new Player(200);
-let ai_player = new Player(200);
+let ai_player = new Player(250);
 human_player.name = "player";
 ai_player.name = "robot";
 
@@ -44,7 +44,7 @@ app.post('/player_move', (req, res) => {
     human_player.player_move.amount = Number(req.body.amount);
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
-    console.log(response);
+    console.log("player move",response);
     res.json(JSON.stringify(response));
     res.end("request completed");
 });
@@ -60,18 +60,12 @@ app.get('/player_object', (req, res) => {
 
 app.get('/ai_move', (req, res) => {
     res.statusCode = 200;
-    ai_player.player_move.amount = 10;
-    ai_player.player_move.move = "raise";
+    ai_player.player_move.amount = 0;
+    ai_player.player_move.move = "call";
 
     let response = round.process_move(ai_player, human_player, dealer);
-    console.log(response);
-    let answer = {
-        ai_move: ai_player.player_move.move,
-        pot_size: response.pot,
-        ai_balance: response.player_balance,
-        whose_turn: response.whose_turn
-    };
-    res.json(JSON.stringify(answer));
+    console.log("ai move: ", response);
+    res.json(JSON.stringify(response));
     res.end("request accepted");
 
 });
@@ -83,16 +77,15 @@ app.get('/table_update', (req, res) => {
     }
     let response = round.next_round(human_player, ai_player, dealer);
     res.statusCode = 200;
-    console.log(response);
+    console.log("table: ", response);
     res.json(JSON.stringify(response));
-    //res.json('{"table_cards":[{"rank":10, "suit":2},{"rank":7, "suit":1},{"rank":3, "suit":0}], "whose_turn":"showdown"}');
     res.end("request accepted");
 
 });
 
 app.get('/winner', (req, res) => {
     let response = round.showdown(human_player, ai_player, dealer);
-    console.log(response);
+    console.log("winner ", response);
     let obj = {
         player_balance: response.player_balance,
         ai_balance: response.bot_balance,
