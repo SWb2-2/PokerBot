@@ -100,7 +100,7 @@ addition.test.js
     //Alternativ
     expect(plus(j,k)).toStrictEqual(7);
     }
-
+```
 For at køre testene skal "jest" installeres. 
 I konsolen skriv:
     npm install jest
