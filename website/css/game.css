@@ -13,8 +13,8 @@ body {
 
 #player-bank p, #ai-bank p {
     width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    /*margin-left: 5%;
+    margin-right: 5%;*/
     color: #eee;
 }
 
@@ -158,7 +158,7 @@ body {
     position: absolute;
     width: 30%;
     left: 35%;
-    top: 180px;
+    /*top: 180px;*/
     padding: 10px;
     background-color: black;
     border: white solid 2px;

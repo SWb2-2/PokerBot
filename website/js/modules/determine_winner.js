@@ -1,4 +1,4 @@
-const Card = require("./card.js");
+const Card = require("../classes/card.js");
 const ace = 14,
 	  hand_size = 7;
 
@@ -63,18 +63,18 @@ function determine_winner(player1, player2){
 	// if hands are similar, the highest cards are checked 
 	let winner;
     if(hand_info1.best_hands.length > hand_info2.best_hands.length) {
-        winner = player1;
+        winner = player1.name;
     } else if (hand_info1.best_hands.length < hand_info2.best_hands.length) {
-        winner = player2;
+        winner = player2.name;
 	} else {   //if the best hands are equal, checks the highest cards
 		winner = "draw";
         for(let i = 0; i < 5; i++) {
             let strongest = hand_info1.best_hands.length - 1;
             if(hand_info1.best_hands[strongest][i] > hand_info2.best_hands[strongest][i]) {
-				winner = player1; 
+				winner = player1.name; 
 				break;
             } else if (hand_info1.best_hands[strongest][i] < hand_info2.best_hands[strongest][i]) {
-				winner = player2;
+				winner = player2.name;
 				break;
             }
         }
@@ -93,7 +93,7 @@ function determine_winner(player1, player2){
 	function convert_hand_to_string(best_hand){
 		switch(best_hand){
 			case 0: best_hand = "high card"; break;
-			case 1: best_hand = "pair"; break;
+			case 1: best_hand = "one pair"; break;
 			case 2: best_hand = "two pairs"; break;
 			case 3: best_hand = "three of a kind"; break;
 			case 4: best_hand = "straight"; break; 

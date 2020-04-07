@@ -68,8 +68,13 @@ async function giveCardsToPlayers(player_cards){
     decideTurn(first_turn);
 }
 
-async function giveTableCards(table){
+async function giveTableCards(){
     deleteCards("open-cards");
+
+    await showJumbotron("Next round");
+    hideJumbotron();
+
+    let table = getTablecards();
 
     for (let index = 0; index < table.table_cards.length; index++) {
         let card = createCard(table.table_cards[index]);
@@ -82,9 +87,6 @@ async function giveTableCards(table){
 }
 
 async function getTablecards() {
-    await showJumbotron("Next round");
-    hideJumbotron();
-    
     let response = await fetch("http://localhost:3000/table_update", {
         method: "GET"
     });
@@ -93,7 +95,7 @@ async function getTablecards() {
     cards = JSON.parse(cards);
     console.log(cards);
 
-    giveTableCards(cards);
+    return cards;
 }
 
 //####################################################################################################
@@ -373,7 +375,7 @@ async function decideTurn(last_turn_respond) {
             makePokerbotMove();
             break;
         case "table":
-            getTablecards();
+            giveTablecards();
             break;
         case "showdown":
             gameEnd();
@@ -383,9 +385,15 @@ async function decideTurn(last_turn_respond) {
     }
 }
 
-function newGame() {
+async function newGame() {
     if (confirm("Do you wanna play another game?")) {
-        location.assert("index.html");
+        await fetch("http://localhost:3000/new_game", {
+            method: 'GET'
+        }).then((response) => {
+            if(response.redirected){
+                window.location.href = response.url;
+            }
+        });
     }
 }
 
@@ -393,3 +401,9 @@ function newGame() {
 window.onload = function() {
     this.setStartup();
 }
+
+module.exports = getTablecards;
+module.exports = getPlayerSetup;
+module.exports = sendPlayerMove;
+module.exports = getPokerbotPlay;
+module.exports = getEndOfGame;

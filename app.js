@@ -1,32 +1,14 @@
 const express = require("express");
+const round = require('./website/js/modules/rounds');
+const dealer_module = require("./website/js/classes/dealer");
+const Player = require("./website/js/classes/player");
 
 const port = 3000;
 const app = express();
 
-class Card {
-    constructor (rank, suit) {
-        this.rank = rank;
-        this.suit = suit;
-    }
-}
-
-class Player{
-    constructor(balance) {
-        this.balance = balance;
-        this.hand = [];
-        this.current_bet = 0;
-        this.blind = "";
-        this.player_move = {move: "", amount: 0}; 
-    }
-}
-
-const round = require('./website/js/modules/roundsModule');
-const dealer_module = require("./website/js/classes/dealer");
 let dealer = new dealer_module;
-let human_player = new Player(200);
-let ai_player = new Player(250);
-human_player.name = "player";
-ai_player.name = "robot";
+let human_player = new Player(250, "player");
+let ai_player = new Player(200, "robot");
 
 app.use(express.static("website"));
 app.use(express.json({limit:"1mb"}));
@@ -67,7 +49,6 @@ app.get('/ai_move', (req, res) => {
     console.log("ai move: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
-
 });
 
 app.get('/table_update', (req, res) => {
@@ -86,20 +67,17 @@ app.get('/table_update', (req, res) => {
 app.get('/winner', (req, res) => {
     let response = round.showdown(human_player, ai_player, dealer);
     console.log("winner ", response);
-    let obj = {
-        player_balance: response.player_balance,
-        ai_balance: response.bot_balance,
-        pot_size: response.pot,
-        winner: response.winner,
-        ai_cards: ai_player.hand,
-        player_best_hand: response.player_best_hand,
-        ai_best_hand: response.ai_best_hand
-    }
     res.statusCode = 200;
-    res.json(JSON.stringify(obj));
+    res.json(JSON.stringify(response));
     //res.json('{"player_balance":110, "ai_balance":0, "pot_size":0, "winner":"player", "ai_cards":[{"rank":3,"suit":0}, {"rank":4, "suit":3}], "player_best_hand":"flush", "ai_best_hand":"straight"}');
     res.end("request accepted");
 
+});
+
+app.get('/new_game', (req, res) => {
+    res.statusCode = 301;
+    res.redirect("index.html");
+    res.end("request accepted");
 });
 
 app.listen(port, () => console.log("Server is running..."));

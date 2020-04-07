@@ -1,11 +1,12 @@
-const determine_winner = require("./determine_winner.js");
+const determine_winner = require("../modules/determine_winner.js");
 const Card = require("./card.js");
 module.exports = class Dealer {
     constructor(){
         this.deck_cards = [];
         this.table_cards = [];
         this.pot = 0;
-        }
+    }
+
     create_deck_of_cards() {
         for(let j = 0; j < 4; j++) {
     
@@ -14,6 +15,7 @@ module.exports = class Dealer {
             }
         }
     }
+    
     add_table_cards(number) {
 
         for(let i = 0; i < number; i++) {
@@ -21,6 +23,7 @@ module.exports = class Dealer {
             this.table_cards.push(this.deck_cards.pop());
         }
     }
+    
     give_hand_cards(player1, player2) {
 
         player1.hand.push(this.deck_cards.pop());
@@ -29,6 +32,7 @@ module.exports = class Dealer {
         player2.hand.push(this.deck_cards.pop());
         player2.hand.push(this.deck_cards.pop());
     }
+    
     shuffle_array() {
 
         let swap = 0; 
@@ -43,8 +47,8 @@ module.exports = class Dealer {
             this.deck_cards[swap] = temp_storage;
         }
     }
+    
     new_game(player1, player2) {
-
         this.deck_cards = [];
         this.table_cards = [];
         this.pot = 0; 
@@ -58,41 +62,48 @@ module.exports = class Dealer {
         player2.player_move.move = "";
         
     }
-    give_pot(player1, player2, equal) {
-        if(player2 === undefined) {
-            player1.balance += this.pot;
-        // Denne else-if sørger for, at hvis en spiller har called en all-in, hvor all-in var større end deres egen balance,
-        // så kan denne spiller ikke modtage mere end det dobbelte af det, de selv har satset. 
-        } else if(player1.player_move.move === 'all-in' && player2.player_move.move === 'all-in') {
-            // I tilfælde af, at begge spillere har lige gode hænder, returneres deres bets bare tilbage til balancen. 
-            if(equal === true) {
-                player1.balance = player1.current_bet;
-                player2.balance = player2.current_bet;
 
+    give_pot(player1, player2, winner) {
+        if (winner === "draw") {
+            player1.balance += player1.current_bet;
+            player2.balance += player2.current_bet;
+        } else{
+            if (player1.current_bet === player2.current_bet) {
+                winner === player1.name ? player1.balance += (player1.current_bet+player2.current_bet) : player2.balance += (player1.current_bet+player2.current_bet);
+            } else if (player1.current_bet > player2.current_bet) {
+                winner === player1.name ? player1.balance += (player2.current_bet*2) : player2.balance += (player2.current_bet*2);
+                player1.balance += (player1.current_bet-player2.current_bet);
             } else {
-                let leftovers = player2.current_bet - player1.current_bet;                                   
-                player1.balance += player2.current_bet - leftovers + player1.current_bet;
-                player2.balance += leftovers;
-
+                winner === player1.name ? player1.balance += (player1.current_bet*2) : player2.balance += (player1.current_bet*2);
+                player2.balance += (player2.current_bet-player1.current_bet);                
             }
-        } else { //Grundet hvis begge har lige gode hænder. 
-            player1.balance += this.pot/2;
-            player2.balance += this.pot/2;
         }
     }
-    end_betting_round(player1, player2) { 
-        // Ny addition til metodens logiske udtryk. Dette er for at sikre, at spillet ikke slutter, når den med det første træk checker
-        if(player1.current_bet === player2.current_bet && (player1.player_move.move !== "" && player2.player_move.move !== "")) {
-            // this.pot += player1.current_bet + player2.current_bet;
-            // player1.current_bet = 0;
-            // player2.current_bet = 0;
-            return true;
+
+    decide_whose_turn(active_player, inactive_player, dealer) {
+        let turn ="";
+        if (active_player.player_move.move === "fold") {
+            turn = "showdown";
+        } else if (active_player.player_move.move == "raise" && inactive_player.balance !== 0) {
+            turn = inactive_player.name;
+        } else if (active_player.balance === 0  || inactive_player.balance === 0) {
+            if (dealer.table_cards.length === 5) {
+                turn = "showdown";
+            } else {
+                turn = "table";
+            }
+        } else if (active_player.player_move.move !== "" && inactive_player.player_move.move === "") {
+            turn = inactive_player.name;
+        } else if (active_player.player_move.move === "" && inactive_player.player_move.move === "") {
+            turn = active_player.name;
+        } else {
+            if (dealer.table_cards.length === 5) {
+                turn = "showdown";
+            } else {
+                turn = "table";
+            }
         }
-        if(player1.player_move.move === 'all-in' && player2.player_move.move === "all-in") {
-            this.pot = player1.current_bet + player2.current_bet;
-            return true;
-        }
-        return false;
+        return turn;
     }
 
     make_blind(player1, player2) {
@@ -125,7 +136,6 @@ module.exports = class Dealer {
     }      
     
     get_winner(player1, player2){
-
         return determine_winner.determine_winner.bind(this)(player1, player2);
     }
 
