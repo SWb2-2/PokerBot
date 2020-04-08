@@ -30,8 +30,8 @@ function determine_winner(player1, player2){
 
     //sorting hands from highest to lowest rank
     sort_hand(hand_info1);
-    sort_hand(hand_info2);
-
+	sort_hand(hand_info2);
+	
     //counting number of each rank and suit in hand
     count_suits(hand_info1);
     count_suits(hand_info2);
@@ -110,18 +110,18 @@ function determine_winner(player1, player2){
 //Sorts player's hand using insertion sort
 function sort_hand(hand_info) {
 
-for(let i = 1; i < hand_size; i++) {
-
-	let key = hand_info.hand[i];
-	let j = i - 1;
-	while(j >= 0 && hand_info.hand[j].rank < key.rank) {
-
-		hand_info.hand[j+1] = hand_info.hand[j];
-		j--;
+	for(let i = 1; i < hand_size; i++) {
+	
+		let key = hand_info.hand[i];
+		let j = i - 1;
+		while(j >= 0 && hand_info.hand[j].rank < key.rank) {
+	
+			hand_info.hand[j+1] = hand_info.hand[j];
+			j--;
+		}
+		hand_info.hand[j+1] = key;
 	}
-	hand_info.hand[j+1] = key;
-}
-return;
+	return;
 }
 
 //Output: Counts the number of each rank in the hand, and stores it as an array in hand_info. 
