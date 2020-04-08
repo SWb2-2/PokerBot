@@ -1,8 +1,32 @@
 const Dealer = require("./classes/class_dealer.js");
 const Player = require("./classes/class_player.js");
 const Card = require("./classes/class_card.js")
-// const sort_hand = require("./classes/dealer_util/Determine_winner2.js")
-const ace = 14;
+
+
+//Sure win
+// let result = equity([new Card(14,2), new Card(14,3)], [new Card(14,1), new Card(14,0), new Card(4,2), new Card(7,0), new Card(12,1)]);
+
+//Pocket Ace
+let result = equity([new Card(14,2), new Card(14,3)]);
+
+//Suited 2-3
+// let result = equity([new Card(2,2), new Card(3,2)]);
+
+//Offsuit 2-3
+// let result = equity([new Card(2,1), new Card(3,2)]);
+
+//Pocket 2
+// let result = equity([new Card(2,1), new Card(2,2)]);
+
+console.log(result);
+
+let k = result.win + result.lose + result.draw;
+let winrate = (result.win / k) * 100;
+let draw_and_winrate = ((result.win + result.draw) / k) * 100;
+
+console.log("Winrate: \n", winrate, "\n Draw and winrate; \n", draw_and_winrate);
+
+
 
 //Sorts player's hand using insertion sort
 function sort_hand(hand) {
@@ -33,6 +57,8 @@ function sort_hand(hand) {
 }
 
 function create_specific_deck_of_cards(ill_cards) {
+    const ace = 14;
+
     let deck = [];
     let i = 0; 
 
@@ -123,29 +149,3 @@ function equity(hand, table, range) {
             lose: lose, 
             draw: draw};
 }
-
-//Sure win
-// let result = equity([new Card(14,2), new Card(14,3)], [new Card(14,1), new Card(14,0), new Card(4,2), new Card(7,0), new Card(12,1)]);
-
-//Pocket Ace
-// let result = equity([new Card(14,2), new Card(14,3)]);
-
-//Suited 2-3
-// let result = equity([new Card(2,2), new Card(3,2)]);
-
-//Offsuit 2-3
-// let result = equity([new Card(2,1), new Card(3,2)]);
-
-//Pocket 2
-let result = equity([new Card(2,1), new Card(2,2)]);
-
-
-
-console.log(result);
-
-let k = result.win + result.lose + result.draw;
-let winrate = (result.win / k) * 100;
-let draw_and_winrate = ((result.win + result.draw) / k) * 100;
-
-console.log("Winrate: \n", winrate, "\n Draw and winrate; \n", draw_and_winrate);
-
