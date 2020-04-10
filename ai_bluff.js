@@ -1,3 +1,5 @@
+import { determine_winner } from "./classes/dealer_util/Determine_winner2";
+
 // Modtager
 object = {
     ai_hand: [],
@@ -12,12 +14,26 @@ object = {
     player_move: {move: "check", amount: 13},
 }
 
+let dealer = new dealer;
+
+
 //Tilbagesender
 object = {
     ai_move: "raise", 
     ai_amount: 100
 }
 
+function ai(object) {
+    find_stadie();
+    determine_range();
+    equity_range();
+    calculate_move();
+
+
+    return  { ai_move: "raise", 
+              ai_amount: 100
+            }
+}
 
 //Find stadiet
 
@@ -34,14 +50,12 @@ object = {
 
 if(fold) {
 
-    Do_pure_bluff 
-    1/100
+    Do_pure_bluff();
+    1/100;
 }
 
 if(check || call) {
-    do_calculated_bluff(ai_hand, table_cards, range) {
-
-    }
+    do_calculated_bluff(ai_hand, table_cards, range);
 }
 
 
