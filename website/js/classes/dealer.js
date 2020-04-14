@@ -9,7 +9,6 @@ module.exports = class Dealer {
 
     create_deck_of_cards() {
         for(let j = 0; j < 4; j++) {
-    
             for(let i = 2; i <= 14; i++) {
                 this.deck_cards.push(new Card(i, j));
             }
@@ -17,15 +16,12 @@ module.exports = class Dealer {
     }
     
     add_table_cards(number) {
-
         for(let i = 0; i < number; i++) {
-    
             this.table_cards.push(this.deck_cards.pop());
         }
     }
     
     give_hand_cards(player1, player2) {
-
         player1.hand.push(this.deck_cards.pop());
         player1.hand.push(this.deck_cards.pop());
 
@@ -34,11 +30,9 @@ module.exports = class Dealer {
     }
     
     shuffle_array() {
-
         let swap = 0; 
         let temp_storage;
         for(let i = 0; i < this.deck_cards.length; i++) {
-
             swap = Math.random() * this.deck_cards.length * this.deck_cards.length+1; 
             swap = Math.floor(swap % this.deck_cards.length);
 
@@ -51,10 +45,11 @@ module.exports = class Dealer {
     new_game(player1, player2) {
         this.deck_cards = [];
         this.table_cards = [];
-        this.pot = 0; 
+        this.pot = 0;
+        
         player1.current_bet = 0; 
         player2.current_bet = 0;
-        // Ny addition til new_game metoden herunder:
+
         player1.hand = [];
         player2.hand = [];
         

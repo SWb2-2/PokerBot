@@ -109,51 +109,45 @@ function determine_winner(player1, player2){
 
 //Sorts player's hand using insertion sort
 function sort_hand(hand_info) {
+	for(let i = 1; i < hand_size; i++) {
+		let key = hand_info.hand[i];
+		let j = i - 1;
+		while(j >= 0 && hand_info.hand[j].rank < key.rank) {
 
-for(let i = 1; i < hand_size; i++) {
-
-	let key = hand_info.hand[i];
-	let j = i - 1;
-	while(j >= 0 && hand_info.hand[j].rank < key.rank) {
-
-		hand_info.hand[j+1] = hand_info.hand[j];
-		j--;
+			hand_info.hand[j+1] = hand_info.hand[j];
+			j--;
+		}
+		hand_info.hand[j+1] = key;
 	}
-	hand_info.hand[j+1] = key;
-}
-return;
 }
 
 //Output: Counts the number of each rank in the hand, and stores it as an array in hand_info. 
-    //The index in the array corresponds to the rank. 
+//The index in the array corresponds to the rank. 
 function count_all_ranks(hand_info) {
-
 	for(let i = 2; i <= ace; i++) {
-		hand_info.count_rank[i] = 0; //initialization
+		hand_info.count_rank[i] = 0;
 
 		for(let j = 0; j < hand_size; j++) {
-			if(hand_info.hand[j].rank == i) {
+			if(hand_info.hand[j].rank === i) {
 				hand_info.count_rank[i] += 1;
 			}
 		}
 	}
-	return;
 }
 
  //Count the amount of each suit in the hand, and stores it as an array in hand_info. 
 function count_suits(hand_info) {
-let hand_size = hand_info.hand.length;
+	let hand_size = hand_info.hand.length;
 
-for(let i = 0; i <= 3; i++) { 
-	hand_info.count_suit[i] = 0; //initialization
+	for(let i = 0; i <= 3; i++) { 
+		hand_info.count_suit[i] = 0;
 
-	for(let j = 0; j < hand_size; j++) {
-		if(hand_info.hand[j].suit == i) {
-			hand_info.count_suit[i] += 1; 
-		}  
+		for(let j = 0; j < hand_size; j++) {
+			if(hand_info.hand[j].suit == i) {
+				hand_info.count_suit[i] += 1; 
+			}  
+		}
 	}
-}
-return;
 }
 
 //Adds the 5 highest cards to best_hands at index high_card
@@ -164,7 +158,6 @@ function find_high_card(hand_info) {
 		best_highcards.push(hand_info.hand[i].rank); 
 	}
 	hand_info.best_hands[high_card] = best_highcards;
-	return;
 }
 
 //Uses the helperfunction find_2_3_4_of_a_kind to find a pair
@@ -208,7 +201,6 @@ function find_two_pairs(hand_info) {
 			}
 		}
 	}
-	return;
 }
 
 //Uses the helper function find_2_3_4_of_a_kind to find a three of a kind
@@ -247,7 +239,6 @@ function find_straight(hand_info) {
 			current_straight = [];
 		}
 	}
-	return;
 }
 
 //Goes through each of the 4 counted suits, and tests if the hand contains 5 cards of the given suit. 
@@ -316,51 +307,48 @@ function find_four_of_a_kind(hand_info) {
 //If yes, adds both cards to best_straight_flush array
 // if 5 cards are found, best_straight_flush is added to best_hands
 function find_straight_flush(hand_info) {
-	if(hand_info.best_hands[flush] == undefined && hand_info.best_hands[straight] == undefined) {
-		return;
-	}
+	if(hand_info.best_hands[flush] !== undefined && hand_info.best_hands[straight] !== undefined) {
+		let best_straight_flush = [];
 
-	let best_straight_flush = [];
-
-	for(let i = 0; i < 4; i++) { 		//checking if player has any aces, which need to count as ones as well
-		if(hand_info.hand[i].rank == 14) {
-			hand_info.hand.push(new Card(1, hand_info.hand[i].suit));
-		}
-	}
-	let suit;
-	for(let i = 0; i < 4; i++) {
-		if(hand_info.count_suit[i] >=5) {
-			suit = i;
-		}
-	}
-
-	//find places with that suit
-	let matching_suit = [];
-	for(let i = 0; i < hand_info.hand.length; i++) {
-		if(hand_info.hand[i].suit == suit) {
-			matching_suit.push(hand_info.hand[i])
-		}
-	}
-
-	for(let i = 0; i < matching_suit.length - 1; i++) {
-		if(matching_suit[i].rank == matching_suit[i+1].rank + 1) {
-
-			best_straight_flush.push(matching_suit[i].rank);
-
-			if(best_straight_flush.length == 4) { // When 4 cards have been added, we have tested 5 cards
-													// So we push the last card in, adds it and return/
-				best_straight_flush.push(matching_suit[i+1].rank);
-				hand_info.best_hands[straight_flush] = best_straight_flush;
-				while(hand_info.hand.length > 7){ //removing excess 1's from hand
-					hand_info.hand.pop();
-				}
-				return; 
+		for(let i = 0; i < 4; i++) { 		//checking if player has any aces, which need to count as ones as well
+			if(hand_info.hand[i].rank == 14) {
+				hand_info.hand.push(new Card(1, hand_info.hand[i].suit));
 			}
-		} else {
-			best_straight_flush = [];
+		}
+
+		let suit;
+		for(let i = 0; i < 4; i++) {
+			if(hand_info.count_suit[i] >=5) {
+				suit = i;
+			}
+		}
+
+		let matching_suit = [];
+		for(let i = 0; i < hand_info.hand.length; i++) {
+			if(hand_info.hand[i].suit == suit) {
+				matching_suit.push(hand_info.hand[i])
+			}
+		}
+
+		for(let i = 0; i < matching_suit.length - 1; i++) {
+			if(matching_suit[i].rank == matching_suit[i+1].rank + 1) {
+
+				best_straight_flush.push(matching_suit[i].rank);
+
+				if(best_straight_flush.length == 4) { // When 4 cards have been added, we have tested 5 cards
+														// So we push the last card in, adds it and return/
+					best_straight_flush.push(matching_suit[i+1].rank);
+					hand_info.best_hands[straight_flush] = best_straight_flush;
+					while(hand_info.hand.length > 7){ //removing excess 1's from hand
+						hand_info.hand.pop();
+					}
+					break; 
+				}
+			} else {
+				best_straight_flush = [];
+			}
 		}
 	}
-	return;
 }
 
 //Helper function that takes an amount, and returns the rank with that amount in player's hand. If none is found, returns false

@@ -84,7 +84,6 @@ function process_move(active_player, inactive_player, dealer) {
 function showdown(human_player, ai_player, dealer) {
     if(human_player.player_move.move !== "fold" && ai_player.player_move.move !== "fold") {
         let winner = dealer.get_winner(human_player, ai_player);
-        console.log(winner);
         
         dealer.give_pot(human_player, ai_player, winner.winner);
         dealer.pot = 0;

@@ -32,12 +32,10 @@ app.post('/player_move', (req, res) => {
 });
 
 app.get('/player_object', (req, res) => {
-    if (req.method === "GET") {
-        res.statusCode = 200;
-        let player_object = round.pre_flop(human_player, ai_player, dealer); 
-        res.json(JSON.stringify(player_object));
-        res.end("request completed");
-    }
+    res.statusCode = 200;
+    let player_object = round.pre_flop(human_player, ai_player, dealer); 
+    res.json(JSON.stringify(player_object));
+    res.end("request completed");
 });
 
 app.get('/ai_move', (req, res) => {
@@ -52,16 +50,11 @@ app.get('/ai_move', (req, res) => {
 });
 
 app.get('/table_update', (req, res) => {
-    if(human_player.player_move.move !== "all-in" && ai_player.player_move !== "all-in") {
-        human_player.player_move.move = "";
-        ai_player.player_move.move = "";
-    }
     let response = round.next_round(human_player, ai_player, dealer);
     res.statusCode = 200;
     console.log("table: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
-
 });
 
 app.get('/winner', (req, res) => {
@@ -69,9 +62,7 @@ app.get('/winner', (req, res) => {
     console.log("winner ", response);
     res.statusCode = 200;
     res.json(JSON.stringify(response));
-    //res.json('{"player_balance":110, "ai_balance":0, "pot_size":0, "winner":"player", "ai_cards":[{"rank":3,"suit":0}, {"rank":4, "suit":3}], "player_best_hand":"flush", "ai_best_hand":"straight"}');
     res.end("request accepted");
-
 });
 
 app.get('/new_game', (req, res) => {
