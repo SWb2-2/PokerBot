@@ -19,6 +19,7 @@ object = {
 }
 
 
+
 //Det er forventet, at ai tilbage sender dette objekt, når der er fundet et givent træk. 
 object = {
     ai_move: "raise", 
@@ -28,10 +29,13 @@ object = {
 
 //Dette er vores main funktion i ai, hvor strukturen skal laves, så der vides hvad den skal udregne, før den kan finde sit ønskede træk. 
 function ai(object) {
-    find_stadie();
+
+    find_stadie(table_cards);
+    update_range();
     determine_range();
     equity_range();
     calculate_move();
+
 
 
     return  { ai_move: "raise", 

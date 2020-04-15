@@ -112,9 +112,6 @@ function equity_range(hand, numb_of_sim, table, range_low, range_high) {
     if(range_low > range_high) {
         console.log("Error in func equity_range, invalid parameters")
         return Error; 
-        let temp_storage = range_low; 
-        range_low = range_high; 
-        range_high = temp_storage;
     }
     if(numb_of_sim == undefined) {
         numb_of_sim = 10000;
