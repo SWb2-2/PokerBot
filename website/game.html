@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Play poker</title>
+        <meta name="description" content="Place where you can practice your poker skills against a world class pokercomputer">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/game.css">
+        <script type="text/javascript" src="js/game.js"></script>
+    </head>
+    <body>
+    <div id="container">
+        <div id="jumbotron"><h1 id="jumbo-text"></h1></div>
+        <div id="game-container">
+            <div id="gameboard">
+                
+                <div id="pot">0$</div>
+                <div id="bot-cards"></div>
+                <div id="open-cards"></div>
+                <div id="player-cards"></div>
+            </div>
+            <div id="player-options">
+                <button class="button-on" id="check" onclick="makePlayerMove(this.id)">Check</button>
+                <button class="button-on" id="call" onclick="makePlayerMove(this.id)">Call</button>
+                <button class="button-on" id="raise" onclick="makePlayerMove(this.id)">Raise</button>
+                <button class="button-on" id="fold" onclick="makePlayerMove(this.id)">Fold</button>
+            </div>
+        </div>
+        <div id="ai-bank">
+            <h2>Pokerbot stats</h2>
+            <p id="bet">Current bet: <strong>0$</strong></p>
+            <p id="blind">Blind: <strong>Big blind</strong></p>
+            <p id="balance-field">Balance: <strong>100$</strong></p>
+        </div>
+        <div id="player-bank">
+            <h2>Player stats</h2>
+            <p id="bet">Current bet: <strong>0$</strong></p>
+            <p id="blind">Blind: <strong>Small blind</strong></p>
+            <p id="balance-field">Balance: <strong>100$</strong></p>
+        </div>
+    </div>
+    </body>
+</html>
