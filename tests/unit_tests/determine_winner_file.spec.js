@@ -78,7 +78,7 @@ describe("Checking that basic determine winner functions work", () => {
     });
     test("Get straight flush",() => {
         let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};
-        hand_info.hand = [new Card(2,1),new Card(4,1),new Card(7,1),new Card(3,1),new Card(5,1),new Card(14,1), new Card(13,1)];
+        hand_info.hand = [new Card(2,1),new Card(4,1),new Card(6,1),new Card(3,1),new Card(5,1),new Card(13,1), new Card(13,1)];
 
         determine_winner.sort_hand(hand_info);
         determine_winner.count_all_ranks(hand_info);
@@ -87,7 +87,7 @@ describe("Checking that basic determine winner functions work", () => {
         determine_winner.find_flush(hand_info);
         determine_winner.find_straight_flush(hand_info);
 
-        expect(hand_info.best_hands[8]).toStrictEqual([5,4,3,2,1]);
+        expect(hand_info.best_hands[8]).toStrictEqual([6,5,4,3,2]);
     });
     test("Get one pair", ()=>{
         let hand_info = {hand: [], count_rank: [], count_suit: [], best_hands: []};

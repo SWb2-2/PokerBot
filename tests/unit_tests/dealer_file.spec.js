@@ -174,6 +174,18 @@ describe("Checking that dealer functions are working correctly", () => {
         expect(player1.balance).toBe(130);
         expect(player2.balance).toBe(100);
     });
+    test("Giving pot when robot lost, and bet more than player", () => {
+        const player1 = new Player(100, "robot");
+        player1.current_bet = 20;
+        const player2 = new Player(100, "player");
+        player2.current_bet = 10;
+        const dealer = new Dealer;
+
+        dealer.give_pot(player1, player2, "player");
+
+        expect(player1.balance).toBe(110);
+        expect(player2.balance).toBe(120);
+    });
     test("Giving pot when player won", () => {
         const player1 = new Player(100, "robot");
         player1.current_bet = 10;
@@ -197,6 +209,18 @@ describe("Checking that dealer functions are working correctly", () => {
 
         expect(player1.balance).toBe(100);
         expect(player2.balance).toBe(130);
+    });
+    test("Giving pot when player lost, and bet more than robot", () => {
+        const player1 = new Player(100, "robot");
+        player1.current_bet = 10;
+        const player2 = new Player(100, "player");
+        player2.current_bet = 20;
+        const dealer = new Dealer;
+
+        dealer.give_pot(player1, player2, "robot");
+
+        expect(player1.balance).toBe(120);
+        expect(player2.balance).toBe(110);
     });
     test("The current player folded", () => {
         const current_player = new Player(100, "robot");

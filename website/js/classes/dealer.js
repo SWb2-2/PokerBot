@@ -121,7 +121,7 @@ module.exports = class Dealer {
             player1.balance -= bb;
             player2.balance -= sb;
             this.pot = bb + sb;
-        } else if (player1.blind === "sb"){
+        } else {
             player1.current_bet += sb;
             player2.current_bet += bb;
             player1.balance -= sb;

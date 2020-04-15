@@ -148,9 +148,53 @@ describe("Checking that fetch is being called and return is gotten", () => {
             return res;
         });
 
-        await game.newGame();
+        const response = await game.newGame();
 
         expect(global.fetch.mock.calls.length).toBe(1)
         expect(window.location.href).toBe("index.html");
+        expect(response).toBe(true);
+    });
+    test("Not changing back to index page because of redirect issue", async () => {
+        window.confirm = () => {return true};
+
+        delete window.location;
+
+        window.location = {
+            href: "game.html"
+        };
+
+        global.fetch = jest.fn().mockImplementation(() => {
+            var res = new Promise((resolve, reject) => {
+                resolve({
+                    redirected: false,
+                    url: "index.html"
+                });
+            });
+            return res;
+        });
+
+        const response = await game.newGame();
+
+        expect(global.fetch.mock.calls.length).toBe(1)
+        expect(window.location.href).toBe("game.html");
+        expect(response).toBe(false);
+    });
+    test("Not changing back to index page because of redirect issue", async () => {
+        window.confirm = () => {return false};
+
+        global.fetch = jest.fn().mockImplementation(() => {
+            var res = new Promise((resolve, reject) => {
+                resolve({
+                    redirected: false,
+                    url: "index.html"
+                });
+            });
+            return res;
+        });
+
+        const response = await game.newGame();
+
+        expect(global.fetch.mock.calls.length).toBe(0)
+        expect(response).toBe(false);
     });
 });

@@ -358,8 +358,6 @@ async function showMove(current_move) {
         case "raise":
             await showJumbotron(text + "raised with " + current_move.player_amount);
             break;
-        default:
-            break;
     }
 }
 
@@ -530,14 +528,16 @@ async function decideTurn(last_turn_respond) {
  */
 async function newGame() {
     if (confirm("Do you wanna play another game?")) {
-        await fetch("http://localhost:3000/new_game", {
+        let response = await fetch("http://localhost:3000/new_game", {
             method: 'GET'
-        }).then((response) => {
-            if(response.redirected){
-                window.location.href = response.url;
-            }
         });
+        
+        if(response.redirected){
+            window.location.href = response.url;
+            return true;
+        }
     }
+    return false;
 }
 
 //####################################################################################################

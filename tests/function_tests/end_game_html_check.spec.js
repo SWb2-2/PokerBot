@@ -70,10 +70,67 @@ describe("Ending game correctly", () => {
 
         expect(pot.innerHTML).toBe("0$");
     });
-    test("Get winner and devide pot, when someone won", async () => {
+    test("Get winner and devide pot, when robot won", async () => {
         document.body.innerHTML = '<div id="jumbotron"><h1 id="jumbo-text"></h1></div><div id="pot">0$</div><div id="bot-cards"><div id="card-back"></div><div id="card-back"></div></div><div id="open-cards"><div id="card-back"></div></div><div id="player-cards"><div id="card-back"></div></div><div id="player-options"><button class="button-on" id="check" onclick="makePlayerMove(this.id)">Check</button><button class="button-on" id="call" onclick="makePlayerMove(this.id)">Call</button><button class="button-on" id="raise" onclick="makePlayerMove(this.id)">Raise</button><button class="button-on" id="fold" onclick="makePlayerMove(this.id)">Fold</button></div><div id="ai-bank"><h2>Pokerbot stats</h2><p id="bet">Current bet: <strong>0$</strong></p><p id="blind">Blind: <strong>Small blind</strong></p><p id="balance-field">Balance: <strong>100$</strong></p></div><div id="player-bank"><h2>Player stats</h2><p id="bet">Current bet: <strong>0$</strong></p><p id="blind">Blind: <strong>Small blind</strong></p><p id="balance-field">Balance: <strong>100$</strong></p></div>';
 
         const fetch_response = JSON.stringify({player_balance: 0,bot_balance: 200,pot: 0,winner: "robot",player_best_hand: "straight",ai_best_hand: "flush",ai_cards: [new Card(10,0)]});
+
+        global.fetch = jest.fn().mockImplementation(() => {
+            var res = new Promise((resolve, reject) => {
+                resolve({
+                    json: function() {
+                        return fetch_response;
+                    }
+                });
+            });
+            return res;
+        });
+
+        await game.decideTurn({whose_turn: "showdown"});
+
+        expect(global.fetch.mock.calls.length).toBe(2)
+
+        const check = document.getElementById("check");
+        const fold = document.getElementById("fold");
+        const raise = document.getElementById("raise");
+        const call = document.getElementById("call");
+
+        expect(check.disabled).toBe(true);
+        expect(check.className).toBe("button-off");
+        
+        expect(fold.disabled).toBe(true);
+        expect(fold.className).toBe("button-off");
+        
+        expect(raise.disabled).toBe(true);
+        expect(raise.className).toBe("button-off");
+
+        expect(call.disabled).toBe(true);
+        expect(call.className).toBe("button-off");
+
+        const bot_cards = document.querySelector("#bot-cards");
+        
+        expect(bot_cards.innerHTML).toBe('<div id="card">10<br><img src="./Images/heart.png"></div>');
+
+        const balance_field = document.querySelector("#player-bank #balance-field strong");
+        const current_bet_field = document.querySelector("#player-bank #bet strong");
+        
+        expect(balance_field.innerHTML).toBe("0$");
+        expect(current_bet_field.innerHTML).toBe("0$");
+
+        const ai_balance_field = document.querySelector("#ai-bank #balance-field strong");
+        const ai_current_bet_field = document.querySelector("#ai-bank #bet strong");
+
+        expect(ai_balance_field.innerHTML).toBe("200$");
+        expect(ai_current_bet_field.innerHTML).toBe("0$");
+
+        const pot = document.querySelector("#pot");
+
+        expect(pot.innerHTML).toBe("0$");
+    });
+    test("Get winner and devide pot, when player won", async () => {
+        document.body.innerHTML = '<div id="jumbotron"><h1 id="jumbo-text"></h1></div><div id="pot">0$</div><div id="bot-cards"><div id="card-back"></div><div id="card-back"></div></div><div id="open-cards"><div id="card-back"></div></div><div id="player-cards"><div id="card-back"></div></div><div id="player-options"><button class="button-on" id="check" onclick="makePlayerMove(this.id)">Check</button><button class="button-on" id="call" onclick="makePlayerMove(this.id)">Call</button><button class="button-on" id="raise" onclick="makePlayerMove(this.id)">Raise</button><button class="button-on" id="fold" onclick="makePlayerMove(this.id)">Fold</button></div><div id="ai-bank"><h2>Pokerbot stats</h2><p id="bet">Current bet: <strong>0$</strong></p><p id="blind">Blind: <strong>Small blind</strong></p><p id="balance-field">Balance: <strong>100$</strong></p></div><div id="player-bank"><h2>Player stats</h2><p id="bet">Current bet: <strong>0$</strong></p><p id="blind">Blind: <strong>Small blind</strong></p><p id="balance-field">Balance: <strong>100$</strong></p></div>';
+
+        const fetch_response = JSON.stringify({player_balance: 0,bot_balance: 200,pot: 0,winner: "player",player_best_hand: "straight",ai_best_hand: "flush",ai_cards: [new Card(10,0)]});
 
         global.fetch = jest.fn().mockImplementation(() => {
             var res = new Promise((resolve, reject) => {
