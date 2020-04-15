@@ -113,7 +113,7 @@ async function giveTableCards(){
         document.getElementById("open-cards").appendChild(card);
     }
 
-    //await sleep(2000);
+    await sleep(2000);
 
     decideTurn(table);
 }
@@ -143,7 +143,7 @@ async function getTableCards() {
 async function showJumbotron(text) {
     document.getElementById("jumbo-text").innerHTML = text;
     document.getElementById("jumbotron").style.visibility = "visible";
-    //await sleep(2500);
+    await sleep(2500);
 }
 
 /**
@@ -386,7 +386,7 @@ async function makePokerbotMove(){
     await showJumbotron("Pokerbots turn");
     hideJumbotron();
 
-    //await sleep(2000);
+    await sleep(2000);
 
     let pokerBot_play = await getPokerbotPlay();
     await showMove(pokerBot_play);
@@ -475,19 +475,19 @@ async function gameEnd() {
         await showJumbotron("Showdown");
         hideJumbotron();
 
-        //await sleep(2000);
+        await sleep(2000);
         showBotCards(winner_plays.ai_cards);
-        //await sleep(2000);
+        await sleep(2000);
 
         await showJumbotron("Pokerbot has " + winner_plays.ai_best_hand);
         hideJumbotron();
-        //await sleep(2000);
+        await sleep(2000);
         await showJumbotron("You have " + winner_plays.player_best_hand);
         hideJumbotron();
     }
     
     let winner_name = winner_plays.winner === "robot" ? "Pokerbot" : "Player";
-    //await sleep(2000);
+    await sleep(2000);
     await showJumbotron("The winner is " + winner_name);
     hideJumbotron();
 
@@ -504,7 +504,7 @@ async function gameEnd() {
  * @param {*} last_turn_respond     : Objekt som skal indeholde whose_turn og kan indeholde et objekt med player_move={move:, amount:}.
  */
 async function decideTurn(last_turn_respond) {
-    //await sleep(1000);
+    await sleep(1000);
     switch (last_turn_respond.whose_turn) {
         case "player":
             await playerTurnSetup(last_turn_respond);
