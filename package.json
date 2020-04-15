@@ -2,19 +2,9 @@
   "name": "pokerbot",
   "version": "1.0.0",
   "description": "",
-<<<<<<< HEAD
   "main": "app.js",
   "scripts": {
     "test": "jest --coverage --verbose"
-=======
-  "main": "main.js",
-  "dependencies": {
-    "jest": "^25.1.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "jest"
->>>>>>> master
   },
   "repository": {
     "type": "git",
@@ -25,7 +15,6 @@
   "bugs": {
     "url": "https://github.com/SWb2-2/PokerBot/issues"
   },
-<<<<<<< HEAD
   "homepage": "https://github.com/SWb2-2/PokerBot#readme",
   "dependencies": {
     "express": "^4.17.1",
@@ -36,7 +25,4 @@
   "devDependencies": {
     "jest": "^25.2.7"
   }
-=======
-  "homepage": "https://github.com/SWb2-2/PokerBot#readme"
->>>>>>> master
 }
