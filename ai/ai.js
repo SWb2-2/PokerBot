@@ -1,48 +1,46 @@
-import { determine_winner } from "./classes/dealer_util/Determine_winner2";
-
 // Modtager
-const game_data = {
+const game_info = {
 	ai_hand: [],
 	table_cards: [],
 	pot: 3,
 	ai_balance: 3,
 	player_balance: 3,
-	ai_current_bet: 3, 
-	player_current_bet: 3,  
-	blind_size: 3, 
-	blind: "sb", 
-	player_move: {move: "check", amount: 13},
+	ai_current_bet: 3,
+	player_current_bet: 3,
+	blind_size: 3,
+	blind: "sb",
+	player_move: { move: "check", amount: 13 },
 	bluff: true
 }
 
 //input: spilinformationsobjektet der sendes mellem server og client
 //output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
-function ai(game_data, player_data) {
+function ai(game_info, player_data) {
 	let ai_move;
 	let current_round = "";
 	let available_moves = [];
-	let range = {range_low: 0, range_high: 100}
+	let range = { range_low: 0, range_high: 100 }
 	let equity = 0;
 	let move_history = [];
-	let player_data = {spilestil: "", fold_odds: 0, preflop_data: [] /*, andet*/};
+	// let player_data = {spilestil: "", fold_odds: 0, preflop_data: [] /*, andet*/};
 
 	//Hent info der skal bruges til at bestemme træk
-	current_round   = find_round(game_data.table_cards.length);
+	current_round = find_round(game_data.table_cards.length);
 	available_moves = find_available_moves(game_data.player_move.move);
-	player_data     = get_player_data();
-	range           = determine_range(player_data, game_data);
-	equity          = equity_range(range);
-	
+	// player_data     = get_player_data();
+	range = determine_range(player_data, game_data);
+	equity = equity_range(range);
+
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
-	ai_move = calculate_move(available_moves, equity, current_round, move_history, player_data, game_data);
+	ai_move = determine_move(available_moves, equity, current_round, move_history, player_data, game_info);
 	//add_move_to_history(ai_move, move_history);
 
-	return ai_move; 
+	return ai_move;
 }
 //input: antal kort på bordet     output: string som angiver runde
 function find_round(num_table_cards) {
-	switch(num_table_cards) {
+	switch (num_table_cards) {
 		case 0: return "preflop";
 		case 3: return "flop";
 		case 4: return "turn";
@@ -51,77 +49,161 @@ function find_round(num_table_cards) {
 	}
 }
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
-function determine_move(equity, player_data, game_data, current_round) {
+function determine_move(available_moves, equity, current_round, move_history, player_data, game_data) {
 	let EV_check = 0;
 	let EV_raise = 0;
-	let EV_call  = 0;
-	const EV_fold  = 0;
+	let EV_call = 0;
+	const EV_fold = 0;
 
-	EV_check = equity * pot;
-	 
-
-	
-	
+	if (reactive == true) {
+		move_reactive(equity, player_data, game_info);
+	} else {
+		move_proactive(equity, player_data, game_info);
+	}
+	//Modstander har: 
+	//Checket
+	//Raised + amount
+	//call  Dette er begyndelse af ny runde. 
 
 
 
 }
 
-function calculate_bet_size(equity, pot, player_data){
-	return 0.75*pot;
+//Modstaneren har eller raiset. 
+function move_reactive(equity, player_data, game_info) {
+	let round_left = 0;
+
+	if(game_info.table_cards.length == 4) {
+		round_left = 1;
+	} else if(game_info.table_cards.length == 3) {
+		round_left = 2; 
+	} else if(game_info.table_cards.length == 0) {
+		round_left = 3; 
+	}
+
+	let EV_raise = 0;
+	let EV_call = (equity/100) * game_info.pot  * Math.pow(2, round_left) - (1-(equity/100)) * game_info.player_move.amount * Math.pow(3, round_left);  //Lidt usikker i frohold til om ha nraiser senere
+	const EV_fold = 0;
 
 
 
-/*	By calculating opponent EV, can we gain insight?
-		Could be used to calculate AI's bet
-			If we want opponent to fold: goal is high -EV
-			If we want opponent to call: goal is low +EV – can be useful if opponent has low chance to call a raise, when we have a strong hand
-		Question: if a move is a +EV move for one player, is it a -EV move for the other?
-			No
 
-	If player has high fold chance to a raise
-		A for loop that increments the bet (with respect to pot size) until we find a value that has 0 EV for opponent?
 
-	Choosing one EV play from another could depend on EV_ai - EV_player: the difference in EV for the respective players
-		Because the difference in EV reflects the amount of money lost/gained in relation to other player, as the amount of money is conserved and finite in the game
-		not the same as profit: the real yield is the pot, profit is half the pot (if showdown)
 
-	Whether looking at the at-hand situation, or a whole hand (comparison of pre hand, post hand), the relative
-	EV of the moves stay the same. Folding is a 0 EV move, relative to other moves.
 
-	The pot is never included in the potential loss amount
-		It is always included in potential winnings
-*/	
+
+
+	return EV_call > EV_fold ? { ai_move: "call", amount: 0 } : { ai_move: "fold", amount: 0 };
+}
+
+
+
+
+
+
+
+
+//Vi har turen. Modstandern har checket, eller callet
+function move_proactive(equity, player_data, game_info) {
+	// if (equity < 50) {
+	// 	return "check";
+	// }
+
+	let pot = game_info.pot;
+	let EV_check = (equity / 100) * game_info.pot;
+	let EV_raise = [];
+	let raise;				//Givet ved % af potten 
+	let our_raise;
+	let temp_call_chance; 
+	let call_chance;
+	let result = 0;
+	if (player_data.total_moves > 30) {  //Tjekker at vores data er reliable. 
+		call_chance = (1 - player_data.chance_of_fold_when_raised);
+	} else {
+		call_chance = 0.30;
+	}
+
+
+	for (let i = 0; i < 30; i++) {  // Can go from 0 too 300, and change it to . 
+
+		raise = i * 0.1 * pot;
+
+		temp_call_chance = call_chance * (0.1 / ((i * 0.1) + 0.03)) - 0.093;
+
+		EV_raise[i] = (1 - temp_call_chance) * pot
+			+ temp_call_chance * (equity / 100) * (pot + raise)
+			- temp_call_chance * (1 - (equity / 100)) * raise;
+
+		if (EV_raise[i] > result) {
+			result = EV_raise[i];
+			our_raise = raise;
+		console.log(EV_raise[i], i);
+			
+		}
+	}
+
+
+	return result > EV_check ? { ai_move: "raise", amount: our_raise } : { ai_move: "check", amount: 0 };
+}
+
+
+
+
+function calculate_bet_size(equity, pot, player_data) {
+	return 0.75 * pot;
+
+
+
+	/*	By calculating opponent EV, can we gain insight?
+			Could be used to calculate AI's bet
+				If we want opponent to fold: goal is high -EV
+				If we want opponent to call: goal is low +EV – can be useful if opponent has low chance to call a raise, when we have a strong hand
+			Question: if a move is a +EV move for one player, is it a -EV move for the other?
+				No
+	
+		If player has high fold chance to a raise
+			A for loop that increments the bet (with respect to pot size) until we find a value that has 0 EV for opponent?
+	
+		Choosing one EV play from another could depend on EV_ai - EV_player: the difference in EV for the respective players
+			Because the difference in EV reflects the amount of money lost/gained in relation to other player, as the amount of money is conserved and finite in the game
+			not the same as profit: the real yield is the pot, profit is half the pot (if showdown)
+	
+		Whether looking at the at-hand situation, or a whole hand (comparison of pre hand, post hand), the relative
+		EV of the moves stay the same. Folding is a 0 EV move, relative to other moves.
+	
+		The pot is never included in the potential loss amount
+			It is always included in potential winnings
+	*/
 }
 
 //input: equity, current round, ai move history (for current hand), player_data, game_data
 //output: ai move and potential amount of money
 //Uses input parameters to decide a move. If Ai has high equity, it should raise, otherwise it should consider the game situation more closely
-function calculate_move(equity, current_round, move_history, player_data, game_data){
-	let ai_move = {move: "", amount: 0}
+function calculate_move(equity, current_round, move_history, player_data, game_data) {
+	let ai_move = { move: "", amount: 0 }
 	let expected_value = 0;
 
 
-	if(equity >= 55) {
+	if (equity >= 55) {
 		ai_move.move = "raise";
 		ai_move.amount = 0.75 * game_data.pot;
 	}
 	else if (equity < 55) {
 		player_move = game_data.player_move.move;
 		expected_value = find_expected_value(equity, pot, bet, player_move);
-		if(player_move === "check") {
-			ai_move = {move: "check", amount: 0};
+		if (player_move === "check") {
+			ai_move = { move: "check", amount: 0 };
 		}
-		else if(player_move === "raise") {
+		else if (player_move === "raise") {
 			if (expected_value >= 0) {
-				ai_move = {move: "call", amount: game_data.player_move.amount}
+				ai_move = { move: "call", amount: game_data.player_move.amount }
 			}
 			else {
-				ai_move = {move: "fold", amount: 0};
-			} 
+				ai_move = { move: "fold", amount: 0 };
+			}
 		}
-		else if(player_move === "call") {
-			ai_move = {move: "check", amount: 0};
+		else if (player_move === "call") {
+			ai_move = { move: "check", amount: 0 };
 		}
 		else {
 			console.log("error: player move undefined");
@@ -132,15 +214,15 @@ function calculate_move(equity, current_round, move_history, player_data, game_d
 	}
 
 	//Håndtering af bluff
-	if(game_data.bluff === true) {
-		if(ai_move.move === "fold") {
+	if (game_data.bluff === true) {
+		if (ai_move.move === "fold") {
 			do_pure_bluff(ai_move, game_data);
 		}
-	/*
-		else if(ai_move.move === "check" || ai_move.move === "call") {
-			do_calculated_bluff(ai_hand, table_cards, range);
-		}
-	*/
+		/*
+			else if(ai_move.move === "check" || ai_move.move === "call") {
+				do_calculated_bluff(ai_hand, table_cards, range);
+			}
+		*/
 	}
 
 	return ai_move
@@ -154,7 +236,7 @@ function find_expected_value(equity, pot, bet, player_move) {
 
 //Input: ai_move objekt og spilobjekt; output: ai_move objekt
 //Simulere et tegningekast, hvor der bluffes hvis tegningen rammer bluff_trigger
-function do_pure_bluff(ai_move, game_data){
+function do_pure_bluff(ai_move, game_data) {
 	let random = 0;
 	let bluff_trigger = 50
 	random = Math.ceil(100 * Math.random());
@@ -165,11 +247,11 @@ function do_pure_bluff(ai_move, game_data){
 		//Something that signifies that the bot has bluffed (data) 
 	}
 	else;
-		//no bluff
+	//no bluff
 }
 
 function do_calculated_bluff(ai_hand, table_cards, range) {
-	
+
 	let result = equity_range(ai_hand, table_cards, range);
 
 
@@ -180,7 +262,7 @@ function do_calculated_bluff(ai_hand, table_cards, range) {
 	//SImpel implementering:
 	//Hvis 3 ens suit, raise en lav % af tiden. 
 	//Hvis 4 connected, raise en lav % af tiden. 
-	
+
 	//Hvis botten har raiset tidligere, støjre chance for at bluffe. 
 
 	//Potodds, til at bedømme outs. 
@@ -190,16 +272,16 @@ function do_calculated_bluff(ai_hand, table_cards, range) {
 }
 
 //input: spillerens sidste move i et spil; Output: array af Ai's mulige træk
-function find_available_moves(player_move){
-	switch(player_move){
+function find_available_moves(player_move) {
+	switch (player_move) {
 		case "check": case "call": return ["check", "fold", "raise"];
 		case "raise": return ["fold", "call", "raise"];
 		default: return ["check", "fold", "raise"]; //default håndtere hvis det er botten der starter og spilleren ikke har lavet et move
 	}
 }
-function add_move_to_history(move, history){
+function add_move_to_history(move, history) {
 	let i = 0;
-	while(history[i] === undefined) {
+	while (history[i] === undefined) {
 		i++
 	}
 	history[i] = move;
@@ -209,7 +291,7 @@ function add_move_to_history(move, history){
 //Notes
 
 /* Brug expected value til at udregne om det værd at lave et træk */
-	/* Kan bruges til bluffing, hvis man har en ide om modstanderens fold chance */
+/* Kan bruges til bluffing, hvis man har en ide om modstanderens fold chance */
 /*
 	Scenarios: Model for player move
 		Assumptions:
@@ -487,3 +569,7 @@ function proactive_move_EV(bet, pot, equity, player_data) {
 	return EV_move;
 }
 */
+
+
+module.exports.move_proactive = move_proactive; 
+module.exports.move_reactive = move_reactive; 
