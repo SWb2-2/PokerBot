@@ -48,7 +48,7 @@ data_aggresive = {
     player_check: 15,  
     player_call: 5, 
     player_raise: 30,   
-    hands_played_percentage: 25/50, 
+    hands_played_percentage: 10/50, 
 
     total_moves: 80,
     total_preflop: 50,
@@ -87,7 +87,7 @@ data_passive = {
     player_check: 30,  
     player_call: 20, 
     player_raise: 10,   
-    hands_played_percentage: 0.75, 
+    hands_played_percentage: 0.7, 
 
     total_moves: 80,
     total_preflop: 50,
@@ -100,7 +100,7 @@ data_passive = {
 
     // Playstyle
     raises: 40,
-    chance_of_raise: 15/100,
+    chance_of_raise: 20/100,
     average_raise_percentage_of_pot: 0.5, 
 
 
@@ -122,9 +122,9 @@ data_passive = {
 }
 
 console.log("\nPassive player!!!!\n");
-console.log(range.determine_range(data_passive, {move: "raise", amount: 10}, 10, 1));
+console.log(range.determine_range(data_passive, {move: "check", amount: 10}, 100, 1));
 for(let i = 0; i < 5; i++) {
-     console.log(range.determine_range(data_passive,{move: "raise", amount: 10}, 10, 0));
+     console.log(range.determine_range(data_passive,{move: "check", amount: 10}, 100, 0));
 }
 console.log("\nAggresive player!!!!\n");
 console.log(range.determine_range(data_aggresive, {move: "raise", amount: 10}, 10, 1));
