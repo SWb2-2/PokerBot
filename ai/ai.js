@@ -69,38 +69,63 @@ function determine_move(available_moves, equity, current_round, move_history, pl
 
 }
 
-//Modstaneren har eller raiset. 
-function move_reactive(equity, player_data, game_info) {
-	let round_left = 0;
-
-	if(game_info.table_cards.length == 4) {
-		round_left = 1;
-	} else if(game_info.table_cards.length == 3) {
-		round_left = 2; 
-	} else if(game_info.table_cards.length == 0) {
-		round_left = 3; 
-	}
-
-	let EV_raise = 0;
-	let EV_call = (equity/100) * game_info.pot  * Math.pow(2, round_left) - (1-(equity/100)) * game_info.player_move.amount * Math.pow(3, round_left);  //Lidt usikker i frohold til om ha nraiser senere
+//Modstaneren har raiset. 
+function move_reactive(equity, player_data, game_info) {	
 	const EV_fold = 0;
+	let EV_raise = 0;
+	let EV_call = 0;
+	let rounds_left = 0;
 
-
-
-
-
-
-
-
+	rounds_left = find_rounds_left(game_info.table_cards.length);
+	equity      = equity / 100;
+	EV_call     = equity * call_winnings(rounds_left) - (1-equity) * call_losses(rounds_left);
 
 	return EV_call > EV_fold ? { ai_move: "call", amount: 0 } : { ai_move: "fold", amount: 0 };
+	//let EV_call = (equity/100) * game_info.pot  * Math.pow(2, round_left) - (1-(equity/100)) * game_info.player_move.amount * Math.pow(3, round_left);  //Lidt usikker i frohold til om ha nraiser senere
+}
+//output: returns amount of rounds left (not including current) based on number of cards on table
+function find_rounds_left(table_cards){
+	switch(table_cards) {
+		case 0: return 3;
+		case 3: return 2;
+		case 4: return 1;
+		case 5: return 0;
+		default: console.log("error: table cards error");
+	}
 }
 
+//input: round: round in relation to initial round, round 0 (the round we are currently in real time)
+//output: total amount of money we can potentially win, if we call the rest of opponent's raises til showdown
+//calculates the potential winnings from calling in round: sum of current round's pot and current round's bet
+function call_winnings(round) {
+	return pot_pre_bet(round) + bet(round);
+}
 
+//output: total amount of money we can potentially lose, if we call the rest of opponent's raises til showdown
+//calulates sum of previous round's losses (money we have thrown into pot) and current bet to be made
+function call_losses(round) {
+	if (k <= 0)
+		return bet_0;
+	else 
+		return call_losses(round-1) + bet(round);
+}
 
+//output: amount of money in pot in a given round (before any bets are added in said round)
+function pot_pre_bet(round) {
+	if (round <= 0)
+		return pot_0;
+	else
+		return pot_pre_bet(round-1) + 2*bet(round-1);
+}
 
-
-
+//output: size of bet in a given round
+function bet(round, game_info) {
+	let bet_percent_of_pot = game_info.player_move.move / game_info.pot;
+	if(round <= 0)
+		return bet_0;
+	else
+		return bet_percent_of_pot * pot_pre_bet(round);
+}
 
 
 //Vi har turen. Modstandern har checket, eller callet
@@ -108,42 +133,63 @@ function move_proactive(equity, player_data, game_info) {
 	// if (equity < 50) {
 	// 	return "check";
 	// }
-
+	equity = equity / 100;
 	let pot = game_info.pot;
-	let EV_check = (equity / 100) * game_info.pot;
-	let EV_raise = [];
-	let raise;				//Givet ved % af potten 
-	let our_raise;
-	let temp_call_chance; 
+	let EV_check = 0;
 	let call_chance;
-	let result = 0;
-	if (player_data.total_moves > 30) {  //Tjekker at vores data er reliable. 
-		call_chance = (1 - player_data.chance_of_fold_when_raised);
+	let raise_info = {};
+
+	raise_info = find_max_EV_raise(player_data.total_moves, call_chance, player_data.chance_of_fold_when_raised, pot);
+	EV_check = calc_EV_check(equity, pot);
+	EV_raise = raise_info.EV;
+
+
+	return EV_raise > EV_check ? { ai_move: "raise", amount: raise_info.ai_raise } : { ai_move: "check", amount: 0 };
+}
+
+
+function calc_EV_check(equity, pot) {
+	return equity * pot;
+}
+
+function find_max_EV_raise(total_moves, call_chance, chance_of_fold_when_raised, pot) {
+	let raise;
+	let adjusted_call_chance; 
+	let max_EV_raise = 0;
+	let EV_raise = [];
+
+	if (total_moves > 30) {  //Tjekker at vores data er reliable. 
+		call_chance = (1 - chance_of_fold_when_raised);
 	} else {
 		call_chance = 0.30;
 	}
 
-
 	for (let i = 0; i < 30; i++) {  // Can go from 0 too 300, and change it to . 
+		bet_percent_of_pot = 0.1 * i;
+		raise = bet_percent_of_pot * pot;
+		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
+		EV_raise[i] = calc_EV_raise(adjusted_call_chance, pot, raise, equity);
 
-		raise = i * 0.1 * pot;
-
-		temp_call_chance = call_chance * (0.1 / ((i * 0.1) + 0.03)) - 0.093;
-
-		EV_raise[i] = (1 - temp_call_chance) * pot
-			+ temp_call_chance * (equity / 100) * (pot + raise)
-			- temp_call_chance * (1 - (equity / 100)) * raise;
-
-		if (EV_raise[i] > result) {
-			result = EV_raise[i];
-			our_raise = raise;
-		console.log(EV_raise[i], i);
-			
+		if (EV_raise[i] > max_EV_raise) {
+			max_EV_raise = EV_raise[i];
+			ai_raise = raise;
+			console.log(EV_raise[i], i);
 		}
 	}
+	return {EV: max_EV_raise, ai_raise: ai_raise};
+}
 
+function adjust_call_chance(call_chance, bet_percent_of_pot) {
+	const a = 0.1;
+	const b = 0.03;
+	const c = 0.093
+	return call_chance * (a / (bet_percent_of_pot + b)) - c;
+}
 
-	return result > EV_check ? { ai_move: "raise", amount: our_raise } : { ai_move: "check", amount: 0 };
+function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
+	return 	(1 - adjusted_call_chance) * pot
+        	+ adjusted_call_chance * equity * (pot + raise)
+			- adjusted_call_chance * (1 - equity) * raise;
 }
 
 
