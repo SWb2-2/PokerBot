@@ -286,14 +286,32 @@ describe("Testing range where each test is split into different moves", () => {
     });
     
     //TEST RAISE!!! 0.1 - 0.5 - 1.5 - 2
-    test("Test of raise on the strong player with different raises", () => {
+    test("Test of raise on the strong player with raise of 10%", () => {
         let i = true;
         let j = true;
 
         let solid = range.determine_range(data_strong_player, {move: "raise", amount: 10}, 100, 1);
         
         if(solid.range_Low > 35) {
-             i = false;
+            i = false;
+        }
+        if(solid.range_high < 63) {
+            j = false;
+        }
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the strong player with raise of 50%", () => {
+        let i = true;
+        let j = true;
+
+        let solid = range.determine_range(data_strong_player, {move: "raise", amount: 50}, 100, 1);
+        // Strong player sættes til standard low_range = 48, da bet ift pot = 0,5. 
+        // Ud fra dette bør strong player få en signifikant større low range.
+        if(solid.range_Low < 60) {
+            i = false;
         }
         if(solid.range_high < 80) {
             j = false;
@@ -303,7 +321,129 @@ describe("Testing range where each test is split into different moves", () => {
         expect(i).toBe(true);
     });
 
+    test("Test of raise on the strong player with raise of 150%", () => {
+        let i = true;
+        let j = true;
 
+        let solid = range.determine_range(data_strong_player, {move: "raise", amount: 149}, 100, 1);
+        // Strong player sættes til standard low_range = 50, da bet ift pot = 1.5. 
+        // Ud fra dette bør strong player få en signifikant større range
+        if(solid.range_Low > 65) {
+            i = false;
+        }
+        if(solid.range_high < 80) {
+            j = false;
+        }
 
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the strong player with raise of 200%", () => {
+        let i = true;
+        let j = true;
+
+        let solid = range.determine_range(data_strong_player, {move: "raise", amount: 200}, 100, 1);
+        // Strong player sættes til standard low_range = 50, da bet ift pot = 1.5. 
+        // Ud fra dette bør strong player få en signifikant større range, så stor at range_control sparker ind
+        if(solid.range_Low < 60) {
+            i = false;
+        }
+        if(solid.range_high < 80) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the passive player with raise of 10%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_passive, {move: "raise", amount: 10}, 100, 1);
+        if(passive.range_Low > 35) {
+            i = false;
+        }
+        if(passive.range_high > 65) {
+            j = false;
+        }
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the passive player with raise of 50%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_passive, {move: "raise", amount: 50}, 100, 1);
+        if(passive.range_Low < 58) {
+            i = false;
+        }
+        if(passive.range_high < 80) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+    test("Test of raise on the passive player with raise of 150%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_passive, {move: "raise", amount: 150}, 100, 1);
+        if(passive.range_Low === 65) {
+            i = false;
+        }
+        if(passive.range_high < 80) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the passive player with raise of 200%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_passive, {move: "raise", amount: 200}, 100, 1);
+        if(passive.range_Low === 65) {
+            i = false;
+        }
+        if(passive.range_high < 80) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the standard player with raise of 10%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 10}, 100, 1);
+        if(passive.range_Low > 35) {
+            i = false;
+        }
+        if(passive.range_high > 70) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the standard player with raise of 50%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 50}, 100, 1);
+        // if(passive.range_Low > 63) {
+        //     i = false;
+        // }
+        if(passive.range_high !== 86) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
 
 });
