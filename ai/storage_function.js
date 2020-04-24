@@ -10,6 +10,7 @@ function store_ai_move(move, data) {
     } else if(move == "call") {
         data.ai_call += 1;
     }
+    console.log(data);
 }
 
 function store_player_move(player, ai_move, pot_size, data) {
@@ -53,6 +54,7 @@ function store_player_move(player, ai_move, pot_size, data) {
             data.fold_when_sb += 1;
         }
     }
+    console.log(data);
 }
 
 module.exports.store_player_move = store_player_move;

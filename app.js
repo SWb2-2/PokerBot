@@ -11,6 +11,8 @@ const app = express();
 let dealer = new dealer_module;
 let human_player = new Player(250, "player");
 let ai_player = new Player(200, "robot");
+let data_preflop = new Data;
+let data_postflop = new Data;
 let data = new Data;
 
 app.use(express.static("website"));
@@ -29,10 +31,14 @@ app.post('/balance', (req, res) => {
 app.post('/player_move', (req, res) => {
     human_player.player_move.move = req.body.move;
     human_player.player_move.amount = Number(req.body.amount);
-    
+
     if(dealer.table_cards.length < 3) {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data);
-    }
+        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop);
+    } else {
+        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop);
+    } 
+    store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data);
+
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
     console.log("player move",response);
@@ -54,8 +60,12 @@ app.get('/ai_move', (req, res) => {
     ai_player.player_move.amount = 5;
     ai_player.player_move.move = "raise";
     if(dealer.table_cards.length < 3) {
-        store.store_ai_move(ai_player.player_move.move, data);
+        store.store_ai_move(ai_player.player_move.move, data_preflop);
+    } else {
+        store.store_ai_move(ai_player.player_move.move, data_postflop);
     }
+    store.store_ai_move(ai_player.player_move.move, data);
+
     let response = round.process_move(ai_player, human_player, dealer);
     console.log("ai move: ", response);
     res.json(JSON.stringify(response));
@@ -73,6 +83,8 @@ app.get('/table_update', (req, res) => {
 
 //Round is ended, and gives the pot based on showdown, or a player has folded
 app.get('/winner', (req, res) => {
+    data_preflop.total_preflop += 1;
+    data_postflop.total_preflop += 1;
     data.total_preflop += 1;
     let response = round.showdown(human_player, ai_player, dealer);
     console.log("winner ", response);
