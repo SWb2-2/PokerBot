@@ -299,6 +299,7 @@ describe("Testing range where each test is split into different moves", () => {
             j = false;
         }
 
+        console.log(solid, "stron 10%");
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -310,15 +311,16 @@ describe("Testing range where each test is split into different moves", () => {
         let solid = range.determine_range(data_strong_player, {move: "raise", amount: 50}, 100, 1);
         // Strong player sættes til standard low_range = 48, da bet ift pot = 0,5. 
         // Ud fra dette bør strong player få en signifikant større low range.
-        if(solid.range_Low < 60) {
+        if(solid.range_Low < 50) {
             i = false;
         }
         if(solid.range_high < 80) {
             j = false;
         }
+        console.log(solid, "stron 50%");
 
-        expect(j).toBe(true);
         expect(i).toBe(true);
+        expect(j).toBe(true);
     });
 
     test("Test of raise on the strong player with raise of 150%", () => {
@@ -334,6 +336,7 @@ describe("Testing range where each test is split into different moves", () => {
         if(solid.range_high < 80) {
             j = false;
         }
+        console.log(solid, "150%");
 
         expect(j).toBe(true);
         expect(i).toBe(true);
@@ -352,6 +355,8 @@ describe("Testing range where each test is split into different moves", () => {
         if(solid.range_high < 80) {
             j = false;
         }
+        console.log(solid, "200%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -367,7 +372,7 @@ describe("Testing range where each test is split into different moves", () => {
         if(passive.range_high > 65) {
             j = false;
         }
-
+        console.log(passive, "10%");
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -377,12 +382,15 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let passive = range.determine_range(data_passive, {move: "raise", amount: 50}, 100, 1);
-        if(passive.range_Low < 58) {
+        if(passive.range_Low < 50) {
             i = false;
         }
+
         if(passive.range_high < 80) {
             j = false;
         }
+        console.log(passive, "50%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -397,6 +405,9 @@ describe("Testing range where each test is split into different moves", () => {
         if(passive.range_high < 80) {
             j = false;
         }
+
+        console.log(passive, "150%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -406,12 +417,14 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let passive = range.determine_range(data_passive, {move: "raise", amount: 200}, 100, 1);
-        if(passive.range_Low === 65) {
+        if(passive.range_Low < 60) {
             i = false;
         }
-        if(passive.range_high < 80) {
+        if(passive.range_high != 86) {
             j = false;
         }
+        console.log(passive, " passive 200%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -427,6 +440,8 @@ describe("Testing range where each test is split into different moves", () => {
         if(passive.range_high > 70) {
             j = false;
         }
+        console.log(passive, "10%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
@@ -436,14 +451,119 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let passive = range.determine_range(data_standard, {move: "raise", amount: 50}, 100, 1);
-        // if(passive.range_Low > 63) {
-        //     i = false;
-        // }
-        if(passive.range_high !== 86) {
+        if(passive.range_Low > 58) {
+            i = false;
+        }
+        if(passive.range_high < 75) {
             j = false;
         }
+
+        console.log(passive, "50%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+    test("Test of raise on the standard player with raise of 150%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
+        if(passive.range_Low < 62) {
+            i = false;
+        }
+        if(passive.range_high != 86) {
+            j = false;
+        }
+
+        console.log(passive, " standard 150%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+    test("Test of raise on the standard player with raise of 200%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 200}, 100, 1);
+        if(passive.range_Low < 64) {
+            i = false;
+        }
+        if(passive.range_high != 86) {
+            j = false;
+        }
+
+        console.log(passive, "stands 200%");
+
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
 
+    test("Test of raise on the aggresive player with raise of 10%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 10}, 100, 1);
+        if(passive.range_Low > 35) {
+            i = false;
+        }
+        if(passive.range_high > 70) {
+            j = false;
+        }
+        console.log(passive, "aggresive 10%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+
+    test("Test of raise on the aggresive player with raise of 50%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 50}, 100, 1);
+        if(passive.range_Low > 60) {
+            i = false;
+        }
+        if(passive.range_high < 75) {
+            j = false;
+        }
+
+        console.log(passive, "aggresive 50%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+    test("Test of raise on the aggresive player with raise of 150%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
+        if(passive.range_Low < 62) {
+            i = false;
+        }
+        if(passive.range_high != 86) {
+            j = false;
+        }
+
+        console.log(passive, " aggresive 150%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
+    test("Test of raise on the aggresive player with raise of 200%", () => {
+        let i = true;
+        let j = true;
+
+        let passive = range.determine_range(data_standard, {move: "raise", amount: 200}, 100, 1);
+        if(passive.range_Low < 64) {
+            i = false;
+        }
+        if(passive.range_high != 86) {
+            j = false;
+        }
+
+        console.log(passive, "aggresive 200%");
+
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    });
 });
