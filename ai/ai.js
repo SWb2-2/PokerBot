@@ -23,12 +23,10 @@ function ai(game_info, player_data) {
 	let range = { range_low: 0, range_high: 100 }
 	let equity = 0;
 	let move_history = [];
-	// let player_data = {spilestil: "", fold_odds: 0, preflop_data: [] /*, andet*/};
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_data.table_cards.length);
 	available_moves = find_available_moves(game_data.player_move.move);
-	// player_data     = get_player_data();
 	range = determine_range(player_data, game_data);
 	equity = equity_range(range);
 
@@ -182,7 +180,7 @@ function find_max_EV_raise(total_moves, call_chance, chance_of_fold_when_raised,
 function adjust_call_chance(call_chance, bet_percent_of_pot) {
 	const a = 0.1;
 	const b = 0.03;
-	const c = 0.093
+	const c = 0.093;
 	return call_chance * (a / (bet_percent_of_pot + b)) - c;
 }
 
@@ -279,6 +277,15 @@ function find_expected_value(equity, pot, bet, player_move) {
 	}
 }
 
+//Ide til simple do_pure_bluff
+function do_pure_bluff_0(ai_move, game_info) {
+	if(1 == Math.ceil(100 * Math.random())) {
+		ai_move.move = "raise"
+		ai_move.amount = (Math.random() + 0.5) * game_info.pot; 
+		return true; 
+	}
+	return false; 
+}
 
 //Input: ai_move objekt og spilobjekt; output: ai_move objekt
 //Simulere et tegningekast, hvor der bluffes hvis tegningen rammer bluff_trigger
@@ -619,3 +626,4 @@ function proactive_move_EV(bet, pot, equity, player_data) {
 
 module.exports.move_proactive = move_proactive; 
 module.exports.move_reactive = move_reactive; 
+module.exports.ai = ai; 
