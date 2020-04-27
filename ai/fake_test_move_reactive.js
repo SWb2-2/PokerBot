@@ -17,10 +17,13 @@ data = {
 }
 
 
-for(let i = 0.51; i < 1; i = i+0.01) {
+console.log(func.find_max_EV_raise_bluff(50, 0.9, 100, 0.25));
 
-    console.log(i, func.move_proactive(i, data, game_info) );
-}
+
+// for(let i = 0.51; i < 1; i = i+0.01) {
+
+//     console.log(i, func.move_proactive(i, data, game_info) );
+// }
 
 
 

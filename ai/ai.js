@@ -1,19 +1,17 @@
-const equity = require("./ai_util/monte_carlo.js");
-// const range = require("./range.js");
-
-
+const monte_carlo = require("./ai_util/monte_carlo.js");
+// const range_func = require("./range.js");
 
 // Modtager
 const game_info = {
 	ai_hand: [],
 	table_cards: [],
 	pot: 3,
-	ai_balance: 3,
-	player_balance: 3,
-	ai_current_bet: 3,
-	player_current_bet: 3,
-	blind_size: 3,
-	blind: "sb",
+	// ai_balance: 3,
+	// player_balance: 3,
+	// ai_current_bet: 3,
+	// player_current_bet: 3,
+	// blind_size: 3,
+	// blind: "sb",
 	player_move: { move: "check", amount: 13 },
 	bluff: true
 }
@@ -21,7 +19,7 @@ const game_info = {
 //input: spilinformationsobjektet der sendes mellem server og client
 //output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
-function ai(game_info, player_data, data_preflop, data_postflop, data) {
+function ai(game_info, data_preflop, data_postflop, data) {
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
@@ -30,15 +28,74 @@ function ai(game_info, player_data, data_preflop, data_postflop, data) {
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_info.table_cards.length);
-	range = range.determine_range(player_data, game_info);					//Check op på 
-	equity = equity.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high) / 100;
+	range = range_func.determine_range(player_data, game_info);					//Check op på 
+	equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high) / 100;
 
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data);
 	//add_move_to_history(ai_move, move_history);
 
-	return ai_move;
+	if(game_info.bluff == false) {
+		return ai_move;
+	} else if(game_info.bluff == true && (ai_move.ai_move == ai_move.ai_move == "fold" || ai_move.ai_move == "check") ){
+
+		do_calculated_bluff(ai_move, )
+		
+
+
+
+
+		if(ai_move.ai_move == "fold" || ai_move.ai_move == "check") {
+			do_pure_bluff_0(ai_move, game_info);
+		}
+
+		return ai_move;
+	}
 }
+
+
+function find_max_EV_raise_bluff(total_moves, chance_of_fold_when_raised, pot, equity) {
+	let raise;
+	let adjusted_call_chance; 
+	let max_EV_raise = 0;
+	let EV_raise = [];
+	let ai_raise; 
+	let call_chance; 
+
+	if (total_moves > 30) {  //Tjekker at vores data er reliable. 
+		call_chance = (1 - chance_of_fold_when_raised);
+	} else {
+		call_chance = 0.30;
+	}
+	
+
+	for (let i = 0; i < 30; i += 0.2) {  // 
+		bet_percent_of_pot = 0.1 * i;
+		raise = bet_percent_of_pot * pot;
+		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
+		EV_raise[i] = calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity);
+		// console.log(EV_raise[i], "118");
+		if (EV_raise[i] > max_EV_raise) {
+			max_EV_raise = EV_raise[i];
+			ai_raise = raise;
+			// console.log(EV_raise[i], i);
+		}
+	}
+	return {EV: max_EV_raise, amount: ai_raise};
+}
+
+function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
+	let low = 1, high = 1
+
+
+	return 	(1 - adjusted_call_chance) * pot
+        	+ (adjusted_call_chance* high) * equity * (pot + raise)
+			- ((adjusted_call_chance* low) * (1 - equity) * raise);
+}
+
+
+
+
 
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
 function determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data) {
@@ -284,5 +341,6 @@ module.exports.move_reactive = move_reactive;
 module.exports.find_max_EV_raise = find_max_EV_raise; 
 module.exports.adjust_call_chance = adjust_call_chance; 
 module.exports.calc_EV_raise = calc_EV_raise; 
-
+module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
+module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
 module.exports.ai = ai; 
