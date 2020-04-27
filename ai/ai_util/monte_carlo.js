@@ -38,6 +38,10 @@ const arr_o_suit = [ undefined,
                     [undefined, undefined, 57.55, 58.41, 59.16, 60.13, 59.80, 60.92, 61.71, 62.60, 64.72, 65.55, 66.54, 67.55, 85.84]
                     ]
 
+
+
+// console.log(equity_range([new Card(14,2), new Card(14,3)], 100000,[], 30, 40));
+
 //Sorts player's hand using insertion sort
 //First sort the rank, and then the suit
 function sort_hand_in_rank_and_suit(hand) {
