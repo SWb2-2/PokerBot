@@ -1,5 +1,6 @@
 const func = require("./ai.js");
 
+
 game_info = {
     ai_hand: [],
     table_cards: [3,4,3,4],
@@ -10,10 +11,34 @@ game_info = {
     player_move: { move: "raise", amount: 10 },
 }
 
-
-for(let i = 10; i < 200; i = i+10) {
-    game_info.player_move.amount = i;
-    let k = func.move_reactive(0.56, game_info);
-
-    console.log(k, i);
+data = {
+    total_moves: 50, 
+    chance_of_fold_when_raised: 0.4
 }
+
+
+for(let i = 0.51; i < 1; i = i+0.01) {
+
+    console.log(i, func.move_proactive(i, data, game_info) );
+}
+
+
+
+
+//Test calc_EV_raise
+// for(let i = 10; i < 200; i= i+10) {
+
+//     k = func.adjust_call_chance(0.3, i/100); 
+//     // console.log(k);
+//   console.log(  func.calc_EV_raise(k, 100, i, 0.65));
+// }
+
+
+
+//TEst adjusted call_chance
+// for(let i = 0.1; i < 2; i = i+0.1) {
+
+//     console.log(i,func.adjust_call_chance(0.8, i));
+
+// }
+

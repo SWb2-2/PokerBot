@@ -72,58 +72,69 @@ function move_reactive(equity, game_info) {
 
 //Vi har turen. Modstandern har checket, eller callet
 function move_proactive(equity, player_data, game_info) {
-	if (equity < 50) { //da et raise under 50% equity betegnes som et bluff
+	if(equity < 0.55) { //da et raise under 50% equity betegnes som et bluff
 		return {ai_move: "check", amount: 0};
+	} else if (equity > 0.92) {
+		return { ai_move: "raise", amount: (Math.random() + 0.5) * game_info.pot}; //Anti bluff
 	}
+	
 	let pot = game_info.pot;
 	let EV_check = 0;
-	let call_chance;
 	let best_raise_info = {};
-
-	best_raise_info = find_max_EV_raise(player_data.total_moves, call_chance, player_data.chance_of_fold_when_raised, pot);
+	let ai_raise; 
+	
+	best_raise_info = find_max_EV_raise(player_data.total_moves, player_data.chance_of_fold_when_raised, pot, equity);
 	max_EV_raise = best_raise_info.EV;
 	ai_raise = best_raise_info.amount
 	EV_check = calc_EV_check(equity, pot);
 
+	// console.log(EV_check, "EV CHECK"); 
+	// console.log(max_EV_raise, "EV raise"); 
 
-	return EV_raise > EV_check ? { ai_move: "raise", amount: ai_raise } : { ai_move: "check", amount: 0 };
+	return max_EV_raise > EV_check ? { ai_move: "raise", amount: ai_raise } : { ai_move: "check", amount: 0 };
 }
 
 function calc_EV_check(equity, pot) {
 	return equity * pot;
 }
 
-function find_max_EV_raise(total_moves, call_chance, chance_of_fold_when_raised, pot) {
+function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity) {
 	let raise;
 	let adjusted_call_chance; 
 	let max_EV_raise = 0;
 	let EV_raise = [];
+	let ai_raise; 
+	let call_chance; 
 
 	if (total_moves > 30) {  //Tjekker at vores data er reliable. 
 		call_chance = (1 - chance_of_fold_when_raised);
 	} else {
 		call_chance = 0.30;
 	}
+	
 
-	for (let i = 0; i < 30; i++) {  // Can go from 0 too 300, and change it to . 
+	for (let i = 0; i < 30; i += 0.2) {  // 
 		bet_percent_of_pot = 0.1 * i;
 		raise = bet_percent_of_pot * pot;
 		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
 		EV_raise[i] = calc_EV_raise(adjusted_call_chance, pot, raise, equity);
-
+		// console.log(EV_raise[i], "118");
 		if (EV_raise[i] > max_EV_raise) {
 			max_EV_raise = EV_raise[i];
 			ai_raise = raise;
-			console.log(EV_raise[i], i);
+			// console.log(EV_raise[i], i);
 		}
 	}
 	return {EV: max_EV_raise, amount: ai_raise};
 }
 
 function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
+	let low = 0.5, high = 1.5
+
+
 	return 	(1 - adjusted_call_chance) * pot
-        	+ adjusted_call_chance * equity * (pot + raise)
-			- adjusted_call_chance * (1 - equity) * raise;
+        	+ (adjusted_call_chance* high) * equity * (pot + raise)
+			- ((adjusted_call_chance* low) * (1 - equity) * raise);
 }
 
 
@@ -132,7 +143,8 @@ function adjust_call_chance(call_chance, bet_percent_of_pot) {
 	const a = 0.1;
 	const b = 0.03;
 	const c = 0.093;
-	return call_chance * (a / (bet_percent_of_pot + b)) - c;
+	return ((call_chance*(a/(0.1* bet_percent_of_pot + b)) ) -c);
+	// return call_chance * (a / (0.1*bet_percent_of_pot + b)) - c;
 }
 
 
@@ -262,4 +274,8 @@ function find_round(num_table_cards) {
 }
 module.exports.move_proactive = move_proactive; 
 module.exports.move_reactive = move_reactive; 
+module.exports.find_max_EV_raise = find_max_EV_raise; 
+module.exports.adjust_call_chance = adjust_call_chance; 
+module.exports.calc_EV_raise = calc_EV_raise; 
+
 module.exports.ai = ai; 
