@@ -1,39 +1,47 @@
 const monte_carlo = require("./ai_util/monte_carlo.js");
-// const range_func = require("./range.js");
+const range_func = require("./ai_util/range");
 
 // Modtager
-const game_info = {
-	ai_hand: [],
-	table_cards: [],
-	pot: 3,
-	// ai_balance: 3,
-	// player_balance: 3,
-	// ai_current_bet: 3,
-	// player_current_bet: 3,
-	// blind_size: 3,
-	// blind: "sb",
-	player_move: { move: "check", amount: 13 },
-	bluff: true
-}
+// const game_info = {
+// 	ai_hand: [],
+// 	table_cards: [],
+// 	pot: 3,
+// 	// ai_balance: 3,
+// 	// player_balance: 3,
+// 	// ai_current_bet: 3,
+// 	// player_current_bet: 3,
+// 	// blind_size: 3,
+// 	// blind: "sb",
+// 	player_move: { move: "check", amount: 13 },
+// 	bluff: true
+// }
 
 //input: spilinformationsobjektet der sendes mellem server og client
 //output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
 function ai(game_info, data_preflop, data_postflop, data) {
+
+	console.log(game_info, data_preflop, data_postflop, data)
+
+
+
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
-	let equity = 0;
+	
 	// let move_history = [];
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_info.table_cards.length);
-	range = range_func.determine_range(player_data, game_info);					//Check op på 
-	equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high) / 100;
-
+	range = range_func.determine_range(data_preflop, game_info);					//Check op på 
+	let equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high);
+	console.log(equity, "38 equity \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
-	ai_move = determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data);
+	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 	//add_move_to_history(ai_move, move_history);
+	
+	console.log(ai_move, "43 SDFJSEFK SEHJFNSKEMSLEIFJJJ\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	return ai_move;
 
 	if(game_info.bluff == false) {
 		return ai_move;
@@ -98,7 +106,7 @@ function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
 
 
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
-function determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data) {
+function determine_move(equity, current_round, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
 
 	move_type = determine_move_type(game_info.player_move.move);

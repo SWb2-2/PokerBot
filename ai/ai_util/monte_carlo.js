@@ -96,7 +96,6 @@ function create_specific_deck_of_cards(ill_cards) {
 
 //Find the equity of a given hand, based on the cards on the table, and the given range of the opponent. 
 function equity_range(hand, numb_of_sim, table, range_low, range_high) {
-
     //makes sure the input is valid, and if not, make it valid. 
     if(table == undefined) {
         table = [];
@@ -221,7 +220,7 @@ function equity_range(hand, numb_of_sim, table, range_low, range_high) {
     let total = win + lose + draw;
     let winrate = (win / total) * 100;
     let draw_and_winrate = ((win + draw) / total) * 100;
-
+console.log("\n\n\n\nWIN", win, lose, draw, draw_and_winrate);
     return {win: win, 
             lose: lose, 
             draw: draw, 

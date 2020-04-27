@@ -4,9 +4,20 @@ const dealer_module = require("./website/js/classes/dealer.js");
 const Player = require("./website/js/classes/player.js");
 const Data = require("./website/js/classes/data.js");
 const store = require("./ai/storage_function.js");
+const ai = require("./ai/ai.js");
 
 const port = 3000;
 const app = express();
+
+let game_info = {
+    ai_hand: [],
+	table_cards: [],
+    pot: 0,
+    player_move: { move: "check", amount: 13 },
+	bluff: true
+}
+
+let bluff = false;
 
 let dealer = new dealer_module;
 let human_player = new Player(250, "player");
@@ -59,6 +70,21 @@ app.get('/ai_move', (req, res) => {
     res.statusCode = 200;
     ai_player.player_move.amount = 5;
     ai_player.player_move.move = "raise";
+
+    game_info.ai_hand = ai_player.hand;
+    game_info.table_cards = dealer.table_cards;
+    game_info.pot = dealer.pot;
+    game_info.player_move = human_player.player_move;
+    game_info.bluff = bluff; 
+    
+    let k = ai.ai(game_info, data_preflop, data_postflop, data);
+    
+    ai_player.player_move.move = k.ai_move;
+    ai_player.player_move.amount = k.amount;
+
+		console.log(ai_player.player_move, "85 SDFJSEFK SEHJFNSKEMSLEIFJJJ\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    
+    
     if(dealer.table_cards.length < 3) {
         store.store_ai_move(ai_player.player_move.move, data_preflop);
     } else {
