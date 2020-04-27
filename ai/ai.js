@@ -324,8 +324,6 @@ function determine_move_type(move) {
 
 //output: returns amount of rounds left (not including current) based on number of cards on table
 function find_rounds_left(table_cards){
-	console.log(table_cards);
-
 	switch(table_cards) {
 		case 0: return 3;
 		case 3: return 2;

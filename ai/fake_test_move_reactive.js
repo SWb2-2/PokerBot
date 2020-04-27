@@ -17,7 +17,7 @@ data = {
 }
 
 
-console.log(func.find_max_EV_raise_bluff(50, 0.9, 100, 0.25));
+// console.log(func.find_max_EV_raise_bluff(50, 0.9, 100, 0.25));
 
 
 // for(let i = 0.51; i < 1; i = i+0.01) {
@@ -25,8 +25,10 @@ console.log(func.find_max_EV_raise_bluff(50, 0.9, 100, 0.25));
 //     console.log(i, func.move_proactive(i, data, game_info) );
 // }
 
-
-
+for(let i = 10; i < 200; i += 10) {
+    game_info.player_move.amount = i; 
+    console.log(func.move_reactive(0.55, game_info)); 
+}
 
 //Test calc_EV_raise
 // for(let i = 10; i < 200; i= i+10) {
