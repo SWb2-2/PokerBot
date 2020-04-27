@@ -1,13 +1,13 @@
 game_info = {
     ai_hand: [],
-    table_cards: [4,3,2,1,5],
+    table_cards: [],
     pot: 100,
     ai_balance: 3,
     player_balance: 3,
     ai_current_bet: 3,
-    player_move: { move: "raise", amount: 50 },
+    player_move: { move: "raise", amount: 99},
 }
-equity = 0.37;
+
 rounds_left = find_rounds_left(game_info.table_cards.length);
 
 //for(i = 1; i < 99; i++){
@@ -16,29 +16,28 @@ rounds_left = find_rounds_left(game_info.table_cards.length);
 	//console.log(equity * call_winnings(rounds_left, game_info) - (1-equity) * call_losses(rounds_left, game_info),equity);
 //}
 
-for (equity = 0; equity < 1; equity +=0.05){
-	let bet_percent =  opponent_bet(rounds_left, game_info) / pot_pre_bet(rounds_left, game_info);
+for (let equity = 0.34; equity < 0.87; equity += 0.01){
 	let initial_bet = game_info.player_move.amount;
 	let initial_pot = game_info.pot - initial_bet;
-	potOdds = pot_odds(initial_pot, initial_bet);
-	console.log(move_reactive(equity, game_info), move_reactive_3(equity, game_info), equity, "and", bet_percent, "and", potOdds);
+	let bet_percent_of_pot = initial_bet / initial_pot;
+	console.log(move_reactive(equity, game_info), move_reactive2(equity, game_info), equity, "and", bet_percent_of_pot);
 }
 
-
-
-function move_reactive_2(equity, game_info){
+//Modstaneren har raiset. 
+function move_reactive2(equity, game_info) {	
 	let EV_raise = 0;
 	let EV_call = 0;
 	let rounds_left = 0;
 	let EV_fold = 0;
 	let initial_bet = game_info.player_move.amount;
-
-	rounds_left = find_rounds_left(game_info.table_cards.length); 		//Virker
-	EV_call     = equity * call_winnings(rounds_left, game_info) - (1-equity) * opponent_bet(rounds_left, game_info);
+	let initial_pot = game_info.pot - initial_bet;
+	
+	EV_call     = equity * (initial_bet + initial_pot) - (1-equity) * initial_bet;
 	EV_fold     = 0;
 
-	return EV_call > EV_fold ? { ai_move: "call", amount: initial_bet} : { ai_move: "fold", amount: 0 };	
+	return EV_call > EV_fold ? { ai_move: "call", amount: initial_bet} : { ai_move: "fold", amount: 0 };
 }
+
 
 //Modstaneren har raiset. 
 function move_reactive(equity, game_info) {	
