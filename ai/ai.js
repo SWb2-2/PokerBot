@@ -34,14 +34,14 @@ function ai(game_info, player_data, data_preflop, data_postflop, data) {
 	equity = equity.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high) / 100;
 
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
-	ai_move = determine_move(equity, current_round, player_data, game_info);
+	ai_move = determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data);
 	//add_move_to_history(ai_move, move_history);
 
 	return ai_move;
 }
 
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
-function determine_move(equity, player_data, game_info) {
+function determine_move(equity, current_round, player_data, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
 
 	move_type = determine_move_type(game_info.player_move.move);
@@ -49,7 +49,14 @@ function determine_move(equity, player_data, game_info) {
 	if (move_type = "reactive") {
 		return move_reactive(equity, game_info);
 	} else {
-		return move_proactive(equity, player_data, game_info);
+		let relevant_data; 
+		if(current_round == "preflop") {
+			relevant_data = data_preflop; 
+		} else {
+			relevant_data = data_postflop; 
+		}
+
+		return move_proactive(equity, relevant_data, game_info);
 	}
 }
 
