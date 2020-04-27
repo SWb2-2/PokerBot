@@ -20,9 +20,12 @@ const range_func = require("./ai_util/range");
 //output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
 function ai(game_info, data_preflop, data_postflop, data) {
+	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	console.log(game_info)
 
-	console.log(game_info, data_preflop, data_postflop, data)
-
+	for(let i = 0; i < 10; i+=0.1) {
+		console.log(Math.ceil((i+0.0001)*10)/10);
+	}
 
 
 	let ai_move;
@@ -108,10 +111,12 @@ function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
 function determine_move(equity, current_round, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
-
+	console.log("111, determinemove!!!!!!!!!!!!\n\n\n\n\n\n\n\n");
+	console.log(game_info.player_move.move, "Hej");
 	move_type = determine_move_type(game_info.player_move.move);
-
-	if (move_type = "reactive") {
+	console.log(move_type, "movetype")
+	if (move_type == "reactive") {
+		console.log(move_type, "reactive");
 		return move_reactive(equity, game_info);
 	} else {
 		let relevant_data; 
@@ -120,7 +125,7 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 		} else {
 			relevant_data = data_postflop; 
 		}
-
+		console.log("123, REACTIVE!!!!!!!!!!!!\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n	 \n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\n");
 		return move_proactive(equity, relevant_data, game_info);
 	}
 }
@@ -315,6 +320,7 @@ function do_calculated_bluff(ai_hand, table_cards, range) {
 
 }
 function determine_move_type(move) {
+	console.log(move, "321");
 	switch(move) {
 		case "check": case "call": return "proactive";
 		case "raise": return "reactive";

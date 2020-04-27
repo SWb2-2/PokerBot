@@ -25,6 +25,8 @@ let ai_player = new Player(200, "robot");
 let data_preflop = new Data;
 let data_postflop = new Data;
 let data = new Data;
+let player_info = {move: "", amount: 0};
+
 
 app.use(express.static("website"));
 app.use(express.json({limit:"1mb"}));
@@ -40,9 +42,11 @@ app.post('/balance', (req, res) => {
 
 //The player makes a move, and it will be stored. 
 app.post('/player_move', (req, res) => {
-    human_player.player_move.move = req.body.move;
-    human_player.player_move.amount = Number(req.body.amount);
+    player_info.move = human_player.player_move.move = req.body.move;
+    player_info.amount = human_player.player_move.amount = Number(req.body.amount);
 
+
+    console.log(human_player, "45");
     if(dealer.table_cards.length < 3) {
         store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop);
     } else {
@@ -68,13 +72,12 @@ app.get('/player_object', (req, res) => {
 //Calls the ai, procces the given move, and sends it back. 
 app.get('/ai_move', (req, res) => {
     res.statusCode = 200;
-    ai_player.player_move.amount = 5;
-    ai_player.player_move.move = "raise";
 
     game_info.ai_hand = ai_player.hand;
     game_info.table_cards = dealer.table_cards;
     game_info.pot = dealer.pot;
-    game_info.player_move = human_player.player_move;
+    game_info.player_move.move = player_info.move;
+    game_info.player_move.amount = player_info.amount;
     game_info.bluff = bluff; 
     
     let k = ai.ai(game_info, data_preflop, data_postflop, data);
@@ -82,8 +85,6 @@ app.get('/ai_move', (req, res) => {
     ai_player.player_move.move = k.ai_move;
     ai_player.player_move.amount = k.amount;
 
-		console.log(ai_player.player_move, "85 SDFJSEFK SEHJFNSKEMSLEIFJJJ\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    
     
     if(dealer.table_cards.length < 3) {
         store.store_ai_move(ai_player.player_move.move, data_preflop);
