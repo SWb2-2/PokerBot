@@ -39,7 +39,7 @@ const arr_o_suit = [ undefined,
                     ]
 
 
-calculate_preflop();
+// calculate_preflop();
 
 // console.log(equity_range([new Card(4,2), new Card(2,2)], 100000,[], 30, 100));
 
