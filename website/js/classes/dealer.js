@@ -5,7 +5,7 @@ module.exports = class Dealer {
         this.deck_cards = [];
         this.table_cards = [];
         this.pot = 0;
-        this.bb = 0; 
+        this.bb = {bb_size: 0, set_flag: false}; 
     }
 
     create_deck_of_cards() {
@@ -132,7 +132,8 @@ module.exports = class Dealer {
     }
     
     create_blind_amount(balance) {
-        this.bb = Math.ceil((balance / 50) - 0.001);
+        this.bb.bb_size = Math.ceil((balance / 50) - 0.001);
+        this.bb.set_flag = true; 
     }
     
     get_winner(player1, player2){

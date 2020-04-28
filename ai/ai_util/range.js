@@ -7,7 +7,7 @@ const Dealer = require("../../website/js/classes/dealer");
 // and their current move
 function determine_range(data, player_move, pot_size, first) {
 
-    if(data.total_moves < 15) {
+    if(data.total_moves < 50) {
     console.log("I range");
         if(player_move.move == "check") {
     console.log("I check");

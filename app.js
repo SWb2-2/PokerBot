@@ -13,6 +13,7 @@ let game_info = {
     ai_hand: [],
 	table_cards: [],
     pot: 0,
+    bb_size: 0,
     player_move: { move: "check", amount: 13 },
 	bluff: true
 }
@@ -78,7 +79,9 @@ app.get('/ai_move', (req, res) => {
     game_info.player_move.move = player_info.move;
     game_info.player_move.amount = player_info.amount;
     game_info.bluff = bluff; 
-    
+    game_info.bb_size = dealer.bb.bb_size; 
+    console.log(dealer.bb)
+    console.log(game_info.bb_size)
     let k = ai.ai(game_info, data_preflop, data_postflop, data);
     
     ai_player.player_move.move = k.ai_move;

@@ -23,6 +23,8 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	// console.log(game_info)
 
+
+
 	// for(let i = 0; i < 10; i+=0.1) {
 	// 	console.log(Math.ceil((i+0.0001)*10)/10);
 	// }
@@ -39,7 +41,14 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	range = range_func.determine_range(data, game_info.player_move, game_info.pot, true);					//Check op på 
 	console.log(range, "Rankge");
 	let equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high);
-	console.log(equity, "38 equity");
+	console.log(equity.draw_and_winrate, "38 equity");
+
+	console.log(game_info.pot, game_info.bb_size);
+	if(game_info.pot < game_info.bb_size*2 && game_info.table_cards.length == 0) {
+		game_info.player_move.move = "raise"; 
+		game_info.player_move.amount = game_info.bb_size / 2; 
+	}
+
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 	//add_move_to_history(ai_move, move_history);
@@ -127,36 +136,59 @@ function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
 function determine_move(equity, current_round, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
-	console.log("111, determinemove!!!!!!!!!!!!\n");
-	move_type = determine_move_type(game_info.player_move.move);
-	if (move_type == "reactive") {
-		console.log(move_type, "reactive");
-		return move_reactive(equity, game_info);
+	let relevant_data; 
+
+	if(current_round == "preflop") {
+		relevant_data = data_preflop; 
 	} else {
-		let relevant_data; 
-		if(current_round == "preflop") {
-			relevant_data = data_preflop; 
-		} else {
-			relevant_data = data_postflop; 
-		}
-		console.log("123, REACTIVE!!!!!!!!!!!!\n");
+		relevant_data = data_postflop; 
+	} 
+
+	move_type = determine_move_type(game_info.player_move.move);
+
+	if (move_type == "reactive") {
+		return move_reactive(equity, game_info, relevant_data);
+	} else {
+
 		return move_proactive(equity, relevant_data, game_info);
 	}
 }
 
 
 //Modstaneren har raiset. 
-function move_reactive(equity, game_info) {	
+function move_reactive(equity, game_info, data) {	
 	let EV_raise = 0;
 	let EV_call = 0;
 	let rounds_left = 0;
 	let EV_fold = 0;
 	let initial_bet = game_info.player_move.amount;
 
+	let new_pot = game_info.pot; 
+	let raise_ratio = game_info.player_move.amount / (game_info.pot - game_info.player_move.amount);
+	let expected_call = game_info.player_move.amount; 
+	let new_raise = game_info.player_move.amount; 
+
 	rounds_left = find_rounds_left(game_info.table_cards.length); 		//Virker
-	equity      = equity;
-	EV_call     = (equity * call_winnings(rounds_left, game_info) )- ( (1-equity) * call_losses(rounds_left, game_info) );
+
+	for(let i = 0; i < rounds_left; i++) {
+		new_pot += new_raise; 				//Vores call af potten 
+
+		new_raise = new_pot * raise_ratio; 	//hans nye raise. 
+
+		new_pot += new_raise; 				//Hans raise til potten. 
+
+		expected_call += new_raise; 
+	}
+
+	EV_call = (equity * (new_pot-(expected_call/2))) - ((1-equity) * expected_call);
+	// EV_call     = (equity * call_winnings(rounds_left, game_info) )- ( (1-equity) * call_losses(rounds_left, game_info) );
 	EV_fold     = 0;
+
+	// if(equity > 75) {
+	// 	let best_raise_info = find_max_EV_raise(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity)
+
+	// }
+
 
 	return EV_call > EV_fold ? { ai_move: "call", amount: initial_bet} : { ai_move: "fold", amount: 0 };
 }
