@@ -15,7 +15,8 @@ let game_info = {
     pot: 0,
     bb_size: 0,
     player_move: { move: "check", amount: 13 },
-	bluff: true
+    bluff: true,
+    ai_balance: 0
 }
 
 let bluff = false;
@@ -80,6 +81,8 @@ app.get('/ai_move', (req, res) => {
     game_info.player_move.amount = player_info.amount;
     game_info.bluff = bluff; 
     game_info.bb_size = dealer.bb.bb_size; 
+    game_info.ai_balance = ai_player.balance;
+    
     console.log(dealer.bb)
     console.log(game_info.bb_size)
     let k = ai.ai(game_info, data_preflop, data_postflop, data);
