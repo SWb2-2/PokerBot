@@ -77,7 +77,7 @@ function determine_winner(player1, player2){
 				winner = player2.name;
 				break;
             }
-        }
+		}
 	}
 
 	let best_hand1 = hand_info1.best_hands.length - 1; 
