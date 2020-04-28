@@ -39,8 +39,9 @@ const arr_o_suit = [ undefined,
                     ]
 
 
+calculate_preflop();
 
-// console.log(equity_range([new Card(14,2), new Card(14,3)], 100000,[], 30, 40));
+// console.log(equity_range([new Card(4,2), new Card(2,2)], 100000,[], 30, 100));
 
 //Sorts player's hand using insertion sort
 //First sort the rank, and then the suit
@@ -239,17 +240,17 @@ function calculate_preflop() {
     for(let i = 2; i <= 14; i++) {
         for(let k = i; k <= 14; k++) {
             if(k != i) {
-                let current_winner = equity_range([new Card(i, 0), new Card(k, 0)], 10);
+                let current_winner = equity_range([new Card(i, 0), new Card(k, 0)], 2000000);
                 result_suit.push({card_1: i, card_2: k, w_r: current_winner.draw_and_winrate});
             }
         }
     }
-    console.log("\n\n", result_suit, "\n\n");
+    console.log("\n\n SUIT WINRATE", result_suit, "\n\n");
     
     //Find pair and off suit winrate 
     for(let i = 2; i <= 14; i++) {
         for(let k = i; k <= 14; k++) {
-            let current_winner = equity_range([new Card(i, 0), new Card(k, 0)], 1000000);
+            let current_winner = equity_range([new Card(i, 0), new Card(k, 1)], 2000000);
             if(k == i) {
                 result_pair.push({rank: i, w_r: current_winner.draw_and_winrate});
             } else {
@@ -257,7 +258,7 @@ function calculate_preflop() {
             }
         }
     }
-    console.log("\n\n", result_off_suit, "\n\n", result_pair);
+    console.log("\n\nOFF SUIT WINRATE", result_off_suit, "\n\nPAIRS", result_pair);
 }
 
 module.exports.calculate_preflop = calculate_preflop;
