@@ -75,7 +75,7 @@ const arr_o_suit = /*00*/[ undefined,
                    /*14*/ [undefined, undefined, 55.41, 56.31, 57.11, 58.01, 58.01, 59.08, 60.12, 61.23, 63.53, 64.53, 65.54, 66.67, 85.54]
                     ]
 
-calculate_preflop();
+// calculate_preflop();
 
 // console.log(equity_range([new Card(4,2), new Card(2,2)], 100000,[], 30, 100));
 
