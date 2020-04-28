@@ -76,17 +76,18 @@ function ai(game_info, data_preflop, data_postflop, data) {
 }
 
 function set_final_amount(ai_move) {
-	let temp_storage = ai_move.amount;
-	let k = 3.2495384204857342980354
-	k.toFixed(3)
-	console.log(k);
-	temp_storage.toFixed(2);
-	console.log(temp_storage);
-	ai_move.amount = Number(temp_storage);
-	ai_move.amount.toFixed(2);
-	console.log(ai_move.amount);
+	//let temp_storage = ai_move.amount;
+	//let k = 3.2495384204857342980354
+	//k.toFixed(3)
+	//console.log(k);
+	//temp_storage.toFixed(2);
+	//console.log(temp_storage);
+	//ai_move.amount = Number(temp_storage);
+	//ai_move.amount.toFixed(2);
+
 	 
-	return Math.ceil(Math.ceil((ai_move.amount * 10)) / 10);
+	ai_move.amount = Math.ceil(Math.ceil((ai_move.amount * 10)) / 10);
+	console.log(ai_move.amount);
 }
 
 

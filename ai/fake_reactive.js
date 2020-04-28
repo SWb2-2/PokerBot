@@ -7,12 +7,43 @@ game_info = {
     ai_current_bet: 3,
     player_move: { move: "raise", amount: 99},
 }
+test1();
 
-rounds_left = find_rounds_left(game_info.table_cards.length);
+function test2(){
+
+}
+
+function test1(){
+	rounds_left = 3
+	new_pot = 110;
+	new_raise = 30;
+	expected_call = new_raise;
+	raise_ratio = new_raise / (new_pot - new_raise);
+	equity = 0.34;
+	for(equity = 0.2; equity < 0.90; equity += 0.05){
+		for(let i = 0; i < rounds_left; i++) {
+			//console.log(new_raise);
+			new_pot += new_raise; 				//Vores call af potten 
+
+			//new_raise = new_pot * raise_ratio; 	//hans nye raise. 
+			//console.log(new_raise);
+			new_pot += new_raise; 				//Hans nye raise til potten. 
+
+			expected_call += new_raise; 
+		}
+		final_win_pot = new_pot + new_raise; //størrelsen af potten med vores sidste bet; den endelige præmie
+		winnings = final_win_pot - expected_call; //hvor meget af potten der er profit (uden vores egne bets) – stemmer overens med expected value
+		EV_call  = equity*(winnings) - (1-equity)*expected_call;
+		console.log("call",expected_call,"newpot", new_pot, "finalpot",final_win_pot, "winnings",winnings, "evcall",EV_call, "ratio",raise_ratio, "equity", equity);
+	}
+}
+
+
+/*rounds_left = find_rounds_left(game_info.table_cards.length);
 
 //for(i = 1; i < 99; i++){
 //	game_info.player_move.amount = i; 
-//	console.log(move_reactive(equity, game_info), /*move_reactive_2(equity, game_info),*/ /*equity,*/ opponent_bet(rounds_left, game_info) / pot_pre_bet(rounds_left, game_info));
+//	console.log(move_reactive(equity, game_info), /*move_reactive_2(equity, game_info), equity, opponent_bet(rounds_left, game_info) / pot_pre_bet(rounds_left, game_info));
 	//console.log(equity * call_winnings(rounds_left, game_info) - (1-equity) * call_losses(rounds_left, game_info),equity);
 //}
 
@@ -21,7 +52,7 @@ for (let equity = 0.34; equity < 0.87; equity += 0.01){
 	let initial_pot = game_info.pot - initial_bet;
 	let bet_percent_of_pot = initial_bet / initial_pot;
 	console.log(move_reactive(equity, game_info), move_reactive2(equity, game_info), equity, "and", bet_percent_of_pot);
-}
+}*/
 
 //Modstaneren har raiset. 
 function move_reactive2(equity, game_info) {	
