@@ -5,6 +5,7 @@ module.exports = class Dealer {
         this.deck_cards = [];
         this.table_cards = [];
         this.pot = 0;
+        this.bb = 0; 
     }
 
     create_deck_of_cards() {
@@ -128,7 +129,11 @@ module.exports = class Dealer {
             player2.balance -= bb;
             this.pot = bb + sb;
         }
-    }      
+    }
+    
+    create_blind_amount(balance) {
+        this.bb = Math.ceil((balance / 50) - 0.001);
+    }
     
     get_winner(player1, player2){
         return determine_winner.determine_winner.bind(this)(player1, player2);

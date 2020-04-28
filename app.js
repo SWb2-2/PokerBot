@@ -46,7 +46,6 @@ app.post('/player_move', (req, res) => {
     player_info.amount = human_player.player_move.amount = Number(req.body.amount);
 
 
-    console.log(human_player, "45");
     if(dealer.table_cards.length < 3) {
         store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop);
     } else {
@@ -56,7 +55,7 @@ app.post('/player_move', (req, res) => {
 
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
-    console.log("player move",response);
+    // console.log("player move",response);
     res.json(JSON.stringify(response));
     res.end("request completed");
 });
@@ -93,6 +92,8 @@ app.get('/ai_move', (req, res) => {
     }
     store.store_ai_move(ai_player.player_move.move, data);
 
+    Math.round(ai_player.amount * 10) / 10;
+
     let response = round.process_move(ai_player, human_player, dealer);
     console.log("ai move: ", response);
     res.json(JSON.stringify(response));
@@ -103,7 +104,7 @@ app.get('/ai_move', (req, res) => {
 app.get('/table_update', (req, res) => {
     let response = round.next_round(human_player, ai_player, dealer);
     res.statusCode = 200;
-    console.log("table: ", response);
+    // console.log("table: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
 });
@@ -114,7 +115,7 @@ app.get('/winner', (req, res) => {
     data_postflop.total_preflop += 1;
     data.total_preflop += 1;
     let response = round.showdown(human_player, ai_player, dealer);
-    console.log("winner ", response);
+    // console.log("winner ", response);
     res.statusCode = 200;
     res.json(JSON.stringify(response));
     res.end("request accepted");

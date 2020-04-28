@@ -219,8 +219,7 @@ function equity_range(hand, numb_of_sim, table, range_low, range_high) {
     //Calculate the winrates, and return. 
     let total = win + lose + draw;
     let winrate = (win / total) * 100;
-    let draw_and_winrate = ((win + draw) / total) * 100;
-console.log("\n\n\n\nWIN", win, lose, draw, draw_and_winrate);
+    let draw_and_winrate = ((win + (draw*0.5)) / total) * 100;
     return {win: win, 
             lose: lose, 
             draw: draw, 

@@ -21,11 +21,11 @@ const range_func = require("./ai_util/range");
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
 function ai(game_info, data_preflop, data_postflop, data) {
 	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	console.log(game_info)
+	// console.log(game_info)
 
-	for(let i = 0; i < 10; i+=0.1) {
-		console.log(Math.ceil((i+0.0001)*10)/10);
-	}
+	// for(let i = 0; i < 10; i+=0.1) {
+	// 	console.log(Math.ceil((i+0.0001)*10)/10);
+	// }
 
 
 	let ai_move;
@@ -36,14 +36,16 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_info.table_cards.length);
-	range = range_func.determine_range(data_preflop, game_info);					//Check op på 
+	range = range_func.determine_range(data, game_info.player_move, game_info.pot, true);					//Check op på 
+	console.log(range, "Rankge");
 	let equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_low, range.range_high);
-	console.log(equity, "38 equity \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	console.log(equity, "38 equity");
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 	//add_move_to_history(ai_move, move_history);
 	
-	console.log(ai_move, "43 SDFJSEFK SEHJFNSKEMSLEIFJJJ\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+	set_final_amount(ai_move);
 	return ai_move;
 
 	if(game_info.bluff == false) {
@@ -62,6 +64,20 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 		return ai_move;
 	}
+}
+
+function set_final_amount(ai_move) {
+	let temp_storage = ai_move.amount;
+	let k = 3.2495384204857342980354
+	k.toFixed(3)
+	console.log(k);
+	temp_storage.toFixed(2);
+	console.log(temp_storage);
+	ai_move.amount = Number(temp_storage);
+	ai_move.amount.toFixed(2);
+	console.log(ai_move.amount);
+	 
+	return Math.ceil(Math.ceil((ai_move.amount * 10)) / 10);
 }
 
 
@@ -111,10 +127,8 @@ function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
 function determine_move(equity, current_round, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
-	console.log("111, determinemove!!!!!!!!!!!!\n\n\n\n\n\n\n\n");
-	console.log(game_info.player_move.move, "Hej");
+	console.log("111, determinemove!!!!!!!!!!!!\n");
 	move_type = determine_move_type(game_info.player_move.move);
-	console.log(move_type, "movetype")
 	if (move_type == "reactive") {
 		console.log(move_type, "reactive");
 		return move_reactive(equity, game_info);
@@ -125,7 +139,7 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 		} else {
 			relevant_data = data_postflop; 
 		}
-		console.log("123, REACTIVE!!!!!!!!!!!!\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n	 \n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\nn\n\n\n\n\n\n\n");
+		console.log("123, REACTIVE!!!!!!!!!!!!\n");
 		return move_proactive(equity, relevant_data, game_info);
 	}
 }
@@ -324,7 +338,7 @@ function determine_move_type(move) {
 	switch(move) {
 		case "check": case "call": return "proactive";
 		case "raise": return "reactive";
-		default: console.log("error: player move undefined");
+		default: console.log("error: player move undefined", move);
 	}
 }
 
