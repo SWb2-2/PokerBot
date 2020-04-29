@@ -20,7 +20,15 @@ const range_func = require("./ai_util/range");
 //output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
 //Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	//console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	// console.log(game_info)
+
+
+
+	// for(let i = 0; i < 10; i+=0.1) {
+	// 	console.log(Math.ceil((i+0.0001)*10)/10);
+	// }
+
 
 	let ai_move;
 	let current_round = "";
@@ -45,7 +53,6 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
-
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
@@ -186,7 +193,6 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 	if (move_type == "reactive") {
 		return move_reactive(equity, game_info, relevant_data);
 	} else {
-
 		return move_proactive(equity, relevant_data, game_info);
 	}
 }

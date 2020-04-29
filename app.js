@@ -9,16 +9,6 @@ const ai = require("./ai/ai.js");
 const port = 3000;
 const app = express();
 
-let game_info = {
-    ai_hand: [],
-	table_cards: [],
-    pot: 0,
-    bb_size: 0,
-    player_move: { move: "check", amount: 13 },
-    bluff: true,
-    ai_balance: 0
-}
-
 let bluff = false;
 
 let dealer = new dealer_module;
@@ -29,6 +19,15 @@ let data_postflop = new Data;
 let data = new Data;
 let player_info = {move: "", amount: 0};
 
+let game_info = {
+    ai_hand: [],
+	table_cards: [],
+    pot: 0,
+    pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
+    bb_size: 0,
+    player_move: { move: "check", amount: 13 },
+	bluff: true
+}
 
 app.use(express.static("website"));
 app.use(express.json({limit:"1mb"}));
@@ -46,10 +45,9 @@ app.post('/balance', (req, res) => {
 app.post('/player_move', (req, res) => {
     player_info.move = human_player.player_move.move = req.body.move;
     player_info.amount = human_player.player_move.amount = Number(req.body.amount);
-
-
+    game_info.pot_before_player = dealer.pot;
     if(dealer.table_cards.length < 3) {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop);
+        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop, true);
     } else {
         store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop);
     } 
@@ -93,6 +91,7 @@ app.get('/ai_move', (req, res) => {
     
     if(dealer.table_cards.length < 3) {
         store.store_ai_move(ai_player.player_move.move, data_preflop);
+        data.hands_played_percentage = data_preflop.hands_played_percentage;
     } else {
         store.store_ai_move(ai_player.player_move.move, data_postflop);
     }
@@ -122,6 +121,7 @@ app.get('/winner', (req, res) => {
     data.total_preflop += 1;
     let response = round.showdown(human_player, ai_player, dealer);
     // console.log("winner ", response);
+    game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;
     res.json(JSON.stringify(response));
     res.end("request accepted");
