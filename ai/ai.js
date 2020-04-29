@@ -37,7 +37,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_info.table_cards.length);
-	range = range_func.determine_range(data, game_info.player_move, game_info.pot, true);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, true);					//Check op på 
 	console.log(range, "Rankge");
 
 	range.range_Low = 55;
@@ -49,23 +49,24 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	console.log(equity.draw_and_winrate, "38 equity");
 
 	console.log(game_info.pot, game_info.bb_size);
-	if(game_info.pot < game_info.bb_size*2 && game_info.table_cards.length == 0) {
+	//Skal se indbetaling af big blind (når den er small blind) som et raise fra modstanderen, så den ikke ser indbetalingen som optional
+	if(game_info.pot < 2*game_info.bb_size && game_info.table_cards.length == 0) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
-
+	//Korregere for lange decimaler
 	set_final_amount(ai_move);
-	confim_bet_size(ai_move, game_info);
+	confirm_bet_size(ai_move, game_info);
 	return ai_move;
 
 	// game_info.bluff = true; 
 	// if(game_info.bluff == false) {		//No bluffing osv. 
 
 	// 	set_final_amount(ai_move);
-	// 	confim_bet_size(ai_move, game_info);
+	// 	confirm_bet_size(ai_move, game_info);
 	// 	return ai_move;
 
 	// } else if(game_info.bluff == true && (ai_move.ai_move == ai_move.ai_move == "fold" || ai_move.ai_move == "check") ){
@@ -95,11 +96,11 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 
 	// 	set_final_amount(ai_move);
-	// 	confim_bet_size(ai_move, game_info);
+	// 	confirm_bet_size(ai_move, game_info);
 	// 	return ai_move;
 	// }
 	// set_final_amount(ai_move);
-	// confim_bet_size(ai_move, game_info);
+	// confirm_bet_size(ai_move, game_info);
 	// return ai_move;
 }
 
@@ -263,6 +264,8 @@ function calc_EV_check(equity, pot) {
 	return equity * pot;
 }
 
+//Output: det raise der yder mest expected value; et objekt der indholder EV og raise amount
+//Tjekker forskellige bet sizes, og vælger den bet size der yder højst EV
 function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity) {
 	let raise;
 	let adjusted_call_chance; 
@@ -277,7 +280,6 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 		call_chance = 0.30;
 	}
 	
-
 	for (let i = 0; i < 30; i += 0.2) {  // 
 		bet_percent_of_pot = 0.1 * i;
 		raise = bet_percent_of_pot * pot;
@@ -292,7 +294,8 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 	}
 	return {EV: max_EV_raise, amount: ai_raise};
 }
-
+//Output: EV af et raise med et givet bet size, og givet modstander chance for at call
+//Udregner EV ud fra de 3 scenarier der kan ske ved et raise: de folder, de caller og vi vinder, de caller og de vinder
 function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
 	// let low = 0.5, high = 1.5
 	low = high = 1; 
@@ -303,7 +306,7 @@ function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
 }
 
 
-
+//Output: justeret call chance af modstanderen, der tager højde for bottens bet size
 function adjust_call_chance(call_chance, bet_percent_of_pot) {
 	const a = 0.1;
 	const b = 0.03;
@@ -340,20 +343,21 @@ function do_pure_bluff(ai_move, game_data) {
 	//no bluff
 }
 
-
-function confim_bet_size(ai_move, game_info) {
+//Hvis botten better mere end sin balanace, så går den all in
+function confirm_bet_size(ai_move, game_info) {
 
 	if(game_info.ai_balance < ai_move.amount) {
 		ai_move.amount = game_info.ai_balance;
 	}
 }
 
+//Afrunder bet til 1 decimal
 function set_final_amount(ai_move) {
 	ai_move.amount = Math.ceil(Math.ceil((ai_move.amount * 10)) / 10);
 	console.log(ai_move.amount);
 }
 
-
+//Output: hvilket type træk botten skal tage, baseret på modstanderens træk
 function determine_move_type(move) {
 	console.log(move, "321");
 	switch(move) {
