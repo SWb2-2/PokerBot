@@ -35,7 +35,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	range.range_Low = 55;
 	range.range_high = 100;
 
-	let equity = monte_carlo.equity_range(game_info.ai_hand, 10000, game_info.table_cards, range.range_Low, range.range_high);
+	let equity = monte_carlo.equity_range(game_info.ai_hand, 141111, game_info.table_cards, range.range_Low, range.range_high);
 	
 	
 	console.log(equity.draw_and_winrate, "38 equity");
