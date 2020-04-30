@@ -5,6 +5,9 @@ function pre_flop(human_player, ai_player, dealer) {
     dealer.create_deck_of_cards();
     dealer.shuffle_array();
     dealer.make_blind(human_player, ai_player);
+    if(dealer.bb.set_flag == false) {
+        dealer.create_blind_amount(human_player.balance);
+    }
     dealer.pay_blinds(human_player, ai_player, 10, 5);
     dealer.give_hand_cards(human_player, ai_player);
 

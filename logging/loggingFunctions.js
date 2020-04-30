@@ -16,7 +16,7 @@ function logMove(playerName, player_action, table, bluff) {
     if(bluff === false) {
         fs.appendFileSync("./logFiles/history_without_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amount}, Round: ${table.length}`);
     } else {
-        fs.appendFileSync("./logFiles/history_with_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amout}, Round: ${table.length}, Bluff: ${player_action.bluff}`);
+        fs.appendFileSync("./logFiles/history_with_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amount}, Round: ${table.length}, Bluff: ${player_action.bluff}`);
     }
 }
 
@@ -26,17 +26,17 @@ function logMove(playerName, player_action, table, bluff) {
 function logWinnings(response, bluff, bigBlind, current_bet) {
     let array = [];
     if(bluff === false) {
-        array = fs.readFileSync("./logFiles/averageMBB.txt");
+        array = fs.readFileSync("./logFiles/averageBB.txt");
     } else {
-        array = fs.readFileSync("./logFiles/averageMBB_bluff.txt");
+        array = fs.readFileSync("./logFiles/averageBB_bluff.txt");
     }
-    
     
     let rep = findNumber(array.toString(), 8);
     let rep2 = findNumber(array.toString(), rep.endOfNumber + 16);
     
     let bb_won = rep.number;
     let hands_played = rep2.number;
+    
     if(response.winner === "robot") {   
         bb_won = bb_won + ((response.pot - current_bet) / bigBlind);
 
@@ -50,11 +50,11 @@ function logWinnings(response, bluff, bigBlind, current_bet) {
     let mmb = (bb_won / hands_played);
     
     if(bluff === false) {
-        fs.appendFileSync('./logFiles/history_without_bluff.txt', `\nMMB: ${mmb}`);
-        fs.writeFileSync('./logFiles/averageMBB.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} /`);
+        fs.appendFileSync('./logFiles/history_without_bluff.txt', ` \n\nWinner: ${response.winner}\nBB/H: ${mmb}`);
+        fs.writeFileSync('./logFiles/averageBB.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} /`);
     } else {
-        fs.appendFileSync('./logFiles/history_with_bluff.txt', `\nMMB: ${mmb}`);
-        fs.writeFileSync('./logFiles/averageMBB_bluff.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} /`);
+        fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nWinner: ${response.winner} \nBB/H: ${mmb}`);
+        fs.writeFileSync('./logFiles/averageBB_bluff.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} /`);
     }
 }
 
