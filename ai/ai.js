@@ -117,9 +117,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
 		ai_move.amount = ((Math.random() / 2) + 0.5) * game_info.pot;
-		return "true";
+		return true;
 	}
-	return "false"; 
+	return false; 
 
 
 	// if(Math.random()*equity > 10) {
