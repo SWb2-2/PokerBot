@@ -113,7 +113,7 @@ function do_calculated_bluff(ai_move, equity, game_info, data) {
 			return true; 
 		}
 	} else if(ai_move.ai_move == "call") {
-		EV_call = 0; 
+		EV_call = calc_EV_call(equity, game_info); 
 
 		if(bluff.EV < EV_call) {
 			ai_move.ai_move = "call"
@@ -140,7 +140,7 @@ function do_calculated_bluff(ai_move, equity, game_info, data) {
 			return true; 
 		}
 	}
-	return error; 
+	return console.log("error: could not read ai move"); 
 }
 
 
@@ -202,9 +202,6 @@ function adjust_call_chance_bluff(call_chance, bet_percent_of_pot) {
 }
 
 
-
-
-
 //Want to know if its a reactive or proactive move already, else it's confusing why it first gets accounted for later
 function determine_move(equity, current_round, game_info, data_preflop, data_postflop, data) {
 	let move_type = "";
@@ -228,44 +225,23 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 
 //Modstaneren har raiset. 
 function move_reactive(equity, game_info, data) {	
-	let EV_raise = 0;
 	let EV_call = 0;
-	let rounds_left = 0;
 	let EV_fold = 0;
 	let initial_bet = game_info.player_move.amount;
-	let best_raise_info 
-	let new_pot = game_info.pot; 
-	let raise_ratio = game_info.player_move.amount / (game_info.pot - game_info.player_move.amount);
-	let expected_call = game_info.player_move.amount; 
-	let new_raise = game_info.player_move.amount; 
+	let best_raise_info = {EV: -Infinity, amount: 0};
 
-	rounds_left = find_rounds_left(game_info.table_cards.length); 		//Virker
-
-
-	for(let i = 0; i < rounds_left; i++) {
-		new_pot += new_raise; 				//Vores call af potten 
-		new_raise = new_pot * raise_ratio; 	//hans nye raise. 
-		new_pot += new_raise; 				//Hans raise til potten. 
-		expected_call += new_raise; 
-	}
-	new_pot += new_raise; 
-
-	EV_call = (equity * (new_pot-(expected_call))) - ((1-equity) * expected_call);
-	EV_fold     = 0;
+	EV_call = calc_EV_call(equity, game_info);
+	EV_fold = 0;
 
 	if(equity > 0.6) {
 
 		best_raise_info = find_max_EV_raise(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
-
 
 		if(best_raise_info.amount > initial_bet && best_raise_info.EV > EV_call && best_raise_info.EV > 0) {
 
 			return { ai_move: "raise", amount: best_raise_info.amount};
 		}
 	}
-
-
-
 	return EV_call > EV_fold ? { ai_move: "call", amount: initial_bet} : { ai_move: "fold", amount: 0 };
 }
 
@@ -289,6 +265,27 @@ function move_proactive(equity, player_data, game_info) {
 	// console.log(max_EV_raise, "EV raise"); 
 
 	return max_EV_raise > EV_check ? { ai_move: "raise", amount: ai_raise } : { ai_move: "check", amount: 0 };
+}
+
+function calc_EV_call(equity, game_info){
+
+	let new_pot = game_info.pot; 
+	let raise_ratio = game_info.player_move.amount / (game_info.pot - game_info.player_move.amount);
+	let expected_call = game_info.player_move.amount; 
+	let new_raise = game_info.player_move.amount;
+	let rounds_left = find_rounds_left(game_info.table_cards.length); 
+
+	
+	for(let i = 0; i < rounds_left; i++) {
+		new_pot += new_raise; 				//Vores call af potten 
+		new_raise = new_pot * raise_ratio; 	//hans nye raise. 
+		new_pot += new_raise; 				//Hans raise til potten. 
+		expected_call += new_raise; 
+	}
+	new_pot += new_raise;                   //vores call af hans sidste raise til potten
+
+	return (equity * (new_pot-(expected_call))) - ((1-equity) * expected_call);
+
 }
 
 function calc_EV_check(equity, pot) {
