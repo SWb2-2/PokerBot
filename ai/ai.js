@@ -23,7 +23,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	// console.log(game_info)
 
-
+	console.log(game_info.player_move, "efuiwghuaewhgiejngiheaugnawegreauignwrigjiorghreuhgieghierhger")
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
@@ -31,7 +31,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 	//Hent info der skal bruges til at bestemme træk
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, true);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot-game_info.player_move.amount, true);					//Check op på 
 	let equity = monte_carlo.equity_range(game_info.ai_hand, 141111, game_info.table_cards, range.range_Low, range.range_high);
 		console.log(equity.draw_and_winrate, "wr");
 	//Skal se indbetaling af big blind (når den er small blind) som et raise fra modstanderen, så den ikke ser indbetalingen som optional
@@ -43,47 +43,47 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
 	// Korregere for lange decimaler
-	set_final_amount(ai_move);
-	confirm_bet_size(ai_move, game_info);
-	return ai_move;
+	// set_final_amount(ai_move);
+	// confirm_bet_size(ai_move, game_info);
+	// return ai_move;
 
-	// game_info.bluff = true; 
-	// if(game_info.bluff == false) {		//No bluffing osv. 
+	game_info.bluff = true; 
+	if(game_info.bluff == false) {		//No bluffing osv. 
 
-	// 	set_final_amount(ai_move);
-	// 	confirm_bet_size(ai_move, game_info);
-	// 	return ai_move;
+		set_final_amount(ai_move);
+		confirm_bet_size(ai_move, game_info);
+		return ai_move;
 
-	// } else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
+	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
 		
-	// 	let relevant_data;
+		let relevant_data;
 		
-	// 	if(current_round == "preflop") {
-	// 		relevant_data = data_preflop; 
-	// 	} else {
-	// 		relevant_data = data_postflop; 
-	// 	} 
+		if(current_round == "preflop") {
+			relevant_data = data_preflop; 
+		} else {
+			relevant_data = data_postflop; 
+		} 
 
-	// 	if(ai_move.ai_move == "check" || ai_move.ai_move == "fold"  || ai_move.ai_move == "call") {
-	// 		if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data)) {
-	// 			ai_move.bluff = "calc bluff";
-	// 			console.log("Did a alculated bluff********************************************************************")
-	// 		}	
-	// 	}
+		if(ai_move.ai_move == "check" || ai_move.ai_move == "fold"  || ai_move.ai_move == "call") {
+			if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
+				ai_move.bluff = "calc bluff";
+				console.log("Did a alculated bluff********************************************************************")
+			}	
+		}
 
-	// 	if(ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move == "call") {
-	// 		if(do_pure_bluff_0(ai_move, game_info, relevant_data)) {
-	// 			ai_move.bluff = "pure bluff";
-	// 			console.log("Did a purebliff????????????????????????????????????????????????????????????????????")
+		if(ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move == "call") {
+			if(do_pure_bluff_0(ai_move, game_info, relevant_data)) {
+				ai_move.bluff = "pure bluff";
+				console.log("Did a purebliff????????????????????????????????????????????????????????????????????")
 				
-	// 		}
-	// 	}
+			}
+		}
 
 
-	// 	set_final_amount(ai_move);
-	// 	confirm_bet_size(ai_move, game_info);
-	// 	return ai_move;
-	// }
+		set_final_amount(ai_move);
+		confirm_bet_size(ai_move, game_info);
+		return ai_move;
+	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
 	return ai_move;
@@ -91,12 +91,95 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 
 
-function do_calculated_bluff(ai_move, equity, game_info, data) {
+function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	let EV_check = -Infinity; 
 	const EV_fold = 0; 
 	let EV_call = 0; 
+	let bluff; 
+	let raise_amount = ((Math.random() / 2) + 0.5) * game_info.pot;		// 50% til 100% af potten 
+	// let adjusted_call_chance = adjust_call_chance_bluff(data.chance_of_call_when_raised)//semi colon
+	let chance = 10; 
+	let pot_size = game_info.pot / game_info.bb_size; 
 
-	let bluff = find_max_EV_raise_bluff(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
+	if(data.total_moves < 10) {
+		return; 
+	}
+	chance += equity * 30;
+	console.log(chance, "equity"); 
+	chance += (data.chance_of_fold_when_raised) * 18; 		//Mest relevant. Burde sættes sammen med equity . 
+	console.log(chance, "their fold chance"); 
+	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
+	console.log(chance, "Their equity + percieved equity "); 
+	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
+	console.log(chance, "our raise and total moves influence"); 
+	console.log(data.ai_raise, data.ai_total_moves);
+
+	if(chance > Math.random()*100) {
+		ai_move.ai_move = "raise"; 
+		ai_move.amount = ((Math.random() / 2) + 0.5) * game_info.pot;
+		return "true";
+	}
+	return "false"; 
+
+
+	// if(Math.random()*equity > 10) {
+	// 	if(Math.random() * data.chance_of_call_when_raised > 10) {
+	// 		if(Math.random() * 8) {
+
+
+
+
+	// 		}
+	// 	}
+	// }
+
+
+	/*
+	our_raise_chance; 		//hvor ofte raiser vi normalt? 
+
+	their_perceived_equity // (range)
+	their_call_chance
+	our_equity
+	pot
+
+
+	our_raise_amount 		//Fast raise 
+
+
+
+	2-2    	selcalculated_equity = 70%  rangelow = 60, range_high 90, 
+
+	7-2		selfcalueted equity = 60%. rangelow = 60, range_high 90, 
+
+	A-K-A - 2- 7
+
+	3-9			selcalculated_equity = 10%  rangelow = 30, range_high 50, 
+
+	4-8			selcalculated_equity = 10%  rangelow = 30, range_high 50, 
+
+
+	*/
+
+
+
+
+
+
+	if(data.ai_raise > 10) {
+		bluff = calc_EV_raise_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
+	} else {
+		bluff = calc_EV_raise_bluff(0.4, game_info.pot, raise_amount, equity);
+	}
+
+	let EV_compared_to_pot = bluff / game_info.pot; 
+
+	if(EV_compared_to_pot < 0.5) {
+		return false; 
+	}
+
+	console.log(bluff, "EV RAISE");
+
+	// let bluff = find_max_EV_raise_bluff(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
 
 	//We only calcualte the EV_check, if we are alloweed to check
 	if(ai_move.ai_move == "check") {
@@ -107,8 +190,8 @@ function do_calculated_bluff(ai_move, equity, game_info, data) {
 			return false; 
 		} else {
 			ai_move.ai_move = "raise"
-			ai_move.amount = (Math.random() + 0.5) * game_info.pot;
-	console.log("Raise on check", bluff);
+			ai_move.amount = raise_amount;
+		console.log("Raise on check", bluff);
 
 			return true; 
 		}
@@ -120,9 +203,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data) {
 			return false; 
 		} else {
 			ai_move.ai_move = "raise"
-			ai_move.amount = (Math.random() + 0.5) * game_info.pot;
+			ai_move.amount = raise_amount;
 
-	console.log("Raise on call", bluff);
+		console.log("Raise on call", bluff);
 
 			return true; 
 		}
@@ -133,9 +216,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data) {
 			return false; 
 		} else {
 			ai_move.ai_move = "raise"
-			ai_move.amount = (Math.random() + 0.5) * game_info.pot;
+			ai_move.amount = raise_amount;
 
-	console.log("Raise on fold", bluff);
+			console.log("Raise on fold", bluff);
 
 			return true; 
 		}
@@ -177,17 +260,17 @@ function find_max_EV_raise_bluff(total_moves, chance_of_fold_when_raised, pot, e
 }
 
 function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
-	let low = 0.75, high = 1.25
-	high = 1;
-	low = 1; 
+	let low = 1.25, high = 0.75
+	// high = 1;
+	// low = 1; 
 
 	console.log((1 - adjusted_call_chance) * pot
 	+ ((adjusted_call_chance* high) * equity * (pot + raise))
-	- ((adjusted_call_chance* low) * (1 - equity) * (pot + raise)), "EV call chance");
+	- ((adjusted_call_chance* low) * (1 - equity) * (raise)), "EV raise");
 
-	return 	(1 - adjusted_call_chance) * pot
-        	+ ( equity * (pot + raise))
-			- ( (1 - equity) *(pot*0.7 + raise));
+	return	(1 - adjusted_call_chance) * pot
+	      	+ (adjusted_call_chance* high) * equity * (pot + raise)
+ 			- ((adjusted_call_chance* low) * (1 - equity) *(/*pot*0.7+*/  raise));
 }
 // (1 - adjusted_call_chance) * pot
 //         	+ (adjusted_call_chance* high) * equity * (pot + raise)
@@ -314,7 +397,7 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 		call_chance = 0.30;
 	}
 	
-	for (let i = 0.2; i < 30; i += 0.2) {  // 
+	for (let i = 0.2; i < 10; i += 0.2) {  // 
 		bet_percent_of_pot = 0.1 * i;
 		raise = bet_percent_of_pot * pot;
 		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
@@ -445,3 +528,5 @@ module.exports.calc_EV_raise = calc_EV_raise;
 module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
 module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
 module.exports.ai = ai; 
+
+module.exports.do_calculated_bluff = do_calculated_bluff; 
