@@ -260,13 +260,12 @@ function find_max_EV_raise_bluff(total_moves, chance_of_fold_when_raised, pot, e
 }
 
 function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
-	let low = 1.25, high = 0.75
-	// high = 1;
-	// low = 1; 
+	let low = 1.75, high = 1 / low;
+ 
 
-	console.log((1 - adjusted_call_chance) * pot
-	+ ((adjusted_call_chance* high) * equity * (pot + raise))
-	- ((adjusted_call_chance* low) * (1 - equity) * (raise)), "EV raise");
+	//console.log((1 - adjusted_call_chance) * pot
+	//+ ((adjusted_call_chance* high) * equity * (pot + raise))
+	//- ((adjusted_call_chance* low) * (1 - equity) * (raise)), "EV raise");
 
 	return	(1 - adjusted_call_chance) * pot
 	      	+ (adjusted_call_chance* high) * equity * (pot + raise)
@@ -530,3 +529,6 @@ module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff;
 module.exports.ai = ai; 
 
 module.exports.do_calculated_bluff = do_calculated_bluff; 
+module.exports.calc_EV_call = calc_EV_call;
+module.exports.calc_EV_check = calc_EV_check;
+module.exports.calc_EV_raise_bluff = calc_EV_raise_bluff;

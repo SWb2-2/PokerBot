@@ -1,3 +1,4 @@
+const ai = require("./ai");
 game_info = {
     ai_hand: [],
     table_cards: [],
@@ -7,9 +8,51 @@ game_info = {
     ai_current_bet: 3,
     player_move: { move: "raise", amount: 99},
 }
-test1();
+
+test2();
 
 function test2(){
+	adjust_comp();
+	comp_check();
+
+	function adjust_comp(){
+		let bet_percent_of_pot = 0;
+		let call_chance = 0.7;
+
+		for(bet_percent_of_pot = 0.3; bet_percent_of_pot < 1.2; bet_percent_of_pot +=0.05){
+			console.log(ai.adjust_call_chance(call_chance, bet_percent_of_pot), bet_percent_of_pot);
+		}
+
+
+	}
+
+	function comp_call(){
+		let call = 0;
+
+
+	}
+	//hvis dette er tilgangen, så kunne man lige så godt fortælle den at den skal raise under 55% call chance, da det er der den laver breaket
+	function comp_check(){
+		pot = 10;
+		equity = 0.45
+		let bet_percent_of_pot =  0.5;//((Math.random() / 2) + 0.5)
+		let raise_amount = 0;
+		let call_chance = 0.5;
+		let adjusted_call_chance = 0;
+		for(let equity = 0.2; equity < 0.5; equity += 0.02){
+			bet_percent_of_pot = 0.5;
+			do{
+				adjusted_call_chance = ai.adjust_call_chance(call_chance, bet_percent_of_pot);
+				bet_percent_of_pot += 0.05;
+				raise_amount = bet_percent_of_pot * pot;
+				bluff = ai.calc_EV_raise_bluff(call_chance, pot, raise_amount, equity);
+				check = ai.calc_EV_check(equity, pot);
+			} while(bluff < check && bet_percent_of_pot <= 1);
+
+			console.log("bluff:",bluff, "check:",check,"equity", equity, "bet%",bet_percent_of_pot, "call_chance", adjusted_call_chance);
+		}
+	}
+
 
 }
 
