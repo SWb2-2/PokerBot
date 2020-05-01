@@ -5,6 +5,8 @@ const Player = require("./website/js/classes/player.js");
 const Data = require("./website/js/classes/data.js");
 const store = require("./ai/storage_function.js");
 const ai = require("./ai/ai.js");
+const log_functions = require('./logging/loggingFunctions');
+const fs = require('fs');
 
 const port = 3000;
 const app = express();
@@ -26,14 +28,22 @@ let game_info = {
     pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
     bb_size: 0,
     player_move: { move: "check", amount: 13 },
-	bluff: true
+	bluff: false
 }
+
+let args = process.argv.slice(2);
+bluff = log_functions.checkCommandLine(args);
 
 app.use(express.static("website"));
 app.use(express.json({limit:"1mb"}));
 
 //Happens once, when balance is given and rediricts, to the actual game
 app.post('/balance', (req, res) => {
+    if(bluff) {
+        fs.appendFileSync('./logFiles/history_with_bluff.txt', "\n–––– NEW PLAYER ––––\n");
+    } else {
+        fs.appendFileSync('./logFiles/history_without_bluff.txt', "\n–––– NEW PLAYER ––––\n");
+    }
     human_player.balance = Number(req.body.balance);
     ai_player.balance = Number(req.body.balance);
     res.statusCode = 301;
@@ -62,6 +72,12 @@ app.post('/player_move', (req, res) => {
 
 //Preflop happens, and playercards, and blinds are send back. 
 app.get('/player_object', (req, res) => {
+    if(bluff) {
+        fs.appendFileSync("./logFiles/history_with_bluff.txt", "\nNew Game: ");
+    } else {
+        fs.appendFileSync("./logFiles/history_without_bluff.txt", "\nNew Game: ");
+    }
+    
     res.statusCode = 200;
     let player_object = round.pre_flop(human_player, ai_player, dealer); 
     res.json(JSON.stringify(player_object));
@@ -81,13 +97,12 @@ app.get('/ai_move', (req, res) => {
     game_info.bb_size = dealer.bb.bb_size; 
     game_info.ai_balance = ai_player.balance;
     
-    console.log(dealer.bb)
-    console.log(game_info.bb_size)
     let k = ai.ai(game_info, data_preflop, data_postflop, data);
     
     ai_player.player_move.move = k.ai_move;
     ai_player.player_move.amount = k.amount;
-
+    k.bluff === undefined ? ai_player.player_move.bluff = "false" : ai_player.player_move.bluff = k.bluff;
+    log_functions.logMove("AI", ai_player.player_move, dealer.table_cards, bluff);
     
     if(dealer.table_cards.length < 3) {
         store.store_ai_move(ai_player.player_move.move, data_preflop);
@@ -96,9 +111,7 @@ app.get('/ai_move', (req, res) => {
         store.store_ai_move(ai_player.player_move.move, data_postflop);
     }
     store.store_ai_move(ai_player.player_move.move, data);
-
     Math.round(ai_player.amount * 10) / 10;
-
     let response = round.process_move(ai_player, human_player, dealer);
     console.log("ai move: ", response);
     res.json(JSON.stringify(response));
@@ -119,7 +132,9 @@ app.get('/winner', (req, res) => {
     data_preflop.total_preflop += 1;
     data_postflop.total_preflop += 1;
     data.total_preflop += 1;
+
     let response = round.showdown(human_player, ai_player, dealer);
+    log_functions.logWinnings(response, bluff, dealer.bb.bb_size, ai_player.current_bet);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;

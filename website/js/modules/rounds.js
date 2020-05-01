@@ -89,7 +89,6 @@ function showdown(human_player, ai_player, dealer) {
         let winner = dealer.get_winner(human_player, ai_player);
         
         dealer.give_pot(human_player, ai_player, winner.winner);
-        dealer.pot = 0;
 
         let response = {
             player_balance: human_player.balance,
@@ -104,7 +103,6 @@ function showdown(human_player, ai_player, dealer) {
     } else {
         let winner = human_player.player_move.move === "fold" ? ai_player.name : human_player.name;
         dealer.give_pot(human_player, ai_player, winner);
-        dealer.pot = 0;
 
         let response = {
             player_balance: human_player.balance,
