@@ -325,7 +325,7 @@ function move_reactive(equity, game_info, data) {
 			return { ai_move: "raise", amount: best_raise_info.amount};
 		}
 	}
-	return EV_call > EV_fold ? { ai_move: "call", amount: initial_bet} : { ai_move: "fold", amount: 0 };
+	return EV_call > EV_fold ? { ai_move: "call", amount: 0} : { ai_move: "fold", amount: 0 };
 }
 
 //Vi har turen. Modstandern har checket, eller callet
@@ -480,9 +480,9 @@ function do_pure_bluff(ai_move, game_data) {
 function confirm_bet_size(ai_move, game_info) {
 
 	//Hvis modstanderen raiser, og det modstanderen raiser med, + det botten raiser med, er 
-	if( ai_move.ai_move == "raise" && game_info.player_move.move == "raise"  &&  (game_info.amount + ai_move.amount) > game_info.ai_balance) {
+	if( ai_move.ai_move == "raise"  && (game_info.player_move.amount + ai_move.amount) > game_info.ai_balance) {
 
-			console.log("Error might occour"); 
+		console.log("Error might occour"); 
 		//Hvis vi ikke har nok til overhovedet så calles der
 		if(game_info.ai_balance <= game_info.player_move.amount) {
 			console.log("Im froced to clal even thought i wanna raise"); 
