@@ -39,6 +39,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
+	equity.draw_and_winrate = 70; 
 	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
@@ -481,15 +482,21 @@ function confirm_bet_size(ai_move, game_info) {
 	//Hvis modstanderen raiser, og det modstanderen raiser med, + det botten raiser med, er 
 	if( ai_move.ai_move == "raise" && game_info.player_move.move == "raise"  &&  (game_info.amount + ai_move.amount) > game_info.ai_balance) {
 
+			console.log("Error might occour"); 
 		//Hvis vi ikke har nok til overhovedet så calles der
-		if(game_info.ai_balance < game_info.player_move.amount) {
+		if(game_info.ai_balance <= game_info.player_move.amount) {
+			console.log("Im froced to clal even thought i wanna raise"); 
 			ai_move.ai_move = "call"; 
 			ai_move.amount = 0; 
 			return; 
-			
+
 		} else {
+			console.log("Im fforced to raise less then i want "); 
+
+			console.log("aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
 
 			ai_move.amount =  game_info.ai_balance - game_info.player_move.amount; 
+			console.log("after", "aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
 			return; 
 
 		}
