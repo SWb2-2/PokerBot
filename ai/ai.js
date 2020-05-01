@@ -6,50 +6,41 @@ const range_func = require("./ai_util/range");
 // 	ai_hand: [],
 // 	table_cards: [],
 // 	pot: 3,
-// 	// ai_balance: 3,
-// 	// player_balance: 3,
-// 	// ai_current_bet: 3,
-// 	// player_current_bet: 3,
 // 	// blind_size: 3,
 // 	// blind: "sb",
 // 	player_move: { move: "check", amount: 13 },
 // 	bluff: true
 // }
 
-//input: spilinformationsobjektet der sendes mellem server og client
-//output: et objekt der indholder Ai's træk og et givet antal penge hvis der calles eller raises
-//Skal bestemme Ai's træk ud fra equity og herved modspillerens range,  (spillets stadie, modspillerens spillestil og sidste træk)
+//input: game_info object describing game's current state
+//output: object containing Ai's move and a potential amount if it is a call or raise
+//Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log("BEGGINIG OF AI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	// console.log(game_info)
-
 	console.log(game_info.player_move, "efuiwghuaewhgiejngiheaugnawegreauignwrigjiorghreuhgieghierhger")
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
+	let equity = {};
+	const num_of_sim = 141111
 	
 
-	//Hent info der skal bruges til at bestemme træk
+	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot-game_info.player_move.amount, true);					//Check op på 
-	let equity = monte_carlo.equity_range(game_info.ai_hand, 141111, game_info.table_cards, range.range_Low, range.range_high);
-		console.log(equity.draw_and_winrate, "wr");
-	//Skal se indbetaling af big blind (når den er small blind) som et raise fra modstanderen, så den ikke ser indbetalingen som optional
+	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
+
+	console.log(equity.draw_and_winrate, "wr");
+	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
 	if(game_info.pot < 2*game_info.bb_size && game_info.table_cards.length == 0) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
-	equity.draw_and_winrate = 70; 
-	//Brug informationer til at bestemme træk. Inkluderer input validering og mulighed for bluff
+	//equity.draw_and_winrate = 70; 
+	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
-	// Korregere for lange decimaler
-	// set_final_amount(ai_move);
-	// confirm_bet_size(ai_move, game_info);
-	// return ai_move;
-
-	game_info.bluff = true; 
-	if(game_info.bluff == false) {		//No bluffing osv. 
+	//Possibility to bluff
+	if(game_info.bluff == false) {		//No bluffing 
 
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
