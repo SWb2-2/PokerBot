@@ -10,10 +10,10 @@ function store_ai_move(move, data) {
     } else if(move == "call") {
         data.ai_call += 1;
     }
-    console.log(data);
+    // console.log(data);
 }
 
-function store_player_move(player, ai_move, pot_size, data) {
+function store_player_move(player, ai_move, pot_size, data, pre_flop) {
     if(player.move == "check") {
         data.player_check += 1;
         data.total_moves += 1;
@@ -43,9 +43,9 @@ function store_player_move(player, ai_move, pot_size, data) {
     } else if(player.move == "fold") {
         data.player_fold += 1;
         data.total_moves += 1;
-        if(data.total_preflop != 0) {
-            data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
-        }
+        // if(data.total_preflop != 0) {
+        //     data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
+        // }
         if(ai_move == "raise") {
 
             data.fold_when_raised += 1;
@@ -54,7 +54,11 @@ function store_player_move(player, ai_move, pot_size, data) {
             data.fold_when_sb += 1;
         }
     }
-    console.log(data);
+    // console.log(data);
+    if(data.total_preflop != 0 && pre_flop === true) {
+        console.log(data.total_preflop, data.player_fold);
+        data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
+    }
 }
 
 module.exports.store_player_move = store_player_move;

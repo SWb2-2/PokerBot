@@ -8,7 +8,7 @@ function pre_flop(human_player, ai_player, dealer) {
     if(dealer.bb.set_flag == false) {
         dealer.create_blind_amount(human_player.balance);
     }
-    dealer.pay_blinds(human_player, ai_player, 10, 5);
+    dealer.pay_blinds(human_player, ai_player, dealer.bb.bb_size, dealer.bb.bb_size/2);
     dealer.give_hand_cards(human_player, ai_player);
 
     let response = {
@@ -89,7 +89,8 @@ function showdown(human_player, ai_player, dealer) {
         let winner = dealer.get_winner(human_player, ai_player);
         
         dealer.give_pot(human_player, ai_player, winner.winner);
-
+        let storage_pot = dealer.pot; 
+        dealer.pot = 0; 
         let response = {
             player_balance: human_player.balance,
             bot_balance: ai_player.balance,
@@ -97,18 +98,23 @@ function showdown(human_player, ai_player, dealer) {
             winner: winner.winner,
             player_best_hand: winner.human_hand,
             ai_best_hand: winner.ai_hand,
-            ai_cards: ai_player.hand
+            ai_cards: ai_player.hand,
+            storage_pot: storage_pot
         }
         return response;
     } else {
         let winner = human_player.player_move.move === "fold" ? ai_player.name : human_player.name;
         dealer.give_pot(human_player, ai_player, winner);
+        
+        let storage_pot = dealer.pot; 
+        dealer.pot = 0; 
 
         let response = {
             player_balance: human_player.balance,
             bot_balance: ai_player.balance,
             pot: dealer.pot,
-            winner: winner
+            winner: winner,
+            storage_pot: storage_pot
         }
         return response;
     }
