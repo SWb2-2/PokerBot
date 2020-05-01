@@ -72,3 +72,205 @@ Winner: player
 BB/H: -1.7307692307692308
 New Game: 
 AI Move: call, Amount: 0, Round: 0, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1, Bluff BB/h: NaN, BB/h without bluff: -1
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1, Bluff BB/h: NaN, BB/h without bluff: -1
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: raise, Amount: 8, Round: 3, Bluff: false
+AI Move: raise, Amount: 26, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: -3.266666666666667, Bluff BB/h: NaN, BB/h without bluff: -3.266666666666667
+New Game: 
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -2.575, Bluff BB/h: NaN, BB/h without bluff: -2.575
+New Game: 
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -2.2600000000000002, Bluff BB/h: NaN, BB/h without bluff: -2.2600000000000002
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -2.0500000000000003, Bluff BB/h: NaN, BB/h without bluff: -2.0500000000000003
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.8285714285714287, Bluff BB/h: NaN, BB/h without bluff: -1.8285714285714287
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1.725, Bluff BB/h: NaN, BB/h without bluff: -1.725
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.588888888888889, Bluff BB/h: NaN, BB/h without bluff: -1.588888888888889
+New Game: 
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.48, Bluff BB/h: NaN, BB/h without bluff: -1.48
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1.4363636363636365, Bluff BB/h: NaN, BB/h without bluff: -1.4363636363636365
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 1, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: -1.2333333333333334, Bluff BB/h: NaN, BB/h without bluff: -1.2333333333333334
+New Game: 
+
+Average raise amount: NaN, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 8, Round: 0, Bluff: false
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.176923076923077, Bluff BB/h: NaN, BB/h without bluff: -1.176923076923077
+New Game: 
+
+Average raise amount: 3.3333333333333335, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 10, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1.3071428571428572, Bluff BB/h: NaN, BB/h without bluff: -1.3071428571428572
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 4.5, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 8, Round: 3, Bluff: false
+
+Average raise amount: 6.6, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 15, Round: 4, Bluff: false
+
+Average raise amount: 17, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 69, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: -0.8466666666666668, Bluff BB/h: NaN, BB/h without bluff: -0.8466666666666668
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: -0.7312500000000001, Bluff BB/h: NaN, BB/h without bluff: -0.7312500000000001
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 15.285714285714286, Average bluff amount: NaN
+
+
+AI Move: raise, Amount: 5, Round: 3, Bluff: false
+–––– NEW PLAYER ––––
+
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+–––– NEW PLAYER ––––
+
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false

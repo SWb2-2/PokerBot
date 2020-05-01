@@ -11,6 +11,7 @@ const fs = require('fs');
 const port = 3000;
 const app = express();
 
+let hasBluffed = false
 let bluff = false;
 
 let dealer = new dealer_module;
@@ -102,6 +103,10 @@ app.get('/ai_move', (req, res) => {
     ai_player.player_move.move = k.ai_move;
     ai_player.player_move.amount = k.amount;
     k.bluff === undefined ? ai_player.player_move.bluff = "false" : ai_player.player_move.bluff = k.bluff;
+    
+    if(k.bluff !== undefined && hasBluffed === false) {
+        hasBluffed = true;
+    }
     log_functions.logMove("AI", ai_player.player_move, dealer.table_cards, bluff);
     
     if(dealer.table_cards.length < 3) {
@@ -134,7 +139,7 @@ app.get('/winner', (req, res) => {
     data.total_preflop += 1;
 
     let response = round.showdown(human_player, ai_player, dealer);
-    log_functions.logWinnings(response, bluff, dealer.bb.bb_size, ai_player.current_bet);
+    log_functions.logWinnings(response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;
