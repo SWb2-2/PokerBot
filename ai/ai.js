@@ -123,49 +123,6 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	return false; 
 
 
-	// if(Math.random()*equity > 10) {
-	// 	if(Math.random() * data.chance_of_call_when_raised > 10) {
-	// 		if(Math.random() * 8) {
-
-
-
-
-	// 		}
-	// 	}
-	// }
-
-
-	/*
-	our_raise_chance; 		//hvor ofte raiser vi normalt? 
-
-	their_perceived_equity // (range)
-	their_call_chance
-	our_equity
-	pot
-
-
-	our_raise_amount 		//Fast raise 
-
-
-
-	2-2    	selcalculated_equity = 70%  rangelow = 60, range_high 90, 
-
-	7-2		selfcalueted equity = 60%. rangelow = 60, range_high 90, 
-
-	A-K-A - 2- 7
-
-	3-9			selcalculated_equity = 10%  rangelow = 30, range_high 50, 
-
-	4-8			selcalculated_equity = 10%  rangelow = 30, range_high 50, 
-
-
-	*/
-
-
-
-
-
-
 	if(data.ai_raise > 10) {
 		bluff = calc_EV_raise_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
 	} else {
@@ -263,18 +220,10 @@ function find_max_EV_raise_bluff(total_moves, chance_of_fold_when_raised, pot, e
 function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
 	let low = 1.75, high = 1 / low;
  
-
-	//console.log((1 - adjusted_call_chance) * pot
-	//+ ((adjusted_call_chance* high) * equity * (pot + raise))
-	//- ((adjusted_call_chance* low) * (1 - equity) * (raise)), "EV raise");
-
 	return	(1 - adjusted_call_chance) * pot
 	      	+ (adjusted_call_chance* high) * equity * (pot + raise)
  			- ((adjusted_call_chance* low) * (1 - equity) *(/*pot*0.7+*/  raise));
 }
-// (1 - adjusted_call_chance) * pot
-//         	+ (adjusted_call_chance* high) * equity * (pot + raise)
-// 			- ((adjusted_call_chance* low) * (1 - equity) *(pot*0.7 + raise));
 
 function adjust_call_chance_bluff(call_chance, bet_percent_of_pot) {
 	const a = 0.1;
@@ -344,8 +293,6 @@ function move_proactive(equity, player_data, game_info) {
 	ai_raise = best_raise_info.amount
 	EV_check = calc_EV_check(equity, pot);
 
-	// console.log(EV_check, "EV CHECK"); 
-	// console.log(max_EV_raise, "EV raise"); 
 
 	return max_EV_raise > EV_check ? { ai_move: "raise", amount: ai_raise } : { ai_move: "check", amount: 0 };
 }
