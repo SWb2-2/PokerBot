@@ -8,7 +8,7 @@ describe("Play rounds in game", () => {
         const name = "player";
         const balance = 200;
         const human_blind = "bb";
-        const blind = 10;
+        const blind = 4;
         const move = {move: "", amount: 0};
 
         const human_player = new Player(balance, "player");
@@ -16,7 +16,7 @@ describe("Play rounds in game", () => {
         const ai_name = "robot";
         const ai_balance = 200;
         const ai_blind = "sb";
-        const ai_blind_amount = 5;
+        const ai_blind_amount = 2;
         const ai_move = {move: "", amount: 0};
 
         const ai_player = new Player(ai_balance, "robot");

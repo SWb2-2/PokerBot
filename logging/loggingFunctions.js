@@ -38,7 +38,7 @@ function logWinnings(response, bluff, bigBlind, current_bet) {
     let hands_played = rep2.number;
     
     if(response.winner === "robot") {   
-        bb_won = bb_won + ((response.pot - current_bet) / bigBlind);
+        bb_won = bb_won + ((response.storage_pot - current_bet) / bigBlind);
 
     } else if(response.winner !== "draw") {
         bb_won = bb_won - ((current_bet) / bigBlind);

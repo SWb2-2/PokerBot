@@ -6,8 +6,8 @@ const range_func = require("./ai_util/range");
 // 	ai_hand: [],
 // 	table_cards: [],
 // 	pot: 3,
-// 	// blind_size: 3,
-// 	// blind: "sb",
+//  blind_size: 3,
+//  blind: "sb",
 // 	player_move: { move: "check", amount: 13 },
 // 	bluff: true
 // }
@@ -140,7 +140,15 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 //Input: equity, game info, and relevant playstyle data on opponent
 //Output: Ai move; is only reraise above 60% equity, else it's a bluff
 //Determines how to react to opponents raise based on whihc move has the highest expected value. The available moves are fold, call, and reraise.
-function move_reactive(equity, game_info, data) {	
+function move_reactive(equity, game_info, data) {
+	
+	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
+		console.log("Vi caller som sb", equity); 
+		if(equity > 0.44) {
+			return { ai_move: "call", amount: 0}
+		}
+	}
+
 	let EV_call = 0;
 	let EV_fold = 0;
 	let initial_bet = game_info.player_move.amount;
@@ -339,10 +347,6 @@ module.exports.move_reactive = move_reactive;
 module.exports.find_max_EV_raise = find_max_EV_raise; 
 module.exports.adjust_call_chance = adjust_call_chance; 
 module.exports.calc_EV_raise = calc_EV_raise; 
-module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
-module.exports.find_max_EV_raise_bluff = find_max_EV_raise_bluff; 
 module.exports.ai = ai; 
-
-module.exports.do_calculated_bluff = do_calculated_bluff; 
 module.exports.calc_EV_call = calc_EV_call;
 module.exports.calc_EV_check = calc_EV_check;
