@@ -12,7 +12,7 @@ const range_func = require("./ai_util/range");
 // 	bluff: true
 // }
 
-//input: game_info object describing game's current state
+//input: game_info object describing game's current state, and opponent's playstyle data
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
