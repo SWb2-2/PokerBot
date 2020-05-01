@@ -478,6 +478,23 @@ function do_pure_bluff(ai_move, game_data) {
 //Hvis botten better mere end sin balanace, så går den all in
 function confirm_bet_size(ai_move, game_info) {
 
+	//Hvis modstanderen raiser, og det modstanderen raiser med, + det botten raiser med, er 
+	if( ai_move.ai_move == "raise" && game_info.player_move.move == "raise"  &&  (game_info.amount + ai_move.amount) > game_info.ai_balance) {
+
+		//Hvis vi ikke har nok til overhovedet så calles der
+		if(game_info.ai_balance < game_info.player_move.amount) {
+			ai_move.ai_move = "call"; 
+			ai_move.amount = 0; 
+			return; 
+			
+		} else {
+
+			ai_move.amount =  game_info.ai_balance - game_info.player_move.amount; 
+			return; 
+
+		}
+	}
+
 	if(game_info.ai_balance < ai_move.amount) {
 		ai_move.amount = game_info.ai_balance;
 	}
