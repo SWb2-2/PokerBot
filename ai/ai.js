@@ -73,7 +73,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		}
 
 		if(ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move == "call") {
-			if(do_pure_bluff_0(ai_move, game_info, relevant_data)) {
+			if(do_pure_bluff(ai_move, game_info, relevant_data)) {
 				ai_move.bluff = "pure bluff";
 				console.log("Did a purebliff????????????????????????????????????????????????????????????????????")
 				
@@ -102,6 +102,23 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	let chance = 10; 
 	let pot_size = game_info.pot / game_info.bb_size; 
 
+	if(ai_move.ai_move == "check") {
+		if(data.total_moves > 20) {
+			chance = data.chance_of_fold_when_raised * 10;				//Might change this number 
+		} else {
+			chance = 16;
+		} 
+	} else if(ai_move.ai_move == "call") {
+		chance = 14; 
+	} else if(ai_move.ai_move == "fold") {
+		chance = 12; 		
+	}
+
+
+
+
+
+
 	if(data.total_moves < 10) {
 		return; 
 	}
@@ -121,7 +138,7 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 		return true;
 	}
 	return false; 
-
+/*
 
 	if(data.ai_raise > 10) {
 		bluff = calc_EV_raise_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
@@ -182,6 +199,7 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 		}
 	}
 	return console.log("error: could not read ai move"); 
+	*/
 }
 
 
@@ -382,7 +400,7 @@ function adjust_call_chance(call_chance, bet_percent_of_pot) {
 
 
 //Ide til simple do_pure_bluff
-function do_pure_bluff_0(ai_move, game_info, data) {
+function do_pure_bluff(ai_move, game_info, data) {
 
 	let chance = 2; 
 
@@ -404,23 +422,6 @@ function do_pure_bluff_0(ai_move, game_info, data) {
 		return true; 
 	}
 	return false; 
-}
-
-
-//Input: ai_move objekt og spilobjekt; output: ai_move objekt
-//Simulere et tegningekast, hvor der bluffes hvis tegningen rammer bluff_trigger
-function do_pure_bluff(ai_move, game_data) {
-	let random = 0;
-	let bluff_trigger = 50
-	random = Math.ceil(100 * Math.random());
-
-	if (random === bluff_trigger) {
-		ai_move.move = "raise"
-		ai_move.amount = 0.75 * game_data.pot;
-		//Something that signifies that the bot has bluffed (data) 
-	}
-	else;
-	//no bluff
 }
 
 //Hvis botten better mere end sin balanace, så går den all in
