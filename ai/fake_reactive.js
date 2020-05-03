@@ -1,4 +1,154 @@
 const ai = require("./ai");
+
+
+
+function bluffing(){
+
+	if(ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move == "call") {
+		if(do_pure_bluff(ai_move, game_info, relevant_data)) {
+			ai_move.bluff = "pure bluff";
+			console.log("Did a purebliff????????????????????????????????????????????????????????????????????")
+			
+		}
+	}
+	
+	function do_calculated_bluff(ai_move, equity, game_info, data, range) {
+		let EV_check = -Infinity; 
+		const EV_fold = 0; 
+		let EV_call = 0; 
+		let bluff; 
+		let raise_amount = ((Math.random() / 2) + 0.5) * game_info.pot;		// 50% til 100% af potten 
+		let chance = 10; 
+		let pot_size = game_info.pot / game_info.bb_size;
+
+	if(data.ai_raise > 10) {
+		bluff = calc_EV_raise_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
+	} else {
+		bluff = calc_EV_raise_bluff(0.4, game_info.pot, raise_amount, equity);
+	}
+
+	let EV_compared_to_pot = bluff / game_info.pot; 
+
+	if(EV_compared_to_pot < 0.5) {
+		return false; 
+	}
+
+	console.log(bluff, "EV RAISE");
+
+	// let bluff = find_max_EV_raise_bluff(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
+
+	//We only calcualte the EV_check, if we are alloweed to check
+	if(ai_move.ai_move == "check") {
+		EV_check = calc_EV_check(equity, game_info.pot);
+
+		if(bluff.EV < EV_check) {
+			ai_move.ai_move = "check"
+			return false; 
+		} else {
+			ai_move.ai_move = "raise"
+			ai_move.amount = raise_amount;
+		console.log("Raise on check", bluff);
+
+			return true; 
+		}
+	} else if(ai_move.ai_move == "call") {
+		EV_call = calc_EV_call(equity, game_info); 
+
+		if(bluff.EV < EV_call) {
+			ai_move.ai_move = "call"
+			return false; 
+		} else {
+			ai_move.ai_move = "raise"
+			ai_move.amount = raise_amount;
+
+		console.log("Raise on call", bluff);
+
+			return true; 
+		}
+	} else if(ai_move.ai_move == "fold") {
+
+		if(bluff.EV <= EV_fold) {
+			ai_move.ai_move = "fold"
+			return false; 
+		} else {
+			ai_move.ai_move = "raise"
+			ai_move.amount = raise_amount;
+
+			console.log("Raise on fold", bluff);
+
+			return true; 
+		}
+	}
+	return console.log("error: could not read ai move"); 
+	}
+	function find_max_EV_raise_bluff(total_moves, chance_of_fold_when_raised, pot, equity) {
+		let raise;
+		let adjusted_call_chance; 
+		let max_EV_raise = -Infinity;
+		let EV_raise = [];
+		let ai_raise; 
+		let call_chance; 
+	
+		if (total_moves > 30) {  //Tjekker at vores data er reliable. 
+			call_chance = (1 - chance_of_fold_when_raised);
+		} else {
+			call_chance = 0.50;
+		}
+		
+	
+		for (let i = 0.5; i < 1.5; i += 0.1) {  // 
+			bet_percent_of_pot = 0.1 * i;
+			raise = bet_percent_of_pot * pot;
+			adjusted_call_chance = adjust_call_chance_bluff(call_chance, bet_percent_of_pot); 
+			console.log(adjusted_call_chance, "adjusted call chac", i);
+			EV_raise[i] = calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity);
+			if (EV_raise[i] > max_EV_raise) {
+				max_EV_raise = EV_raise[i];
+				ai_raise = raise;
+				console.log(EV_raise[i], i);
+			}
+		}
+		return {EV: max_EV_raise, amount: ai_raise};
+	}
+	function calc_EV_raise_bluff(adjusted_call_chance, pot, raise, equity) {
+		let low = 1.75, high = 1 / low;
+	 
+		return	(1 - adjusted_call_chance) * pot
+				  + (adjusted_call_chance* high) * equity * (pot + raise)
+				 - ((adjusted_call_chance* low) * (1 - equity) *(/*pot*0.7+*/  raise));
+	}
+	function adjust_call_chance_bluff(call_chance, bet_percent_of_pot) {
+		const a = 0.1;
+		const b = 0.5;
+		const c = 0.2;
+		return ((call_chance*(a/(bet_percent_of_pot + b)) ) +c);
+		// return call_chance * (a / (0.1*bet_percent_of_pot + b)) - c;
+	}
+	function do_pure_bluff(ai_move, game_info, data) {
+
+		let chance = 2; 
+	
+		if(ai_move.ai_move == "check") {
+			if(data.total_moves > 20) {
+				chance = data.chance_of_fold_when_raised * 90;				//Might change this number 
+			} else {
+				chance = 6;
+			} 
+		} else if(ai_move.ai_move == "call") {
+			chance = 4; 
+		} else if(ai_move.ai_move == "fold") {
+			chance = 2; 		
+		}
+	
+		if(chance >= Math.ceil(100 * Math.random())) {
+			ai_move.ai_move = "raise"
+			ai_move.amount = (Math.random() + 0.5) * game_info.pot; 
+			return true; 
+		}
+		return false; 
+	}
+}
+
 game_info = {
     ai_hand: [],
     table_cards: [],
