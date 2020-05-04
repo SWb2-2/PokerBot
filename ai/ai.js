@@ -38,7 +38,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
-	equity.draw_and_winrate = 70; 
+	// equity.draw_and_winrate = 70; 
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
