@@ -121,6 +121,13 @@ app.get('/ai_move', (req, res) => {
 //A round is done, and cards are added to the table. 
 app.get('/table_update', (req, res) => {
     let response = round.next_round(human_player, ai_player, dealer);
+
+    if(response.whose_turn === ai_player.name) {
+        player_info.move = ""; 
+        player_info.amount = 0; 
+    }
+
+
     res.statusCode = 200;
     // console.log("table: ", response);
     res.json(JSON.stringify(response));
