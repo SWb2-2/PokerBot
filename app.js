@@ -57,11 +57,15 @@ app.post('/player_move', (req, res) => {
     player_info.amount = human_player.player_move.amount = Number(req.body.amount);
     game_info.pot_before_player = dealer.pot;
     if(dealer.table_cards.length < 3) {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop, true);
+        if(!(human_player.player_move.move == "call" && dealer.pot == dealer.bb.bb_size * 3/2)) {
+            store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop, true);
+        } else {
+            store.store_player_move({move: "check", amount: 0}, undefined, dealer.pot, data_preflop, true )
+        }
     } else {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop);
+        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop, false);
     } 
-    store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data);
+    store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data, false);
 
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
