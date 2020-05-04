@@ -16,17 +16,16 @@ const range_func = require("./ai_util/range");
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log(game_info.player_move, "efuiwghuaewhgiejngiheaugnawegreauignwrigjiorghreuhgieghierhger")
+	console.log(game_info.player_move, "––––––––––––––––––––––––––––––––––––––––––");
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111
-	
+	const num_of_sim = 14111
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot-game_info.player_move.amount, true);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 
 	console.log(equity.draw_and_winrate, "wr");
@@ -36,6 +35,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
+	
 	//equity.draw_and_winrate = 70; 
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
@@ -102,9 +102,8 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
 	//console.log(chance, "Their equity + percieved equity "); 
 	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
-	console.log(chance, "our raise and total moves influence"); 
 	//console.log(data.ai_raise, data.ai_total_moves);
-
+	console.log(chance, "our raise and total moves influence"); 
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
 		ai_move.amount = ((Math.random() / 2) + 0.5) * game_info.pot;

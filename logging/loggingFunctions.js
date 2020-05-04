@@ -11,7 +11,7 @@ function checkCommandLine(args) {
     return false;
 }
 
-// Logger end spillers træk ud i den givne situation. Det er ligegyldigt, om det er AI eller Player, den er lavet til begge.
+// Logger en spillers træk ud fra den givne situation. Det er ligegyldigt, om det er AI eller Player, den er lavet til begge.
 function logMove(playerName, player_action, table, bluff) {
     if(player_action.move === "raise") {
         logRaiseAverage(player_action, bluff);
@@ -23,7 +23,7 @@ function logMove(playerName, player_action, table, bluff) {
         fs.appendFileSync("./logFiles/history_with_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amount}, Round: ${table.length}, Bluff: ${player_action.bluff}`);
     }
 }
-
+// The amount of each move is updated and the new frequency of every possible move is recalculated.
 function logFrequencyOfMove(player_action, bluff) {
     let line = [];
     let raise_line = [];
@@ -62,7 +62,6 @@ function logFrequencyOfMove(player_action, bluff) {
     avgCheck = calcAverage(totalMoves, checkValue);
     avgRaise = calcAverage(totalMoves, raiseValue);
     avgFold = calcAverage(totalMoves, foldValue);
-console.log("spiller det", checkValue, callValue, foldValue, raiseValue);
     if(bluff === false) {
         fs.appendFileSync('./logFiles/moveFrequency.txt', `\n check frequency: ${avgCheck}, call frequency: ${avgCall}, raise frequency: ${avgRaise}, fold frequency: ${avgFold}`);
         fs.writeFileSync('./logFiles/moveAmount.txt', `Checks:${checkValue} / Calls:${callValue} / Folds:${foldValue} / Total moves:${totalMoves} /`);
@@ -79,7 +78,7 @@ function calcAverage(total, current) {
 // Logwinnings har to filer til de to botter, hvori den bevarer hands played samt bigblinds won. 
 // Efter hvert spil overskriver den det gamle med det nye resultat, og appender den nyligt beregnet bb værdi 
 // i history filerne. Lige nu bliver det kaldt mmb/h men det er faktisk i bb/h. Vi skal lige blive enige 
-function logWinnings(response, bluff, bigBlind, current_bet, hasBluffed) {
+function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     let array = [];
     let bluff_hands = 0; let hands_without = 0; let bb_won_with_bluff = 0; let bb_won_without = 0;
     
@@ -104,7 +103,7 @@ function logWinnings(response, bluff, bigBlind, current_bet, hasBluffed) {
     }
     
     let bb_ratio = ((response.storage_pot - current_bet) / bigBlind);
-    if(response.winner === "robot") {   
+    if(response.winner === name) {   
         bb_won += bb_ratio;
         if(hasBluffed) {
             bb_won_with_bluff += bb_ratio;
@@ -132,7 +131,7 @@ function logWinnings(response, bluff, bigBlind, current_bet, hasBluffed) {
 
     if(bluff === false) {
         fs.appendFileSync('./logFiles/history_without_bluff.txt', ` \n\nWinner: ${response.winner}\nBB/H: ${mmb}`);
-        fs.writeFileSync('./logFiles/averageBB.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} /`);
+        fs.writeFileSync('./logFiles/averageBB.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} / BB won with bluffs: 0 / bluffed hands: 0 /`);
     } else {
         fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nWinner: ${response.winner} \nBB/h: ${mmb}, Bluff BB/h: ${avg_bb_won_with_bluff}, BB/h without bluff: ${avg_bb_won_without}`);
         fs.writeFileSync('./logFiles/averageBB_bluff.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} / BB won with bluffs: ${bb_won_with_bluff} / bluffed hands: ${bluff_hands} /`);
@@ -166,7 +165,7 @@ function logRaiseAverage(ai_player_move, bluff) {
 
     amount_of_raises = res.number + 1;
     total_raise_amount = res2.number + ai_player_move.amount;
-    if(ai_player_move.bluff !== "false") {
+    if(ai_player_move.bluff !== "false" && ai_player_move.bluff !== undefined) {
         bluffs += res3.number + 1;
         bluff_amount = res4.number + ai_player_move.amount;
     }
@@ -177,8 +176,8 @@ function logRaiseAverage(ai_player_move, bluff) {
         fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} / Amount of bluff raises: ${bluffs} / Total amount of bluff: ${bluff_amount} / `);
         fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}, Average bluff amount: ${average_raise_with_bluff}`);
     } else {
-        fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} /`);
-        fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}`);
+        fs.writeFileSync('./logFiles/raiseAverage.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} /`);
+        fs.appendFileSync('./logFiles/history_without_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}`);
     }
 }
 

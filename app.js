@@ -139,7 +139,7 @@ app.get('/winner', (req, res) => {
     data.total_preflop += 1;
 
     let response = round.showdown(human_player, ai_player, dealer);
-    log_functions.logWinnings(response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
+    log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;

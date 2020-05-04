@@ -1,9 +1,10 @@
 function store_ai_move(move, data) {
     data.ai_total_moves += 1;
-
+    console.log("data here in storage", data);
     if(move == "check") {
         data.ai_check += 1;
     } else if(move == "raise") {
+        console.log("move here2 ", move);
         data.ai_raise += 1;
     } else if(move == "fold") {
         data.ai_fold += 1;
