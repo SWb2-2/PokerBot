@@ -16,19 +16,19 @@ const range_func = require("./ai_util/range");
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log(game_info.player_move, "efuiwghuaewhgiejngiheaugnawegreauignwrigjiorghreuhgieghierhger")
-	let ai_move;
-	let current_round = "";
-	let range = { range_low: 0, range_high: 100 }
-	let equity = {};
-	const num_of_sim = 141111
+	let   ai_move;
+	let   current_round = "";
+	let   range = { range_low: 0, range_high: 100 }
+	let   equity = {};
+	const num_of_sim = 141111;
+	let   relevant_data = "";
 	
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot-game_info.player_move.amount, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
-
+	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
 	console.log(equity.draw_and_winrate, "wr");
 
 	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
@@ -38,7 +38,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	}
 	//equity.draw_and_winrate = 70; 
 	//Use information to determine move. Includes input validation
-	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
+	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
 
 	//Possibility to bluff
 	if(game_info.bluff == false) {		//No bluffing 
@@ -48,22 +48,12 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
+	
+		if(do_calculated_bluff2(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data)) {
+			ai_move.bluff = "calc bluff";
+			console.log("bluffed: aimove:", ai_move);
+		}	
 		
-		let relevant_data;
-		
-		if(current_round == "preflop") {
-			relevant_data = data_preflop; 
-		} else {
-			relevant_data = data_postflop; 
-		} 
-
-		if(ai_move.ai_move == "check" || ai_move.ai_move == "fold"  || ai_move.ai_move == "call") {
-			if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
-				ai_move.bluff = "calc bluff";
-				console.log("Did a alculated bluff********************************************************************")
-			}	
-		}
-
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
 		return ai_move;
@@ -72,6 +62,73 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	confirm_bet_size(ai_move, game_info);
 	return ai_move;
 }
+
+
+function do_calculated_bluff2(ai_move, equity, game_info, data) {
+	let   EV_check = -Infinity; 
+	const EV_fold  = 0; 
+	let   EV_call  = 0; 
+	let   EV_bluff = 0;
+	let   raise_amount = ((Math.random() / 2) + 0.5) * game_info.pot;		// 50% til 100% af potten
+
+	if(data.ai_raise > 10) {
+		EV_bluff = calc_EV_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
+	} 
+	else {
+		EV_bluff = calc_EV_bluff(0.5, game_info.pot, raise_amount, equity);
+	}
+	console.log(bluff, "EV Bluff");
+	let EV_compared_to_pot = bluff / game_info.pot; 
+	if(EV_compared_to_pot < 0.5) {
+		return false; 
+	}
+
+	//Compare bluff EV to EV of ai's initial non bluff move. If higher, then bluff 
+	switch(ai_move.ai_move) {
+		case "check":
+			EV_check = calc_EV_check(equity, game_info.pot);
+
+			if(bluff.EV <= EV_check) {
+				return false; 
+			} else {
+				ai_move.ai_move = "raise";
+				ai_move.amount  = raise_amount;
+				console.log("bluff on check", bluff);
+				return true; 
+			}
+		case "call":
+			EV_call = calc_EV_call(equity, game_info); 
+
+			if(bluff.EV <= EV_call) {
+				return false; 
+			} else {
+				ai_move.ai_move = "raise";
+				ai_move.amount  = raise_amount;
+				console.log("bluff on call", bluff);
+				return true; 
+			}
+		case "fold":
+			if(bluff.EV <= EV_fold) {
+				return false; 
+			} else {
+				ai_move.ai_move = "raise";
+				ai_move.amount  = raise_amount;
+				console.log("bluff on fold")
+				return true; 
+			}
+		default: console.log("error: could not read ai move");
+	}
+}
+
+
+function calc_EV_bluff(call_chance, pot, raise, equity) {
+	let k1 = 1.75, k2 = 1 / low;
+ 
+	return	(1 - call_chance) * pot
+			+ k1 * call_chance * equity * (pot + raise)
+			- k2 * call_chance * (1 - equity) *raise;
+}
+
 
 
 //Input: Ai's potential move without bluff, equity, game_info, opponent's playerstyle data, opponent's range
@@ -117,17 +174,8 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 //Output: object containing Ai's move and potential amount
 //First determines the relevant playstyle data and determines the type of move the Ai needs to make based on opponents move
 
-function determine_move(equity, current_round, game_info, data_preflop, data_postflop) {
-	let move_type = "";
-	let relevant_data; 
-
-	if(current_round == "preflop") {
-		relevant_data = data_preflop; 
-	} else {
-		relevant_data = data_postflop; 
-	} 
-
-	move_type = determine_move_type(game_info.player_move.move);
+function determine_move(equity, game_info, relevant_data) {
+	let move_type = determine_move_type(game_info.player_move.move);
 
 	if (move_type == "reactive") {
 		return move_reactive(equity, game_info, relevant_data);
@@ -172,20 +220,20 @@ function move_reactive(equity, game_info, data) {
 //Input: equity, opponent's playstyle data, game info
 //output: A proactive move, which can be checking or raising; is only a raise onver 60% equity, otherwise its a bluff
 //Compares expected value of checking and raising, and returns the move that yields the highest
-function move_proactive(equity, player_data, game_info) {
+function move_proactive(equity, data, game_info) {
 	if(equity < 0.55) { //as a raise under 50% is a bluff
 		return {ai_move: "check", amount: 0};
 	}
 	
-	let pot = game_info.pot;
-	let EV_check = 0;
-	let best_raise_info = {};
+	let pot			     = game_info.pot;
+	let EV_check         = 0;
+	let best_raise_info  = {};
 	let ai_raise; 
 	
-	best_raise_info = find_max_EV_raise(player_data.total_moves, player_data.chance_of_fold_when_raised, pot, equity);
-	max_EV_raise = best_raise_info.EV;
-	ai_raise = best_raise_info.amount
-	EV_check = calc_EV_check(equity, pot);
+	best_raise_info = find_max_EV_raise(data.total_moves, data.chance_of_fold_when_raised, pot, equity);
+	max_EV_raise    = best_raise_info.EV;
+	ai_raise        = best_raise_info.amount;
+	EV_check        = calc_EV_check(equity, pot);
 
 
 	return max_EV_raise > EV_check ? { ai_move: "raise", amount: ai_raise } : { ai_move: "check", amount: 0 };
@@ -195,11 +243,11 @@ function move_proactive(equity, player_data, game_info) {
 //potential winnings the bot may yield by calling every raise, and the potential losses by calling every raise
 function calc_EV_call(equity, game_info){
 
-	let new_pot = game_info.pot; 
-	let raise_ratio = game_info.player_move.amount / (game_info.pot - game_info.player_move.amount);
+	let new_pot       = game_info.pot; 
+	let raise_ratio   = game_info.player_move.amount / (game_info.pot - game_info.player_move.amount);
 	let expected_call = game_info.player_move.amount; 
-	let new_raise = game_info.player_move.amount;
-	let rounds_left = find_rounds_left(game_info.table_cards.length); 
+	let new_raise     = game_info.player_move.amount;
+	let rounds_left   = find_rounds_left(game_info.table_cards.length); 
 
 	
 	for(let i = 0; i < rounds_left; i++) {
@@ -210,7 +258,7 @@ function calc_EV_call(equity, game_info){
 	}
 	new_pot += new_raise;                   //Our call of opponent's last raise put into pot
 
-	return (equity * (new_pot-(expected_call))) - ((1-equity) * expected_call);
+	return (equity * (new_pot - expected_call)) - ((1-equity) * expected_call);
 
 }
 
@@ -343,6 +391,18 @@ function find_round(num_table_cards) {
 		case 5: return "river";
 		default: console.log("error: invalid table cards");
 	}
+}
+
+function get_relevant_data(current_round, data_preflop, data_postflop){
+	if(current_round == "preflop") {
+		return data_preflop;
+	}
+	else {
+		return data_postflop;
+	}
+
+	
+
 }
 module.exports.move_proactive = move_proactive; 
 module.exports.move_reactive = move_reactive; 
