@@ -16,7 +16,8 @@ const range_func = require("./ai_util/range");
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log(game_info.player_move, "efuiwghuaewhgiejngiheaugnawegreauignwrigjiorghreuhgieghierhger")
+	console.log("___________________________________________________________________________________________________________________");
+	console.log(game_info.player_move)
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
@@ -26,7 +27,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot-game_info.player_move.amount, true);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 
 	console.log(equity.draw_and_winrate, "wr");
@@ -63,10 +64,6 @@ function ai(game_info, data_preflop, data_postflop, data) {
 				console.log("Did a alculated bluff********************************************************************")
 			}	
 		}
-
-		set_final_amount(ai_move);
-		confirm_bet_size(ai_move, game_info);
-		return ai_move;
 	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
@@ -144,7 +141,7 @@ function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
 		console.log("Vi caller som sb", equity); 
-		if(equity > 0.44) {
+		if(equity > 0.44) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
 	}
@@ -283,22 +280,15 @@ function confirm_bet_size(ai_move, game_info) {
 	if( ai_move.ai_move == "raise"  && (game_info.player_move.amount + ai_move.amount) > game_info.ai_balance) {
 
 		if(game_info.ai_balance <= game_info.player_move.amount) { 
-			console.log("Im froced to clal even thought i wanna raise"); 
 			ai_move.ai_move = "call"; 
 			ai_move.amount = 0; 
 			return; 
 
 		} else {
-			console.log("Im fforced to raise less then i want "); 
-			console.log("aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
-
 			ai_move.amount =  game_info.ai_balance - game_info.player_move.amount; 
-			console.log("after", "aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
 			return; 
-
 		}
 	}
-
 	if(game_info.ai_balance < ai_move.amount) {
 		ai_move.amount = game_info.ai_balance;
 	}
@@ -312,9 +302,8 @@ function set_final_amount(ai_move) {
 
 //Returns the type of move Ai needs to make depending on opponent's last move
 function determine_move_type(move) {
-	console.log(move, "321");
 	switch(move) {
-		case "check": case "call": return "proactive";
+		case "check": case "call": case "": return "proactive";
 		case "raise": return "reactive";
 		default: console.log("error: player move undefined", move);
 	}
