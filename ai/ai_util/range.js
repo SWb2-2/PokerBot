@@ -149,7 +149,6 @@ function determine_range(data, player_move, pot_size, first) {
             } else if(ra > 0.2) {
                 factor = Math.pow(ra, 1-ra);
             }
-            console.log("Chance of Raise = ", cr, " Hands played = ", hp);
             let max_range = 8.6;
             
             if(cr >= 0.6 && hp >= 0.7 && factor > 1.5) {
@@ -175,7 +174,7 @@ function determine_range(data, player_move, pot_size, first) {
 function range_control_check(current_range) {
 
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in range_control check"); 
+        console.log("Error in range_control check 1", current_range); 
     }
 
     if(current_range.range_high > 86) {
@@ -185,7 +184,7 @@ function range_control_check(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in, range_control check"); 
+        console.log("Error in, range_control check 2", current_range); 
     }
 }
 
@@ -193,7 +192,7 @@ function range_control_check(current_range) {
 //Make sure the range is legetimate, and caps it
 function range_control_call(current_range) {
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in range_control call ", current_range); 
+        console.log("Error in range_control call 1", current_range); 
     }
 
     if(current_range.range_high > 86) {
@@ -203,12 +202,15 @@ function range_control_call(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("After Error in, range_control call", current_range); 
+        console.log("Error in, range_control call 2", current_range); 
     }
 }
 
 //Make sure the range is legetimate, and caps it
 function range_control_raise(current_range) {
+    if(current_range.range_high - 3 < current_range.range_Low) {
+        console.log("Error in, range_control raise 1", current_range); 
+    }
     if(current_range.range_Low > 65) {
         current_range.range_Low = 65;
     }
@@ -219,9 +221,8 @@ function range_control_raise(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in, range_control raise"); 
+        console.log("Error in, range_control raise 1", current_range); 
     }
-    
 }
 
 module.exports.determine_range = determine_range;

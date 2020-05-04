@@ -12,16 +12,17 @@ const range_func = require("./ai_util/range");
 // 	bluff: true
 // }
 
-//input: game_info object describing game's current state
+//input: game_info object describing game's current state, and opponent's playstyle data
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log(game_info.player_move, "––––––––––––––––––––––––––––––––––––––––––");
+	console.log("___________________________________________________________________________________________________________________");
+	console.log(game_info.player_move)
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 14111
+	const num_of_sim = 1411
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
@@ -63,10 +64,6 @@ function ai(game_info, data_preflop, data_postflop, data) {
 				console.log("Did a alculated bluff********************************************************************")
 			}	
 		}
-
-		set_final_amount(ai_move);
-		confirm_bet_size(ai_move, game_info);
-		return ai_move;
 	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
@@ -143,7 +140,7 @@ function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
 		console.log("Vi caller som sb", equity); 
-		if(equity > 0.44) {
+		if(equity > 0.44) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
 	}
@@ -217,7 +214,7 @@ function calc_EV_call(equity, game_info){
 function calc_EV_check(equity, pot) {
 	return equity * pot;
 }
-
+//Input: total moves made by opponent, opponents chance to fold a raise, 
 //Output: the raise amount that yields the highest expected value; an object containing EV and amount
 //Checks different raise amounts and returns the raise with the highest EV
 function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity) {
@@ -232,96 +229,88 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 	let ai_raise; 
 	let call_chance; 
 
-	if (total_moves > 30) {  //Tjekker at vores data er reliable. 
+	if (total_moves > 30) {  //Threshold for considering data reliable 
 		call_chance = (1 - chance_of_fold_when_raised);
 	} else {
 		call_chance = 0.30;
 	}
 	
-	for (let i = 0.2; i < 10; i += 0.2) {  // 
+	for (let i = 0.2; i < 10; i += 0.2) {
 		bet_percent_of_pot = 0.1 * i;
 		raise = bet_percent_of_pot * pot;
 		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
 		EV_raise[i] = calc_EV_raise(adjusted_call_chance, pot, raise, equity);
-		// console.log(EV_raise[i], "118");
 		if (EV_raise[i] > max_EV_raise) {
 			max_EV_raise = EV_raise[i];
 			ai_raise = raise;
-			// console.log(EV_raise[i], i);
 		}
 	}
 	return {EV: max_EV_raise, amount: ai_raise};
 }
-//Output: EV af et raise med et givet bet size, og givet modstander chance for at call
-//Udregner EV ud fra de 3 scenarier der kan ske ved et raise: de folder, de caller og vi vinder, de caller og de vinder
+//Calculates EV of a raise based on the 3 scenarios that can happen: (1) they fold (2) they call and lose (3) they call and win 
+//Input  : Opponent's chance to call our raise, pot size, raise size, equity
+//Output : EV of a raise
 function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
 	let low = 0.5, high = 1.5
-	// low = high = 1; 
 
 	return 	(1 - adjusted_call_chance) * pot
         	+ (adjusted_call_chance* high) * equity * (pot + raise)
 			- ((adjusted_call_chance* low) * (1 - equity) * (raise));
 }
 
-
-//Output: justeret call chance af modstanderen, der tager højde for bottens bet size
+//Adjusts opponents call chance to account for Ai's raise amount
+//Output: adjusted call chance that is dependent on Ai's raise amount
+//Input: opponent's general call chance and Ai's raise amount in relation to pot
 function adjust_call_chance(call_chance, bet_percent_of_pot) {
 	const a = 0.1;
 	const b = 0.03;
 	const c = 0.093;
-	return ((call_chance*(a/(0.1* bet_percent_of_pot + b)) ) -c);
-	// return call_chance * (a / (0.1*bet_percent_of_pot + b)) - c;
+	return ((call_chance * (a/(0.1 * bet_percent_of_pot + b)) ) - c);
+
 }
 
 
-//Hvis botten better mere end sin balanace, så går den all in
+//Output validation for if bot tries to bet more than it has in the balance; in that case, goes all in
+//Input: Ai's move and game info
+//Output: Limits Ai's move amount if tries to bet more than possible 
 function confirm_bet_size(ai_move, game_info) {
 
-	//Hvis modstanderen raiser, og det modstanderen raiser med, + det botten raiser med, er 
+	//In case sum of opponent's raise amount and Ai's rereraise amount is larger than the Ai's balance
 	if( ai_move.ai_move == "raise"  && (game_info.player_move.amount + ai_move.amount) > game_info.ai_balance) {
 
-		console.log("Error might occour"); 
-		//Hvis vi ikke har nok til overhovedet så calles der
-		if(game_info.ai_balance <= game_info.player_move.amount) {
-			console.log("Im froced to clal even thought i wanna raise"); 
+		if(game_info.ai_balance <= game_info.player_move.amount) { 
 			ai_move.ai_move = "call"; 
 			ai_move.amount = 0; 
 			return; 
 
 		} else {
-			console.log("Im fforced to raise less then i want "); 
-
-			console.log("aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
-
 			ai_move.amount =  game_info.ai_balance - game_info.player_move.amount; 
-			console.log("after", "aimove amount", ai_move.amount, "my balance", game_info.ai_balance, "playerraise", game_info.player_move.amount); 
 			return; 
-
 		}
 	}
-
 	if(game_info.ai_balance < ai_move.amount) {
 		ai_move.amount = game_info.ai_balance;
 	}
 }
 
-//Afrunder bet til 1 decimal
+//Rounds Ai's final move amount to the nearest tenth
 function set_final_amount(ai_move) {
 	ai_move.amount = Math.ceil(Math.ceil((ai_move.amount * 10)) / 10);
 	console.log(ai_move.amount);
 }
 
-//Output: hvilket type træk botten skal tage, baseret på modstanderens træk
+//Returns the type of move Ai needs to make depending on opponent's last move
 function determine_move_type(move) {
-	console.log(move, "321");
 	switch(move) {
-		case "check": case "call": return "proactive";
+		case "check": case "call": case "": return "proactive";
 		case "raise": return "reactive";
 		default: console.log("error: player move undefined", move);
 	}
 }
 
-//output: returns amount of rounds left (not including current) based on number of cards on table
+//returns amount of rounds left (not including current) based on number of cards on table
+//Input: number of table cards
+//output: amount of rounds left (not including current)
 function find_rounds_left(table_cards){
 	switch(table_cards) {
 		case 0: return 3;
@@ -331,7 +320,9 @@ function find_rounds_left(table_cards){
 		default: console.log("error: table cards error");
 	}
 }
-//input: antal kort på bordet     output: string som angiver runde
+//Returns name of current round
+//input: number of table cards
+//output: string that contains the current round name
 function find_round(num_table_cards) {
 	switch (num_table_cards) {
 		case 0: return "preflop";

@@ -1,6 +1,6 @@
 function store_ai_move(move, data) {
     data.ai_total_moves += 1;
-    console.log("data here in storage", data);
+    //console.log("data here in storage", data);
     if(move == "check") {
         data.ai_check += 1;
     } else if(move == "raise") {
@@ -11,7 +11,6 @@ function store_ai_move(move, data) {
     } else if(move == "call") {
         data.ai_call += 1;
     }
-    // console.log(data);
 }
 
 function store_player_move(player, ai_move, pot_size, data, pre_flop) {
@@ -24,7 +23,11 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         data.player_call += 1;
         data.call_a_raise += 1;
         data.total_moves += 1;
-        data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
+        if(data.ai_raise !== 0) {
+            data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
+        } else {
+            data.chance_of_call_a_raise = 0.5; 
+        }
         return true;
 
     } else if(player.move == "raise") {
@@ -44,6 +47,9 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
     } else if(player.move == "fold") {
         data.player_fold += 1;
         data.total_moves += 1;
+        if(data.ai_raise !== 0) {
+            data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
+        }
         // if(data.total_preflop != 0) {
         //     data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
         // }
@@ -55,7 +61,6 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
             data.fold_when_sb += 1;
         }
     }
-    // console.log(data);
     if(data.total_preflop != 0 && pre_flop === true) {
         console.log(data.total_preflop, data.player_fold);
         data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
