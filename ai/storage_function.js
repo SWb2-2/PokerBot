@@ -1,10 +1,8 @@
 function store_ai_move(move, data) {
     data.ai_total_moves += 1;
-    //console.log("data here in storage", data);
     if(move == "check") {
         data.ai_check += 1;
     } else if(move == "raise") {
-        console.log("move here2 ", move);
         data.ai_raise += 1;
     } else if(move == "fold") {
         data.ai_fold += 1;
@@ -22,10 +20,6 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
     } else if(player.move == "call") {
         data.player_call += 1;
         data.call_a_raise += 1;
-        // if(data.call_a_raise > data.ai_raise) {
-        //     data.call_a_raise -= 1;
-        //     data.total_moves -= 1;
-        // }
         data.total_moves += 1;
         if(data.ai_raise !== 0) {
             data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;

@@ -147,17 +147,14 @@ function updateGameInfo(active, game_info_bluff, game_info_math, dealer, player_
 
 function storePlayer(active_player, inactive_player, dealer) {
     if(dealer.table_cards.length < 3) {
-        console.log("Checking calls 1 ", active_player.player_move.move, dealer.pot);
         if((active_player.player_move.move !== "call" || dealer.pot !== dealer.bb.bb_size * 3/2)) {
             store.store_ai_move(active_player.player_move.move, active_player.data_preflop);
             store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data_preflop, true);
-            console.log("Checking calls 2 ", active_player.player_move.move, dealer.pot);
             store.store_ai_move(active_player.player_move.move, active_player.data);
             store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
         } else {
             store.store_ai_move({move: "check", amount: 0}, active_player.data_preflop);
             store.store_player_move({move: "check", amount: 0}, inactive_player.player_move.move, dealer.pot, inactive_player.data_preflop, true);
-            console.log("Checking calls 3 ", active_player.player_move.move, dealer.pot);
             store.store_ai_move({move: "check", amount: 0}, active_player.data);
             store.store_player_move({move: "check", amount: 0}, inactive_player.player_move.move, dealer.pot, inactive_player.data);
         }

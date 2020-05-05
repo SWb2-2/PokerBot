@@ -22,11 +22,10 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 1411
+	const num_of_sim = 141111
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	game_info.bluff === true ? console.log("\nTHIS IS BLUFF AI\n") : console.log("\nTHIS IS MATH AI\n");
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 
@@ -38,7 +37,6 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
 	
-	//equity.draw_and_winrate = 70; 
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
