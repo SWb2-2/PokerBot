@@ -30,7 +30,7 @@ function determine_range(data, player_move, pot_size, first) {
         // Variables used in all the functions
         let cr = data.chance_of_raise;  
         let hp = data.hands_played_percentage;
-        let c  = 1 - data.chance_of_call_a_raise; 
+        let c  = 1 - data.chance_of_call_a_raise;
         let ra = player_move.amount / pot_size;
         console.log("Ra is ", ra, " Pot is ", pot_size, " amount is ", player_move.amount);
         let w_cr, w_hp,  w_c;
@@ -72,6 +72,7 @@ function determine_range(data, player_move, pot_size, first) {
             return data.current_range;
 
         } else if(player_move.move == "call") {
+            //console.log("C is ", c," Cr is ", cr, " Hp is ", hp, data.current_range);
             if(first) {
                 data.current_range.range_Low = 40;
                 data.current_range.range_high = 86;
@@ -107,8 +108,9 @@ function determine_range(data, player_move, pot_size, first) {
                 data.current_range.range_Low = 60;
             }
             data.current_range.range_high = data.current_range.range_Low + 30;  
-            
+            //console.log("Before ", data.current_range);
             range_control_call(data.current_range);
+            //console.log("After ", data.current_range);
             return data.current_range; 
             
         } else if (player_move.move == "raise") {

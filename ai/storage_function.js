@@ -1,6 +1,5 @@
 function store_ai_move(move, data) {
     data.ai_total_moves += 1;
-
     if(move == "check") {
         data.ai_check += 1;
     } else if(move == "raise") {
@@ -25,7 +24,7 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         if(data.ai_raise !== 0) {
             data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
         } else {
-            data.call_a_raise = 0.5; 
+            data.chance_of_call_a_raise = 0.5; 
         }
         return true;
 

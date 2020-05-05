@@ -23,8 +23,6 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
 	const num_of_sim = 141111
-	
-	console.log(data_preflop,"\n\n\n",  data_postflop, "\n\n\n\n", data); 
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
@@ -38,7 +36,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		game_info.player_move.move = "raise"; 
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
-	// equity.draw_and_winrate = 70; 
+	
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, current_round, game_info, data_preflop, data_postflop, data);
 
@@ -100,9 +98,8 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
 	//console.log(chance, "Their equity + percieved equity "); 
 	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
-	console.log(chance, "our raise and total moves influence"); 
 	//console.log(data.ai_raise, data.ai_total_moves);
-
+	console.log(chance, "our raise and total moves influence"); 
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
 		ai_move.amount = ((Math.random() / 2) + 0.5) * game_info.pot;
