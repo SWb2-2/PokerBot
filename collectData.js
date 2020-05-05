@@ -40,7 +40,7 @@ let game_info_bluff = {
     pot: 0,
     pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
     bb_size: 0,
-    player_move: { move: "", amount: 0 },
+    player_move: { move: "", amount: 0},
 	bluff: true
 }
 
@@ -50,7 +50,7 @@ game_info_math = {
     pot: 0,
     pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
     bb_size: 0,
-    player_move: { move: "", amount: 0 },
+    player_move: { move: "", amount: 0},
 	bluff: false
 }
 
@@ -73,15 +73,15 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         log_functions.logWinnings(aiMath.name, res2, aiMath.bluff, dealer.bb.bb_size, aiBluff.current_bet, false);
         updateData(aiBluff);
         updateData(aiMath);
-        game_info_bluff.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
-        game_info_math.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
-        aiBluff.balance = 100;
-        aiMath.balance = 100;
+        readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer);
     }
+    console.log("Data for math, then bluff: ", aiBluff.data, aiMath.data);
+    console.log("pre-flop data:  ", aiMath.data_postflop, aiBluff.data_postflop);
 }
 
 function initiateBetting(player1, player2, dealer) {
-    if(player2.name === "bluff") {
+    resetMoves(player1.name, game_info_math, game_info_bluff, dealer);
+    if(player2.name === "Bluff") {
         var player2_move = game_info_bluff.player_move;
         player2_move.ai_move = player2_move.move;
     } else {
@@ -148,22 +148,30 @@ function updateGameInfo(active, game_info_bluff, game_info_math, dealer, player_
 function storePlayer(active_player, inactive_player, dealer) {
     if(dealer.table_cards.length < 3) {
         console.log("Checking calls 1 ", active_player.player_move.move, dealer.pot);
-        if(!(active_player.player_move.move === "call" && dealer.pot === dealer.bb.bb_size * 3/2)) {
+        if((active_player.player_move.move !== "call" || dealer.pot !== dealer.bb.bb_size * 3/2)) {
             store.store_ai_move(active_player.player_move.move, active_player.data_preflop);
             store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data_preflop, true);
             console.log("Checking calls 2 ", active_player.player_move.move, dealer.pot);
+            store.store_ai_move(active_player.player_move.move, active_player.data);
+            store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
         } else {
             store.store_ai_move({move: "check", amount: 0}, active_player.data_preflop);
             store.store_player_move({move: "check", amount: 0}, inactive_player.player_move.move, dealer.pot, inactive_player.data_preflop, true);
             console.log("Checking calls 3 ", active_player.player_move.move, dealer.pot);
+            store.store_ai_move({move: "check", amount: 0}, active_player.data);
+            store.store_player_move({move: "check", amount: 0}, inactive_player.player_move.move, dealer.pot, inactive_player.data);
         }
         active_player.data.hands_played_percentage = active_player.data_preflop.hands_played_percentage;
     } else {
         store.store_ai_move(active_player.player_move.move, active_player.data_postflop);
         store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data_postflop, false);
+        store.store_ai_move(active_player.player_move.move, active_player.data);
+        store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
     } 
-    store.store_ai_move(active_player.player_move.move, active_player.data);
-    store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
+    // if(!(active_player.player_move.move === "call" && dealer.pot === dealer.bb.bb_size * 3/2) && dealer.table_cards.length >= 3) {
+    //     store.store_ai_move(active_player.player_move.move, active_player.data);
+    //     store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
+    // } 
 }
 
 function logNewGame() {
@@ -175,7 +183,8 @@ function checkBluff(active_player, player_move) {
     player_move.bluff === undefined ? active_player.player_move.bluff = "false" : active_player.player_move.bluff = player_move.bluff;
     active_player.player_move.move = player_move.ai_move;
     active_player.player_move.amount = player_move.amount;
-    if(active_player.player_move.bluff !== undefined && active_player.hasBluffed === false) {
+
+    if(active_player.player_move.bluff !== "false" && active_player.hasBluffed === false) {
         active_player.hasBluffed = true;
     }
 }
@@ -194,4 +203,27 @@ function getPlayerMove(active_player) {
     }
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 200);
+function resetMoves(active_player_name, game_info_math, game_info_bluff, dealer) {
+    game_info_bluff.player_move.move = "";
+    game_info_bluff.player_move.amount = 0;
+    game_info_bluff.player_move.ai_move = "";
+
+    game_info_math.player_move.move = "";
+    game_info_math.player_move.amount = 0;
+    game_info_math.player_move.ai_move = "";
+    
+}
+
+function readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer) {
+        game_info_bluff.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+        game_info_math.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+        game_info_math.player_move.move = "";
+        game_info_bluff.player_move.move = "";
+        game_info_bluff.player_move.amount = 0;
+        game_info_math.player_move.amount = 0;
+        aiBluff.hasBluffed = false;
+        aiBluff.balance = 100;
+        aiMath.balance = 100;
+}
+
+simulatePoker(aiBluff, aiMath, dealer, 20);

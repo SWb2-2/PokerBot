@@ -126,7 +126,10 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     }
     hands_played += 1;
     let mmb = (bb_won / hands_played);
-    let avg_bb_won_with_bluff = (bb_won_with_bluff / bluff_hands);
+    let avg_bb_won_with_bluff = 0;
+    if(bluff_hands !== 0) {
+        avg_bb_won_with_bluff = (bb_won_with_bluff / bluff_hands);
+    }
     let avg_bb_won_without = (bb_won_without / hands_without);
 
     if(bluff === false) {
@@ -171,7 +174,10 @@ function logRaiseAverage(ai_player_move, bluff) {
     }
 
     average_raise_without_bluff = total_raise_amount / amount_of_raises;
-    average_raise_with_bluff = bluff_amount / bluffs;
+    let average_raise_with_bluff = 0;
+    if(bluffs !== 0) {
+        average_raise_with_bluff = bluff_amount / bluffs;
+    }
     if(bluff) {
         fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} / Amount of bluff raises: ${bluffs} / Total amount of bluff: ${bluff_amount} / `);
         fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}, Average bluff amount: ${average_raise_with_bluff}`);

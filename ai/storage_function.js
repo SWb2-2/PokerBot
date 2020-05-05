@@ -22,6 +22,10 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
     } else if(player.move == "call") {
         data.player_call += 1;
         data.call_a_raise += 1;
+        // if(data.call_a_raise > data.ai_raise) {
+        //     data.call_a_raise -= 1;
+        //     data.total_moves -= 1;
+        // }
         data.total_moves += 1;
         if(data.ai_raise !== 0) {
             data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
