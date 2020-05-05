@@ -20,8 +20,8 @@ describe("Play rounds in game", () => {
         const ai_move = {move: "", amount: 0};
 
         const ai_player = new Player(ai_balance, "robot");
-
-        const pot = 15;
+        // Da sb = 1/2 bb og bb = 2% af balance, som er 200, må samlet pot være 6.
+        const pot = 6;
         const turn = "robot";
 
         const dealer_here = new Dealer();
@@ -47,7 +47,7 @@ describe("Play rounds in game", () => {
         const name = "player";
         const balance = 200;
         const human_blind = "bb";
-        const blind = 10;
+        const blind = 4;
         const move = {move: "", amount: 0};
 
         const human_player = new Player(balance, "player");
@@ -56,12 +56,12 @@ describe("Play rounds in game", () => {
         const ai_name = "robot";
         const ai_balance = 200;
         const ai_blind = "sb";
-        const ai_blind_amount = 5;
+        const ai_blind_amount = 2;
         const ai_move = {move: "", amount: 0};
 
         const ai_player = new Player(ai_balance, "robot");
         ai_player.blind = "bb";
-        const pot = 15;
+        const pot = 6;
         const turn = "robot";
 
         const dealer_here = new Dealer();
@@ -87,7 +87,7 @@ describe("Play rounds in game", () => {
         const name = "player";
         const balance = 200;
         const human_blind = "sb";
-        const blind = 5;
+        const blind = 2;
         const move = {move: "", amount: 0};
 
         const human_player = new Player(balance, "player");
@@ -96,13 +96,14 @@ describe("Play rounds in game", () => {
         const ai_name = "robot";
         const ai_balance = 200;
         const ai_blind = "bb";
-        const ai_blind_amount = 10;
+        const ai_blind_amount = 4;
         const ai_move = {move: "", amount: 0};
 
         const ai_player = new Player(ai_balance, "robot");
         ai_player.blind = "sb";
 
-        const pot = 15;
+        const pot = 6;
+
         const turn = "player";
 
         const dealer_here = new Dealer();
@@ -140,7 +141,8 @@ describe("Play rounds in game", () => {
         expect(human_player.player_move.move).toBe("");
         expect(ai_player.player_move.move).toBe("");
         expect(flop.table_cards.length).toBe(number_of_cards);  
-        expect(flop.whose_turn).toBe("player");
+        // BB moves first post-flop, thus we expect it to be the ai and not the player, even though they get to make the first move in pre-flop
+        expect(flop.whose_turn).toBe("robot");
     });
     test("Turn round setup", () => {
         const number_of_cards = 4;
@@ -161,7 +163,7 @@ describe("Play rounds in game", () => {
         expect(human_player.player_move.move).toBe("");
         expect(ai_player.player_move.move).toBe("");
         expect(flop.table_cards.length).toBe(number_of_cards);
-        expect(flop.whose_turn).toBe("robot"); 
+        expect(flop.whose_turn).toBe("player"); 
     });
     test("River round setup", () => {
         const number_of_cards = 5;
