@@ -70,7 +70,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         }
         let res2 = round.showdown(aiBluff, aiMath, dealer);
         log_functions.logWinnings(aiBluff.name, res2, aiBluff.bluff, dealer.bb.bb_size, aiBluff.current_bet, aiBluff.hasBluffed);
-        log_functions.logWinnings(aiMath.name, res2, aiMath.bluff, dealer.bb.bb_size, aiBluff.current_bet, false);
+        log_functions.logWinnings(aiMath.name, res2, aiMath.bluff, dealer.bb.bb_size, aiMath.current_bet, false);
         updateData(aiBluff);
         updateData(aiMath);
         readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer);
