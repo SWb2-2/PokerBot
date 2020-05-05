@@ -11,6 +11,7 @@ const fs = require('fs');
 const port = 3000;
 const app = express();
 
+let hasBluffed = false
 let bluff = false;
 
 let dealer = new dealer_module;
@@ -57,11 +58,15 @@ app.post('/player_move', (req, res) => {
     player_info.amount = human_player.player_move.amount = Number(req.body.amount);
     game_info.pot_before_player = dealer.pot;
     if(dealer.table_cards.length < 3) {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop, true);
+        if(!(human_player.player_move.move == "call" && dealer.pot == dealer.bb.bb_size * 3/2)) {
+            store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_preflop, true);
+        } else {
+            store.store_player_move({move: "check", amount: 0}, undefined, dealer.pot, data_preflop, true )
+        }
     } else {
-        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop);
+        store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data_postflop, false);
     } 
-    store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data);
+    store.store_player_move(human_player.player_move, ai_player.player_move.move, dealer.pot, data, false);
 
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
@@ -102,6 +107,10 @@ app.get('/ai_move', (req, res) => {
     ai_player.player_move.move = k.ai_move;
     ai_player.player_move.amount = k.amount;
     k.bluff === undefined ? ai_player.player_move.bluff = "false" : ai_player.player_move.bluff = k.bluff;
+    
+    if(k.bluff !== undefined && hasBluffed === false) {
+        hasBluffed = true;
+    }
     log_functions.logMove("AI", ai_player.player_move, dealer.table_cards, bluff);
     
     if(dealer.table_cards.length < 3) {
@@ -121,6 +130,13 @@ app.get('/ai_move', (req, res) => {
 //A round is done, and cards are added to the table. 
 app.get('/table_update', (req, res) => {
     let response = round.next_round(human_player, ai_player, dealer);
+
+    if(response.whose_turn === ai_player.name) {
+        player_info.move = ""; 
+        player_info.amount = 0; 
+    }
+
+
     res.statusCode = 200;
     // console.log("table: ", response);
     res.json(JSON.stringify(response));
@@ -134,7 +150,7 @@ app.get('/winner', (req, res) => {
     data.total_preflop += 1;
 
     let response = round.showdown(human_player, ai_player, dealer);
-    log_functions.logWinnings(response, bluff, dealer.bb.bb_size, ai_player.current_bet);
+    log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;

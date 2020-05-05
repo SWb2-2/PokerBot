@@ -8,30 +8,20 @@ const Dealer = require("../../website/js/classes/dealer");
 function determine_range(data, player_move, pot_size, first) {
 
     if(data.total_moves < 10) { // Husk at ændre tilbage
-    console.log("I range");
         if(player_move.move == "check") {
-    console.log("I check");
-
             data.current_range.range_Low = 34;
             data.current_range.range_high = 65;
         } else if(player_move.move == "call") {
-    console.log("I call");
-
             data.current_range.range_Low = 40;
             data.current_range.range_high = 86;
         } else if (player_move.move == "raise") {
-    console.log("I raose");
-
             data.current_range.range_Low = 45;
             data.current_range.range_high = 86;     
         }
-    console.log("I return");
-
         return data.current_range;
     }
 
     //AI is sb and player hasent done a move yet. 
-    console.log("Her er vi, hvor player move er: ", player_move);
     if(player_move.move == undefined) {
         //data.player_average_range = data.fold_when_sb / data.total_preflop;
         return data.range;
@@ -40,7 +30,7 @@ function determine_range(data, player_move, pot_size, first) {
         // Variables used in all the functions
         let cr = data.chance_of_raise;  
         let hp = data.hands_played_percentage;
-        let c  = 1 - data.chance_of_call_a_raise; 
+        let c  = 1 - data.chance_of_call_a_raise;
         let ra = player_move.amount / pot_size;
         console.log("Ra is ", ra, " Pot is ", pot_size, " amount is ", player_move.amount);
         let w_cr, w_hp,  w_c;
@@ -82,6 +72,7 @@ function determine_range(data, player_move, pot_size, first) {
             return data.current_range;
 
         } else if(player_move.move == "call") {
+            //console.log("C is ", c," Cr is ", cr, " Hp is ", hp, data.current_range);
             if(first) {
                 data.current_range.range_Low = 40;
                 data.current_range.range_high = 86;
@@ -117,8 +108,9 @@ function determine_range(data, player_move, pot_size, first) {
                 data.current_range.range_Low = 60;
             }
             data.current_range.range_high = data.current_range.range_Low + 30;  
-            
+            //console.log("Before ", data.current_range);
             range_control_call(data.current_range);
+            //console.log("After ", data.current_range);
             return data.current_range; 
             
         } else if (player_move.move == "raise") {
@@ -149,27 +141,21 @@ function determine_range(data, player_move, pot_size, first) {
             // If high data.hands_played_percentage, low increase in range. 
 
             let factor = ra; 
-            console.log(ra, "dette er ra");
-            console.log("Range before is ", data.current_range.range_Low);
             if(ra > 1) {
                 factor = Math.pow(ra, 1-ra) * (-1) + 2;
                 
             } else if(ra > 0.2) {
                 factor = Math.pow(ra, 1-ra);
             }
-            console.log("Chance of Raise = ", cr, " Hands played = ", hp);
             let max_range = 8.6;
             
             if(cr >= 0.6 && hp >= 0.7 && factor > 1.5) {
-                console.log("Get outta here with your shitty raises");
                 data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/max_range, (1 - (cr * hp)) + factor/3) * (factor/2);
                 // Kunne overveje en fast range her også hvis det er. 
             }
             else if(factor < 1.3) {
-                console.log("Faktoren er ", factor);
                 data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/2) * factor; 
             } else {
-                console.log("We cuttin this up");
                 data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/3) * factor; 
             }
             
@@ -186,7 +172,7 @@ function determine_range(data, player_move, pot_size, first) {
 function range_control_check(current_range) {
 
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in range_control check"); 
+        console.log("Error in range_control check 1", current_range); 
     }
 
     if(current_range.range_high > 86) {
@@ -196,7 +182,7 @@ function range_control_check(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in, range_control check"); 
+        console.log("Error in, range_control check 2", current_range); 
     }
 }
 
@@ -204,7 +190,7 @@ function range_control_check(current_range) {
 //Make sure the range is legetimate, and caps it
 function range_control_call(current_range) {
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in range_control call"); 
+        console.log("Error in range_control call 1", current_range); 
     }
 
     if(current_range.range_high > 86) {
@@ -214,12 +200,15 @@ function range_control_call(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in, range_control call"); 
+        console.log("Error in, range_control call 2", current_range); 
     }
 }
 
 //Make sure the range is legetimate, and caps it
 function range_control_raise(current_range) {
+    if(current_range.range_high - 3 < current_range.range_Low) {
+        console.log("Error in, range_control raise 1", current_range); 
+    }
     if(current_range.range_Low > 65) {
         current_range.range_Low = 65;
     }
@@ -230,9 +219,8 @@ function range_control_raise(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
-        console.log("Error in, range_control raise"); 
+        console.log("Error in, range_control raise 1", current_range); 
     }
-    
 }
 
 module.exports.determine_range = determine_range;

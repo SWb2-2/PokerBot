@@ -99,6 +99,9 @@ module.exports = class Dealer {
                 turn = "table";
             }
         }
+
+
+
         return turn;
     }
 

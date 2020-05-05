@@ -42,6 +42,10 @@ function next_round(human_player, ai_player, dealer) {
     
     let turn = dealer.decide_whose_turn(first_player, second_player, dealer);
 
+    if(turn != "table" && turn != "showdown") {
+        turn = human_player.blind === "bb" ? human_player.name : ai_player.name;
+    }
+
     let response = {
         table_cards: dealer.table_cards,
         whose_turn: turn
