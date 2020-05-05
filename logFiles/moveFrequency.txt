@@ -1,7 +1,0 @@
-
- check frequency: 0, call frequency: 1, raise frequency: 0, fold frequency: 0
- check frequency: 0.5, call frequency: 0.5, raise frequency: 0, fold frequency: 0
- check frequency: 0.6666666666666666, call frequency: 0.3333333333333333, raise frequency: 0, fold frequency: 0
- check frequency: 0.5, call frequency: 0.25, raise frequency: 0, fold frequency: 0.25
- check frequency: 0.6, call frequency: 0.2, raise frequency: 0, fold frequency: 0.2
- check frequency: 0.6666666666666666, call frequency: 0.16666666666666666, raise frequency: 0, fold frequency: 0.16666666666666666

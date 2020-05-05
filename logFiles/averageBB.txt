@@ -1,1 +1,1 @@
-BB won: -1 / Hands Played: 1 / BB won with bluffs: 0 / bluffed hands: 0 /
+BB won: 0 / Hands Played: 0 / BB won with bluffs: 0 / bluffed hands: 0 /
