@@ -1,0 +1,9 @@
+
+Bluff:
+ BB/h: 1.22, Bluffed BB/h: -6.071428571428571, Overall BB won: 122, Overall BB with Bluff: -42.5, Bluffed hands: 7, Hands: 100
+Math:
+ BB/h: -1.22, Bluffed BB/h: 0, Overall BB won: -122, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 100
+Bluff:
+ BB/h: 1.545, Bluffed BB/h: -4.083333333333333, Overall BB won: 309, Overall BB with Bluff: -49, Bluffed hands: 12, Hands: 200
+Math:
+ BB/h: -1.545, Bluffed BB/h: 0, Overall BB won: -309, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 200

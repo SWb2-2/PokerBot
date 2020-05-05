@@ -165,10 +165,6 @@ function storePlayer(active_player, inactive_player, dealer) {
         store.store_ai_move(active_player.player_move.move, active_player.data);
         store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
     } 
-    // if(!(active_player.player_move.move === "call" && dealer.pot === dealer.bb.bb_size * 3/2) && dealer.table_cards.length >= 3) {
-    //     store.store_ai_move(active_player.player_move.move, active_player.data);
-    //     store.store_player_move(active_player.player_move, inactive_player.player_move.move, dealer.pot, inactive_player.data);
-    // } 
 }
 
 function logNewGame() {
@@ -223,4 +219,4 @@ function readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer) 
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 20);
+simulatePoker(aiBluff, aiMath, dealer, 200);
