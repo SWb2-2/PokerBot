@@ -22,17 +22,6 @@ function pre_flop(human_player, ai_player, dealer) {
 // Næste runde indkapsler flop, turn og river. Ud fra dealeren bestemmes det hvilken runde det er. 
 // Når antallet af kort er 5, sendes det tilbage, at der ikke er en new round 
 function next_round(human_player, ai_player, dealer) {
-	let first_player  = "";
-	let second_player = "";
-
-	if(dealer.table_cards.length === 0) {
-		first_player = human_player.blind === "sb" ? human_player : ai_player;
-		second_player = human_player.blind === "bb" ? human_player : ai_player;
-	}
-	else {
-		second_player = human_player.blind === "sb" ? human_player : ai_player;
-		first_player  = human_player.blind === "bb" ? human_player : ai_player;
-	}
     dealer.table_cards.length < 3 ? dealer.add_table_cards(3) : dealer.add_table_cards(1);
 
     human_player.player_move.move = "";
