@@ -49,7 +49,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		confirm_bet_size(ai_move, game_info);
 		return ai_move;
 
-	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
+	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" /*|| ai_move.ai_move == "call"*/)) {
 	
 		if(do_calculated_bluff2(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data)) {
 			ai_move.bluff = "calc bluff";
@@ -74,7 +74,6 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 	let   raise_amount = ((Math.random() / 2) + 0.5) * game_info.pot;		// 50% til 100% af potten
 
 	if(data.ai_raise > 10) {
-		console.log("raaaaaaise raaaaange kicks in")
 		EV_bluff = calc_EV_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
 	} 
 	else {
@@ -83,10 +82,10 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 	console.log(EV_bluff, "EV Bluff");
 	let EV_compared_to_pot = EV_bluff / game_info.pot; 
 	console.log("EV bluff comp pot", EV_compared_to_pot);
-	if(EV_compared_to_pot < 0.5) {
+	/*if(EV_compared_to_pot < 0.5) {
 		return false; 
 	}
-
+	*/
 	//Compare bluff EV to EV of ai's initial non bluff move. If higher, then bluff 
 	switch(ai_move.ai_move) {
 		case "check":
@@ -126,7 +125,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 
 
 function calc_EV_bluff(call_chance, pot, raise, equity) {
-	let k1 = 0.1, k2 = find_k2(equity, k1);
+	let k1 = 0.52, k2 = find_k2(equity, k1);
 	let k3 = 1.5, k4 = 0.5;
 	console.log("k2",k2);
 	console.log("please workd",(1 - call_chance) * pot
@@ -140,6 +139,11 @@ function calc_EV_bluff(call_chance, pot, raise, equity) {
 	function find_k2(equity, k1) {
 		return (1 - equity*k1) / (1-equity);
 	}
+}
+
+function do_pure_bluff(){
+
+
 }
 
 
@@ -204,9 +208,10 @@ function determine_move(equity, game_info, relevant_data) {
 function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
-		if(equity > 0.44) {
+		/*if(equity > 0.44) {
 			return { ai_move: "call", amount: 0}
 		}
+		*/
 	}
 
 	let EV_call = 0;
@@ -216,7 +221,7 @@ function move_reactive(equity, game_info, data) {
 
 	EV_call = calc_EV_call(equity, game_info);
 	EV_fold = 0;
-
+/*
 	if(equity > 0.6) {
 
 		best_raise_info = find_max_EV_raise(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
@@ -226,6 +231,7 @@ function move_reactive(equity, game_info, data) {
 			return { ai_move: "raise", amount: best_raise_info.amount};
 		}
 	}
+*/
 	return EV_call > EV_fold ? { ai_move: "call", amount: 0} : { ai_move: "fold", amount: 0 };
 }
 
