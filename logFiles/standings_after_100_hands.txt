@@ -1,0 +1,3 @@
+
+robot:
+ BB/h: -0.53, Bluffed BB/h: -0.3170731707317073, Overall BB won: -53, Overall BB with Bluff: -26, Bluffed hands: 82, Hands: 100
