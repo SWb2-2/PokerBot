@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111
+	const num_of_sim = 14111;
 	let relevant_data = "";
 
 	//Get data needed to determine move
@@ -80,10 +80,10 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 		EV_bluff = calc_EV_bluff(data.chance_of_call_when_raised, game_info.pot, raise_amount, equity);
 	} 
 	else {
-		EV_bluff = calc_EV_bluff(0.5, game_info.pot, raise_amount, equity);
+		EV_bluff = calc_EV_bluff(0.3, game_info.pot, raise_amount, equity);
 	}
 	// console.log(EV_bluff, "EV Bluff");
-	let EV_compared_to_pot = EV_bluff / game_info.pot; 
+	//let EV_compared_to_pot = EV_bluff / game_info.pot; 
 	// console.log("EV bluff comp pot", EV_compared_to_pot);
 	/*if(EV_compared_to_pot < 0.5) {
 		return false; 
@@ -126,6 +126,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 		*/
 		// default: console.log("error: could not read ai move");
 	}
+	return false;
 }
 
 
@@ -206,10 +207,10 @@ function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
 		// console.log("Vi caller som sb", equity); 
-		/*if(equity > 0.44) {								//CHECK VÆRDI 
+		if(equity > 0.44) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
-		*/
+		
 	}
 
 	let EV_call = 0;
@@ -219,7 +220,7 @@ function move_reactive(equity, game_info, data) {
 
 	EV_call = calc_EV_call(equity, game_info);
 	EV_fold = 0;
-/*
+
 	if(equity > 0.6) {
 
 		best_raise_info = find_max_EV_raise(data.total_moves, data.chance_of_fold_when_raised, game_info.pot, equity);
@@ -229,7 +230,7 @@ function move_reactive(equity, game_info, data) {
 			return { ai_move: "raise", amount: best_raise_info.amount};
 		}
 	}
-*/
+
 	return EV_call > EV_fold ? { ai_move: "call", amount: 0} : { ai_move: "fold", amount: 0 };
 }
 
