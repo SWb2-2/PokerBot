@@ -24,6 +24,10 @@ function pre_flop(human_player, ai_player, dealer) {
 function next_round(human_player, ai_player, dealer) {
     dealer.table_cards.length < 3 ? dealer.add_table_cards(3) : dealer.add_table_cards(1);
 
+
+	let first_player = human_player.blind === "sb" ? human_player : ai_player;
+	let second_player = human_player.blind === "bb" ? human_player : ai_player;
+	
     human_player.player_move.move = "";
     ai_player.player_move.move = "";
     
