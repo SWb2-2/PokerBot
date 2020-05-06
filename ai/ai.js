@@ -17,7 +17,7 @@ const range_func = require("./ai_util/range");
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
 	console.log("___________________________________________________________________________________________________________________");
-	console.log(game_info.player_move)
+	console.log("Opponents move: ", game_info.player_move);
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
@@ -48,6 +48,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
+		console.log("My move: ", ai_move);
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" /*|| ai_move.ai_move == "call"*/)) {
@@ -63,6 +64,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
+	console.log("My move: ", ai_move);
 	return ai_move;
 }
 
@@ -153,32 +155,30 @@ function do_pure_bluff(){
 //output: Returns true, if bluff is determined, makes Ai raise
 //Calculates the chance of the Ai to bluff in a given scenario based on input paramters. The raise amount is between 0.5x and 1x the pot
 function do_calculated_bluff(ai_move, equity, game_info, data, range) {
+	if(data.total_moves < 15) {
+		return; 
+	}
+
 	let chance = 10; 
 	
 	if(ai_move.ai_move == "check") {
 		if(data.total_moves > 20) {
-			chance = data.chance_of_fold_when_raised * 10;				//Might change this number 
+			chance = data.chance_of_fold_when_raised * 30;				//Might change this number 
 		} else {
-			chance = 16;
+			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 14; 
+		chance = 10; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 12; 		
+		chance = 5; 		
 	}
 
-	if(data.total_moves < 10) {
-		return; 
-	}
 	chance += equity * 30;
-	//console.log(chance, "equity"); 
 	chance += (data.chance_of_fold_when_raised) * 18; 		//Mest relevant. Burde sættes sammen med equity . 
-	//console.log(chance, "their fold chance"); 
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
-	//console.log(chance, "Their equity + percieved equity "); 
 	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
-	//console.log(data.ai_raise, data.ai_total_moves);
 	console.log(chance, "our raise and total moves influence"); 
+
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
 		ai_move.amount = ((Math.random() / 2) + 0.5) * game_info.pot;
@@ -289,6 +289,8 @@ function calc_EV_check(equity, pot) {
 //Output: the raise amount that yields the highest expected value; an object containing EV and amount
 //Checks different raise amounts and returns the raise with the highest EV
 function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity) {
+
+	//When equity gets too high, the AI gets afraid of raising, which gets avoided here. 
 	if (equity > 0.85) {
 		return {EV: Infinity, amount: (Math.random() + 0.5) * pot}
 	}
@@ -306,7 +308,7 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 		call_chance = 0.30;
 	}
 	
-	for (let i = 0.2; i < 10; i += 0.2) {
+	for (let i = 5; i < 10; i += 0.2) {
 		bet_percent_of_pot = 0.1 * i;
 		raise = bet_percent_of_pot * pot;
 		adjusted_call_chance = adjust_call_chance(call_chance, bet_percent_of_pot); 
@@ -325,7 +327,7 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 //Input  : Opponent's chance to call our raise, pot size, raise size, equity
 //Output : EV of a raise
 function calc_EV_raise(adjusted_call_chance, pot, raise, equity) {
-	let low = 0.5, high = 1.5
+	let low = 0.5, high = 1.5											//CHANGE MIGHT HAPPEND
 
 	return 	(1 - adjusted_call_chance) * pot
         	+ (adjusted_call_chance* high) * equity * (pot + raise)

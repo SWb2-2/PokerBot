@@ -1,0 +1,8 @@
+1000 hands played: 
+Average_no_bluff
+BB won: -105.5 / Hands Played: 1000 / BB won with bluffs: 0 / bluffed hands: 0 /
+BB won: 139 / Hands Played: 2000 / BB won with bluffs: 0 / bluffed hands: 0 /
+
+Average_bluff
+BB won: 105.5 / Hands Played: 1000 / BB won with bluffs: -272.5 / bluffed hands: 77 /
+BB won: -139 / Hands Played: 2000 / BB won with bluffs: -601 / bluffed hands: 156 /
