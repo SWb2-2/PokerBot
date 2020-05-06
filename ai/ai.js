@@ -16,8 +16,8 @@ const range_func = require("./ai_util/range");
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log("___________________________________________________________________________________________________________________");
-	console.log("Opponents move: ", game_info.player_move);
+	// console.log("___________________________________________________________________________________________________________________");
+	// console.log("Opponents move: ", game_info.player_move);
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
@@ -30,9 +30,9 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
-	console.log(equity.draw_and_winrate, "wr");
-	console.log(relevant_data === data_preflop ? "preflop data" : "postflop data");
-	console.log("range:", range)
+	// console.log(equity.draw_and_winrate, "wr");
+	// console.log(relevant_data === data_preflop ? "preflop data" : "postflop data");
+	// console.log("range:", range)
 
 	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
 	if(game_info.pot < 2*game_info.bb_size && game_info.table_cards.length == 0) {
@@ -48,14 +48,14 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
-		console.log("My move: ", ai_move);
+		// console.log("My move: ", ai_move);
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" /*|| ai_move.ai_move == "call"*/)) {
 	
 		if(do_calculated_bluff2(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data)) {
 			ai_move.bluff = "calc bluff";
-			console.log("bluffed: aimove:", ai_move);
+			// console.log("bluffed: aimove:", ai_move);
 		}	
 		
 		set_final_amount(ai_move);
@@ -64,7 +64,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
-	console.log("My move: ", ai_move);
+	// console.log("My move: ", ai_move);
 	return ai_move;
 }
 
@@ -82,9 +82,9 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 	else {
 		EV_bluff = calc_EV_bluff(0.5, game_info.pot, raise_amount, equity);
 	}
-	console.log(EV_bluff, "EV Bluff");
+	// console.log(EV_bluff, "EV Bluff");
 	let EV_compared_to_pot = EV_bluff / game_info.pot; 
-	console.log("EV bluff comp pot", EV_compared_to_pot);
+	// console.log("EV bluff comp pot", EV_compared_to_pot);
 	/*if(EV_compared_to_pot < 0.5) {
 		return false; 
 	}
@@ -99,10 +99,10 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 			} else {
 				ai_move.ai_move = "raise";
 				ai_move.amount  = raise_amount;
-				console.log("bluff on check", EV_bluff, EV_check);
+				// console.log("bluff on check", EV_bluff, EV_check);
 				return true; 
 			}
-		case "call":
+		/*case "call":
 			EV_call = calc_EV_call(equity, game_info); 
 
 			if(EV_bluff <= EV_call) {
@@ -113,6 +113,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 				console.log("bluff on call", EV_bluff, EV_call);
 				return true; 
 			}
+		
 		case "fold":
 			if(EV_bluff <= EV_fold) {
 				return false; 
@@ -122,19 +123,21 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 				console.log("bluff on fold")
 				return true; 
 			}
-		default: console.log("error: could not read ai move");
+		*/
+		// default: console.log("error: could not read ai move");
 	}
 }
 
 
 function calc_EV_bluff(call_chance, pot, raise, equity) {
-	let k1 = 0.52, k2 = find_k2(equity, k1);
-	let k3 = 1.5, k4 = 0.5;
-	console.log("k2",k2);
-	console.log("please workd",(1 - call_chance) * pot
-	+ k1 * call_chance * equity * (pot + raise)
-	- k2 * call_chance * (1 - equity) *raise);
-
+	let k1 = 1, k2 = 1;//find_k2(equity, k1);
+	//let k3 = 1.5, k4 = 0.5;
+	// console.log("k2",k2);
+	/*console.log("please workd",
+		( 1 - call_chance) * pot
+		+ k1 * call_chance * equity * (pot + raise)
+		- k2 * call_chance * (1 - equity) *raise);
+	*/
 	return	(1 - call_chance) * pot
 			+ k1 * call_chance * equity * (pot + raise)
 			- k2 * call_chance * (1 - equity) *raise;
@@ -162,16 +165,16 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
+		chance = -Infinity; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		chance = -Infinity; 		
 	}
 
 	chance += equity * 30;
 	chance += (data.chance_of_fold_when_raised) * 18; 		//Mest relevant. Burde sættes sammen med equity . 
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
 	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
-	console.log(chance, "our raise and total moves influence"); 
+	// console.log(chance, "our raise and total moves influence"); 
 
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
@@ -202,7 +205,7 @@ function determine_move(equity, game_info, relevant_data) {
 function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
-		console.log("Vi caller som sb", equity); 
+		// console.log("Vi caller som sb", equity); 
 		/*if(equity > 0.44) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
@@ -313,8 +316,8 @@ function find_max_EV_raise(total_moves, chance_of_fold_when_raised, pot, equity)
 		}
 	}
 	let EV_compared_to_pot = max_EV_raise / pot; 
-	console.log("Raise ev comp pot##########################", EV_compared_to_pot);
-	console.log("Percent pot raise:", raise / pot);
+	// console.log("Raise ev comp pot##########################", EV_compared_to_pot);
+	// console.log("Percent pot raise:", raise / pot);
 	return {EV: max_EV_raise, amount: ai_raise};
 }
 //Calculates EV of a raise based on the 3 scenarios that can happen: (1) they fold (2) they call and lose (3) they call and win 

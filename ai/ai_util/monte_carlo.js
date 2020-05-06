@@ -148,7 +148,7 @@ function equity_range(hand, numb_of_sim, table, range_low, range_high) {
         range_low = 80;
     }
     if(range_low > range_high) {
-        console.log("Error in func equity_range, invalid parameters")
+        // console.log("Error in func equity_range, invalid parameters")
         return Error; 
     }
     if(numb_of_sim == undefined) {
@@ -285,7 +285,7 @@ function calculate_preflop() {
         }
 	}
 	
-    console.log("\n\n SUIT WINRATE", result_suit, "\n\n");
+    // console.log("\n\n SUIT WINRATE", result_suit, "\n\n");
     
     //Find pair and off suit winrate 
     for(let i = 2; i <= 14; i++) {
@@ -298,7 +298,7 @@ function calculate_preflop() {
             }
         }
     }
-	console.log("\n\nOFF SUIT WINRATE", result_off_suit, "\n\nPAIRS", result_pair);
+	// console.log("\n\nOFF SUIT WINRATE", result_off_suit, "\n\nPAIRS", result_pair);
 	
 }
 
