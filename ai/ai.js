@@ -144,12 +144,6 @@ function calc_EV_bluff(call_chance, pot, raise, equity) {
 	}
 }
 
-function do_pure_bluff(){
-
-
-}
-
-
 
 //Input: Ai's potential move without bluff, equity, game_info, opponent's playerstyle data, opponent's range
 //output: Returns true, if bluff is determined, makes Ai raise
