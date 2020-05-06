@@ -1,0 +1,1525 @@
+
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1, Bluff BB/h: 0, BB/h without bluff: -1
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: -1, Bluff BB/h: 0, BB/h without bluff: -1
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1.5, Bluff BB/h: 0, BB/h without bluff: -1.5
+New Game: 
+
+Average raise amount: 4, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+
+Winner: robot 
+BB/h: -0.875, Bluff BB/h: 0, BB/h without bluff: -0.875
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.8, Bluff BB/h: 0, BB/h without bluff: -0.8
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -0.8333333333333334, Bluff BB/h: 0, BB/h without bluff: -0.8333333333333334
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -0.8571428571428571, Bluff BB/h: 0, BB/h without bluff: -0.8571428571428571
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 4, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -0.625, Bluff BB/h: 0, BB/h without bluff: -0.625
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 3.6666666666666665, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -2.8055555555555554, Bluff BB/h: 0, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 3.5, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 4, Bluff: calc bluff
+
+Average raise amount: 5.6, Average bluff amount: 8.5
+AI Move: raise, Amount: 14, Round: 4, Bluff: calc bluff
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: -3.75, Bluff BB/h: -12.25, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -3.4545454545454546, Bluff BB/h: -6.375, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -3.25, Bluff BB/h: -4.583333333333333, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -3.0384615384615383, Bluff BB/h: -3.5625, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 5.5, Average bluff amount: 0
+AI Move: raise, Amount: 5, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -2.75, Bluff BB/h: -2.65, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 5.285714285714286, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -3.033333333333333, Bluff BB/h: -3.375, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 5.125, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 4, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -3.03125, Bluff BB/h: -3.3214285714285716, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 5, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -2.7941176470588234, Bluff BB/h: -2.78125, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 4.8, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 0, Bluff: false
+
+Winner: robot 
+BB/h: -2.5833333333333335, Bluff BB/h: -2.361111111111111, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 4.7272727272727275, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 5.333333333333333, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+
+Average raise amount: 6.769230769230769, Average bluff amount: 0
+AI Move: raise, Amount: 24, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: -1.3421052631578947, Bluff BB/h: -0.025, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 6.571428571428571, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 0, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -1.425, Bluff BB/h: -0.29545454545454547, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.380952380952381, Bluff BB/h: -0.3125, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 6.4, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -1.2727272727272727, Bluff BB/h: -0.21153846153846154, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -1.2391304347826086, Bluff BB/h: -0.23214285714285715, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 6.25, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 0, Bluff: calc bluff
+
+Winner: robot 
+BB/h: -1.1458333333333333, Bluff BB/h: -0.15, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 6.0588235294117645, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -1.06, Bluff BB/h: -0.078125, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: -1, Bluff BB/h: -0.04411764705882353, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.9814814814814815, Bluff BB/h: -0.06944444444444445, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: -0.9821428571428571, Bluff BB/h: -0.11842105263157894, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.9655172413793104, Bluff BB/h: -0.1375, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 5.888888888888889, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: -1.0333333333333334, Bluff BB/h: -0.27380952380952384, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 5.684210526315789, Average bluff amount: 0
+AI Move: raise, Amount: 2, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -0.967741935483871, Bluff BB/h: -0.2159090909090909, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: -0.921875, Bluff BB/h: -0.18478260869565216, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 5.55, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -0.8636363636363636, Bluff BB/h: -0.13541666666666666, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 5.476190476190476, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 0, Bluff: calc bluff
+
+Average raise amount: 5.7727272727272725, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 3, Bluff: false
+
+Average raise amount: 7.086956521739131, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: -0.5735294117647058, Bluff BB/h: 0.23, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Winner: robot 
+BB/h: -0.5285714285714286, Bluff BB/h: 0.25961538461538464, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: -0.5, Bluff BB/h: 0.26851851851851855, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.5, Bluff BB/h: 0.24107142857142858, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 6.958333333333333, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: -0.4605263157894737, Bluff BB/h: 0.2672413793103448, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 6.84, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 7.076923076923077, Average bluff amount: 0
+AI Move: raise, Amount: 13, Round: 4, Bluff: false
+
+Average raise amount: 8.851851851851851, Average bluff amount: 0
+AI Move: raise, Amount: 55, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.5769230769230769, Bluff BB/h: 1.5916666666666666, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.575, Bluff BB/h: 1.5564516129032258, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 9.714285714285714, Average bluff amount: 0
+AI Move: raise, Amount: 33, Round: 5, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 1.7804878048780488, Bluff BB/h: 3.0703125, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 1.75, Bluff BB/h: 2.992424242424242, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.697674418604651, Bluff BB/h: 2.889705882352941, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 1.6704545454545454, Bluff BB/h: 2.8214285714285716, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 9.586206896551724, Average bluff amount: 0
+AI Move: raise, Amount: 6, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 1.6555555555555554, Bluff BB/h: 2.7708333333333335, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 1.6304347826086956, Bluff BB/h: 2.7094594594594597, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.5851063829787233, Bluff BB/h: 2.625, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 9.366666666666667, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.5, Bluff BB/h: 2.4935897435897436, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 9.419354838709678, Average bluff amount: 0
+AI Move: raise, Amount: 11, Round: 3, Bluff: false
+
+Average raise amount: 10.5625, Average bluff amount: 0
+AI Move: raise, Amount: 46, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.4489795918367347, Bluff BB/h: 1.18125, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 10.363636363636363, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.46, Bluff BB/h: 1.1768292682926829, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 10.176470588235293, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 3, Bluff: calc bluff
+
+Average raise amount: 10.085714285714285, Average bluff amount: 0
+AI Move: raise, Amount: 7, Round: 4, Bluff: false
+
+Average raise amount: 10.277777777777779, Average bluff amount: 0
+AI Move: raise, Amount: 17, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.7450980392156863, Bluff BB/h: 1.505952380952381, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.7403846153846154, Bluff BB/h: 1.4825581395348837, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 10.108108108108109, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.7452830188679245, Bluff BB/h: 1.4715909090909092, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 9.947368421052632, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 10, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+
+Average raise amount: 10.65, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.8981481481481481, Bluff BB/h: 1.6388888888888888, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 10.487804878048781, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 5, Bluff: false
+
+Average raise amount: 10.595238095238095, Average bluff amount: 0
+AI Move: raise, Amount: 15, Round: 5, Bluff: false
+
+Average raise amount: 11.651162790697674, Average bluff amount: 0
+AI Move: raise, Amount: 56, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -0.02727272727272727, Bluff BB/h: 0.5163043478260869, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 11.5, Average bluff amount: 0
+AI Move: raise, Amount: 5, Round: 5, Bluff: false
+
+Average raise amount: 11.666666666666666, Average bluff amount: 0
+AI Move: raise, Amount: 19, Round: 5, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.8660714285714286, Bluff BB/h: 1.5691489361702127, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.8421052631578947, Bluff BB/h: 1.5260416666666667, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.8103448275862069, Bluff BB/h: 1.4744897959183674, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.788135593220339, Bluff BB/h: 1.435, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.7583333333333333, Bluff BB/h: 1.3872549019607843, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.7377049180327869, Bluff BB/h: 1.3509615384615385, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.7096774193548387, Bluff BB/h: 1.3066037735849056, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 11.478260869565217, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.2698412698412698, Bluff BB/h: 0.7824074074074074, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.25, Bluff BB/h: 0.75, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.23846153846153847, Bluff BB/h: 0.7276785714285714, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 11.8125, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+
+Winner: robot 
+BB/h: 0.25, Bluff BB/h: 0.7324561403508771, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.23880597014925373, Bluff BB/h: 0.7112068965517241, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.653061224489797, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 11.66, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+
+Average raise amount: 12.117647058823529, Average bluff amount: 0
+AI Move: raise, Amount: 35, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.625, Bluff BB/h: 1.1483050847457628, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.6086956521739131, Bluff BB/h: 1.1208333333333333, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 11.942307692307692, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.5642857142857143, Bluff BB/h: 1.0614754098360655, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.754716981132075, Average bluff amount: 0
+AI Move: raise, Amount: 2, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.5845070422535211, Bluff BB/h: 1.0766129032258065, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.61111111111111, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.5902777777777778, Bluff BB/h: 1.0753968253968254, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.5684931506849316, Bluff BB/h: 1.04296875, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.472727272727273, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 11.589285714285714, Average bluff amount: 0
+AI Move: raise, Amount: 18, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12.403508771929825, Average bluff amount: 0
+AI Move: raise, Amount: 58, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -0.11486486486486487, Bluff BB/h: 0.25769230769230766, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.12, Bluff BB/h: 0.24621212121212122, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: -0.1118421052631579, Bluff BB/h: 0.25, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: -0.12337662337662338, Bluff BB/h: 0.23161764705882354, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 12.241379310344827, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: -0.15384615384615385, Bluff BB/h: 0.19202898550724637, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.15822784810126583, Bluff BB/h: 0.18214285714285713, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: -0.16875, Bluff BB/h: 0.16549295774647887, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: -0.1728395061728395, Bluff BB/h: 0.15625, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 12.101694915254237, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+
+Average raise amount: 12.15, Average bluff amount: 0
+AI Move: raise, Amount: 15, Round: 3, Bluff: false
+
+Average raise amount: 12.295081967213115, Average bluff amount: 0
+AI Move: raise, Amount: 21, Round: 4, Bluff: false
+
+Average raise amount: 13.03225806451613, Average bluff amount: 0
+AI Move: raise, Amount: 58, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.43902439024390244, Bluff BB/h: 0.839041095890411, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.42771084337349397, Bluff BB/h: 0.8209459459459459, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 12.88888888888889, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12.875, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.4583333333333333, Bluff BB/h: 0.85, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.738461538461538, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.4647058823529412, Bluff BB/h: 0.8519736842105263, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.46511627906976744, Bluff BB/h: 0.8474025974025974, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.4540229885057471, Bluff BB/h: 0.8301282051282052, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 12.606060606060606, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 4, Bluff: false
+
+Average raise amount: 12.716417910447761, Average bluff amount: 0
+AI Move: raise, Amount: 20, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.5284090909090909, Bluff BB/h: 0.9082278481012658, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5168539325842697, Bluff BB/h: 0.890625, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.588235294117647, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.4777777777777778, Bluff BB/h: 0.8425925925925926, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.492753623188406, Average bluff amount: 0
+AI Move: raise, Amount: 6, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.4835164835164835, Bluff BB/h: 0.8445121951219512, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.371428571428572, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.5543478260869565, Bluff BB/h: 0.9186746987951807, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.6075268817204301, Bluff BB/h: 0.9732142857142857, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 12.253521126760564, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 4, Bluff: false
+
+Average raise amount: 12.222222222222221, Average bluff amount: 0
+AI Move: raise, Amount: 10, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.6861702127659575, Bluff BB/h: 1.0558823529411765, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.6684210526315789, Bluff BB/h: 1.0319767441860466, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.6510416666666666, Bluff BB/h: 1.0086206896551724, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.6391752577319587, Bluff BB/h: 0.9914772727272727, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: 0.6224489795918368, Bluff BB/h: 0.9691011235955056, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.6111111111111112, Bluff BB/h: 0.9527777777777777, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.61, Bluff BB/h: 0.9478021978021978, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.594059405940594, Bluff BB/h: 0.9266304347826086, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.095890410958905, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.5980392156862745, Bluff BB/h: 0.9274193548387096, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.587378640776699, Bluff BB/h: 0.9122340425531915, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: 0.5721153846153846, Bluff BB/h: 0.8921052631578947, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.6, Bluff BB/h: 0.9192708333333334, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: 0.5849056603773585, Bluff BB/h: 0.8994845360824743, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 11.972972972972974, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+
+Average raise amount: 11.933333333333334, Average bluff amount: 0
+AI Move: raise, Amount: 9, Round: 3, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.514018691588785, Bluff BB/h: 0.8188775510204082, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.828947368421053, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 11.831168831168831, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.5370370370370371, Bluff BB/h: 0.8409090909090909, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5229357798165137, Bluff BB/h: 0.8225, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.5227272727272727, Bluff BB/h: 0.8193069306930693, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5135135135135135, Bluff BB/h: 0.8063725490196079, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.73076923076923, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 11.784810126582279, Average bluff amount: 0
+AI Move: raise, Amount: 16, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.32142857142857145, Bluff BB/h: 0.5946601941747572, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.3141592920353982, Bluff BB/h: 0.5841346153846154, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.3026315789473684, Bluff BB/h: 0.569047619047619, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.2956521739130435, Bluff BB/h: 0.5589622641509434, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.775, Average bluff amount: 0
+AI Move: raise, Amount: 11, Round: 3, Bluff: false
+
+Average raise amount: 11.876543209876543, Average bluff amount: 0
+AI Move: raise, Amount: 20, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.3793103448275862, Bluff BB/h: 0.647196261682243, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.3717948717948718, Bluff BB/h: 0.6365740740740741, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 11.768292682926829, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+
+Winner: robot 
+BB/h: 0.3771186440677966, Bluff BB/h: 0.6399082568807339, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 11.662650602409638, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+
+Average raise amount: 11.654761904761905, Average bluff amount: 0
+AI Move: raise, Amount: 11, Round: 4, Bluff: false
+
+Average raise amount: 12.011764705882353, Average bluff amount: 0
+AI Move: raise, Amount: 42, Round: 4, Bluff: false
+
+Average raise amount: 12.244186046511627, Average bluff amount: 0
+AI Move: raise, Amount: 32, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.7941176470588235, Bluff BB/h: 1.0886363636363636, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.149425287356323, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.7958333333333333, Bluff BB/h: 1.087837837837838, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12.420454545454545, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.8636363636363636, Bluff BB/h: 1.1584821428571428, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 12.325842696629213, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+
+Average raise amount: 12.322222222222223, Average bluff amount: 12
+AI Move: raise, Amount: 12, Round: 3, Bluff: calc bluff
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12.582417582417582, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 5, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.44672131147540983, Bluff BB/h: 0.7057522123893806, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.43902439024390244, Bluff BB/h: 0.6951754385964912, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 12.48913043478261, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.4112903225806452, Bluff BB/h: 0.6630434782608695, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.404, Bluff BB/h: 0.6530172413793104, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.40476190476190477, Bluff BB/h: 0.6517094017094017, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 12.397849462365592, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.4251968503937008, Bluff BB/h: 0.6716101694915254, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.4140625, Bluff BB/h: 0.657563025210084, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.29457364341085274, Bluff BB/h: 0.5270833333333333, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.2846153846153846, Bluff BB/h: 0.5144628099173554, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.2786259541984733, Bluff BB/h: 0.5061475409836066, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.2689393939393939, Bluff BB/h: 0.49390243902439024, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.2593984962406015, Bluff BB/h: 0.48185483870967744, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.25, Bluff BB/h: 0.47, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.24444444444444444, Bluff BB/h: 0.4623015873015873, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.27205882352941174, Bluff BB/h: 0.49015748031496065, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.2773722627737226, Bluff BB/h: 0.494140625, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 12.297872340425531, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 4, Bluff: false
+
+Average raise amount: 12.31578947368421, Average bluff amount: 0
+AI Move: raise, Amount: 14, Round: 5, Bluff: false
+
+Average raise amount: 12.770833333333334, Average bluff amount: 0
+AI Move: raise, Amount: 56, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.6376811594202898, Bluff BB/h: 0.877906976744186, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.6258992805755396, Bluff BB/h: 0.8634615384615385, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.6142857142857143, Bluff BB/h: 0.8492366412213741, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.6063829787234043, Bluff BB/h: 0.8390151515151515, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5950704225352113, Bluff BB/h: 0.825187969924812, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 12.77319587628866, Average bluff amount: 0
+AI Move: raise, Amount: 13, Round: 3, Bluff: false
+
+Average raise amount: 13.275510204081632, Average bluff amount: 0
+AI Move: raise, Amount: 62, Round: 4, Bluff: false
+
+Average raise amount: 13.303030303030303, Average bluff amount: 0
+AI Move: raise, Amount: 16, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.8846153846153846, Bluff BB/h: 1.132462686567164, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 13.21, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.84375, Bluff BB/h: 1.087037037037037, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.8344827586206897, Bluff BB/h: 1.0753676470588236, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.118811881188119, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.7876712328767124, Bluff BB/h: 1.0237226277372262, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.7789115646258503, Bluff BB/h: 1.0126811594202898, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.777027027027027, Bluff BB/h: 1.0089928057553956, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.7684563758389261, Bluff BB/h: 0.9982142857142857, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.029411764705882, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 13.019417475728156, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+
+Average raise amount: 13.240384615384615, Average bluff amount: 0
+AI Move: raise, Amount: 36, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.5833333333333334, Bluff BB/h: 0.799645390070922, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5761589403973509, Bluff BB/h: 0.7904929577464789, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5657894736842105, Bluff BB/h: 0.777972027972028, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5588235294117647, Bluff BB/h: 0.7690972222222222, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5487012987012987, Bluff BB/h: 0.756896551724138, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5419354838709678, Bluff BB/h: 0.7482876712328768, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.532051282051282, Bluff BB/h: 0.7363945578231292, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5254777070063694, Bluff BB/h: 0.7280405405405406, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5158227848101266, Bluff BB/h: 0.7164429530201343, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5062893081761006, Bluff BB/h: 0.705, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.496875, Bluff BB/h: 0.6937086092715232, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.4906832298136646, Bluff BB/h: 0.6858552631578947, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.48148148148148145, Bluff BB/h: 0.6748366013071896, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.4, Average bluff amount: 0
+AI Move: raise, Amount: 30, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.5184049079754601, Bluff BB/h: 0.7126623376623377, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.349056603773585, Average bluff amount: 0
+AI Move: raise, Amount: 8, Round: 3, Bluff: false
+
+Average raise amount: 13.373831775700934, Average bluff amount: 0
+AI Move: raise, Amount: 16, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.5579268292682927, Bluff BB/h: 0.7532258064516129, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.5484848484848485, Bluff BB/h: 0.7419871794871795, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 13.287037037037036, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+
+Average raise amount: 13.293577981651376, Average bluff amount: 0
+AI Move: raise, Amount: 14, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.5632530120481928, Bluff BB/h: 0.7563694267515924, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.209090909090909, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.46407185628742514, Bluff BB/h: 0.6503164556962026, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.4642857142857143, Bluff BB/h: 0.64937106918239, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.4556213017751479, Bluff BB/h: 0.6390625, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.144144144144144, Average bluff amount: 0
+AI Move: raise, Amount: 6, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.4588235294117647, Bluff BB/h: 0.6413043478260869, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.45321637426900585, Bluff BB/h: 0.6342592592592593, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 0.45348837209302323, Bluff BB/h: 0.6334355828220859, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.4479768786127168, Bluff BB/h: 0.6265243902439024, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: check, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.4396551724137931, Bluff BB/h: 0.6166666666666667, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.43142857142857144, Bluff BB/h: 0.6069277108433735, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: fold, Amount: 0, Round: 3, Bluff: false
+
+Winner: player 
+BB/h: 0.42329545454545453, Bluff BB/h: 0.5973053892215568, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.4152542372881356, Bluff BB/h: 0.5877976190476191, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.0625, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 13.097345132743364, Average bluff amount: 0
+AI Move: raise, Amount: 17, Round: 4, Bluff: false
+
+Average raise amount: 13.24561403508772, Average bluff amount: 0
+AI Move: raise, Amount: 30, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 0.5617977528089888, Bluff BB/h: 0.7411242603550295, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.173913043478262, Average bluff amount: 0
+AI Move: raise, Amount: 5, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.301724137931034, Average bluff amount: 0
+AI Move: raise, Amount: 28, Round: 3, Bluff: false
+
+Average raise amount: 13.512820512820513, Average bluff amount: 0
+AI Move: raise, Amount: 38, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 0.8379888268156425, Bluff BB/h: 1.0308823529411764, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 13.432203389830509, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 13.453781512605042, Average bluff amount: 0
+AI Move: raise, Amount: 16, Round: 3, Bluff: false
+
+Average raise amount: 13.833333333333334, Average bluff amount: 0
+AI Move: raise, Amount: 59, Round: 3, Bluff: false
+
+Winner: robot 
+BB/h: 1.1111111111111112, Bluff BB/h: 1.317251461988304, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.1022099447513811, Bluff BB/h: 1.306686046511628, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 1.098901098901099, Bluff BB/h: 1.3020231213872833, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 1.0874316939890711, Bluff BB/h: 1.2887931034482758, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Winner: robot 
+BB/h: 1.0842391304347827, Bluff BB/h: 1.2842857142857143, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.0756756756756756, Bluff BB/h: 1.2741477272727273, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false
+AI Move: check, Amount: 0, Round: 4, Bluff: false
+AI Move: fold, Amount: 0, Round: 4, Bluff: false
+
+Winner: player 
+BB/h: 1.064516129032258, Bluff BB/h: 1.2612994350282485, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.0561497326203209, Bluff BB/h: 1.2514044943820224, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 13.743801652892563, Average bluff amount: 3
+AI Move: raise, Amount: 3, Round: 0, Bluff: calc bluff
+
+Average raise amount: 13.71311475409836, Average bluff amount: 0
+AI Move: raise, Amount: 10, Round: 3, Bluff: false
+
+Average raise amount: 13.845528455284553, Average bluff amount: 0
+AI Move: raise, Amount: 30, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Average raise amount: 14.096774193548388, Average bluff amount: 0
+AI Move: raise, Amount: 45, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.7845744680851063, Bluff BB/h: 0.9650837988826816, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: call, Amount: 0, Round: 3, Bluff: false
+
+Average raise amount: 14.064, Average bluff amount: 0
+AI Move: raise, Amount: 10, Round: 4, Bluff: false
+
+Average raise amount: 14.19047619047619, Average bluff amount: 0
+AI Move: raise, Amount: 30, Round: 5, Bluff: false
+
+Winner: player 
+BB/h: 0.6613756613756614, Bluff BB/h: 0.8347222222222223, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 14.10236220472441, Average bluff amount: 0
+AI Move: raise, Amount: 3, Round: 3, Bluff: false
+
+Average raise amount: 14.1015625, Average bluff amount: 0
+AI Move: raise, Amount: 14, Round: 4, Bluff: false
+
+Average raise amount: 14.279069767441861, Average bluff amount: 0
+AI Move: raise, Amount: 37, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.9210526315789473, Bluff BB/h: 1.106353591160221, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 0.9136125654450262, Bluff BB/h: 1.0975274725274726, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 14.2, Average bluff amount: 4
+AI Move: raise, Amount: 4, Round: 3, Bluff: calc bluff
+
+Average raise amount: 14.145038167938932, Average bluff amount: 0
+AI Move: raise, Amount: 7, Round: 4, Bluff: false
+
+Winner: robot 
+BB/h: 0.9244791666666666, Bluff BB/h: 1.1079234972677596, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+
+Average raise amount: 14.068181818181818, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 3, Bluff: false
+
+Average raise amount: 14.052631578947368, Average bluff amount: 0
+AI Move: raise, Amount: 12, Round: 4, Bluff: false
+AI Move: call, Amount: 0, Round: 5, Bluff: false
+
+Winner: robot 
+BB/h: 1.0181347150259068, Bluff BB/h: 1.205163043478261, BB/h without bluff: -2.8055555555555554
+New Game: 
+
+Average raise amount: 13.977611940298507, Average bluff amount: 0
+AI Move: raise, Amount: 4, Round: 0, Bluff: false
+
+Average raise amount: 13.955555555555556, Average bluff amount: 11
+AI Move: raise, Amount: 11, Round: 3, Bluff: calc bluff
+
+Winner: robot 
+BB/h: 1.0283505154639174, Bluff BB/h: 1.2148648648648648, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: call, Amount: 0, Round: 0, Bluff: false
+AI Move: fold, Amount: 0, Round: 0, Bluff: false
+
+Winner: player 
+BB/h: 1.0179487179487179, Bluff BB/h: 1.2029569892473118, BB/h without bluff: -2.8055555555555554
+New Game: 
+AI Move: check, Amount: 0, Round: 0, Bluff: false
+AI Move: check, Amount: 0, Round: 3, Bluff: false

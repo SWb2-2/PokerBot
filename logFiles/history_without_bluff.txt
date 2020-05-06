@@ -1,0 +1,3302 @@
+
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0 
+
+Winner: robot
+BB/H: 1
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: 0
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 4
+AI Move: raise, Amount: 4, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -2.3333333333333335
+New Game: 
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 3
+AI Move: raise, Amount: 2, Round: 3 
+
+Winner: robot
+BB/H: 1
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: 0
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 8.333333333333334
+AI Move: raise, Amount: 19, Round: 4 
+
+Winner: robot
+BB/H: 1.1666666666666667
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: 1.875
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: 1.4
+New Game: 
+
+Average raise amount: 7.25
+AI Move: raise, Amount: 4, Round: 0 
+
+Winner: robot
+BB/H: 1.3333333333333333
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: 1
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+
+Average raise amount: 6.8
+AI Move: raise, Amount: 5, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 7.666666666666667
+AI Move: raise, Amount: 12, Round: 4
+
+Average raise amount: 12.285714285714286
+AI Move: raise, Amount: 40, Round: 4 
+
+Winner: draw
+BB/H: 0.875
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.25
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: 0.8888888888888888
+New Game: 
+
+Average raise amount: 10.333333333333334
+AI Move: raise, Amount: 3, Round: 0 
+
+Winner: robot
+BB/H: 0.9
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: 0.9090909090909091
+New Game:  
+
+Winner: robot
+BB/H: 0.875
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.7
+AI Move: raise, Amount: 4, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: 0.5769230769230769
+New Game: 
+
+Average raise amount: 9.090909090909092
+AI Move: raise, Amount: 3, Round: 0
+
+Average raise amount: 8.75
+AI Move: raise, Amount: 5, Round: 3 
+
+Winner: robot
+BB/H: 0.7142857142857143
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 8.23076923076923
+AI Move: raise, Amount: 2, Round: 3
+
+Average raise amount: 7.928571428571429
+AI Move: raise, Amount: 4, Round: 4
+
+Average raise amount: 7.933333333333334
+AI Move: raise, Amount: 8, Round: 5 
+
+Winner: player
+BB/H: 0.13333333333333333
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: 0.1875
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 7.625
+AI Move: raise, Amount: 3, Round: 3
+
+Average raise amount: 8
+AI Move: raise, Amount: 14, Round: 4
+
+Average raise amount: 10.38888888888889
+AI Move: raise, Amount: 51, Round: 5 
+
+Winner: robot
+BB/H: 3.1176470588235294
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+–––– NEW PLAYER ––––
+
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 10.052631578947368
+AI Move: raise, Amount: 4, Round: 3
+
+Average raise amount: 10.6
+AI Move: raise, Amount: 21, Round: 4
+
+Average raise amount: 11.952380952380953
+AI Move: raise, Amount: 39, Round: 4 
+
+Winner: player
+BB/H: -50
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -25.5
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -17.5
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+
+Average raise amount: 11.545454545454545
+AI Move: raise, Amount: 3, Round: 4 
+
+Winner: robot
+BB/H: -12.875
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -10.5
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -8.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -7.357142857142857
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+
+Average raise amount: 11.130434782608695
+AI Move: raise, Amount: 2, Round: 3
+
+Average raise amount: 11
+AI Move: raise, Amount: 8, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.96
+AI Move: raise, Amount: 35, Round: 4 
+
+Winner: player
+BB/H: -12.6875
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.653846153846153
+AI Move: raise, Amount: 4, Round: 3
+AI Move: check, Amount: 0, Round: 4
+
+Average raise amount: 12.185185185185185
+AI Move: raise, Amount: 26, Round: 5 
+
+Winner: robot
+BB/H: -8.833333333333334
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -8.05
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -7.363636363636363
+New Game: 
+
+Average raise amount: 11.892857142857142
+AI Move: raise, Amount: 4, Round: 0 
+
+Winner: robot
+BB/H: -6.666666666666667
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -6.230769230769231
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.724137931034482
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -5.642857142857143
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -5.3
+New Game:  
+
+Winner: robot
+BB/H: -4.9375
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -4.676470588235294
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+
+Average raise amount: 11.5
+AI Move: raise, Amount: 5, Round: 4 
+
+Winner: robot
+BB/H: -4.361111111111111
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.193548387096774
+AI Move: raise, Amount: 2, Round: 3 
+
+Winner: robot
+BB/H: -4.078947368421052
+New Game:  
+
+Winner: robot
+BB/H: -3.85
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 10.96875
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -3.619047619047619
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -3.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -3.369565217391304
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -3.2708333333333335
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 10.757575757575758
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -3.1
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -3.019230769230769
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.925925925925926
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.857142857142857
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.7758620689655173
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.716666666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.6451612903225805
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.59375
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.5303030303030303
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.485294117647059
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -2.5285714285714285
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.486111111111111
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 10.558823529411764
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -2.391891891891892
+New Game:  
+
+Winner: robot
+BB/H: -2.3157894736842106
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.269230769230769
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.2375
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.1951219512195124
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+
+Average raise amount: 10.371428571428572
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -2.119047619047619
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0930232558139537
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0681818181818183
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.033333333333333
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+
+Average raise amount: 10.194444444444445
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.9673913043478262
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.946808510638298
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.9270833333333333
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8979591836734695
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.88
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8529411764705883
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8365384615384615
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8113207547169812
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.7962962962962963
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 10.027027027027026
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.7454545454545454
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.7321428571428572
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7105263157894737
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6982758620689655
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6779661016949152
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.6666666666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6475409836065573
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+
+Average raise amount: 9.842105263157896
+AI Move: raise, Amount: 3, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 9.923076923076923
+AI Move: raise, Amount: 13, Round: 4 
+
+Winner: robot
+BB/H: -1.5241935483870968
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5158730158730158
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.4296875
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4153846153846155
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4090909090909092
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3955223880597014
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3897058823529411
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.4130434782608696
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4071428571428573
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3943661971830985
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.875
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.3472222222222223
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3424657534246576
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.337837837837838
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3266666666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3223684210526316
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3116883116883118
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.829268292682928
+AI Move: raise, Amount: 8, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.3717948717948718
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.360759493670886
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.35625
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.345679012345679
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3414634146341464
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.785714285714286
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.3012048192771084
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2976190476190477
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2882352941176471
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.651162790697674
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.25
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 9.568181818181818
+AI Move: raise, Amount: 6, Round: 3 
+
+Winner: robot
+BB/H: -1.2126436781609196
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.2102272727272727
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.202247191011236
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1923076923076923
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.190217391304348
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1827956989247312
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: call, Amount: 0, Round: 4
+
+Average raise amount: 10.022222222222222
+AI Move: raise, Amount: 30, Round: 5
+
+Average raise amount: 10.782608695652174
+AI Move: raise, Amount: 45, Round: 5 
+
+Winner: player
+BB/H: -1.702127659574468
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6894736842105262
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6822916666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6701030927835052
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.663265306122449
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.27659574468085
+AI Move: raise, Amount: 34, Round: 4
+AI Move: call, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -2.1515151515151514
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -2.15
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.133663366336634
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.122549019607843
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.1067961165048543
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -2.105769230769231
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0904761904761906
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.080188679245283
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0654205607476634
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.208333333333334
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -2.0277777777777777
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0137614678899083
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0045454545454544
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.990990990990991
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9821428571428572
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9690265486725664
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9605263157894737
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9478260869565218
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.122448979591837
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.9137931034482758
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.86
+AI Move: raise, Amount: 48, Round: 4
+AI Move: call, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -2.324786324786325
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.3135593220338984
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.2983193277310923
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+
+Average raise amount: 11.862745098039216
+AI Move: raise, Amount: 12, Round: 5 
+
+Winner: robot
+BB/H: -2.2291666666666665
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.711538461538462
+AI Move: raise, Amount: 4, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -2.2355371900826446
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.2254098360655736
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.2113821138211383
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.2016129032258065
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.716981132075471
+AI Move: raise, Amount: 12, Round: 4 
+
+Winner: robot
+BB/H: -2.136
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.126984126984127
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.1141732283464565
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.10546875
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0930232558139537
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -2.0923076923076924
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0801526717557253
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.071969696969697
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0601503759398496
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0522388059701493
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0407407407407407
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0330882352941178
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.021897810218978
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0144927536231885
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -2.0035971223021583
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9964285714285714
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.62962962962963
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.9609929078014185
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.954225352112676
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.49090909090909
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.9265734265734267
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9201388888888888
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.910344827586207
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.904109589041096
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8945578231292517
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8885135135135136
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.9261744966442953
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.92
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9105960264900663
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9046052631578947
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.911764705882353
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.9123376623376624
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.903225806451613
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8974358974358974
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.8980891719745223
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+
+Average raise amount: 11.375
+AI Move: raise, Amount: 5, Round: 4
+AI Move: call, Amount: 0, Round: 4 
+
+Winner: draw
+BB/H: -1.8860759493670887
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.31578947368421
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.8616352201257862
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.85625
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8478260869565217
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8425925925925926
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.843558282208589
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8384146341463414
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8303030303030303
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8253012048192772
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8173652694610778
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8125
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8047337278106508
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7923976608187135
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7877906976744187
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.327586206896552
+AI Move: raise, Amount: 12, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.9508670520231215
+New Game: 
+AI Move: check, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.9454022988505748
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.937142857142857
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.9318181818181819
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.203389830508474
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.9096045197740112
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.904494382022472
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8966480446927374
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8916666666666666
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8839779005524862
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.879120879120879
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8715846994535519
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8668478260869565
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8594594594594596
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8548387096774193
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8475935828877006
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.8430851063829787
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.216666666666667
+AI Move: raise, Amount: 12, Round: 4
+
+Average raise amount: 11.524590163934427
+AI Move: raise, Amount: 30, Round: 5 
+
+Winner: robot
+BB/H: -1.7698412698412698
+New Game: 
+
+Average raise amount: 11.370967741935484
+AI Move: raise, Amount: 2, Round: 0 
+
+Winner: robot
+BB/H: -1.7552631578947369
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7486910994764397
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7447916666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.738341968911917
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.26984126984127
+AI Move: raise, Amount: 5, Round: 3 
+
+Winner: robot
+BB/H: -1.7190721649484537
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.7128205128205127
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.683673469387755
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.7055837563451777
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.702020202020202
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6959798994974875
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6925
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6865671641791045
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.683168316831683
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.40625
+AI Move: raise, Amount: 20, Round: 3 
+
+Winner: robot
+BB/H: -1.645320197044335
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.642156862745098
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6365853658536584
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.633495145631068
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.6352657004830917
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6322115384615385
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.6339712918660287
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.630952380952381
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6255924170616114
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6226415094339623
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6173708920187793
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6144859813084111
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6093023255813954
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.353846153846154
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.5925925925925926
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.5944700460829493
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.591743119266055
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.363636363636363
+AI Move: raise, Amount: 12, Round: 3 
+
+Winner: robot
+BB/H: -1.5662100456621004
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5636363636363637
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.388059701492537
+AI Move: raise, Amount: 13, Round: 3 
+
+Winner: robot
+BB/H: -1.5384615384615385
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4 
+
+Winner: robot
+BB/H: -1.5135135135135136
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5112107623318385
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5089285714285714
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: fold, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.5377777777777777
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5353982300884956
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.573529411764707
+AI Move: raise, Amount: 24, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.6167400881057268
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6140350877192982
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6091703056768558
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.6108695652173912
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.594202898550725
+AI Move: raise, Amount: 13, Round: 4 
+
+Winner: robot
+BB/H: -1.5865800865800865
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.5883620689655173
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5836909871244635
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5811965811965811
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3 
+
+Winner: robot
+BB/H: -1.5574468085106383
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4 
+
+Winner: robot
+BB/H: -1.5338983050847457
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.529535864978903
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.5567226890756303
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.6171548117154813
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.6270833333333334
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.6244813278008299
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.485714285714286
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.609504132231405
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.450704225352112
+AI Move: raise, Amount: 9, Round: 4 
+
+Winner: robot
+BB/H: -1.5864197530864197
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.584016393442623
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.579591836734694
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5772357723577235
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5728744939271255
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5705645161290323
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5662650602409638
+New Game: 
+
+Average raise amount: 11.36111111111111
+AI Move: raise, Amount: 5, Round: 0 
+
+Winner: robot
+BB/H: -1.552
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.5617529880478087
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.5634920634920635
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5592885375494072
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5570866141732282
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3 
+
+Winner: robot
+BB/H: -1.535294117647059
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.533203125
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5291828793774318
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5271317829457365
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5231660231660231
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.521153846153846
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.498091603053435
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4981060606060606
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.315068493150685
+AI Move: raise, Amount: 8, Round: 4 
+
+Winner: robot
+BB/H: -1.4773584905660377
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4755639097744362
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.378378378378379
+AI Move: raise, Amount: 16, Round: 4
+AI Move: call, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.395131086142322
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3936567164179106
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3903345724907064
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3888888888888888
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.373333333333333
+AI Move: raise, Amount: 11, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.5682656826568266
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5661764705882353
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5622710622710623
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5602189781021898
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.31578947368421
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.5472727272727274
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5452898550724639
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5415162454873645
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.539568345323741
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.53584229390681
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.272727272727273
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.5232142857142856
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5213523131672597
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5195035460992907
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5159010600706713
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.282051282051283
+AI Move: raise, Amount: 12, Round: 3 
+
+Winner: robot
+BB/H: -1.5035211267605635
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4982517482517483
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.5
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4982638888888888
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.494809688581315
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.341772151898734
+AI Move: raise, Amount: 16, Round: 4 
+
+Winner: robot
+BB/H: -1.4758620689655173
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4725085910652922
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.470890410958904
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4675767918088738
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.465986394557823
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4627118644067796
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4611486486486487
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4579124579124578
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4563758389261745
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4531772575250836
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4516666666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4485049833887043
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.25
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.4370860927152318
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.433993399339934
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4325657894736843
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4295081967213115
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4281045751633987
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.4299674267100977
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4285714285714286
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.197530864197532
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.4110032362459546
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4096774193548387
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4067524115755627
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4054487179487178
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.402555910543131
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4012738853503184
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.403174603174603
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.4018987341772151
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3990536277602523
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3977987421383649
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.207317073170731
+AI Move: raise, Amount: 12, Round: 3
+
+Average raise amount: 11.313253012048193
+AI Move: raise, Amount: 20, Round: 4 
+
+Winner: robot
+BB/H: -1.3620689655172413
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3609375
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3582554517133956
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3571428571428572
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3544891640866874
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.353395061728395
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.44047619047619
+AI Move: raise, Amount: 22, Round: 4 
+
+Winner: robot
+BB/H: -1.3246153846153845
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3236196319018405
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3211009174311927
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3201219512195121
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.317629179331307
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3166666666666667
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3141993957703928
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3132530120481927
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3108108108108107
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.312874251497006
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.31044776119403
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3095238095238095
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3071216617210681
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3062130177514792
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.303834808259587
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3029411764705883
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3005865102639296
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2997076023391814
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2973760932944607
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2965116279069768
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.4
+AI Move: raise, Amount: 8, Round: 4 
+
+Winner: robot
+BB/H: -1.281159420289855
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2803468208092486
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2780979827089338
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2772988505747127
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2750716332378222
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2742857142857142
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.272079772079772
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2713068181818181
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.2563739376770537
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2556497175141244
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2535211267605635
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.252808988764045
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2507002801120448
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.25
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2479108635097493
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2472222222222222
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.395348837209303
+AI Move: raise, Amount: 11, Round: 3 
+
+Winner: robot
+BB/H: -1.2326869806094183
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.448275862068966
+AI Move: raise, Amount: 16, Round: 4 
+
+Winner: robot
+BB/H: -1.218232044198895
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.5
+AI Move: raise, Amount: 16, Round: 4 
+
+Winner: robot
+BB/H: -1.2038567493112948
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.415730337078651
+AI Move: raise, Amount: 4, Round: 3 
+
+Winner: robot
+BB/H: -1.195054945054945
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1945205479452055
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.1967213114754098
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.455555555555556
+AI Move: raise, Amount: 15, Round: 4 
+
+Winner: robot
+BB/H: -1.1825613079019073
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1820652173913044
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+
+Average raise amount: 11.582417582417582
+AI Move: raise, Amount: 23, Round: 5 
+
+Winner: robot
+BB/H: -1.1680216802168022
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.1756756756756757
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1752021563342319
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.174731182795699
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1729222520107239
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.1751336898395721
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1733333333333333
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.51086956521739
+AI Move: raise, Amount: 5, Round: 3 
+
+Winner: robot
+BB/H: -1.1648936170212767
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.602150537634408
+AI Move: raise, Amount: 20, Round: 4 
+
+Winner: robot
+BB/H: -1.1511936339522546
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1507936507936507
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1490765171503958
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1486842105263158
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.606382978723405
+AI Move: raise, Amount: 12, Round: 4 
+
+Winner: robot
+BB/H: -1.1351706036745406
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1348167539267016
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.133159268929504
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1328125
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1311688311688313
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1308290155440415
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1291989664082687
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1288659793814433
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.1465295629820051
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.56842105263158
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.1384615384615384
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1381074168797953
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.489583333333334
+AI Move: raise, Amount: 4, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.494845360824742
+AI Move: raise, Amount: 12, Round: 4
+
+Average raise amount: 11.66326530612245
+AI Move: raise, Amount: 28, Round: 4
+AI Move: call, Amount: 0, Round: 4 
+
+Winner: player
+BB/H: -1.2627551020408163
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.251908396946565
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.251269035532995
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.249367088607595
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.2512626262626263
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2493702770780857
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.616161616161616
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.2412060301507537
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2393483709273183
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.54
+AI Move: raise, Amount: 4, Round: 3
+
+Average raise amount: 11.603960396039604
+AI Move: raise, Amount: 18, Round: 3
+
+Average raise amount: 11.96078431372549
+AI Move: raise, Amount: 48, Round: 3 
+
+Winner: player
+BB/H: -1.36125
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3591022443890275
+New Game: 
+
+Average raise amount: 11.902912621359222
+AI Move: raise, Amount: 6, Round: 0 
+
+Winner: robot
+BB/H: -1.3507462686567164
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.34863523573201
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -1.3353960396039604
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.334567901234568
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.333743842364532
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3316953316953317
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3308823529411764
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3288508557457213
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.328048780487805
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3260340632603407
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.325242718446602
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3232445520581113
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.85576923076923
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.315217391304348
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3144578313253013
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3137019230769231
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.3117505995203838
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.81904761904762
+AI Move: raise, Amount: 8, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5
+AI Move: call, Amount: 0, Round: 5 
+
+Winner: player
+BB/H: -1.3373205741626795
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 4
+
+Average raise amount: 12.11320754716981
+AI Move: raise, Amount: 43, Round: 5 
+
+Winner: robot
+BB/H: -1.2255369928400954
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.225
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2232779097387174
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12.065420560747663
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.2156398104265402
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.215130023640662
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2146226415094339
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2129411764705882
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.2124413145539905
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12.027777777777779
+AI Move: raise, Amount: 8, Round: 0 
+
+Winner: robot
+BB/H: -1.2049180327868851
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.972477064220184
+AI Move: raise, Amount: 6, Round: 3
+
+Average raise amount: 11.963636363636363
+AI Move: raise, Amount: 11, Round: 4
+
+Average raise amount: 12.045045045045045
+AI Move: raise, Amount: 21, Round: 5 
+
+Winner: robot
+BB/H: -1.15303738317757
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1515151515151516
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1511627906976745
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 12.008928571428571
+AI Move: raise, Amount: 8, Round: 4 
+
+Winner: robot
+BB/H: -1.1392111368909512
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1388888888888888
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1374133949191685
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1370967741935485
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1356321839080459
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.135321100917431
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.133867276887872
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1335616438356164
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.132118451025057
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1318181818181818
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.1337868480725624
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1334841628959276
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1320541760722347
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.938053097345133
+AI Move: raise, Amount: 4, Round: 3
+
+Average raise amount: 11.921052631578947
+AI Move: raise, Amount: 10, Round: 3 
+
+Winner: robot
+BB/H: -1.115990990990991
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1146067415730336
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.116591928251121
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1152125279642058
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1149553571428572
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.939130434782609
+AI Move: raise, Amount: 14, Round: 4 
+
+Winner: robot
+BB/H: -1.1035634743875278
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1033333333333333
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1019955654101996
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1017699115044248
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.1037527593818985
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.10352422907489
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1021978021978023
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.1019736842105263
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.939655172413794
+AI Move: raise, Amount: 12, Round: 3 
+
+Winner: robot
+BB/H: -1.0908096280087527
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.897435897435898
+AI Move: raise, Amount: 7, Round: 3 
+
+Winner: robot
+BB/H: -1.084061135371179
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.932203389830509
+AI Move: raise, Amount: 16, Round: 4 
+
+Winner: robot
+BB/H: -1.0729847494553377
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.0728260869565218
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+
+Average raise amount: 12.042016806722689
+AI Move: raise, Amount: 25, Round: 5 
+
+Winner: robot
+BB/H: -1.0488069414316703
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.0487012987012987
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12.008333333333333
+AI Move: raise, Amount: 8, Round: 3 
+
+Winner: robot
+BB/H: -1.0399568034557236
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -1.0420258620689655
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12
+AI Move: raise, Amount: 11, Round: 3 
+
+Winner: robot
+BB/H: -1.032258064516129
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.0321888412017168
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.031049250535332
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.0309829059829059
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12.040983606557377
+AI Move: raise, Amount: 17, Round: 3 
+
+Winner: robot
+BB/H: -1.0202558635394456
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.0202127659574467
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.019108280254777
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 12.05691056910569
+AI Move: raise, Amount: 14, Round: 4 
+
+Winner: robot
+BB/H: -1.0084745762711864
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -1.007399577167019
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 12.03225806451613
+AI Move: raise, Amount: 9, Round: 3 
+
+Winner: robot
+BB/H: -1.001054852320675
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 0
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 12
+AI Move: raise, Amount: 8, Round: 4 
+
+Winner: robot
+BB/H: -0.9905263157894737
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 11.968253968253968
+AI Move: raise, Amount: 8, Round: 4 
+
+Winner: robot
+BB/H: -0.9800420168067226
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9790356394129979
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9790794979079498
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9780793319415448
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: call, Amount: 0, Round: 3
+AI Move: check, Amount: 0, Round: 4
+AI Move: check, Amount: 0, Round: 5 
+
+Winner: robot
+BB/H: -0.9677083333333333
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9677754677754677
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9678423236514523
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9668737060041408
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9669421487603306
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.965979381443299
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9660493827160493
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9650924024640657
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+AI Move: check, Amount: 0, Round: 3
+AI Move: fold, Amount: 0, Round: 3 
+
+Winner: player
+BB/H: -0.9672131147540983
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9662576687116564
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9663265306122449
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9653767820773931
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9654471544715447
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9645030425963489
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9645748987854251
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9636363636363636
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9637096774193549
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9627766599597586
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9628514056224899
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9619238476953907
+New Game: 
+AI Move: call, Amount: 0, Round: 0
+
+Average raise amount: 11.905511811023622
+AI Move: raise, Amount: 4, Round: 3
+AI Move: call, Amount: 0, Round: 3
+
+Average raise amount: 12.078125
+AI Move: raise, Amount: 34, Round: 4 
+
+Winner: robot
+BB/H: -0.948
+New Game: 
+AI Move: fold, Amount: 0, Round: 0 
+
+Winner: player
+BB/H: -0.9471057884231537
+New Game: 

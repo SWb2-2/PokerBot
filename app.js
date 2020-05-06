@@ -150,9 +150,13 @@ app.get('/winner', (req, res) => {
     data.total_preflop += 1;
 
     let response = round.showdown(human_player, ai_player, dealer);
+    response.player_balance = 100; 
+    response.bot_balance = 100; 
     log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+    ai_player.balance = 100; 
+    human_player.balance = 100; 
     res.statusCode = 200;
     res.json(JSON.stringify(response));
     res.end("request accepted");

@@ -1,0 +1,13 @@
+
+robot:
+ BB/h: 0.61, Bluffed BB/h: 0.9478021978021978, Overall BB won: 61, Overall BB with Bluff: 86.25, Bluffed hands: 91, Hands: 100
+robot:
+ BB/h: -2.15, Bluffed BB/h: 0, Overall BB won: -215, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 100
+robot:
+ BB/h: -1.6925, Bluffed BB/h: 0, Overall BB won: -338.5, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 200
+robot:
+ BB/h: -1.4516666666666667, Bluffed BB/h: 0, Overall BB won: -435.5, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 300
+robot:
+ BB/h: -1.36125, Bluffed BB/h: 0, Overall BB won: -544.5, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 400
+robot:
+ BB/h: -0.948, Bluffed BB/h: 0, Overall BB won: -474, Overall BB with Bluff: 0, Bluffed hands: 0, Hands: 500
