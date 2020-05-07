@@ -206,7 +206,7 @@ function getPlayerMove(active_player) {
     }
 }
 
-function resetMoves(active_player_name, game_info_math, game_info_bluff, dealer) {
+function resetMoves(active_player, game_info_math, game_info_bluff, dealer) {
     game_info_bluff.player_move.move = "";
     game_info_bluff.player_move.amount = 0;
     game_info_bluff.player_move.ai_move = "";
@@ -229,4 +229,4 @@ function readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer) 
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, Infinity);
+simulatePoker(aiBluff, aiMath, dealer, 88797);
