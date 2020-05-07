@@ -1,1 +1,1 @@
-Checks:8323 / Calls:45893 / Folds:29680 / Total moves:166530 /
+Checks:0 / Calls:0 / Folds:0 / Total moves:0 /
