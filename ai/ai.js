@@ -166,9 +166,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = -Infinity; 
+		chance = 10; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = -Infinity; 		
+		chance = 5; 		
 	}
 
 	chance += equity * 30;
