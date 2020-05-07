@@ -16,20 +16,20 @@ const range_func = require("./ai_util/range");
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
 function ai(game_info, data_preflop, data_postflop, data) {
-	console.log("___________________________________________________________________________________________________________________");
-	console.log("Opponents move: ", game_info.player_move);
+	//console.log("___________________________________________________________________________________________________________________");
+	//console.log("Opponents move: ", game_info.player_move);
 	let ai_move;
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111;
+	const num_of_sim = 14111;
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 
-	console.log(equity.draw_and_winrate, "wr");
+	//console.log(equity.draw_and_winrate, "wr");
 
 	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
 	if(game_info.pot < 2*game_info.bb_size && game_info.table_cards.length == 0) {
@@ -45,7 +45,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
-		console.log("My move: ", ai_move);
+		//console.log("My move: ", ai_move);
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
@@ -61,13 +61,13 @@ function ai(game_info, data_preflop, data_postflop, data) {
 		if(ai_move.ai_move == "check" || ai_move.ai_move == "fold"  || ai_move.ai_move == "call") {
 			if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
 				ai_move.bluff = "calc bluff";
-				console.log("Did a alculated bluff********************************************************************")
+				//console.log("Did a alculated bluff********************************************************************")
 			}	
 		}
 	}
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
-	console.log("My move: ", ai_move);
+	//console.log("My move: ", ai_move);
 	return ai_move;
 }
 
@@ -89,16 +89,16 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
+		chance = -Infinity; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		chance = -Infinity; 		
 	}
 
 	chance += equity * 30;
 	chance += (data.chance_of_fold_when_raised) * 18; 		//Mest relevant. Burde sættes sammen med equity . 
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
 	chance -= (data.ai_raise / data.ai_total_moves) * 12; 
-	console.log(chance, "our raise and total moves influence"); 
+	//console.log(chance, "our raise and total moves influence"); 
 
 	if(chance > Math.random()*100) {
 		ai_move.ai_move = "raise"; 
@@ -137,7 +137,7 @@ function determine_move(equity, current_round, game_info, data_preflop, data_pos
 function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
-		console.log("Vi caller som sb", equity); 
+		//console.log("Vi caller som sb", equity); 
 		if(equity > 0.44) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
@@ -303,7 +303,7 @@ function determine_move_type(move) {
 	switch(move) {
 		case "check": case "call": case "": return "proactive";
 		case "raise": return "reactive";
-		default: console.log("error: player move undefined", move);
+		default: //console.log("error: player move undefined", move);
 	}
 }
 
@@ -316,7 +316,7 @@ function find_rounds_left(table_cards){
 		case 3: return 2;
 		case 4: return 1;
 		case 5: return 0;
-		default: console.log("error: table cards error");
+		default: //console.log("error: table cards error");
 	}
 }
 //Returns name of current round
@@ -328,7 +328,7 @@ function find_round(num_table_cards) {
 		case 3: return "flop";
 		case 4: return "turn";
 		case 5: return "river";
-		default: console.log("error: invalid table cards");
+		default: //console.log("error: invalid table cards");
 	}
 }
 module.exports.move_proactive = move_proactive; 

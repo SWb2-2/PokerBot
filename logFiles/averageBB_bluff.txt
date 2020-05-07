@@ -1,1 +1,1 @@
-BB won: 0 / Hands Played: 0 / BB won with bluffs: 0 / bluffed hands: 0 /
+BB won: 5917 / Hands Played: 100368 / BB won with bluffs: -4087 / bluffed hands: 9996 /
