@@ -102,7 +102,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 				// console.log("bluff on check", EV_bluff, EV_check);
 				return true; 
 			}
-		/*case "call":
+		case "call":
 			EV_call = calc_EV_call(equity, game_info); 
 
 			if(EV_bluff <= EV_call) {
@@ -123,8 +123,8 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 				console.log("bluff on fold")
 				return true; 
 			}
-		*/
-		// default: console.log("error: could not read ai move");
+		
+		 default: console.log("error: could not read ai move");
 	}
 	return false;
 }
