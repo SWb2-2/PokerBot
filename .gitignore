@@ -1,6 +1,3 @@
 node_modules
 coverage
-logFiles/averageBB_bluff.txt
-logFiles/averageBB.txt
-logFiles/history_with_bluff.txt
-logFiles/history_without_bluff.txt
+
