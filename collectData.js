@@ -75,8 +75,8 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         updateData(aiMath);
         readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer);
     }
-    console.log("Data for math, then bluff: ", aiBluff.data, aiMath.data);
-    console.log("pre-flop data:  ", aiMath.data_postflop, aiBluff.data_postflop);
+    // console.log("Data for math, then bluff: ", aiBluff.data, aiMath.data);
+    // console.log("pre-flop data:  ", aiMath.data_postflop, aiBluff.data_postflop);
 }
 
 function initiateBetting(player1, player2, dealer) {

@@ -4,7 +4,7 @@ const fs = require('fs');
 function checkCommandLine(args) {
     for(i = 0; i < args.length; i++) {
         if(args[i] === "--bluff") {
-            console.log("Bluff enabled...");
+             console.log("Bluff enabled...");
             return true;
         }
     }

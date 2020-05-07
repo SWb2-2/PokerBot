@@ -60,7 +60,7 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         }
     }
     if(data.total_preflop != 0 && pre_flop === true) {
-        console.log(data.total_preflop, data.player_fold);
+        // console.log(data.total_preflop, data.player_fold);
         data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
     }
 }

@@ -122,7 +122,7 @@ app.get('/ai_move', (req, res) => {
     store.store_ai_move(ai_player.player_move.move, data);
     Math.round(ai_player.amount * 10) / 10;
     let response = round.process_move(ai_player, human_player, dealer);
-    console.log("ai move: ", response);
+    // console.log("ai move: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
 });
