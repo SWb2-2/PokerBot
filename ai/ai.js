@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 14111;
+	const num_of_sim = 1411;
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
