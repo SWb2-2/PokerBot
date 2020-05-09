@@ -51,7 +51,7 @@ data_aggresive = {
     player_check: 15,  
     player_call: 5, 
     player_raise: 30,   
-    hands_played_percentage: 40/100, 
+    hands_played_percentage: 20/100, 
 
     total_moves: 80,
     total_preflop: 50,
@@ -64,7 +64,7 @@ data_aggresive = {
 
     // Playstyle
     raises: 40,
-    chance_of_raise: 0.6,
+    chance_of_raise: 0.4,
     average_raise_percentage_of_pot: 1, 
 
 
@@ -164,7 +164,46 @@ data_strong_player = {
     }
 }
 
-/*
+data_loose_aggressive_player = {
+    //Imperical data
+    player_fold: 20,
+    player_check: 30,  
+    player_call: 20, 
+    player_raise: 10,   
+    hands_played_percentage: 0.8, 
+
+    total_moves: 80,
+    total_preflop: 50,
+
+    ai_fold: 20,
+    ai_check: 20, 
+    ai_call: 8, 
+    ai_raise: 20,
+    ai_total_moves: 68, 
+
+    // Playstyle
+    raises: 40,
+    chance_of_raise: 80/100,
+    average_raise_percentage_of_pot: 0.7, 
+
+
+    call_a_raise: 10,
+    chance_of_call_a_raise: 2/10, 
+
+    fold_when_raised: 10, 
+    fold_when_sb: 0.5,
+    chance_of_fold_when_raised: 0.7,
+    
+    range: {
+        range_Low: 34, 
+        range_high: 86
+    }, 
+    current_range: {
+        range_Low: 34, 
+        range_high: 86 
+    }
+}
+
 
 describe("Testing range where each test is split into different moves", () => {
     test("Test on passive player who checks", () => {
@@ -355,9 +394,9 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let solid = range.determine_range(data_strong_player, {move: "raise", amount: 200}, 100, 1);
-        // Strong player sættes til standard low_range = 50, da bet ift pot = 1.5. 
-        // Ud fra dette bør strong player få en signifikant større range, så stor at range_control sparker ind
-        if(solid.range_Low < 60) {
+        // Strong player sættes til standard low_range = 50, da bet ift pot = 2. 
+        // Ud fra dette bør strong player få en signifikant større range
+        if(solid.range_Low < 58) {
             i = false;
         }
         if(solid.range_high < 80) {
@@ -425,7 +464,7 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let passive = range.determine_range(data_passive, {move: "raise", amount: 200}, 100, 1);
-        if(passive.range_Low < 60) {
+        if(passive.range_Low < 58) {
             i = false;
         }
         if(passive.range_high != 86) {
@@ -475,8 +514,9 @@ describe("Testing range where each test is split into different moves", () => {
         let i = true;
         let j = true;
 
-        let passive = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
-        if(passive.range_Low < 62) {
+        let standard = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
+        let passive = range.determine_range(data_passive, {move: "raise", amount: 150}, 100, 1);
+        if(passive.range_Low < standard.range_Low) {
             i = false;
         }
         if(passive.range_high != 86) {
@@ -493,7 +533,7 @@ describe("Testing range where each test is split into different moves", () => {
         let j = true;
 
         let passive = range.determine_range(data_standard, {move: "raise", amount: 200}, 100, 1);
-        if(passive.range_Low < 64) {
+        if(passive.range_Low < 58) {
             i = false;
         }
         if(passive.range_high != 86) {
@@ -544,15 +584,14 @@ describe("Testing range where each test is split into different moves", () => {
         let i = true;
         let j = true;
 
-        let passive = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
-        if(passive.range_Low < 62) {
+        let aggressive = range.determine_range(data_aggresive, {move: "raise", amount: 150}, 100, 1);
+        let standard = range.determine_range(data_standard, {move: "raise", amount: 150}, 100, 1);
+        if(aggressive.range_Low < standard.range_Low) {
             i = false;
         }
-        if(passive.range_high != 86) {
+        if(aggressive.range_high != 86) {
             j = false;
         }
-
-        console.log(passive, " aggresive 150%");
 
         expect(j).toBe(true);
         expect(i).toBe(true);
@@ -560,20 +599,36 @@ describe("Testing range where each test is split into different moves", () => {
     test("Test of raise on the aggresive player with raise of 200%", () => {
         let i = true;
         let j = true;
-
-        let passive = range.determine_range(data_standard, {move: "raise", amount: 200}, 100, 1);
-        if(passive.range_Low < 64) {
+        
+        let aggressive = range.determine_range(data_aggresive, {move: "raise", amount: 200}, 100, 1);
+        
+        if(aggressive.range_Low < 60) {
             i = false;
         }
-        if(passive.range_high != 86) {
+        if(aggressive.range_high != 86) {
             j = false;
         }
 
-        console.log(passive, "aggresive 200%");
 
         expect(j).toBe(true);
         expect(i).toBe(true);
     });
+    test("A player who raises all the time, playing many hands and raises with big factors should not be given a high range_low", () => {
+        let i = true;
+        let j = true;
+        
+
+        let looseAggressive = range.determine_range(data_loose_aggressive_player, {move: "raise", amount: 200}, 100, 1);
+        
+        if(looseAggressive.range_Low > 57) {
+            i = false;
+        }
+        if(looseAggressive.range_high != 86) {
+            j = false;
+        }
+        expect(j).toBe(true);
+        expect(i).toBe(true);
+    })
 });
 
-*/
+
