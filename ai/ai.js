@@ -41,7 +41,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	}
 	
 	//Use information to determine move. Includes input validation
-	// ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
+	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
 	// console.log("opponent move", game_info.player_move);
 	// console.log("Our move", ai_move);
 
