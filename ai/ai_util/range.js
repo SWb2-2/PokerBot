@@ -6,6 +6,7 @@ const Dealer = require("../../website/js/classes/dealer");
 // Find the range of a given player, based on information about their playstyle
 // and their current move
 function determine_range(data, player_move, pot_size, first) {
+    console.log("Current range", data.current_range); 
 
     if(data.total_moves < 10) { // Husk at ændre tilbage
         if(player_move.move == "check") {
@@ -67,8 +68,12 @@ function determine_range(data, player_move, pot_size, first) {
                 w_hp = 6; 
             }
 
-            data.current_range.range_high = data.current_range.range_high - (cr * w_cr * i_cr) - (hp * w_hp * i_hp);
+            data.current_range.range_Low -= (((data.chance_of_raise / data.vpip) * w_cr * i_cr) + (data.vpip * w_hp * i_hp));
+
+
+            // data.current_range.range_high = data.current_range.range_high - (cr * w_cr * i_cr) - (hp * w_hp * i_hp);
             range_control_check(data.current_range);
+            // console.log("new range after check", data.current_range);
             return data.current_range;
 
         } else if(player_move.move == "call") {
@@ -87,22 +92,26 @@ function determine_range(data, player_move, pot_size, first) {
             // If low data.hands_played_percentage, high increase in range.   // Can be ignored, maybe take it into account always.  
             // If high data.hands_played_percentage, low increase in range. 
     
-            w_cr = w_hp = w_c = i_c = 1;
-            i_c = 1;
-            i_hp = 0.6;
-            i_cr = 0.2;
+            // w_cr = w_hp = w_c = i_c = 1;
+            // i_c = 1;
+            // i_hp = 0.6;
+            // i_cr = 0.2;
 
-            if(data.current_range.range_Low < 38) {
-                w_c = 40 - data.current_range.range_Low;                 
-                w_hp = 40 - data.current_range.range_Low;
-                w_cr = 40 - data.current_range.range_Low;
-            } else if(data.current_range.range_Low < 60) {
-                w_c = 10;
-                w_cr = 10;                                               
-                w_hp = 10; 
-            } 
+            // if(data.current_range.range_Low < 38) {
+            //     w_c = 40 - data.current_range.range_Low;                 
+            //     w_hp = 40 - data.current_range.range_Low;
+            //     w_cr = 40 - data.current_range.range_Low;
+            // } else if(data.current_range.range_Low < 60) {
+            //     w_c = 10;
+            //     w_cr = 10;                                               
+            //     w_hp = 10; 
+            // } 
 
-            data.current_range.range_Low = data.current_range.range_Low + (c * w_c * i_c) + (cr * w_cr * i_cr) + (hp * w_hp * i_hp);
+            let j = 10 - (data.current_range.range_Low / 10); 
+
+            data.current_range.range_Low += (data.chance_of_raise / data.vpip) * j * 0.2 + (1 - data.vpip) * j * 0.8; 
+
+            // data.current_range.range_Low = data.current_range.range_Low + (c * w_c * i_c) + (cr * w_cr * i_cr) + (hp * w_hp * i_hp);
             
             if(data.current_range.range_Low > 60) {
                 data.current_range.range_Low = 60;
@@ -111,6 +120,7 @@ function determine_range(data, player_move, pot_size, first) {
             //console.log("Before ", data.current_range);
             range_control_call(data.current_range);
             //console.log("After ", data.current_range);
+            // console.log("new range after call", data.current_range);
             return data.current_range; 
             
         } else if (player_move.move == "raise") {
@@ -140,28 +150,35 @@ function determine_range(data, player_move, pot_size, first) {
             // If low data.hands_played_percentage, high increase in range.   // Can be ignored, maybe take it into account always.  
             // If high data.hands_played_percentage, low increase in range. 
 
-            let factor = ra; 
-            if(ra > 1) {
-                factor = Math.pow(ra, 1-ra) * (-1) + 2;
+            let factor = (-0.25) * ra + 1;
+
+            let st = factor * (1 - (data.chance_of_raise/data.vpip)) + data.vpip + (data.chance_of_raise/data.vpip - 0.5) - (data.vpip - 0.3);
+            // console.log("change in range", (Math.pow(10, 3.5 - st)/data.current_range.range_Low) - (data.current_range.range_Low/10)); 
+            data.current_range.range_Low += (Math.pow(10, 3.5 - st)/data.current_range.range_Low) - (data.current_range.range_Low/10);
+            console.log("range_low", data.current_range.range_Low);
+            // let factor = ra; 
+            // if(ra > 1) {
+            //     factor = Math.pow(ra, 1-ra) * (-1) + 2;
                 
-            } else if(ra > 0.2) {
-                factor = Math.pow(ra, 1-ra);
-            }
-            let max_range = 8.6;
+            // } else if(ra > 0.2) {
+            //     factor = Math.pow(ra, 1-ra);
+            // }
+            // let max_range = 8.6;
             
-            if(cr >= 0.6 && hp >= 0.7 && factor > 1.5) {
-                data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/max_range, (1 - (cr * hp)) + factor/3) * (factor/2);
-                // Kunne overveje en fast range her også hvis det er. 
-            }
-            else if(factor < 1.3) {
-                data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/2) * factor; 
-            } else {
-                data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/3) * factor; 
-            }
+            // if(cr >= 0.6 && hp >= 0.7 && factor > 1.5) {
+            //     data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/max_range, (1 - (cr * hp)) + factor/3) * (factor/2);
+            //     // Kunne overveje en fast range her også hvis det er. 
+            // }
+            // else if(factor < 1.3) {
+            //     data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/2) * factor; 
+            // } else {
+            //     data.current_range.range_Low += Math.pow(max_range - data.current_range.range_Low/10, (1 - (cr * hp)) + factor/3) * factor; 
+            // }
             
             // console.log("Your range is: ", data.current_range.range_Low, " After a bet of", player_move.amount);
             data.current_range.range_high = data.current_range.range_Low + 30;
             range_control_raise(data.current_range);
+            // console.log("new range after raise", data.current_range);
             return data.current_range; 
         }
     }

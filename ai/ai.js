@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 14111;
+	const num_of_sim = 141111;
 	let relevant_data = "";
 
 	//Get data needed to determine move
@@ -41,7 +41,9 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	}
 	
 	//Use information to determine move. Includes input validation
-	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
+	// ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
+	// console.log("opponent move", game_info.player_move);
+	// console.log("Our move", ai_move);
 
 	//Possibility to bluff
 	if(game_info.bluff == false) {		//No bluffing 
