@@ -26,6 +26,7 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         } else {
             data.chance_of_call_a_raise = 0.5; 
         }
+        data.vpip = (data.player_call + data.raises) / data.total_moves;
         return true;
 
     } else if(player.move == "raise") {
@@ -39,7 +40,8 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
             total += player.amount / pot_size;
             data.raises += 1;
             data.average_raise_percentage_of_pot = total / data.raises; 
-            data.chance_of_raise = data.raises / (data.total_moves - data.player_fold);
+            data.chance_of_raise = data.raises / (data.total_moves);
+            data.vpip = (data.player_call + data.raises) / data.total_moves;
         }
 
     } else if(player.move == "fold") {

@@ -7,6 +7,8 @@ module.exports = class Data {
         this.player_raise = 0,   
         this.hands_played_percentage = 1, 
 
+        this.vpip = 1; 
+
         this.total_moves = 0,
         this.total_preflop = 1,
 
