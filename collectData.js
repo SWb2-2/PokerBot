@@ -193,8 +193,14 @@ function updateData(player) {
 }
 
 function getPlayerMove(active_player) {
+    // For at sikre det er to ai's, der ikke bluffer mod hinanden. 
     if(active_player.name === "Bluff") {
-        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data);
+        active_player.bluff = false;
+        game_info_bluff.bluff = false;
+        response = ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data);
+        active_player.bluff = true;
+        game_info_bluff.bluff = true;
+        return response;
     } else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data);
     }
