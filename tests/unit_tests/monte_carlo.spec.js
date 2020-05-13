@@ -1,5 +1,5 @@
-const monte_carlo = require("../../ai/ai_util/monte_carlo.js");
-const Card = require("../../website/js/classes/card.js");
+const monte_carlo = require("../../ai/ai_util/monte_carlo");
+const Card = require("../../website/js/classes/card");
 
 describe("Checking that monte_carlo works decent", () => {
     //Test sort in monte_carlo

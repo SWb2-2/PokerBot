@@ -1,4 +1,4 @@
-const range = require('../../ai/ai_util/range.js');
+const range = require('../../ai/ai_util/range');
 
 test("heej", () => {
 
