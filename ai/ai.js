@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111;
+	const num_of_sim = 1411;
 	let relevant_data = "";
 
 	//Get data needed to determine move
@@ -168,9 +168,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
+		chance = -infinity; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		chance = -infinity;
 	}
 
 	chance += equity * 30;
