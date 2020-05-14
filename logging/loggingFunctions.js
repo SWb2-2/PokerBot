@@ -139,7 +139,7 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
         fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nWinner: ${response.winner} \nBB/h: ${mmb}, Bluff BB/h: ${avg_bb_won_with_bluff}, BB/h without bluff: ${avg_bb_won_without}`);
         fs.writeFileSync('./logFiles/averageBB_bluff.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} / BB won with bluffs: ${bb_won_with_bluff} / bluffed hands: ${bluff_hands} /`);
     }
-    if(hands_played % 100 === 0) {
+    if(hands_played % 50 === 0) {
         fs.appendFileSync('./logFiles/standings_after_100_hands.txt', `\n${name}:\n BB/h: ${mmb}, Bluffed BB/h: ${avg_bb_won_with_bluff}, Overall BB won: ${bb_won}, Overall BB with Bluff: ${bb_won_with_bluff}, Bluffed hands: ${bluff_hands}, Hands: ${hands_played}`);
     }
 }

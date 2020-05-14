@@ -153,6 +153,10 @@ app.get('/winner', (req, res) => {
     log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+    human_player.balance = 100;
+    ai_player.balance = 100;
+    res.player_balance = human_player.balance;
+    res.bot_balance = ai_player.balance;
     res.statusCode = 200;
     res.json(JSON.stringify(response));
     res.end("request accepted");
