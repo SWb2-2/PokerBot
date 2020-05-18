@@ -36,8 +36,8 @@ function determine_range(data, player_move, pot_size, first) {
         // console.log("Ra is ", ra, " Pot is ", pot_size, " amount is ", player_move.amount);
         let w_cr, w_hp,  w_c;
         let i_cr, i_hp, i_c;
-        w_cr = w_hp = w_c = w_ra = 1;
-        i_cr = i_hp = i_c = i_ra = 1; 
+        w_pfr = w_vpip = w_c = w_ra = 1;
+        i_pfr = i_vpip = i_c = i_ra = 1; 
         
         if(player_move.move == "check") {
             if(first) {
@@ -51,24 +51,24 @@ function determine_range(data, player_move, pot_size, first) {
                 // AND high data.hand_played_percentage, we cant chance much. 
                 // AND low data.hand_played_percentage, it can be a good hand. 
             
-            w_cr = w_hp = 1;
-            i_cr = 1
-            i_hp = 0.2;
+            w_pfr = w_vpip = 1;
+            i_pfr = 1
+            i_vpip = 0.2;
 
             if(data.current_range.range_high > 70) {
-                w_cr = (data.current_range.range_high - 40) * 1;        
-                w_hp = (data.current_range.range_high - 40) * 0.75; 
+                w_pfr = (data.current_range.range_high - 50) * 0.66;        
+                w_vpip = (data.current_range.range_high - 50) * 0.5; 
 
             } else if(data.current_range.range_high > 60) {
-                w_cr = (data.current_range.range_high - 48) * 0.75;        
-                w_hp = (data.current_range.range_high - 48) * 0.5; 
+                w_pfr = (data.current_range.range_high - 52) * 0.66;        
+                w_vpip = (data.current_range.range_high - 52) * 0.5; 
 
             } else if(data.current_range.range_high > 40) {
-                w_cr = 10;                                               
-                w_hp = 6; 
+                w_pfr = 4;                                               
+                w_vpip = 3; 
             }
 
-            data.current_range.range_Low -= (((data.chance_of_raise / data.vpip) * w_cr * i_cr) + (data.vpip * w_hp * i_hp));
+            data.current_range.range_high -= (((data.chance_of_raise / data.vpip) * w_pfr * i_pfr) + (data.vpip * w_vpip * i_vpip));
 
 
             // data.current_range.range_high = data.current_range.range_high - (cr * w_cr * i_cr) - (hp * w_hp * i_hp);
@@ -199,6 +199,7 @@ function range_control_check(current_range) {
         current_range.range_Low = 34; 
     }
     if(current_range.range_high - 3 < current_range.range_Low) {
+        current_range.range_high = 3 + current_range.range_Low;
         // console.log("Error in, range_control check 2", current_range); 
     }
 }
