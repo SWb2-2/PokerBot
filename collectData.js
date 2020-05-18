@@ -82,6 +82,8 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
 
 function initiateBetting(player1, player2, dealer) {
     resetMoves(player1.name, game_info_math, game_info_bluff, dealer);
+    let first = true;
+    let time = 0;
     if(player2.name === "Bluff") {
         var player2_move = game_info_bluff.player_move;
         player2_move.ai_move = player2_move.move;
@@ -94,7 +96,8 @@ function initiateBetting(player1, player2, dealer) {
         player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, game_info_bluff, game_info_math, dealer, player_info);
-        let player1_move = getPlayerMove(player1);
+        time++;
+        let player1_move = getPlayerMove(player1, first, time);
         checkBluff(player1, player1_move);
         log_functions.logMove(player1.name, player1.player_move, dealer.table_cards, player1.bluff);
         storePlayer(player1, player2, dealer);
@@ -104,7 +107,7 @@ function initiateBetting(player1, player2, dealer) {
             player_info.move = player1_move.ai_move;
             player_info.amount = player1_move.amount;
             updateGameInfo(player2, game_info_bluff, game_info_math, dealer, player_info);
-            player2_move = getPlayerMove(player2);
+            player2_move = getPlayerMove(player2, first, time);
             checkBluff(player2, player2_move);
             log_functions.logMove(player2.name, player2.player_move, dealer.table_cards, player2.bluff);
             storePlayer(player2, player1, dealer);
@@ -194,10 +197,13 @@ function updateData(player) {
 }
 
 function getPlayerMove(active_player) {
+    if(time !== 1) {
+        first = false;
+    }
     if(active_player.name === "Bluff") {
-        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data);
+        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
     } else {
-        return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data);
+        return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
     }
 }
 

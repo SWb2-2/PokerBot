@@ -15,7 +15,7 @@ const range_func = require("./ai_util/range");
 //input: game_info object describing game's current state, and opponent's playstyle data
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
-function ai(game_info, data_preflop, data_postflop, data) {
+function ai(game_info, data_preflop, data_postflop, data, first) {
 	// console.log("___________________________________________________________________________________________________________________");
 	// console.log("Opponents move: ", game_info.player_move);
 	let ai_move;
@@ -27,7 +27,7 @@ function ai(game_info, data_preflop, data_postflop, data) {
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, true);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, first);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
 	// console.log(equity.draw_and_winrate, "wr");
