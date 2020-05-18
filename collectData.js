@@ -196,7 +196,7 @@ function updateData(player) {
     player.data.total_preflop += 1;
 }
 
-function getPlayerMove(active_player) {
+function getPlayerMove(active_player, first, time) {
     if(time !== 1) {
         first = false;
     }
