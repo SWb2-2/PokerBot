@@ -6,7 +6,7 @@ const Dealer = require("../../website/js/classes/dealer");
 // Find the range of a given player, based on information about their playstyle
 // and their current move
 function determine_range(data, player_move, pot_size, first) {
-    console.log("Current range", data.current_range); 
+    //console.log("Current range", data.current_range); 
 
     if(data.total_moves < 10) { // Husk at ændre tilbage
         if(player_move.move == "check") {
@@ -155,7 +155,7 @@ function determine_range(data, player_move, pot_size, first) {
             let st = factor * (1 - (data.chance_of_raise/data.vpip)) + data.vpip + (data.chance_of_raise/data.vpip - 0.5) - (data.vpip - 0.3);
             // console.log("change in range", (Math.pow(10, 3.5 - st)/data.current_range.range_Low) - (data.current_range.range_Low/10)); 
             data.current_range.range_Low += (Math.pow(10, 3.5 - st)/data.current_range.range_Low) - (data.current_range.range_Low/10);
-            console.log("range_low", data.current_range.range_Low);
+            //console.log("range_low", data.current_range.range_Low);
             // let factor = ra; 
             // if(ra > 1) {
             //     factor = Math.pow(ra, 1-ra) * (-1) + 2;

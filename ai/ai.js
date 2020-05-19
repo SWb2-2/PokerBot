@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111;
+	const num_of_sim = 1411;
 	let relevant_data = "";
 
 	//Get data needed to determine move
@@ -112,7 +112,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 			} else {
 				ai_move.ai_move = "raise";
 				ai_move.amount  = raise_amount;
-				console.log("bluff on call", EV_bluff, EV_call);
+				//console.log("bluff on call", EV_bluff, EV_call);
 				return true; 
 			}
 		
@@ -122,7 +122,7 @@ function do_calculated_bluff2(ai_move, equity, game_info, data) {
 			} else {
 				ai_move.ai_move = "raise";
 				ai_move.amount  = raise_amount;
-				console.log("bluff on fold")
+				//console.log("bluff on fold")
 				return true; 
 			}
 		
@@ -168,9 +168,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
+		chance = -Infinity; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		chance = -Infinity; 		
 	}
 
 	chance += equity * 30;
