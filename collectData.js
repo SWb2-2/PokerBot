@@ -91,7 +91,7 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
         var player2_move = game_info_math.player_move;
         player2_move.ai_move = player2_move.move;
     }
-    let whose_turn = "player1";
+    let whose_turn = dealer.decide_whose_turn(player1,player2);
     while(whose_turn !== "table" && whose_turn !== "showdown") {
         player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
@@ -114,14 +114,14 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
             storePlayer(player2, player1, dealer);
             whose_turn = round.process_move(player2, player1, dealer).whose_turn;
         } else {
-            return isTable(player1, player2, dealer);
+            return isTable(player1, player2);
         }
     }
-    return isTable(player2, player1, dealer);
+    return isTable(player2, player1);
 }
 
-function isTable(player1, player2, dealer) {
-    if(dealer.decide_whose_turn(player1, player2, dealer) === "showdown" ) {
+function isTable(player1, player2) {
+    if(dealer.decide_whose_turn(player1, player2) === "showdown" ) {
         return false;
     } else {
         return true;

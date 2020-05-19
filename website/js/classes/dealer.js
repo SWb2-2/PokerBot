@@ -76,14 +76,14 @@ module.exports = class Dealer {
         }
     }
 
-    decide_whose_turn(active_player, inactive_player, dealer) {
+    decide_whose_turn(active_player, inactive_player) {
         let turn ="";
         if (active_player.player_move.move === "fold") {
             turn = "showdown";
         } else if (active_player.player_move.move == "raise" && inactive_player.balance !== 0) {
             turn = inactive_player.name;
         } else if (active_player.balance === 0  || inactive_player.balance === 0) {
-            if (dealer.table_cards.length === 5) {
+            if (this.table_cards.length === 5) {
                 turn = "showdown";
             } else {
                 turn = "table";
@@ -93,7 +93,7 @@ module.exports = class Dealer {
         } else if (active_player.player_move.move === "" && inactive_player.player_move.move === "") {
             turn = active_player.name;
         } else {
-            if (dealer.table_cards.length === 5) {
+            if (this.table_cards.length === 5) {
                 turn = "showdown";
             } else {
                 turn = "table";
