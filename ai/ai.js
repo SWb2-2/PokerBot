@@ -22,7 +22,7 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 	let current_round = "";
 	let range = { range_low: 0, range_high: 100 }
 	let equity = {};
-	const num_of_sim = 141111;
+	const num_of_sim = 1411;
 	let relevant_data = "";
 
 	//Get data needed to determine move

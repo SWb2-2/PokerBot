@@ -137,6 +137,7 @@ function determine_range(data, player_move, pot_size, first) {
                 } else {
                     data.current_range.range_Low = 34;
                 }
+                data.current_range.range_high = 86;
             }
             
             //In general, increase the range more then when called. 

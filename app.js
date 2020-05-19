@@ -21,6 +21,7 @@ let data_preflop = new Data;
 let data_postflop = new Data;
 let data = new Data;
 let player_info = {move: "", amount: 0};
+let first = true;
 
 let game_info = {
     ai_hand: [],
@@ -102,8 +103,8 @@ app.get('/ai_move', (req, res) => {
     game_info.bb_size = dealer.bb.bb_size; 
     game_info.ai_balance = ai_player.balance;
     
-    let k = ai.ai(game_info, data_preflop, data_postflop, data);
-    
+    let k = ai.ai(game_info, data_preflop, data_postflop, data, first);
+    first = false;
     ai_player.player_move.move = k.ai_move;
     ai_player.player_move.amount = k.amount;
     k.bluff === undefined ? ai_player.player_move.bluff = "false" : ai_player.player_move.bluff = k.bluff;
@@ -152,6 +153,7 @@ app.get('/winner', (req, res) => {
     let response = round.showdown(human_player, ai_player, dealer);
     log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
     // console.log("winner ", response);
+    first = true;
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;
     res.json(JSON.stringify(response));
