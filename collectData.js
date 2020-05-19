@@ -177,8 +177,8 @@ function storePlayer(active_player, inactive_player, dealer) {
 }
 
 function logNewGame() {
-    fs.appendFileSync('./logFiles/history_without_bluff.txt', '\n\n ––––––– NEW GAME ––––––––– \n\n');
-    fs.appendFileSync('./logFiles/history_with_bluff.txt', '\n\n ––––––– NEW GAME ––––––––– \n\n');
+    //fs.appendFileSync('./logFiles/history_without_bluff.txt', '\n\n ––––––– NEW GAME ––––––––– \n\n');
+    //fs.appendFileSync('./logFiles/history_with_bluff.txt', '\n\n ––––––– NEW GAME ––––––––– \n\n');
 }
 
 function checkBluff(active_player, player_move) {
