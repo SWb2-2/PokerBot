@@ -59,7 +59,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         let first1 = true;
         let first2 = true;
         let progress = true;
-        logNewGame();
+        //logNewGame();
         player_info.move = "";
         player_info.amount = 0;
         let response = round.pre_flop(aiMath, aiBluff, dealer);
@@ -91,7 +91,7 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
         var player2_move = game_info_math.player_move;
         player2_move.ai_move = player2_move.move;
     }
-    let whose_turn = "player1";
+    let whose_turn = dealer.decide_whose_turn(player1, player2, dealer);
     while(whose_turn !== "table" && whose_turn !== "showdown") {
         player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
@@ -102,6 +102,9 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
         log_functions.logMove(player1.name, player1.player_move, dealer.table_cards, player1.bluff);
         storePlayer(player1, player2, dealer);
         let res1 = round.process_move(player1, player2, dealer);
+        if(player1.player_move.move === "call") {
+            player1.player_move.amount = 0;
+        }
         
         if(res1.whose_turn !== "showdown" && res1.whose_turn !== "table") {
             player_info.move = player1_move.ai_move;
@@ -113,6 +116,9 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
             log_functions.logMove(player2.name, player2.player_move, dealer.table_cards, player2.bluff);
             storePlayer(player2, player1, dealer);
             whose_turn = round.process_move(player2, player1, dealer).whose_turn;
+            if(player2.player_move.move === "call") {
+                player2.player_move.amount = 0;
+            }
         } else {
             return isTable(player1, player2, dealer);
         }
@@ -199,7 +205,12 @@ function updateData(player) {
 
 function getPlayerMove(active_player, first) {
     if(active_player.name === "Bluff") {
-        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+        game_info_bluff.bluff = false;
+        active_player.bluff = false;
+        res = ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+        game_info_bluff.bluff = true;
+        active_player.bluff = true;
+        return res;
     } else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
     }
@@ -228,4 +239,4 @@ function readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer) 
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 1000000);
+simulatePoker(aiBluff, aiMath, dealer, 1000000 - 212598);
