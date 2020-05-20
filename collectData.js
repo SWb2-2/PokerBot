@@ -59,7 +59,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         let first1 = true;
         let first2 = true;
         let progress = true;
-        logNewGame();
+        //logNewGame();
         player_info.move = "";
         player_info.amount = 0;
         let response = round.pre_flop(aiMath, aiBluff, dealer);
