@@ -59,16 +59,26 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         let first1 = true;
         let first2 = true;
         let progress = true;
-        logNewGame();
+        //logNewGame();
         player_info.move = "";
         player_info.amount = 0;
         let response = round.pre_flop(aiMath, aiBluff, dealer);
-        response.whose_turn === "Bluff" ? progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2) 
-                                        : progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2);
+        if (response.whose_turn === "Math") {
+            progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+        } else if (response.whose_turn === "Bluff") {
+            progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+        } else {
+            progress = isTable(aiBluff, aiMath, dealer);
+        }
         while(progress !== false) {
             let res = round.next_round(aiBluff, aiMath, dealer);
-            res.whose_turn === "Bluff" ? progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2) 
-                                       : progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2);
+            if (res.whose_turn === "Math") {
+                progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+            } else if (res.whose_turn === "Bluff") {
+                progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+            } else {
+                progress = isTable(aiBluff, aiMath, dealer);
+            }
         }
         let res2 = round.showdown(aiBluff, aiMath, dealer);
         log_functions.logWinnings(aiBluff.name, res2, aiBluff.bluff, dealer.bb.bb_size, aiBluff.current_bet, aiBluff.hasBluffed);
@@ -78,8 +88,14 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer);
     }
     console.log("–––––––––General data for bluff, then math: ––––––––– \n", aiBluff.data, aiMath.data);
-    console.log("–––––––––Pre-flop data for bluff, then math: ––––––––– \n", aiMath.data_preflop, aiBluff.data_preflop);
+    console.log("–––––––––Pre-flop data for bluff, then math: ––––––––– \n", aiBluff.data_preflop, aiMath.data_preflop);
     console.log("–––––––––Post-flop data for bluff, then math: ––––––––– \n", aiBluff.data_postflop, aiMath.data_postflop);
+    logData(aiMath, aiBluff);
+}
+
+function logData(aiMath, aiBluff) {
+    fs.writeFileSync("./logFiles/data4Math", JSON.stringify(aiMath.data) + " Pre_flop " + JSON.stringify(aiMath.data_preflop) + "Post flop " + JSON.stringify(aiMath.data_postflop));
+    fs.writeFileSync("./logFiles/data4Bluff", JSON.stringify(aiBluff.data) + "Pre_flop " + JSON.stringify(aiBluff.data_preflop) + "Postflop" + JSON.stringify(aiBluff.data_postflop));
 }
 
 function initiateBetting(player1, player2, dealer, first1, first2) {
