@@ -38,7 +38,7 @@ let game_info_bluff = {
     ai_hand: [],
 	table_cards: [],
     pot: 0,
-    pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
+    //pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
     bb_size: 0,
     player_move: { move: "", amount: 0},
 	bluff: true
@@ -48,7 +48,7 @@ game_info_math = {
     ai_hand: [],
 	table_cards: [],
     pot: 0,
-    pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
+    //pot_before_player: dealer.bb.bb_size + dealer.bb.bb_size/2,
     bb_size: 0,
     player_move: { move: "", amount: 0},
 	bluff: false
@@ -155,7 +155,7 @@ function updateGameInfo(active, game_info_bluff, game_info_math, dealer, player_
         game_info_bluff.player_move.amount = player_info.amount;
         game_info_bluff.bb_size = dealer.bb.bb_size; 
         game_info_bluff.ai_balance = active.balance;
-        game_info_bluff.pot_before_player = dealer.pot;
+        //game_info_bluff.pot_before_player = dealer.pot;
     } else {
         game_info_math.ai_hand = active.hand;
         game_info_math.table_cards = dealer.table_cards;
@@ -164,7 +164,7 @@ function updateGameInfo(active, game_info_bluff, game_info_math, dealer, player_
         game_info_math.player_move.amount = player_info.amount;
         game_info_math.bb_size = dealer.bb.bb_size; 
         game_info_math.ai_balance = active.balance;
-        game_info_math.pot_before_player = dealer.pot;
+        //game_info_math.pot_before_player = dealer.pot;
     }
 }
 
@@ -235,8 +235,8 @@ function resetMoves(active_player_name, game_info_math, game_info_bluff, dealer)
 }
 
 function readyNewGame(game_info_math, game_info_bluff, aiBluff, aiMath, dealer) {
-        game_info_bluff.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
-        game_info_math.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+        //game_info_bluff.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
+        //game_info_math.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
         game_info_math.player_move.move = "";
         game_info_bluff.player_move.move = "";
         game_info_bluff.player_move.amount = 0;

@@ -19,7 +19,7 @@ function determine_range(data, player_move, pot_size, first) {
             data.current_range.range_Low = 45;
             data.current_range.range_high = 86;     
         }
-        return data.current_range;
+    	return data.current_range;
     }
 
     //AI is sb and player hasent done a move yet. 
@@ -32,7 +32,10 @@ function determine_range(data, player_move, pot_size, first) {
         let cr = data.chance_of_raise;  
         let hp = data.hands_played_percentage;
         let c  = 1 - data.chance_of_call_a_raise;
-        let ra = player_move.amount / pot_size;
+		let ra = player_move.amount / (pot_size - player_move.amount);
+		if (ra < 0) {
+			console.log("ERROR: ra is lower than zero");
+		}	
         // console.log("Ra is ", ra, " Pot is ", pot_size, " amount is ", player_move.amount);
         let w_cr, w_hp,  w_c;
         let i_cr, i_hp, i_c;

@@ -27,7 +27,7 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot_before_player, first);					//Check op på 
+	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, first);					//Check op på 
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
 	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
 	// console.log(equity.draw_and_winrate, "wr");
@@ -209,7 +209,7 @@ function move_reactive(equity, game_info, data) {
 	
 	if(game_info.player_move.amount == game_info.bb_size / 2 && (game_info.pot == game_info.bb_size * 3/2)) {
 		// console.log("Vi caller som sb", equity); 
-		if(equity > 0.44) {								//CHECK VÆRDI 
+		if(equity > 0.44 && equity < 0.55) {								//CHECK VÆRDI 
 			return { ai_move: "call", amount: 0}
 		}
 		
