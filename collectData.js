@@ -217,7 +217,12 @@ function updateData(player) {
 
 function getPlayerMove(active_player, first) {
     if(active_player.name === "Bluff") {
-        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+        game_info_bluff.bluff = false;
+        active_player.bluff = false;
+        res = ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+        game_info_bluff.bluff = true;
+        active_player.bluff = true;
+        return res;
     } else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
     }
