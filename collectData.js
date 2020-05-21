@@ -80,6 +80,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
     console.log("–––––––––General data for bluff, then math: ––––––––– \n", aiBluff.data, aiMath.data);
     console.log("–––––––––Pre-flop data for bluff, then math: ––––––––– \n", aiMath.data_preflop, aiBluff.data_preflop);
     console.log("–––––––––Post-flop data for bluff, then math: ––––––––– \n", aiBluff.data_postflop, aiMath.data_postflop);
+    let i = 0; 
 }
 
 function initiateBetting(player1, player2, dealer, first1, first2) {
