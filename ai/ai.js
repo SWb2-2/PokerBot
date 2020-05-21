@@ -54,7 +54,7 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
-	
+		console.log("EROOOOOOORERERE, Martin har fucked up, linje 57, ai, der bluffews");
 		if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
 			ai_move.bluff = "calc bluff";
 			// console.log("bluffed: aimove:", ai_move);
