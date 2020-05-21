@@ -71,7 +71,6 @@ app.post('/player_move', (req, res) => {
 
     res.statusCode = 200;
     let response = round.process_move(human_player, ai_player, dealer);
-    // console.log("player move",response);
     res.json(JSON.stringify(response));
     res.end("request completed");
 });
@@ -123,7 +122,6 @@ app.get('/ai_move', (req, res) => {
     store.store_ai_move(ai_player.player_move.move, data);
     Math.round(ai_player.amount * 10) / 10;
     let response = round.process_move(ai_player, human_player, dealer);
-    // console.log("ai move: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
 });
@@ -135,11 +133,9 @@ app.get('/table_update', (req, res) => {
     if(response.whose_turn === ai_player.name) {
         player_info.move = ""; 
         player_info.amount = 0; 
-    }
-
-
+	}
+	
     res.statusCode = 200;
-    // console.log("table: ", response);
     res.json(JSON.stringify(response));
     res.end("request accepted");
 });
@@ -152,7 +148,6 @@ app.get('/winner', (req, res) => {
 
     let response = round.showdown(human_player, ai_player, dealer);
     log_functions.logWinnings(ai_player.name, response, bluff, dealer.bb.bb_size, ai_player.current_bet, hasBluffed);
-    // console.log("winner ", response);
     first = true;
     game_info.pot_before_player = dealer.bb.bb_size + dealer.bb.bb_size/2;
     res.statusCode = 200;

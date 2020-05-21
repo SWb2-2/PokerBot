@@ -1,3 +1,4 @@
+//increases tally pokerai's own move
 function store_ai_move(move, data) {
     data.ai_total_moves += 1;
     if(move == "check") {
@@ -11,6 +12,7 @@ function store_ai_move(move, data) {
     }
 }
 
+//keeps track of opponents playstyle in preflop, postflop, and overall
 function store_player_move(player, ai_move, pot_size, data, pre_flop) {
     if(player.move == "check") {
         data.player_check += 1;
@@ -50,11 +52,8 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         if(data.ai_raise !== 0) {
             data.chance_of_call_a_raise = data.call_a_raise / data.ai_raise;
         }
-        // if(data.total_preflop != 0) {
-        //     data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
-        // }
+ 
         if(ai_move == "raise") {
-
             data.fold_when_raised += 1;
             data.chance_of_fold_when_raised = data.fold_when_raised / data.ai_raise;
         } else {
@@ -62,7 +61,6 @@ function store_player_move(player, ai_move, pot_size, data, pre_flop) {
         }
     }
     if(data.total_preflop != 0 && pre_flop === true) {
-        // console.log(data.total_preflop, data.player_fold);
         data.hands_played_percentage = 1 - (data.player_fold / data.total_preflop);
     }
 }

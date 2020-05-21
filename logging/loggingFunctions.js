@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// Tjekker om bluff er på kommandolinjen. Hvis ja, returnerer den true, og ellers false.
+// checks commandline inputs for if bluff is enabled
 function checkCommandLine(args) {
     for(i = 0; i < args.length; i++) {
         if(args[i] === "--bluff") {
@@ -11,18 +11,14 @@ function checkCommandLine(args) {
     return false;
 }
 
-// Logger en spillers træk ud fra den givne situation. Det er ligegyldigt, om det er AI eller Player, den er lavet til begge.
+// Logs a player move
 function logMove(playerName, player_action, table, bluff) {
     if(player_action.move === "raise") {
         logRaiseAverage(player_action, bluff);
     }
     logFrequencyOfMove(player_action, bluff);
-    // if(bluff === false) {
-    //     fs.appendFileSync("./logFiles/history_without_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amount}, Round: ${table.length}`);
-    // } else {
-    //     fs.appendFileSync("./logFiles/history_with_bluff.txt", `\n${playerName} Move: ${player_action.move}, Amount: ${player_action.amount}, Round: ${table.length}, Bluff: ${player_action.bluff}`);
-    // }
 }
+
 // The amount of each move is updated and the new frequency of every possible move is recalculated.
 function logFrequencyOfMove(player_action, bluff) {
     let line = [];
@@ -75,9 +71,7 @@ function calcAverage(total, current) {
     return current/total;
 }
 
-// Logwinnings har to filer til de to botter, hvori den bevarer hands played samt bigblinds won. 
-// Efter hvert spil overskriver den det gamle med det nye resultat, og appender den nyligt beregnet bb værdi 
-// i history filerne. Lige nu bliver det kaldt mmb/h men det er faktisk i bb/h. Vi skal lige blive enige 
+//Updates log files: pokerais winnings
 function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     let array = [];
     let bluff_hands = 0; let hands_without = 0; let bb_won_with_bluff = 0; let bb_won_without = 0;
@@ -144,7 +138,7 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     }
 }
 
-// I de to filer, der hver især har hands_played og bigblind won, finder denne funktion tallene i filerne og returnerer dem på talform.
+//Returns index of a number in a log file
 function findNumber(array, numberSpot) {
     let amount = "";
     while(array[numberSpot] !== "/") {
@@ -183,13 +177,10 @@ function logRaiseAverage(ai_player_move, bluff) {
     }
     if(bluff) {
         fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} / Amount of bluff raises: ${bluffs} / Total amount of bluff: ${bluff_amount} / `);
-        //fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}, Average bluff amount: ${average_raise_with_bluff}`);
     } else {
         fs.writeFileSync('./logFiles/raiseAverage.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} /`);
-        //fs.appendFileSync('./logFiles/history_without_bluff.txt', `\n\nAverage raise amount: ${average_raise_without_bluff}`);
     }
 }
-
 
 module.exports.findNumber = findNumber;
 module.exports.logWinnings = logWinnings;

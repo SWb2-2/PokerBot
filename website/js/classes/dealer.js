@@ -100,8 +100,6 @@ module.exports = class Dealer {
             }
         }
 
-
-
         return turn;
     }
 
