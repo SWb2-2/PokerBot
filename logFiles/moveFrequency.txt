@@ -1,2 +1,2 @@
 
- check frequency: 0.376808716646491, call frequency: 0.21592728307659467, raise frequency: 0.20403967951016938, fold frequency: 0.2032243207667449
+ check frequency: 0.377333847259336, call frequency: 0.21648444853835894, raise frequency: 0.2032180535868659, fold frequency: 0.2029636506154392
