@@ -7,7 +7,7 @@ const ai = require("./ai/ai.js");
 const log_functions = require('./logging/loggingFunctions');
 const fs = require('fs');
 
-
+// Initializing players and dealer
 let aiBluff = new Player(100, "Bluff");
 let aiMath = new Player(100, "Math");
 let dealer = new dealer_module();
@@ -44,9 +44,11 @@ game_info_math = {
 	bluff: false
 }
 
-//Overall structure of simulated poker game given player infos and dealer
+//Overall structure of simulated poker game given player infos and dealer.
 function simulatePoker(aiBluff, aiMath, dealer, simulations) {
-    for(let i = 0; i < simulations; i++) {
+	let args = process.argv.slice(2);
+	game_info_bluff.bluff = log_functions.checkCommandLine(args);
+	for(let i = 0; i < simulations; i++) {
         let first1 = true;
         let first2 = true;
         let progress = true;
@@ -74,7 +76,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
                 progress = isTable(aiBluff, aiMath, dealer);
             }
         }
-
+		//Showdown
         let res2 = round.showdown(aiBluff, aiMath, dealer);
         log_functions.logWinnings(aiBluff.name, res2, aiBluff.bluff, dealer.bb.bb_size, aiBluff.current_bet, aiBluff.hasBluffed);
         log_functions.logWinnings(aiMath.name, res2, aiMath.bluff, dealer.bb.bb_size, aiMath.current_bet, false);
@@ -82,8 +84,9 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         updateData(aiMath);
         readyNewGame(aiBluff, aiMath);
     }
-    console.log("–––––––––General data for bluff, then math: ––––––––– \n", aiBluff.data, aiMath.data);
-    console.log("–––––––––Pre-flop data for bluff, then math: ––––––––– \n", aiMath.data_preflop, aiBluff.data_preflop);
+	// Logs the data for each player after all the given input simulations have been completed.
+	console.log("–––––––––General data for bluff, then math: ––––––––– \n", aiBluff.data, aiMath.data);
+    console.log("–––––––––Pre-flop data for bluff, then math: ––––––––– \n", aiBluff.data_preflop, aiMath.data_preflop);
     console.log("–––––––––Post-flop data for bluff, then math: ––––––––– \n", aiBluff.data_postflop, aiMath.data_postflop);
 
     logData(aiMath, aiBluff);
@@ -95,25 +98,21 @@ function logData(aiMath, aiBluff) {
     fs.writeFileSync("./logFiles/data4Bluff", JSON.stringify(aiBluff.data) + "Pre_flop " + JSON.stringify(aiBluff.data_preflop) + "Postflop" + JSON.stringify(aiBluff.data_postflop));
 }
 
-//Runs bettingsrounds for a given round until someone folds or players have equal current bets
+//Runs bettingsrounds for a given round until someone folds or players have equal current bets. 
+// Returns boolean value which indicates whether it is time for showdown or not. 
 function initiateBetting(player1, player2, dealer, first1, first2) {
     resetMoves();
-    if(player2.name === "Bluff") {
-        var player2_move = game_info_bluff.player_move;
-        player2_move.ai_move = player2_move.move;
-    } else {
-        var player2_move = game_info_math.player_move;
-        player2_move.ai_move = player2_move.move;
-    }
+	let player2_move = {ai_move: "", amount: 0};
     let whose_turn = dealer.decide_whose_turn(player1,player2);
-    while(whose_turn !== "table" && whose_turn !== "showdown") {
-        player_info.move = player2_move.ai_move;
+	// Loop contains the betting round, where dealer object decides whether or not round is over.  
+	while(whose_turn !== "table" && whose_turn !== "showdown") {
+		player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
         let player1_move = getPlayerMove(player1, first1);
-        first1 = false;
+		first1 = false;
         checkBluff(player1, player1_move);
-        log_functions.logMove(player1.name, player1.player_move, dealer.table_cards, player1.bluff);
+        log_functions.logMove(player1.player_move, player1.bluff);
         storePlayer(player1, player2, dealer);
         let res1 = round.process_move(player1, player2, dealer);
         
@@ -121,10 +120,10 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
             player_info.move = player1_move.ai_move;
             player_info.amount = player1_move.amount;
             updateGameInfo(player2, dealer, player_info);
-            player2_move = getPlayerMove(player2, first2);
+			player2_move = getPlayerMove(player2, first2);
             first2 = false;
             checkBluff(player2, player2_move);
-            log_functions.logMove(player2.name, player2.player_move, dealer.table_cards, player2.bluff);
+            log_functions.logMove(player2.player_move, player2.bluff);
             storePlayer(player2, player1, dealer);
             whose_turn = round.process_move(player2, player1, dealer).whose_turn;
         } else {
@@ -206,11 +205,11 @@ function updateData(player) {
     player.data.total_preflop += 1;
 }
 
-//gets player move from ai
+//gets player move from either ai 'Bluff' or 'Math'. Parameter first means that it is the first move in the round. 
 function getPlayerMove(active_player, first) {
     if(active_player.name === "Bluff") {
         return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
-    } else {
+	} else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
     }
 }

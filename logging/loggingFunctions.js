@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-// checks commandline inputs for if bluff is enabled
+// checks commandline inputs for, if bluff is enabled
 function checkCommandLine(args) {
     for(i = 0; i < args.length; i++) {
         if(args[i] === "--bluff") {
@@ -11,15 +11,15 @@ function checkCommandLine(args) {
     return false;
 }
 
-// Logs a player move
-function logMove(playerName, player_action, table, bluff) {
+// Logs a player move – move frequency and number of raises. Bluff parameter determines which player that is to be logged
+function logMove(player_action, bluff) {
     if(player_action.move === "raise") {
         logRaiseAverage(player_action, bluff);
     }
     logFrequencyOfMove(player_action, bluff);
 }
 
-// The amount of each move is updated and the new frequency of every possible move is recalculated.
+// The amount of each move is updated and the new frequency of every possible move is recalculated. Bluff determines which player is logged
 function logFrequencyOfMove(player_action, bluff) {
     let line = [];
     let raise_line = [];
@@ -71,10 +71,11 @@ function calcAverage(total, current) {
     return current/total;
 }
 
-//Updates log files: pokerais winnings
+//Updates log files: pokerais winnings writing BB's won, BB/g, and BB won from bluffed hands for the given player
 function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     let array = [];
-    let bluff_hands = 0; let hands_without = 0; let bb_won_with_bluff = 0; let bb_won_without = 0;
+	let bluff_hands = 0; 
+	let bb_won_with_bluff = 0;
     
     if(bluff === false) {
         array = fs.readFileSync("./logFiles/averageBB.txt");
@@ -92,8 +93,6 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     if(bluff === true) {
         bb_won_with_bluff = rep3.number;
         bluff_hands = rep4.number;
-        hands_without = hands_played - bluff_hands;
-        bb_won_without = bb_won - bb_won_with_bluff;
     }
     
     let bb_ratio = ((response.storage_pot - current_bet) / bigBlind);
@@ -101,20 +100,14 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
         bb_won += bb_ratio;
         if(hasBluffed) {
             bb_won_with_bluff += bb_ratio;
-            bluff_hands += 1;
-        } else {
-            hands_without += 1;
-            bb_won_without += bb_ratio;
-        }
+			bluff_hands += 1;
+		}
     } else if(response.winner !== "draw") {
         bb_won = bb_won - ((current_bet) / bigBlind);
         if(hasBluffed) {
             bb_won_with_bluff -= ((current_bet) / bigBlind);
-            bluff_hands += 1;
-        } else {
-            hands_without += 1;
-            bb_won_without -= ((current_bet) / bigBlind);
-        }
+			bluff_hands += 1;
+		}
     } else {
         bb_won += 0;
     }
@@ -124,13 +117,9 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     if(bluff_hands !== 0) {
         avg_bb_won_with_bluff = (bb_won_with_bluff / bluff_hands);
     }
-    let avg_bb_won_without = (bb_won_without / hands_without);
-
     if(bluff === false) {
-        //fs.appendFileSync('./logFiles/history_without_bluff.txt', ` \n\nWinner: ${response.winner}\nBB/H: ${mmb}`);
         fs.writeFileSync('./logFiles/averageBB.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} / BB won with bluffs: 0 / bluffed hands: 0 /`);
     } else {
-        //fs.appendFileSync('./logFiles/history_with_bluff.txt', `\n\nWinner: ${response.winner} \nBB/h: ${mmb}, Bluff BB/h: ${avg_bb_won_with_bluff}, BB/h without bluff: ${avg_bb_won_without}`);
         fs.writeFileSync('./logFiles/averageBB_bluff.txt', `BB won: ${bb_won} / Hands Played: ${hands_played} / BB won with bluffs: ${bb_won_with_bluff} / bluffed hands: ${bluff_hands} /`);
     }
     if(hands_played % 100 === 0) {
@@ -138,7 +127,7 @@ function logWinnings(name, response, bluff, bigBlind, current_bet, hasBluffed) {
     }
 }
 
-//Returns index of a number in a log file
+//Returns index of a number in a log file. 
 function findNumber(array, numberSpot) {
     let amount = "";
     while(array[numberSpot] !== "/") {
@@ -147,16 +136,17 @@ function findNumber(array, numberSpot) {
     }
     return {number: Number(amount), endOfNumber: numberSpot};
 }
-
+// Logs total amount of raises and the average raise amount for the given player. 
 function logRaiseAverage(ai_player_move, bluff) {
     let line = [];
     let total_raise_amount = 0; let amount_of_raises = 0; let bluffs = 0; let bluff_amount = 0;
-    if(bluff) {
+	if(bluff) {
         line = fs.readFileSync('./logFiles/raiseAverageBluff.txt');
     } else {
         line = fs.readFileSync('./logFiles/raiseAverage.txt');
     }
-    let res = findNumber(line.toString(), 18);
+	// Number placement is predetermined in file, thus constants are added to find the number in the file.
+	let res = findNumber(line.toString(), 18);
     let res2 = findNumber(line.toString(), res.endOfNumber + 22);
     if(bluff) {
         var res3 = findNumber(line.toString(), res2.endOfNumber + 26);
@@ -171,7 +161,6 @@ function logRaiseAverage(ai_player_move, bluff) {
     }
 
     average_raise_without_bluff = total_raise_amount / amount_of_raises;
-    let average_raise_with_bluff = 0;
     if(bluffs !== 0) {
         average_raise_with_bluff = bluff_amount / bluffs;
     }
