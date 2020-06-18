@@ -15,12 +15,7 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, first);					//Check op på 
-
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
-	if(game_info.bluff == false) {
-		
-		// console.log("round:", game_info.table_cards.length, range, equity.draw_and_winrate); 
-	}
 	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
 	
 	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
@@ -72,9 +67,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
+		chance = -Infinity; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		chance = -Infinity; 		
 	}
 
 	chance += equity * 30;
