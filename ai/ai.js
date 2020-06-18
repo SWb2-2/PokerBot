@@ -17,27 +17,50 @@ function ai_math(game_info, data_preflop, data_postflop, data, first) {
 	current_round = find_round(game_info.table_cards.length);
 	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, first);					//Check op på 
 
-
-
 	equity        = monte_carlo.equity_range(game_info.ai_hand, num_of_sim, game_info.table_cards, range.range_Low, range.range_high);
+	if(game_info.bluff == false) {
+		
+		// console.log("round:", game_info.table_cards.length, range, equity.draw_and_winrate); 
+	}
 	relevant_data = get_relevant_data(current_round, data_preflop, data_postflop);
 	
 
 
 	//Considers payment of big blind (when its small blind) as mandatory by considering it as a raise from the opponent
 	if(game_info.pot < 2*game_info.bb_size && game_info.table_cards.length == 0) {
-		game_info.player_move.move = "raise"; 
+		game_info.player_move.move = "raise";  
 		game_info.player_move.amount = game_info.bb_size / 2; 
 	}
 	
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
+
     if(current_round == "preflop" && game_info.player_move.move == "raise") {
-        // console.log("ai_math", range); 
-        ai_move.range0 = range; 
-    } else {
-		ai_move.range0 = undefined; 
+		ai_move.range0 = range; 
+		ai_move.range0.round = "preflop_raise"; 
+    } else if(current_round == "preflop") {
+		ai_move.range0 = range; 
+		ai_move.range0.round = "preflop_no_raise"; 
+
+	} else if(current_round != "preflop") {
+		ai_move.range0 = range; 
+		ai_move.range0.round = "postflop"; 
 	}
+
+	if(game_info.player_move.move == "raise") {
+		ai_move.range0.opponent_move = "raise"; 
+
+	} else if(game_info.player_move.move == "call") {
+		ai_move.range0.opponent_move = "call"; 
+
+	} else if(game_info.player_move.move == "check") {
+		ai_move.range0.opponent_move = "check"; 
+
+	} else {
+		ai_move.range0.opponent_move = "empty"; 
+		
+	}
+
 	//Possibility to bluff
 	if(game_info.bluff == false) {		//No bluffing 
 

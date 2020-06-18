@@ -33,12 +33,31 @@ function ai_bluff(game_info, data_preflop, data_postflop, data, first) {
 	
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
-	
+		
     if(current_round == "preflop" && game_info.player_move.move == "raise") {
-        // console.log("ai_bluff", range, "move", game_info.player_move.move); 
-        ai_move.range0 = range; 
-    } else {
-		ai_move.range0 = undefined; 
+		ai_move.range0 = range; 
+		ai_move.range0.round = "preflop_raise"; 
+    } else if(current_round == "preflop") {
+		ai_move.range0 = range; 
+		ai_move.range0.round = "preflop_no_raise"; 
+
+	} else if(current_round != "preflop") {
+		ai_move.range0 = range; 
+		ai_move.range0.round = "postflop"; 
+	}
+
+	if(game_info.player_move.move == "raise") {
+		ai_move.range0.opponent_move = "raise"; 
+
+	} else if(game_info.player_move.move == "call") {
+		ai_move.range0.opponent_move = "call"; 
+
+	} else if(game_info.player_move.move == "check") {
+		ai_move.range0.opponent_move = "check"; 
+
+	} else {
+		ai_move.range0.opponent_move = "empty"; 
+		
 	}
 
 	//Possibility to bluff
@@ -54,24 +73,12 @@ function ai_bluff(game_info, data_preflop, data_postflop, data, first) {
 		if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
 			ai_move.bluff = "calc bluff";
 		}	
-        
-        // if(current_round == "preflop" && game_info.player_move.move == "raise") {
-        //     console.log("ai_bluff", range, "move", game_info.player_move.move); 
-        //     ai_move.range0 = range; 
-        // } else {
-        //     ai_move.range0 = undefined; 
-        // }
+
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
 		return ai_move;
     }
-    // if(current_round == "preflop" && game_info.player_move.move == "raise") {
-    //     console.log("ai_bluff", range, "move", game_info.player_move.move); 
-    //     ai_move.range0 = range; 
-    // } else {
-	// 	ai_move.range0 = undefined; 
-    // }
-    
+
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
 	return ai_move;
