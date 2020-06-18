@@ -44,13 +44,16 @@ game_info_math = {
 	bluff: false
 }
 
+let first1 = true;
+let first2 = true;
+
 //Overall structure of simulated poker game given player infos and dealer.
 function simulatePoker(aiBluff, aiMath, dealer, simulations) {
 	let args = process.argv.slice(2);
 	game_info_bluff.bluff = log_functions.checkCommandLine(args);
 	for(let i = 0; i < simulations; i++) {
-        let first1 = true;
-        let first2 = true;
+        first1 = true;
+        first2 = true;
         let progress = true;
         player_info.move = "";
         player_info.amount = 0;
@@ -58,9 +61,9 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
 
 		//preflop
         if (response.whose_turn === "Math") {
-            progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+            progress = initiateBetting(aiMath, aiBluff, dealer); 
         } else if (response.whose_turn === "Bluff") {
-            progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+            progress = initiateBetting(aiBluff, aiMath, dealer);
         } else {
             progress = isTable(aiBluff, aiMath, dealer);
 		}
@@ -69,9 +72,9 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         while(progress !== false) {
             let res = round.next_round(aiBluff, aiMath, dealer);
             if (res.whose_turn === "Math") {
-                progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+                progress = initiateBetting(aiMath, aiBluff, dealer); 
             } else if (res.whose_turn === "Bluff") {
-                progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+                progress = initiateBetting(aiBluff, aiMath, dealer);
             } else {
                 progress = isTable(aiBluff, aiMath, dealer);
             }
@@ -100,12 +103,14 @@ function logData(aiMath, aiBluff) {
 
 //Runs bettingsrounds for a given round until someone folds or players have equal current bets. 
 // Returns boolean value which indicates whether it is time for showdown or not. 
-function initiateBetting(player1, player2, dealer, first1, first2) {
+function initiateBetting(player1, player2, dealer) {
+    console.log(first1, first2); 
     resetMoves();
 	let player2_move = {ai_move: "", amount: 0};
     let whose_turn = dealer.decide_whose_turn(player1,player2);
 	// Loop contains the betting round, where dealer object decides whether or not round is over.  
 	while(whose_turn !== "table" && whose_turn !== "showdown") {
+        console.log("round:", dealer.table_cards.length);
 		player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
