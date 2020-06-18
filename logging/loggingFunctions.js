@@ -149,37 +149,37 @@ function findNumber(array, numberSpot) {
 }
 
 function logRaiseAverage(ai_player_move, bluff) {
-    let line = [];
-    let total_raise_amount = 0; let amount_of_raises = 0; let bluffs = 0; let bluff_amount = 0;
-    if(bluff) {
-        line = fs.readFileSync('./logFiles/raiseAverageBluff.txt');
-    } else {
-        line = fs.readFileSync('./logFiles/raiseAverage.txt');
-    }
-    let res = findNumber(line.toString(), 18);
-    let res2 = findNumber(line.toString(), res.endOfNumber + 22);
-    if(bluff) {
-        var res3 = findNumber(line.toString(), res2.endOfNumber + 26);
-        var res4 = findNumber(line.toString(), res3.endOfNumber + 25);
-    }
+    // let line = [];
+    // let total_raise_amount = 0; let amount_of_raises = 0; let bluffs = 0; let bluff_amount = 0;
+    // if(bluff) {
+    //     line = fs.readFileSync('./logFiles/raiseAverageBluff.txt');
+    // } else {
+    //     line = fs.readFileSync('./logFiles/raiseAverage.txt');
+    // }
+    // let res = findNumber(line.toString(), 18);
+    // let res2 = findNumber(line.toString(), res.endOfNumber + 22);
+    // if(bluff) {
+    //     var res3 = findNumber(line.toString(), res2.endOfNumber + 26);
+    //     var res4 = findNumber(line.toString(), res3.endOfNumber + 25);
+    // }
 
-    amount_of_raises = res.number + 1;
-    total_raise_amount = res2.number + ai_player_move.amount;
-    if(ai_player_move.bluff !== "false" && ai_player_move.bluff !== undefined) {
-        bluffs += res3.number + 1;
-        bluff_amount = res4.number + ai_player_move.amount;
-    }
+    // amount_of_raises = res.number + 1;
+    // total_raise_amount = res2.number + ai_player_move.amount;
+    // if(ai_player_move.bluff !== "false" && ai_player_move.bluff !== undefined) {
+    //     bluffs += res3.number + 1;
+    //     bluff_amount = res4.number + ai_player_move.amount;
+    // }
 
-    average_raise_without_bluff = total_raise_amount / amount_of_raises;
-    let average_raise_with_bluff = 0;
-    if(bluffs !== 0) {
-        average_raise_with_bluff = bluff_amount / bluffs;
-    }
-    if(bluff) {
-        fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} / Amount of bluff raises: ${bluffs} / Total amount of bluff: ${bluff_amount} / `);
-    } else {
-        fs.writeFileSync('./logFiles/raiseAverage.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} /`);
-    }
+    // average_raise_without_bluff = total_raise_amount / amount_of_raises;
+    // let average_raise_with_bluff = 0;
+    // if(bluffs !== 0) {
+    //     average_raise_with_bluff = bluff_amount / bluffs;
+    // }
+    // if(bluff) {
+    //     fs.writeFileSync('./logFiles/raiseAverageBluff.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} / Amount of bluff raises: ${bluffs} / Total amount of bluff: ${bluff_amount} / `);
+    // } else {
+    //     fs.writeFileSync('./logFiles/raiseAverage.txt', `Amount of raises: ${amount_of_raises} / Total raise amount: ${total_raise_amount} /`);
+    // }
 }
 
 module.exports.findNumber = findNumber;
