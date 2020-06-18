@@ -104,13 +104,11 @@ function logData(aiMath, aiBluff) {
 //Runs bettingsrounds for a given round until someone folds or players have equal current bets. 
 // Returns boolean value which indicates whether it is time for showdown or not. 
 function initiateBetting(player1, player2, dealer) {
-    console.log(first1, first2); 
     resetMoves();
 	let player2_move = {ai_move: "", amount: 0};
     let whose_turn = dealer.decide_whose_turn(player1,player2);
 	// Loop contains the betting round, where dealer object decides whether or not round is over.  
 	while(whose_turn !== "table" && whose_turn !== "showdown") {
-        console.log("round:", dealer.table_cards.length);
 		player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
