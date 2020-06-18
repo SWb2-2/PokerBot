@@ -3,7 +3,8 @@ const dealer_module = require("./website/js/classes/dealer.js");
 const Player = require("./website/js/classes/player.js");
 const Data = require("./website/js/classes/data.js");
 const store = require("./ai/storage_function.js");
-const ai = require("./ai/ai.js");
+const ai_bluff = require("./ai/ai_bluff.js");
+const ai_math = require("./ai/ai.js");
 const log_functions = require('./logging/loggingFunctions');
 const fs = require('fs');
 
@@ -44,11 +45,29 @@ game_info_math = {
 	bluff: false
 }
 
+var first_bluff = true;
+var first_math = true;
+
+var bluff0 = 0;
+var math0 = 0;
+var count_bluff0 = 0; 
+var count_math0 = 0; 
+
+
 //Overall structure of simulated poker game given player infos and dealer
 function simulatePoker(aiBluff, aiMath, dealer, simulations) {
     for(let i = 0; i < simulations; i++) {
-        let first1 = true;
-        let first2 = true;
+
+        if(bluff0 !== 0 && count_bluff0 != 0) 
+            // console.log("bluff", (bluff0 / count_bluff0))
+
+        if(i%100 === 0) {
+            console.log("bluff", (bluff0 / count_bluff0), "\n Math:", (math0 / count_math0));
+        }
+
+        first_bluff = true;
+        first_math = true;
+
         let progress = true;
         player_info.move = "";
         player_info.amount = 0;
@@ -56,9 +75,11 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
 
 		//preflop
         if (response.whose_turn === "Math") {
-            progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+            progress = initiateBetting(aiMath, aiBluff, dealer); 
+            // progress = initiateBetting(aiMath, aiBluff, dealer, first_bluff, first_math); 
         } else if (response.whose_turn === "Bluff") {
-            progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+            progress = initiateBetting(aiBluff, aiMath, dealer);
+            // progress = initiateBetting(aiBluff, aiMath, dealer, first_bluff, first_math);
         } else {
             progress = isTable(aiBluff, aiMath, dealer);
 		}
@@ -67,9 +88,11 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         while(progress !== false) {
             let res = round.next_round(aiBluff, aiMath, dealer);
             if (res.whose_turn === "Math") {
-                progress = initiateBetting(aiMath, aiBluff, dealer, first1, first2); 
+                progress = initiateBetting(aiMath, aiBluff, dealer); 
+                // progress = initiateBetting(aiMath, aiBluff, dealer, first_bluff, first_math); 
             } else if (res.whose_turn === "Bluff") {
-                progress = initiateBetting(aiBluff, aiMath, dealer, first1, first2);
+                progress = initiateBetting(aiBluff, aiMath, dealer);
+                // progress = initiateBetting(aiBluff, aiMath, dealer, first_bluff, first_math);
             } else {
                 progress = isTable(aiBluff, aiMath, dealer);
             }
@@ -96,7 +119,10 @@ function logData(aiMath, aiBluff) {
 }
 
 //Runs bettingsrounds for a given round until someone folds or players have equal current bets
-function initiateBetting(player1, player2, dealer, first1, first2) {
+function initiateBetting(player1, player2, dealer) {
+
+    // console.log("round", dealer.table_cards.length); 
+    
     resetMoves();
     if(player2.name === "Bluff") {
         var player2_move = game_info_bluff.player_move;
@@ -110,8 +136,17 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
         player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
-        let player1_move = getPlayerMove(player1, first1);
-        first1 = false;
+        // let player1_move = getPlayerMove(player1, first_bluff);
+        let player1_move = getPlayerMove(player1);
+
+        if(player1.name === "Bluff") {
+            first_bluff = false; 
+        } else if (player1.name === "Math") {
+            first_math = false; 
+        } else {
+            console.log("erroe")
+        }
+
         checkBluff(player1, player1_move);
         log_functions.logMove(player1.name, player1.player_move, dealer.table_cards, player1.bluff);
         storePlayer(player1, player2, dealer);
@@ -121,8 +156,18 @@ function initiateBetting(player1, player2, dealer, first1, first2) {
             player_info.move = player1_move.ai_move;
             player_info.amount = player1_move.amount;
             updateGameInfo(player2, dealer, player_info);
-            player2_move = getPlayerMove(player2, first2);
-            first2 = false;
+            player2_move = getPlayerMove(player2);
+            // player2_move = getPlayerMove(player2, first_math);
+
+
+            if(player2.name === "Bluff") {
+                first_bluff = false; 
+            } else if (player2.name === "Math") {
+                first_math = false; 
+            } else {
+                console.log("erroe")
+            }
+
             checkBluff(player2, player2_move);
             log_functions.logMove(player2.name, player2.player_move, dealer.table_cards, player2.bluff);
             storePlayer(player2, player1, dealer);
@@ -206,12 +251,42 @@ function updateData(player) {
     player.data.total_preflop += 1;
 }
 
+
+
 //gets player move from ai
-function getPlayerMove(active_player, first) {
+function getPlayerMove(active_player) {
     if(active_player.name === "Bluff") {
-        return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+
+        let j = ai_bluff.ai_bluff(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first_bluff);
+        
+        if(j.range0 !== undefined) {
+            if(bluff0 == undefined) {
+                
+            }
+            // console.log(j.range); 
+            bluff0 += j.range0.range_Low;
+            count_bluff0++; 
+            // console.log("Hej 269", bluff0, "countbluff:", count_bluff0); 
+        }
+
+        return j; 
+        
     } else {
-        return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
+        let j = ai_math.ai_math(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first_math);
+        
+        if(j.range0 != undefined) {
+            if(math0 == undefined) {
+                console.log("Fejl1"); 
+            }
+
+            math0 += j.range0.range_Low;
+            count_math0++; 
+
+            // console.log("Hej nej 285", bluff0, count_bluff0); 
+        }
+
+        return j; 
+        // return ai_math.ai_math(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first_math);
     }
 }
 
@@ -238,4 +313,4 @@ function readyNewGame(aiBluff, aiMath) {
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 1000000);
+simulatePoker(aiBluff, aiMath, dealer, 100000);

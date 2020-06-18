@@ -4,7 +4,7 @@ const range_func = require("./ai_util/range");
 //input: game_info object describing game's current state, and opponent's playstyle data
 //output: object containing Ai's move and a potential amount if it is a call or raise
 //Determines Ai's move based on equity, opponent's range, the state of the game, and whether bluffing is on or off
-function ai_math(game_info, data_preflop, data_postflop, data, first) {
+function ai_bluff(game_info, data_preflop, data_postflop, data, first) {
 
 	let ai_move;
 	let current_round = "";
@@ -15,7 +15,8 @@ function ai_math(game_info, data_preflop, data_postflop, data, first) {
 
 	//Get data needed to determine move
 	current_round = find_round(game_info.table_cards.length);
-	range         = range_func.determine_range(data, game_info.player_move, game_info.pot, first);					//Check op på 
+    range         = range_func.determine_range(data, game_info.player_move, game_info.pot, first);					//Check op på 
+    
 
 
 
@@ -32,12 +33,14 @@ function ai_math(game_info, data_preflop, data_postflop, data, first) {
 	
 	//Use information to determine move. Includes input validation
 	ai_move = determine_move(equity.draw_and_winrate / 100, game_info, relevant_data/*, data*/);
+	
     if(current_round == "preflop" && game_info.player_move.move == "raise") {
-        // console.log("ai_math", range); 
+        // console.log("ai_bluff", range, "move", game_info.player_move.move); 
         ai_move.range0 = range; 
     } else {
 		ai_move.range0 = undefined; 
 	}
+
 	//Possibility to bluff
 	if(game_info.bluff == false) {		//No bluffing 
 
@@ -51,11 +54,24 @@ function ai_math(game_info, data_preflop, data_postflop, data, first) {
 		if(do_calculated_bluff(ai_move, equity.draw_and_winrate / 100, game_info, relevant_data, range)) {
 			ai_move.bluff = "calc bluff";
 		}	
-		
+        
+        // if(current_round == "preflop" && game_info.player_move.move == "raise") {
+        //     console.log("ai_bluff", range, "move", game_info.player_move.move); 
+        //     ai_move.range0 = range; 
+        // } else {
+        //     ai_move.range0 = undefined; 
+        // }
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
 		return ai_move;
-	}
+    }
+    // if(current_round == "preflop" && game_info.player_move.move == "raise") {
+    //     console.log("ai_bluff", range, "move", game_info.player_move.move); 
+    //     ai_move.range0 = range; 
+    // } else {
+	// 	ai_move.range0 = undefined; 
+    // }
+    
 	set_final_amount(ai_move);
 	confirm_bet_size(ai_move, game_info);
 	return ai_move;
@@ -323,6 +339,6 @@ module.exports.move_reactive = move_reactive;
 module.exports.find_max_EV_raise = find_max_EV_raise; 
 module.exports.adjust_call_chance = adjust_call_chance; 
 module.exports.calc_EV_raise = calc_EV_raise; 
-module.exports.ai_math = ai_math; 
+module.exports.ai_bluff = ai_bluff; 
 module.exports.calc_EV_call = calc_EV_call;
 module.exports.calc_EV_check = calc_EV_check;
