@@ -107,6 +107,7 @@ function logData(aiMath, aiBluff) {
 //Runs bettingsrounds for a given round until someone folds or players have equal current bets. 
 // Returns boolean value which indicates whether it is time for showdown or not. 
 function initiateBetting(player1, player2, dealer) {
+
    //preflop, when there have been called as sb. 
    if((dealer.table_cards.length === 3) && (dealer.pot === dealer.bb.bb_size * 2)) {
 
@@ -133,7 +134,6 @@ function initiateBetting(player1, player2, dealer) {
             game_info_math.player_move.move = ""; 
         }
     }
-
 
 	let player2_move = {ai_move: "", amount: 0};
     let whose_turn = dealer.decide_whose_turn(player1,player2);
