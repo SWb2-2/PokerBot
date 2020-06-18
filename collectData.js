@@ -35,7 +35,7 @@ let game_info_bluff = {
 	bluff: true
 }
 
-game_info_math = {
+let game_info_math = {
     ai_hand: [],
 	table_cards: [],
     pot: 0,
@@ -46,12 +46,15 @@ game_info_math = {
 
 let first1 = true;
 let first2 = true;
+let end_round = "" // Can be "sb" or "bb", based on who ended the bettin round. 
 
 //Overall structure of simulated poker game given player infos and dealer.
 function simulatePoker(aiBluff, aiMath, dealer, simulations) {
 	let args = process.argv.slice(2);
 	game_info_bluff.bluff = log_functions.checkCommandLine(args);
 	for(let i = 0; i < simulations; i++) {
+        resetMoves();
+        end_round = ""; 
         first1 = true;
         first2 = true;
         let progress = true;
@@ -104,13 +107,38 @@ function logData(aiMath, aiBluff) {
 //Runs bettingsrounds for a given round until someone folds or players have equal current bets. 
 // Returns boolean value which indicates whether it is time for showdown or not. 
 function initiateBetting(player1, player2, dealer) {
-    console.log(first1, first2); 
-    resetMoves();
+   //preflop, when there have been called as sb. 
+   if((dealer.table_cards.length === 3) && (dealer.pot === dealer.bb.bb_size * 2)) {
+
+        if(player2.name == "Bluff") {
+            game_info_bluff.player_move.move = ""; 
+        } else if (player2.name == "Math") {
+            game_info_math.player_move.move = ""; 
+        } 
+    }
+
+    if(end_round === "bb" && dealer.table_cards.length > 0) {  //Player 2 vil altid være sb herinde. 
+
+        if(player2.name == "Bluff") {
+            game_info_bluff.player_move.move = ""; 
+        } else if (player2.name == "Math") {
+            game_info_math.player_move.move = ""; 
+        }
+    }
+
+    if(player2.player_move.move == "raise") {
+        if(player2.name == "Bluff") {
+            game_info_bluff.player_move.move = ""; 
+        } else if (player2.name == "Math") {
+            game_info_math.player_move.move = ""; 
+        }
+    }
+
+
 	let player2_move = {ai_move: "", amount: 0};
     let whose_turn = dealer.decide_whose_turn(player1,player2);
 	// Loop contains the betting round, where dealer object decides whether or not round is over.  
 	while(whose_turn !== "table" && whose_turn !== "showdown") {
-        console.log("round:", dealer.table_cards.length);
 		player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
@@ -120,6 +148,8 @@ function initiateBetting(player1, player2, dealer) {
         log_functions.logMove(player1.player_move, player1.bluff);
         storePlayer(player1, player2, dealer);
         let res1 = round.process_move(player1, player2, dealer);
+
+        player1.blind === "sb" ? end_round = "sb" : end_round = "bb"; 
         
         if(res1.whose_turn !== "showdown" && res1.whose_turn !== "table") {
             player_info.move = player1_move.ai_move;
@@ -131,6 +161,9 @@ function initiateBetting(player1, player2, dealer) {
             log_functions.logMove(player2.player_move, player2.bluff);
             storePlayer(player2, player1, dealer);
             whose_turn = round.process_move(player2, player1, dealer).whose_turn;
+
+            player2.blind === "sb" ? end_round = "sb" : end_round = "bb"; 
+
         } else {
             return isTable(player1, player2);
         }
@@ -213,6 +246,9 @@ function updateData(player) {
 //gets player move from either ai 'Bluff' or 'Math'. Parameter first means that it is the first move in the round. 
 function getPlayerMove(active_player, first) {
     if(active_player.name === "Bluff") {
+
+        // console.log(dealer.table_cards.length, end_round, game_info_bluff.player_move.move);
+
         return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
 	} else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
@@ -228,6 +264,12 @@ function resetMoves() {
     game_info_math.player_move.move = "";
     game_info_math.player_move.amount = 0;
     game_info_math.player_move.ai_move = "";
+
+    aiMath.data.current_range.range_Low = 34; 
+    aiMath.data.current_range.range_high = 86; 
+
+    aiBluff.data.current_range.range_Low = 34; 
+    aiBluff.data.current_range.range_high = 86; 
     
 }
 
