@@ -65,6 +65,8 @@ function determine_range(data, player_move, pot_size, first) {
 
             data.current_range.range_high -= (((data.chance_of_raise / data.vpip) * w_pfr * i_pfr) + (data.vpip * w_vpip * i_vpip));
 
+            data.current_range.range_Low = data.current_range.range_high - 30; 
+
 			range_control_check_call(data.current_range);
 			
             return data.current_range;
@@ -138,7 +140,7 @@ function determine_range(data, player_move, pot_size, first) {
             return data.current_range; 
         }
     }
-    return data.range;
+    return data.current_range;
 }
 
 //Make sure the range is legetimate, and caps it
