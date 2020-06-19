@@ -151,13 +151,15 @@ function logRaiseAverage(ai_player_move, bluff) {
     if(bluff) {
         var res3 = findNumber(line.toString(), res2.endOfNumber + 26);
         var res4 = findNumber(line.toString(), res3.endOfNumber + 25);
+        bluffs = res3.number; 
+        bluff_amount = res4.number; 
     }
 
     amount_of_raises = res.number + 1;
     total_raise_amount = res2.number + ai_player_move.amount;
-    if(ai_player_move.bluff !== "false" && ai_player_move.bluff !== undefined) {
+    if(ai_player_move.bluff !== "false" /*&& ai_player_move.bluff !== undefined*/) {
         bluffs += res3.number + 1;
-        bluff_amount = res4.number + ai_player_move.amount;
+        bluff_amount =  ai_player_move.amount;
     }
 
     average_raise_without_bluff = total_raise_amount / amount_of_raises;

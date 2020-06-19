@@ -39,5 +39,10 @@ module.exports = class Data {
             range_Low: 34, 
             range_high: 100
         }
+        this.good_hands = 0; 
+        this.bad_hands = 0;
+        this.good_hands_winnings = 0; 
+        this.bad_hands_winnings = 0; 
+        this.number_of_bluffs = 0; 
     }
 }
