@@ -236,7 +236,6 @@ function initiateBetting(player1, player2, dealer) {
     }
  
     if(game_info_bluff.player_move.move === "raise") {
-        ////console.log("Hello\n\n\n\n");
         game_info_bluff.player_move.move = "";
     } 
  
@@ -254,12 +253,10 @@ function initiateBetting(player1, player2, dealer) {
     let whose_turn = dealer.decide_whose_turn(player1,player2);
     // Loop contains the betting round, where dealer object decides whether or not round is over.  
     while(whose_turn !== "table" && whose_turn !== "showdown") {
-        //console.log(player1.name, "'s turn");
         player_info.move = player2_move.ai_move;
         player_info.amount = player2_move.amount;
         updateGameInfo(player1, dealer, player_info);
         let player1_move = getPlayerMove(player1, first1);
-        //console.log(player1_move, "Move from ", player1.name);
         first1 = false;
         checkBluff(player1, player1_move);
         log_functions.logMove(player1.player_move, player1.bluff);
@@ -274,12 +271,10 @@ function initiateBetting(player1, player2, dealer) {
         player1.blind === "sb" ? end_round = "sb" : end_round = "bb"; 
         
         if(res1.whose_turn !== "showdown" && res1.whose_turn !== "table") {
-            //console.log(player2.name, "'s turn");
             player_info.move = player1_move.ai_move;
             player_info.amount = player1_move.amount;
             updateGameInfo(player2, dealer, player_info);
             player2_move = getPlayerMove(player2, first2);
-            //console.log(player2_move, "Move from ", player2.name);
             first2 = false;
             checkBluff(player2, player2_move);
             log_functions.logMove(player2.player_move, player2.bluff);
@@ -376,8 +371,6 @@ function updateData(player) {
 function getPlayerMove(active_player, first) {
     if(active_player.name === "Bluff") {
 
-        // //console.log(dealer.table_cards.length, end_round, game_info_bluff.player_move.move);
-
         return ai.ai(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
 	} else {
         return ai.ai(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first);
@@ -413,6 +406,4 @@ function readyNewGame(aiBluff, aiMath) {
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 2500);
-
-
+simulatePoker(aiBluff, aiMath, dealer, 1000000);
