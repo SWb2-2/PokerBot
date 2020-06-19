@@ -32,7 +32,6 @@ function ai(game_info, data_preflop, data_postflop, data, first) {
 
 		set_final_amount(ai_move);
 		confirm_bet_size(ai_move, game_info);
-		// console.log("My move: ", ai_move);
 		return ai_move;
 
 	} else if(game_info.bluff == true && equity.draw_and_winrate < 50 && (ai_move.ai_move == "fold" || ai_move.ai_move == "check" || ai_move.ai_move == "call")) {
@@ -67,9 +66,9 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 			chance = 15;
 		} 
 	} else if(ai_move.ai_move == "call") {
-		chance = -Infinity; 
+		chance = 10; 
 	} else if(ai_move.ai_move == "fold") {
-		chance = -Infinity; 		
+		chance = 5; 		
 	}
 
 	chance += equity * 30;
