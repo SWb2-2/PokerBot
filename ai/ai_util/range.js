@@ -23,7 +23,7 @@ function determine_range(data, player_move, pot_size, first) {
 
     //AI is sb and player hasent done a move yet. 
     if(player_move.move == undefined) {
-        return data.range;
+        return data.current_range;
 
     } else {
         // Variables used in all the functions
@@ -101,7 +101,6 @@ function determine_range(data, player_move, pot_size, first) {
             return data.current_range; 
             
         } else if (player_move.move == "raise") {
-
             if(first) {
                 if(ra > 0.8) {
                     data.current_range.range_Low = 52;
@@ -139,6 +138,7 @@ function determine_range(data, player_move, pot_size, first) {
             range_control_raise(data.current_range);
             
             return data.current_range; 
+        } else if(player_move.move == "") {
         }
     }
     return data.current_range;

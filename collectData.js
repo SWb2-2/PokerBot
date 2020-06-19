@@ -85,13 +85,16 @@ let end_round = "" // Can be "sb" or "bb", based on who ended the bettin round.
 
 //Overall structure of simulated poker game given player infos and dealer.
 function simulatePoker(aiBluff, aiMath, dealer, simulations) {
+    
 	let args = process.argv.slice(2);
-	game_info_bluff.bluff = log_functions.checkCommandLine(args);
+    game_info_bluff.bluff = log_functions.checkCommandLine(args);
+    
 	for(let i = 0; i < simulations; i++) {
 
 
         if(i%100 == 0) {
-            console.log("\nMath raise range:",  math.preflop_raise_range / math.preflop_raise_count,
+            console.log(
+            "\nMath raise range:",  math.preflop_raise_range / math.preflop_raise_count,
             "Math no raise preflop:",  math.preflop_range / math.preflop_count,
             "Math postflop: ",  math.postflop_range / math.postflop_count , 
             "math total", math.total_range / math.total_count,
@@ -113,8 +116,7 @@ function simulatePoker(aiBluff, aiMath, dealer, simulations) {
         first_math = true;
         resetMoves();
         end_round = ""; 
-        first1 = true;
-        first2 = true;
+
         let progress = true;
         player_info.move = "";
         player_info.amount = 0;
@@ -348,8 +350,6 @@ function getPlayerMove(active_player) {
             bluff.postflop_range += j.range0.range_Low;
 
         }
-        bluff.total_count++;
-        bluff.total_range += j.range0.range_Low;
 
         if(j.range0.opponent_move == "raise") {
             bluff.raise++;
@@ -367,10 +367,13 @@ function getPlayerMove(active_player) {
             bluff.empty_range += j.range0.range_Low;
         }
 
+        bluff.total_count++;
+        bluff.total_range += j.range0.range_Low;
+
         return j; 
         
     } else {
-        let j = ai_math.ai_math(game_info_bluff, active_player.data_preflop, active_player.data_postflop, active_player.data, first_math);
+        let j = ai_math.ai_math(game_info_math, active_player.data_preflop, active_player.data_postflop, active_player.data, first_math);
         
         if(j.range0.round == "preflop_raise") {
 
@@ -388,8 +391,6 @@ function getPlayerMove(active_player) {
             math.postflop_range += j.range0.range_Low;
 
         }
-        math.total_count++;
-        math.total_range += j.range0.range_Low;
 
 
         if(j.range0.opponent_move == "raise") {
@@ -407,6 +408,10 @@ function getPlayerMove(active_player) {
             math.empty++;
             math.empty_range += j.range0.range_Low;
         }
+
+        math.total_count++;
+        math.total_range += j.range0.range_Low;
+
 
         return j; 
     }
@@ -441,4 +446,4 @@ function readyNewGame(aiBluff, aiMath) {
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 100000);
+simulatePoker(aiBluff, aiMath, dealer, 2000);
