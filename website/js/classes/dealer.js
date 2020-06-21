@@ -35,7 +35,8 @@ module.exports = class Dealer {
         let temp_storage;
         for(let j = 0; j < 2; j++) {
             for(let i = 0; i < this.deck_cards.length; i++) {
-                swap = Math.floor((Math.random() * 52));
+                swap = Math.random() * 52 
+                swap = Math.floor(swap % this.deck_cards.length);
 
                 temp_storage = this.deck_cards[i];
                 this.deck_cards[i] = this.deck_cards[swap];
@@ -43,7 +44,7 @@ module.exports = class Dealer {
             }
         }
     }
-    
+
     new_game(player1, player2) {
         this.deck_cards = [];
         this.table_cards = [];

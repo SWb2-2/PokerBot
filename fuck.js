@@ -50,9 +50,9 @@ let player2_good_hands = 0;
 let player1_bad_hands = 0;
 let player2_bad_hands = 0;
 
-for(let i = 0; i < 1000000; i++) {
+for(let i = 0; i < 10000000; i++) {
 
-    if(i%10000 == 0) {
+    if(i%100000 == 0) {
         console.log(i);
     }
     dealer.create_deck_of_cards();
