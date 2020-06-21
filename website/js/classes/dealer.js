@@ -33,13 +33,14 @@ module.exports = class Dealer {
     shuffle_array() {
         let swap = 0; 
         let temp_storage;
-        for(let i = 0; i < this.deck_cards.length; i++) {
-            swap = Math.random() * this.deck_cards.length * this.deck_cards.length+1; 
-            swap = Math.floor(swap % this.deck_cards.length);
+        for(let j = 0; j < 2; j++) {
+            for(let i = 0; i < this.deck_cards.length; i++) {
+                swap = Math.floor((Math.random() * 52));
 
-            temp_storage = this.deck_cards[i];
-            this.deck_cards[i] = this.deck_cards[swap];
-            this.deck_cards[swap] = temp_storage;
+                temp_storage = this.deck_cards[i];
+                this.deck_cards[i] = this.deck_cards[swap];
+                this.deck_cards[swap] = temp_storage;
+            }
         }
     }
     

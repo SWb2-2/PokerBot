@@ -59,18 +59,18 @@ function do_calculated_bluff(ai_move, equity, game_info, data, range) {
 
 	let chance = 10; 
 	
-	if(ai_move.ai_move == "check") {
+
+	if(game_info.player_move.move == "check") {
 		if(data.total_moves > 20) {
 			chance = data.chance_of_fold_when_raised * 30;
 		} else {
 			chance = 15;
-		} 
-	} else if(ai_move.ai_move == "call") {
-		chance = 10; 
-	} else if(ai_move.ai_move == "fold") {
-		chance = 5; 		
+		} 	
+	} else {
+		chance = -Infinity;
 	}
 
+	
 	chance += equity * 30;
 	chance += (data.chance_of_fold_when_raised) * 18; 
 	chance -= ((((range.range_Low +  range.range_high) / 200) + (1-equity)) / 2) * 30; 
