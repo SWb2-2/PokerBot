@@ -111,7 +111,7 @@ app.get('/ai_move', (req, res) => {
     if(k.bluff !== undefined && hasBluffed === false) {
         hasBluffed = true;
     }
-    log_functions.logMove("AI", ai_player.player_move, dealer.table_cards, bluff);
+    log_functions.logMove(ai_player.player_move, bluff);
     
     if(dealer.table_cards.length < 3) {
         store.store_ai_move(ai_player.player_move.move, data_preflop);
