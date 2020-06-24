@@ -407,7 +407,7 @@ async function makePokerbotMove(){
  * @param {out}         : Den returnerer undefined når tiden er gået.
  */
 async function sleep(ms) {
-    return new Promise(res => {setTimeout(res, ms)});
+    return new Promise(res => {setTimeout(res, ms / 3)});
 }
 
 /**
