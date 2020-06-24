@@ -406,4 +406,4 @@ function readyNewGame(aiBluff, aiMath) {
         aiMath.balance = 100;
 }
 
-simulatePoker(aiBluff, aiMath, dealer, 1000000);
+simulatePoker(aiBluff, aiMath, dealer, 1000);
