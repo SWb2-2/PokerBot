@@ -1,5 +1,5 @@
-// Initialiserende funktion der starter spillet og sender et objekt tilbage til klienten med en kopi af
-// player1, potten samt hvis tur det er. 
+//Initalizing funktion that starts the game and returns an objekt to the client
+//with a copy of human player, the pot, and whose turn
 function pre_flop(human_player, ai_player, dealer) {
     dealer.new_game(human_player, ai_player);
     dealer.create_deck_of_cards();
@@ -19,21 +19,15 @@ function pre_flop(human_player, ai_player, dealer) {
     };
     return response;
 }
-// Næste runde indkapsler flop, turn og river. Ud fra dealeren bestemmes det hvilken runde det er. 
-// Når antallet af kort er 5, sendes det tilbage, at der ikke er en new round 
+
+//Puts card on table in flop, turn, and river. When there are 5 table cards, returns that there are no more bettingrounds
 function next_round(human_player, ai_player, dealer) {
     dealer.table_cards.length < 3 ? dealer.add_table_cards(3) : dealer.add_table_cards(1);
-
-
     human_player.player_move.move = "";
     ai_player.player_move.move = "";
 
 	let first_player = human_player.blind === "sb" ? human_player : ai_player;
 	let second_player = human_player.blind === "bb" ? human_player : ai_player;
-	
-
-    
-
     let turn = dealer.decide_whose_turn(first_player, second_player, dealer);
 
     if(turn != "table" && turn != "showdown") {
@@ -47,13 +41,7 @@ function next_round(human_player, ai_player, dealer) {
     return response;
 }
 
-// Vi skal have serveren til at modtage, at det nu er Bottens træk. Botten gives den nødvendige information, 
-// som er spillerens current_bet samt bordets pulje og kort. Herfra gør den sig et træk den sætter ind robot_player.player_move
-// Herved kan den nedstående funktion genbruges.
-
-
-// Processer et move, hvor det antages server har modtaget player move og potentielt amount. 
-// SKal fikses 
+//Processes a move, where its assumed that the server has received a player move and potential amount 
 function process_move(active_player, inactive_player, dealer) {
     let difference = inactive_player.current_bet - active_player.current_bet;
     switch (active_player.player_move.move) {
@@ -90,8 +78,9 @@ function process_move(active_player, inactive_player, dealer) {
     }
     return response;
 }
-// Funktion, der bestemmer vinder ved showdown og sender et objekt tilbage med opdateringer på, hvordan spilelrnes
-// balance ser ud. 
+
+//Decides the winner at showdown and returns an objekt containing player's updated current balance, the winner,
+//and other information the front end needs to display
 function showdown(human_player, ai_player, dealer) {
     if(human_player.player_move.move !== "fold" && ai_player.player_move.move !== "fold") {
         let winner = dealer.get_winner(human_player, ai_player);

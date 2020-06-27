@@ -1,5 +1,6 @@
 'use strict'
 
+//Sends form from front end to backend containing the desired game balance
 async function sendInfo (event) {
     let formElement = document.querySelector("#balance").value;
 

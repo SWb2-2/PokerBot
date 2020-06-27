@@ -33,13 +33,15 @@ module.exports = class Dealer {
     shuffle_array() {
         let swap = 0; 
         let temp_storage;
-        for(let i = 0; i < this.deck_cards.length; i++) {
-            swap = Math.random() * this.deck_cards.length * this.deck_cards.length+1; 
-            swap = Math.floor(swap % this.deck_cards.length);
+        for(let j = 0; j < 2; j++) {
+            for(let i = 0; i < this.deck_cards.length; i++) {
+                swap = Math.random() * this.deck_cards.length * this.deck_cards.length+1; 
+                swap = Math.floor(swap % this.deck_cards.length);
 
-            temp_storage = this.deck_cards[i];
-            this.deck_cards[i] = this.deck_cards[swap];
-            this.deck_cards[swap] = temp_storage;
+                temp_storage = this.deck_cards[i];
+                this.deck_cards[i] = this.deck_cards[swap];
+                this.deck_cards[swap] = temp_storage;
+            }
         }
     }
     
@@ -76,14 +78,14 @@ module.exports = class Dealer {
         }
     }
 
-    decide_whose_turn(active_player, inactive_player, dealer) {
+    decide_whose_turn(active_player, inactive_player) {
         let turn ="";
         if (active_player.player_move.move === "fold") {
             turn = "showdown";
         } else if (active_player.player_move.move == "raise" && inactive_player.balance !== 0) {
             turn = inactive_player.name;
         } else if (active_player.balance === 0  || inactive_player.balance === 0) {
-            if (dealer.table_cards.length === 5) {
+            if (this.table_cards.length === 5) {
                 turn = "showdown";
             } else {
                 turn = "table";
@@ -93,14 +95,12 @@ module.exports = class Dealer {
         } else if (active_player.player_move.move === "" && inactive_player.player_move.move === "") {
             turn = active_player.name;
         } else {
-            if (dealer.table_cards.length === 5) {
+            if (this.table_cards.length === 5) {
                 turn = "showdown";
             } else {
                 turn = "table";
             }
         }
-
-
 
         return turn;
     }
